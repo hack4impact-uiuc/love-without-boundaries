@@ -11,7 +11,7 @@ yarn
 yarn build
 yarn start
 ```
-To run the frontened
+To run the frontend
 ```
 cd react_frontend
 yarn 
