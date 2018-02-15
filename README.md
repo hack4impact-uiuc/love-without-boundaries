@@ -13,6 +13,7 @@ yarn start
 ```
 To run the frontened
 ```
+cd react_frontend
 yarn 
 yarn run relay # will recompile graphql querries and regenrate files
 yarn run dev 
