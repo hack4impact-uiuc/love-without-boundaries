@@ -1,0 +1,14 @@
+# Your Root Mutation
+type Mutation {
+  createStudent(name: String): Student
+}
+
+# Your Root Query
+type Query {
+  students: [Student]
+}
+
+# Self Descriptive
+type Student {
+  name: String
+}
