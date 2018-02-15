@@ -5,7 +5,7 @@
   "main": "dist/bundle.js",
   "scripts": {
     "start": "micro dist/bundle.js -p 8080",
-    "build": "yarn run exportSchema && webpack",
+    "build": "webpack",
     "watch": "webpack -w",
     "exportSchema": "babel-node ./src/scripts/exportSchema.js"
   },
