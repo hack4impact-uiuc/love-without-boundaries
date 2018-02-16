@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLList, GraphQLID } from 'graphql';
 import StudentType from '../types/StudentType'
 import LessonType from '../types/LessonType'
 import Student from '../../models/student';
