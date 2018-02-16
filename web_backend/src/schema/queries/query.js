@@ -1,8 +1,8 @@
 import { GraphQLObjectType, GraphQLList } from 'graphql';
 import StudentType from '../types/StudentType'
-
-
+import LessonType from '../types/LessonType'
 import Student from '../../models/student';
+import Lesson from '../../models/lessons'
 
 
 const Query = new GraphQLObjectType({
@@ -15,9 +15,12 @@ const Query = new GraphQLObjectType({
         resolve() { 
           return Student.find()
         }
-      }, 
-      
-
+      },lessons:{
+          type: new GraphQLList(LessonType),
+          resolve(){
+            return Lesson.find()
+          }
+        }
     };
   },
 });
