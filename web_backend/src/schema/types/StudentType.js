@@ -9,9 +9,6 @@ const Student = new GraphQLObjectType({
       name: {
         type: GraphQLString,
       },
-    //   teachers: {
-    //     type: GraphQLString
-    //   },
     };
   },
 });
