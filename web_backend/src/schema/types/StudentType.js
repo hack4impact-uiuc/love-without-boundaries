@@ -6,9 +6,15 @@ const Student = new GraphQLObjectType({
   description: 'Self Descriptive',
   fields() {
     return {
-      name: {
+      User: {
         type: GraphQLString,
       },
+      Teacher: {
+        type: GraphQLString,
+      },
+      Lesson: {
+        type: GraphQLString,
+      }, 
     };
   },
 });
