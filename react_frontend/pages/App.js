@@ -7,7 +7,9 @@ import environment from './../relay/environment';
 import StudentListItem from './../components/studentListItem';
 import Button from './../components/button';
 import addStudent from './../relay/mutations/addStudent';
-import Lesson from './../components/lesson';
+import StudentPage from './StudentPage';
+import TeacherPage from './TeacherPage';
+import AdminPage from './AdminPage';
 
 export default () => (
     <div>
@@ -25,8 +27,9 @@ export default () => (
                 if (!props) {
                     return (
                         <section>
-                            <Lesson />
-                            <Lesson />
+                            <StudentPage />
+                            <TeacherPage />
+                            <AdminPage />
                         </section>
                     );
                 }
