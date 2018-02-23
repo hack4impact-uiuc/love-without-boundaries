@@ -21,13 +21,6 @@ const Mutation = new GraphQLObjectType({
         type: StudentType,
         args: { user: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
         resolve(root, { user, lesson, score}, ctx) {
-          // return Student.findOne({ "user": user }, function (err, u){
-          //   // u.grades += {"lesson": lesson, "score": score}
-          //   u.grades.lesson = lesson;
-          //   u.grades.score = score;
-          //   u.save();
-          // });
-
           var grade = {"lesson": lesson, "score": score};
           return Student.findOneAndUpdate({"user": user}, {$push: {"grades": grade}})
 
