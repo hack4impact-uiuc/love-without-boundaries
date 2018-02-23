@@ -3,7 +3,6 @@ import GradeType from '../types/GradeType'
 import StudentType from '../types/StudentType'
 import Student from '../../models/student';
 
-
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Your Root Mutation',
@@ -23,14 +22,8 @@ const Mutation = new GraphQLObjectType({
         resolve(root, { user, lesson, score}, ctx) {
           var grade = {"lesson": lesson, "score": score};
           return Student.findOneAndUpdate({"user": user}, {$push: {"grades": grade}})
-
-
         } 
-
       }
-
-
-
     };
   },
 });
