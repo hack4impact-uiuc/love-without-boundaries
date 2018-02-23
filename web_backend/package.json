@@ -20,8 +20,7 @@
     "micro": "^6.2.0",
     "micro-compress": "^1.0.0",
     "micro-cors": "^0.1.0",
-    "mongoose": "^5.0.3",
-    "redux": "^3.7.2"
+    "mongoose": "^5.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
