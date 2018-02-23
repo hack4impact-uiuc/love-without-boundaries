@@ -11,9 +11,9 @@ const Mutation = new GraphQLObjectType({
     return {
       createStudent: {
         type: StudentType,
-        args: { name: { type: GraphQLString } },
-        resolve(root, { name }, ctx) {
-          const s = new Student({ name });
+        args: { user: { type: GraphQLString },  teacher: { type: GraphQLString } },
+        resolve(root, { user, teacher}, ctx) {
+          const s = new Student({ user, teacher });
           return s.save()
         } 
       },
