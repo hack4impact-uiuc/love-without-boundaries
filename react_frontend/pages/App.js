@@ -8,20 +8,11 @@ import environment from './../relay/environment';
 import StudentListItem from './../components/studentListItem';
 import Button from './../components/button';
 import addStudent from './../relay/mutations/addStudent';
-import Lesson from './../components/lesson';
 
-const Home = () => (
-    <div>
-      <h2>Home</h2>
-    </div>
-);
-  
-const About = () => (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-  
+import HomePage from './HomePage';
+import StudentPage from './StudentPage';
+import TeacherPage from './TeacherPage';
+import AdminPage from './AdminPage';  
 
 export default () => (
     <div>
@@ -29,17 +20,25 @@ export default () => (
             <div>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/" >Home</Link>
                     </li>
                     <li>
-                        <Link to="/about">About</Link>
+                        <Link to="/student" >Student</Link>
+                    </li>
+                    <li>
+                        <Link to="/teacher" >Teacher</Link>
+                    </li>
+                    <li>
+                        <Link to="/admin" >Admin</Link>
                     </li>
                 </ul>
 
                 <hr />
 
-                <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
+                <Route exact path="/" component={HomePage} />
+                <Route path="/student" component={StudentPage} />
+                <Route path="/teacher" component={TeacherPage} />
+                <Route path="/admin" component={AdminPage} />
             </div>
         </Router>
         <QueryRenderer
@@ -54,12 +53,9 @@ export default () => (
             variables={{}}
             render={({ props }) => {
                 if (!props) {
-                    return (
-                        <section>
-                            <Lesson />
-                            <Lesson />
-                        </section>
-                    );
+                    return(
+                        <div>Cant get query</div>
+                    )
                 }
                 return (
                     <div>
