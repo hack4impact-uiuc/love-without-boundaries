@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
-
+import { GraphQLObjectType, GraphQLList } from 'graphql';
 import StudentType from '../types/StudentType'
 import Student from '../../models/student';
 
