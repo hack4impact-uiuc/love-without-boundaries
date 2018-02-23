@@ -14,7 +14,7 @@ const Student = new GraphQLObjectType({
         type: GraphQLString,
       },
       grades: {
-        type: Grade
+        type: new GraphQLList(Grade)
       }
       };
     },
