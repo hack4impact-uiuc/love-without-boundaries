@@ -1,8 +1,7 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
-
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+import GradeType from '../types/GradeType'
 import StudentType from '../types/StudentType'
 import Student from '../../models/student';
-
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -11,12 +10,20 @@ const Mutation = new GraphQLObjectType({
     return {
       createStudent: {
         type: StudentType,
-        args: { name: { type: GraphQLString } },
-        resolve(root, { name }, ctx) {
-          const s = new Student({ name });
+        args: { user: { type: GraphQLString },  teacher: { type: GraphQLString } },
+        resolve(root, { user, teacher}, ctx) {
+          const s = new Student({ user, teacher });
           return s.save()
         } 
       },
+      addGrade: {
+        type: StudentType,
+        args: { user: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
+        resolve(root, { user, lesson, score}, ctx) {
+          var grade = {"lesson": lesson, "score": score};
+          return Student.findOneAndUpdate({"user": user}, {$push: {"grades": grade}})
+        } 
+      }
     };
   },
 });

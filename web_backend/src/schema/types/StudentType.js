@@ -1,16 +1,23 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 const mongoose = require('mongoose');
+import Grade from './GradeType'
 
 const Student = new GraphQLObjectType({
   name: 'Student',
   description: 'Self Descriptive',
   fields() {
     return {
-      name: {
+      user: {
         type: GraphQLString,
       },
-    };
-  },
+      teacher: {
+        type: GraphQLString,
+      },
+      grades: {
+        type: new GraphQLList(Grade)
+      }
+      };
+    },
 });
 
 export default Student;
