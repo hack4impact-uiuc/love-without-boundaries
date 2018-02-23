@@ -17,10 +17,6 @@ const Mutation = new GraphQLObjectType({
           return s.save()
         } 
       },
-
-
-
-
     };
   },
 });
