@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
-    User: { type: String },
-    Teacher: {type: String },
-    Grades: [{type: String, type: Number}]
+    user: { type: String },
+    teacher: {type: String },
+    grades: [{type: String, type: Number}]
   });
   
 export default mongoose.model('Student', StudentSchema);

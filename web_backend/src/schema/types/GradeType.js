@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 
 const Grade = new GraphQLObjectType({
   name: 'Grade',
-  description: 'Self Descriptive',
+  description: 'Grade received on a quiz',
   fields() {
     return {
-      Lesson: {
+      lesson: {
         type: GraphQLString,
       },
-      Score: {
+      score: {
         type: GraphQLInt,
       }
     };
