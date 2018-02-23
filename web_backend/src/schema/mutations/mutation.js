@@ -12,7 +12,9 @@ const Mutation = new GraphQLObjectType({
     return {
       createStudent: {
         type: StudentType,
-        args: { name: { type: GraphQLString } },
+        args: { 
+          name: { type: GraphQLString } 
+        },
         resolve(root, { name }, ctx) {
           const s = new Student({ name });
           return s.save()
@@ -20,7 +22,13 @@ const Mutation = new GraphQLObjectType({
       },
       createLesson: {
         type: LessonType,
-        args: { id: { type: GraphQLID}, name: {type: GraphQLString}, quiz: { type: GraphQLString}, worksheets: { type: GraphQLString}, notes: { type: GraphQLString}},
+        args: { 
+          id: { type: GraphQLID}, 
+          name: {type: GraphQLString}, 
+          quiz: { type: GraphQLString}, 
+          worksheets: { type: GraphQLString}, 
+          notes: { type: GraphQLString}
+        },
         resolve(root, { id, name, quiz, worksheets, notes}, ctx) {
           const s = new Lesson({name, quiz, worksheets, notes})
           return s.save()
@@ -28,7 +36,9 @@ const Mutation = new GraphQLObjectType({
       },
       deleteLesson: {
         type: LessonType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)}},
+        args: { 
+          id: {type: new GraphQLNonNull(GraphQLID)}
+        },
         resolve(root, {id}, ctx){
           return lessons.delete(id)
         }

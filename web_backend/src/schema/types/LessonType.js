@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const Lesson = new GraphQLObjectType({
   name: 'Lesson',
-  description: 'Self Descriptive',
+  description: 'Schema design for lessons',
   fields() {
     return {
       id: {
