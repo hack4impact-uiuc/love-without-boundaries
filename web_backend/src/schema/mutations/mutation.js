@@ -34,15 +34,16 @@ const Mutation = new GraphQLObjectType({
           return s.save()
         }
       },
-      deleteLesson: {
-        type: LessonType,
-        args: { 
-          id: {type: new GraphQLNonNull(GraphQLID)}
-        },
-        resolve(root, {id}, ctx){
-          return lessons.delete(id)
-        }
-      },
+      // Doesn't work
+      // deleteLesson: { 
+      //   type: LessonType,
+      //   args: { 
+      //     id: {type: new GraphQLNonNull(GraphQLID)}
+      //   },
+      //   resolve(root, {id}, ctx){
+      //     return lessons.delete(id)
+      //   }
+      // },
 
 
 
