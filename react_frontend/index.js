@@ -8,12 +8,15 @@ import { CHANGE_USER_TYPE, UserTypes } from './redux/actions';
 
 import App from './pages/App';
 
-const store = createStore(appReducer);
+const store = createStore(
+    appReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('app'),
 );
 
