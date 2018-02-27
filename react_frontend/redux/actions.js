@@ -1,23 +1,24 @@
 /*
- * Action Types
+ * action types
  */
-
 export const CHANGE_USER_TYPE = 'CHANGE_USER_TYPE';
 
+
 /*
- * Other Constants
+ * other types
  */
+
 export const UserTypes = {
-    NO_AUTH: 'NO_AUTH',
     STUDENT: 'STUDENT',
     TEACHER: 'TEACHER',
-    ADMIN: 'ADMIN'
-}
+    ADMIN: 'ADMIN',
+};
 
 /*
- *  action creators
+ * action creators
  */
 
-export const changeUserType(userType) {
-    return { type: CHANGE_USER_TYPE, userType }
-}
+// this doesnt work when you import it...
+export const changeUserType = (userType) => {
+    return ({ type: CHANGE_USER_TYPE, userType });
+};

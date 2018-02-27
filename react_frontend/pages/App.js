@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -14,57 +14,66 @@ import StudentPage from './StudentPage';
 import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
 
-export default () => (
-    <div>
-        <Router>
+type Props = {
+    /**/ 
+  }
+
+class App extends React.Component<Props>{ 
+    render() {
+        return (
             <div>
-                <ul>
-                    <li>
-                        <Link to="/" >Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/student" >Student</Link>
-                    </li>
-                    <li>
-                        <Link to="/teacher" >Teacher</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin" >Admin</Link>
-                    </li>
-                </ul>
-
-                <hr />
-
-                <Route exact path="/" component={HomePage} />
-                <Route path="/student" component={StudentPage} />
-                <Route path="/teacher" component={TeacherPage} />
-                <Route path="/admin" component={AdminPage} />
-            </div>
-        </Router>
-        <QueryRenderer
-            environment={environment}
-            query={graphql`
-                query App_Query{
-                    students {
-                        ...studentListItem_student
-                    }
-                }   
-            `}
-            variables={{}}
-            render={({ props }) => {
-                if (!props) {
-                    return (
-                        <div>Cant get query</div>
-                    );
-                }
-                return (
+                <Router>
                     <div>
-                        {props.students.map(s => <StudentListItem student={s} />)}
-                        <Button onClick={() => addStudent(environment, 'Pranay')}>Add Pranay</Button>
-                    </div>
-                );
-            }}
-        />
-    </div>
-);
+                        <ul>
+                            <li>
+                                <Link to="/" >Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/student" >Student</Link>
+                            </li>
+                            <li>
+                                <Link to="/teacher" >Teacher</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin" >Admin</Link>
+                            </li>
+                        </ul>
 
+                        <hr />
+
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/student" component={StudentPage} />
+                        <Route path="/teacher" component={TeacherPage} />
+                        <Route path="/admin" component={AdminPage} />
+                    </div>
+                </Router>
+                <QueryRenderer
+                    environment={environment}
+                    query={graphql`
+                        query App_Query{
+                            students {
+                                ...studentListItem_student
+                            }
+                        }   
+                    `}
+                    variables={{}}
+                    render={({ props }) => {
+                        if (!props) {
+                            return (
+                                <div>Cant get query</div>
+                            );
+                        }
+                        return (
+                            <div>
+                                {props.students.map(s => <StudentListItem student={s} />)}
+                                <Button onClick={() => addStudent(environment, 'Pranay')}>Add Pranay</Button>
+                            </div>
+                        );
+                    }}
+                />
+            </div>
+        );
+    }
+}
+
+export default App;
