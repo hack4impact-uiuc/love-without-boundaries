@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
