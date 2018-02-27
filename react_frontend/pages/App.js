@@ -53,9 +53,9 @@ export default () => (
             variables={{}}
             render={({ props }) => {
                 if (!props) {
-                    return(
+                    return (
                         <div>Cant get query</div>
-                    )
+                    );
                 }
                 return (
                     <div>
