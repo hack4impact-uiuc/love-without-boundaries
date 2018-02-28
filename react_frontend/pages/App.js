@@ -13,6 +13,7 @@ import HomePage from './HomePage';
 import StudentPage from './StudentPage';
 import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
+import QuizPage from './QuizPage';
 
 export default () => (
     <div>
@@ -32,13 +33,13 @@ export default () => (
                         <Link to="/admin" >Admin</Link>
                     </li>
                 </ul>
-
                 <hr />
 
                 <Route exact path="/" component={HomePage} />
                 <Route path="/student" component={StudentPage} />
                 <Route path="/teacher" component={TeacherPage} />
                 <Route path="/admin" component={AdminPage} />
+                <Route path="/quiz" component={QuizPage} />
             </div>
         </Router>
         <QueryRenderer

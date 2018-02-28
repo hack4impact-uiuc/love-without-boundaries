@@ -1,14 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import QuizPage from './QuizPage'
-
 
 class AdminPage extends React.Component{
     constructor(props){
-        super(props);
+        super(props)
         this.state = {}
     }
-    gotoQuiz = () => {window.location = QuizPage}
+    gotoQuiz = () => {window.location = '/quiz'}
     render() {
         return (
             <div>
