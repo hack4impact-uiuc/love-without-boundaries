@@ -10,18 +10,18 @@ const Mutation = new GraphQLObjectType({
     return {
       createStudent: {
         type: StudentType,
-        args: { user: { type: GraphQLString },  teacher: { type: GraphQLString } },
-        resolve(root, { user, teacher}, ctx) {
-          const s = new Student({ user, teacher });
+        args: { name: { type: GraphQLString },  teacher: { type: GraphQLString } },
+        resolve(root, { name, teacher}, ctx) {
+          const s = new Student({ name, teacher });
           return s.save()
         } 
       },
       addGrade: {
         type: StudentType,
-        args: { user: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
-        resolve(root, { user, lesson, score}, ctx) {
+        args: { name: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
+        resolve(root, { name, lesson, score}, ctx) {
           var grade = {"lesson": lesson, "score": score};
-          return Student.findOneAndUpdate({"user": user}, {$push: {"grades": grade}})
+          return Student.findOneAndUpdate({"name": name}, {$push: {"grades": grade}})
         } 
       }
     };
