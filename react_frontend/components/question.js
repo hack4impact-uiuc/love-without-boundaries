@@ -1,23 +1,22 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-type Props = {
-  name
-}
-class Question extends React.Component<Props>{
-    constructor(Props){
-        super(Props)
+
+class Question extends React.Component{
+    constructor(props){
+        super(props)
         this.state = {
-            opt1 = '',
-            opt1val = false,
-            opt2 = '',
-            opt2val = false,
-            opt3 = '',
-            opt3val = false,
-            opt4 = '',
-            opt4val = false
+            opt1: '',
+            opt1val: false,
+            opt2: '',
+            opt2val: false,
+            opt3: '',
+            opt3val: false,
+            opt4: '',
+            opt4val: false
         }
     }
+    name = this.props.name
     update1 = event => {
         this.setState({opt1 : event.target.value})
     }

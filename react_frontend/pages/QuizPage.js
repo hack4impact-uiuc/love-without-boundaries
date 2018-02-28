@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import AdminPage from './AdminPage'
 import Question from '../components/question'
 
-type Props = {
-    /**/ 
-  }
-
-class QuizPage extends React.Component<Props>{
-    constructor(Props){
-        super(Props)
+class QuizPage extends React.Component{
+    constructor(props){
+        super(props)
         this.state = { question:'', createQuestion:false}
     }
     /* question = () => {

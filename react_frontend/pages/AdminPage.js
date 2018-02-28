@@ -2,13 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import QuizPage from './QuizPage'
 
-type Props = {
-    /*prop = type*/ 
-  }
 
-class AdminPage extends React.Component<Props>{
-    constructor(Props){
-        super(Props);
+class AdminPage extends React.Component{
+    constructor(props){
+        super(props);
         this.state = {}
     }
     gotoQuiz = () => {window.location = QuizPage}
