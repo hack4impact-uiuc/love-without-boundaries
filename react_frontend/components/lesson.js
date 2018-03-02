@@ -2,50 +2,81 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  /**/ 
+  /**/
 }
+
+const LessonBox = styled.div`
+    border-style: solid;
+    border-color: #d7dce2;
+    color: white;
+    background-color: #a6acb5;
+    height: 300px;
+    width: 500px;
+    z-index: -1;
+    font-family: "Arial";
+`;
+
 const LessonTitle = styled.div`
-    border-style: solid;
-    border-color: red;
-    color: white;
-    font-size: 30px;
-    background-color: #969ba3;
-    height: 200px;
-    width: 400px;
-    z-index: -1;
-`;
+      border-bottom-style: solid;
+      border-color: white;
+      color: white;
+      padding: 10px;
+      font-size: 35px;
+      text-align: right;
+      z-index = -1;
+      margin: 20px;
+      font-family: "Arial";
+  `;
+
 const LessonProps = styled.div`
-    font-size: 20px;
-    color: white;
-    z-index: 1;
+      border-style: solid;
+      border-color: white;
+      color: #a6acb5;
+      padding: 5px 5px;
+      margin: 5px 5px;
+      font-size: 20px;
+      text-align: center;
+      border-radius: 0px;
+      background-color: white;
+      height: 30px;
+      z-index: -1;
+      font-family: "Arial";
 `;
-const checkedBoxComplete = styled.div`
+const CheckedBoxComplete = styled.div`
+    display: inline-block;
+    margin-left: 3px;
+    margin-bottom: 1px;
     border-style: solid;
     border-color: red;
     color: white;
     font-size: 30px;
-    background-color: #969ba3;
-    height: 10px;
-    width: 400px;
-    z-index: -1;
+    background-color: red;
+    height: 25px;
+    width: 25px;
+    z-index: 100;
 `;
-const checkedBoxInComplete = styled.div`
+
+const CheckedBoxInComplete = styled.div`
+    float: right;
+    float:top;
     border-style: solid;
     border-color: red;
-    height: 15px;
-    width: 15px;
-    background-color: red;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    z-index: 100;
 `;
+
 class LessonComponent extends React.Component<Props>{
     render() {
         return(
             <div>
-            <LessonTitle>{this.props.lessonName}
-            <LessonProps>Notes: {this.props.lessonNotes}</LessonProps>
-            <LessonProps>Worksheet: {this.props.worksheetName}</LessonProps>
-            <LessonProps>Quiz: {this.props.quizName}, Grade: {this.props.quizPercentage}, Completed: {this.props.quizIsChecked} </LessonProps>
-            {/* {isChecked(this.props)} */}
-            </LessonTitle>
+            <LessonBox>
+              <LessonTitle>{this.props.lessonName}</LessonTitle>
+              <LessonProps> Notes: {this.props.lessonNotes}</LessonProps>
+              <LessonProps> Worksheet: {this.props.worksheetName}</LessonProps>
+              <LessonProps> Quiz: {this.props.quizName}, Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>
+            </LessonBox>
             </div>
         );
     }
@@ -55,12 +86,12 @@ class LessonComponent extends React.Component<Props>{
 function isChecked(props) {
     if (props.quizIsChecked){
         return(
-            <checkedBoxComplete></checkedBoxComplete>
+            <CheckedBoxComplete></CheckedBoxComplete>
         )
     }
     else{
         return(
-            <checkedBoxComplete></checkedBoxComplete>
+            <CheckedBoxInComplete></CheckedBoxInComplete>
         )
     }
 }
