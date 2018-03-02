@@ -1,15 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import AddLessonForm from './../components/lessonform';
 
-type Props = {
-    /**/ 
-  }
 
 class TeacherPage extends React.Component<Props>{
 
     render() {
         return (
-            <div>I am a teacher</div>
+            <div>I am a teacher
+                <AddLessonForm> </AddLessonForm>
+            </div>
         );
     }
 }
