@@ -7,8 +7,9 @@ import Question from '../components/question'
 class QuizPage extends React.Component{
     constructor(props){
         super(props)
-    this.state = {opts:[], opt:'', questions:[], question:'', createQuestion:false}
+    this.state = {opts:[], opt:'', correct:'', questions:[], question:'', createQuestion:false}
     }
+    finish = () => {window.location = '/admin'}
     question = () => {
         //var questionCopy = questions.slice();
         //questionCopy.push(this.state.question)
@@ -24,18 +25,37 @@ class QuizPage extends React.Component{
     option = () => {
         this.setState({ opts : [...this.state.opts, this.state.opt] })
     }
-    finish = () => {window.location = '/admin'}
+    radio = correct => {
+        this.setState({ correct : correct.target.value })
+    }
     render() {
+        /*
+        <form>
+                    <input type="checkbox" value="A" checked={this.state.correct == "A"} 
+                        onChange={this.radio}> "A"</input>
+                    <input type="checkbox" value="B" checked={this.state.correct == "B"} 
+                        onChange={this.radio}> "B" </input>
+                    <input type="checkbox" value="C" checked={this.state.correct == "C"}
+                        onChange={this.radio}> "C" </input>
+                    <input type="checkbox" value="D" checked={this.state.correct == "D"} 
+                        onChange={this.radio}> "D" </input>
+                </form>
+        */
         return (
             <div>
-                Quiz Page <br />
-                {this.state.questions.map(q => <li>{q}</li>)}
+                Quiz Page
+                <br />
+                {this.state.questions.map(q => <ol><li>{q}</li></ol>)}
                 <br />
                 <form>
-                    <input type="radio" name="choice" value="optionA"> {opts[0]} </input>
-                    <input type="radio" name="choice" value="optionB"> {opts[1]} </input>
-                    <input type="radio" name="choice" value="optionC"> {opts[2]} </input>
-                    <input type="radio" name="choice" value="optionD"> {opts[3]} </input>
+                    <input type="checkbox" value="A" checked={this.state.correct == "A"} 
+                        onChange={this.radio} /> A. {opts}<br/>
+                    <input type="checkbox" value="B" checked={this.state.correct == "B"} 
+                        onChange={this.radio} /> B. <br/>
+                    <input type="checkbox" value="C" checked={this.state.correct == "C"}
+                        onChange={this.radio} /> C. <br/>
+                    <input type="checkbox" value="D" checked={this.state.correct == "D"} 
+                        onChange={this.radio} /> D. <br/>
                 </form>
                 <br />
                 <label>
