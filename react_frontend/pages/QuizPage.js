@@ -29,18 +29,6 @@ class QuizPage extends React.Component{
         this.setState({ correct : correct.target.value })
     }
     render() {
-        /*
-        <form>
-                    <input type="checkbox" value="A" checked={this.state.correct == "A"} 
-                        onChange={this.radio}> "A"</input>
-                    <input type="checkbox" value="B" checked={this.state.correct == "B"} 
-                        onChange={this.radio}> "B" </input>
-                    <input type="checkbox" value="C" checked={this.state.correct == "C"}
-                        onChange={this.radio}> "C" </input>
-                    <input type="checkbox" value="D" checked={this.state.correct == "D"} 
-                        onChange={this.radio}> "D" </input>
-                </form>
-        */
         return (
             <div>
                 Quiz Page
@@ -49,13 +37,13 @@ class QuizPage extends React.Component{
                 <br />
                 <form>
                     <input type="checkbox" value="A" checked={this.state.correct == "A"} 
-                        onChange={this.radio} /> A. {opts}<br/>
+                        onChange={this.radio} /> A. {this.state.opts[0]}<br/>
                     <input type="checkbox" value="B" checked={this.state.correct == "B"} 
-                        onChange={this.radio} /> B. <br/>
+                        onChange={this.radio} /> B. {this.state.opts[1]}<br/>
                     <input type="checkbox" value="C" checked={this.state.correct == "C"}
-                        onChange={this.radio} /> C. <br/>
+                        onChange={this.radio} /> C. {this.state.opts[2]}<br/>
                     <input type="checkbox" value="D" checked={this.state.correct == "D"} 
-                        onChange={this.radio} /> D. <br/>
+                        onChange={this.radio} /> D. {this.state.opts[3]}<br/>
                 </form>
                 <br />
                 <label>
