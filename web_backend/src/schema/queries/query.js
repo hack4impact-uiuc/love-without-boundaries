@@ -1,8 +1,8 @@
 import { GraphQLObjectType, GraphQLList} from 'graphql';
-import StudentType from '../types/StudentType'
-
 
 import Student from '../../models/student';
+
+import StudentType from '../types/StudentType';
 
 import Answer from '../../models/answer';
 
@@ -38,10 +38,10 @@ const Query = new GraphQLObjectType({
       },
       // question: {
       //   type: new GraphQLList(QuestionType),
-      //   resolve() { 
+      //   resolve() {
       //     return Question.find()
       //   }
-      // },
+      // }
       // quiz: {
       //   type: new GraphQLList(QuizType),
       //   resolve() { 
