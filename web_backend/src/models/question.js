@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
     questionName: { type: String },
-    listofAnswers : [{ type: Answer }]
+    listOfAnswers : [{ Answer: String }]
   });
   
 export default mongoose.model('Question', QuestionSchema);

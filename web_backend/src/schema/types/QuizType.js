@@ -6,7 +6,7 @@ const Quiz = new GraphQLObjectType({
   description: 'Self Descriptive',
   fields() {
     return {
-      quizName: {
+      name: {
         type: GraphQLString,
       },
       listOfQuestions: {
@@ -16,4 +16,4 @@ const Quiz = new GraphQLObjectType({
   },
 });
 
-export default Student;
+export default Quiz;

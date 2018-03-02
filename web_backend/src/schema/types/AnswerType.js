@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLString, GraphQLBoolean} from 'graphql';
 const mongoose = require('mongoose');
 
 const Answer = new GraphQLObjectType({
-  answerName: 'Student',
+  name: 'Answer',
   description: 'Self Descriptive',
   fields() {
     return {
@@ -16,4 +16,4 @@ const Answer = new GraphQLObjectType({
   },
 });
 
-export default Student;
+export default Answer;
