@@ -1,4 +1,3 @@
-
 import Answer from './answer.js'
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;

@@ -1,4 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
+import QuestionType from '../types/QuestionType';
+
 const mongoose = require('mongoose');
 
 const Quiz = new GraphQLObjectType({
@@ -6,11 +8,11 @@ const Quiz = new GraphQLObjectType({
   description: 'Self Descriptive',
   fields() {
     return {
-      name: {
+      quizName: {
         type: GraphQLString,
       },
       listOfQuestions: {
-      	type: GraphQLList(Question),
+      	type: new GraphQLList(QuestionType),
       },
     };
   },
