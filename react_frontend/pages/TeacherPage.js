@@ -52,8 +52,6 @@ class TeacherPage extends React.Component<Props>{
     render() {
         return (
             <div>I am a teacher
-                <LessonForm> </LessonForm>
-
                 {/* {isChecked(this.props)}
                 <TeacherAddLessonBox>
                     <TeacherTitle> Add Lesson Here </TeacherTitle>
