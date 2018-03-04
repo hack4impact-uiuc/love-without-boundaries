@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
 
-class AddLessonForm extends React.Component {
+class LessonForm extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -78,4 +78,4 @@ class AddLessonForm extends React.Component {
 }
 
 
-export default AddLessonForm;
+export default LessonForm;

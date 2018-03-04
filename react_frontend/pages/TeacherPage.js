@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import AddLessonForm from './../components/lessonform';
+import LessonForm from './../components/lessonform';
 
 
 class TeacherPage extends React.Component<Props>{
@@ -8,7 +8,7 @@ class TeacherPage extends React.Component<Props>{
     render() {
         return (
             <div>I am a teacher
-                <AddLessonForm> </AddLessonForm>
+                <LessonForm> </LessonForm>
             </div>
         );
     }
