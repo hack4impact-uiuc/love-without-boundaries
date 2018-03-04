@@ -1,14 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import StyledButton from '../components/button'
+import StyledButton from '../components/button';
+import { Button, Grid } from 'react-bootstrap';
 type Props = {
     /**/ 
-  }
-const homeSection = styled.div`
-    background: url("https://file-bbzuvotrbb.now.sh/") no-repeat center center fixed;
-    background: #000000;
+}
+const HomeSection = styled.div`
+    background: url("https://file-bbzuvotrbb.now.sh/") no-repeat center center fixed;   
+    // background: #000000;
     width: 100%;
-    height: 100%;
+    height: 5000px;
+    display: block;
 `
 const LoginBtns = styled.button`
     padding: 10px;
@@ -38,24 +40,22 @@ class HomePage extends React.Component<Props>{
     }
     render() {
         return (
-            <div>
-                <homeSection>
+            <HomeSection className="container">
                 { 
                     this.state.signup ? 
                     <TempDiv>
                         <p>Are you a...</p>
-                        <LoginBtns className="btn">Student</LoginBtns>
-                        <LoginBtns className="btn">Teacher</LoginBtns>
-                        <LoginBtns className="btn">Admin</LoginBtns>
+                        <Button bsStyle="primary">Student</Button>
+                        <Button bsStyle="primary">Teacher</Button>
+                        <Button bsStyle="primary">Admin</Button>
                     </TempDiv>
                     : 
                     <TempDiv>
-                        <LoginBtns className="btn">Login</LoginBtns>
-                        <LoginBtns className="btn" onClick={this.onSignUp}>Sign Up</LoginBtns>
+                        <Button bsStyle="primary">Login</Button>
+                        <Button bsStyle="primary" onClick={this.onSignUp}>Sign Up</Button>
                     </TempDiv>
                 }
-                </homeSection>
-            </div>
+            </HomeSection>
         );
     }
 }
