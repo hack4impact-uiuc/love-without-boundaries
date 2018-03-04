@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
-import StudentPage from '../pages/StudentPage';
 
 class AddLessonForm extends React.Component {
     constructor() {
@@ -22,14 +21,13 @@ class AddLessonForm extends React.Component {
         const data = event.target;
         this.setState({
             Lesson: this.state.Lessons.push({
-                Name: this.state.name,
-                Notes: this.state.notes,
-                Worksheet: this.state.wksht,
-                Quiz: this.state.quiz,
+                name: this.state.name,
+                notes: this.state.notes,
+                worksheet: this.state.wksht,
+                quiz: this.state.quiz,
             }),
         });
-        <StudentPage lessonName={lesson.Name} lessonNotes={lesson.Notes} worksheetName={lesson.Worksheet} quizName={lesson.Quiz} />
-        console.log(this.state.Lessons);
+
     }
 
     handleChange(event) {
@@ -42,26 +40,34 @@ class AddLessonForm extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="Lesson Name">Lesson Name</label>
-                    <input id="Lesson Name" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
-
-                    <label htmlFor="Lesson Notes">Lesson Notes</label>
-                    <input id="Lesson Notes" name="notes" type="text" value={this.state.notes} onChange={this.handleChange} />
-
-                    <label htmlFor="Lesson Wksht">Lesson Worksheet</label>
-                    <input id="Lesson Wksht" name="wksht" type="text" value={this.state.wksht} onChange={this.handleChange} />
-
-                    <label htmlFor="Lesson Wksht">Lesson Quiz</label>
-                    <input id="Lesson Wksht" name="quiz" type="text" value={this.state.quiz} onChange={this.handleChange} />
-
-                    <button>Add Lesson</button>
+                    <div>
+                        <label htmlFor="Lesson Name">Lesson Name: </label>
+                        <input id="Lesson Name" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
+                    </div>
+                    <div>
+                        <label htmlFor="Lesson Notes">Lesson Notes: </label>
+                        <input id="Lesson Notes" name="notes" type="text" value={this.state.notes} onChange={this.handleChange} />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="Lesson Wksht">Lesson Worksheet: </label>
+                        <input id="Lesson Wksht" name="wksht" type="text" value={this.state.wksht} onChange={this.handleChange} />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="Lesson Wksht">Lesson Quiz: </label>
+                        <input id="Lesson Wksht" name="quiz" type="text" value={this.state.quiz} onChange={this.handleChange} />
+                    </div>
+                    <div>
+                        <button>Add Lesson</button>
+                    </div>
                 </form>
 
                 <div>
                     <div>
                         {
                             this.state.Lessons.map(lesson => (
-                                <LessonComponent lessonName={lesson.Name} lessonNotes={lesson.Notes} worksheetName={lesson.Worksheet} quizName={lesson.Quiz} />
+                                <LessonComponent lessonName={lesson.name} lessonNotes={lesson.notes} worksheetName={lesson.worksheet} quizName={lesson.quiz} />
                             ))
                         }
                     </div>
