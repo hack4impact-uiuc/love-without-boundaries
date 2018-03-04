@@ -2,123 +2,85 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  /**/ 
+  /**/
 }
-const LessonDiv = styled.div`
+
+const LessonBox = styled.div`
+    border-style: solid;
+    border-color: #d7dce2;
+    color: white;
+    background-color: #a6acb5;
+    height: 300px;
+    width: 500px;
+    z-index: -1;
+    font-family: "Arial";
+`;
+
+const LessonTitle = styled.div`
+      border-bottom-style: solid;
+      border-color: white;
+      color: white;
+      padding: 10px;
+      font-size: 35px;
+      text-align: right;
+      z-index = -1;
+      margin: 20px;
+      font-family: "Arial";
+  `;
+
+const LessonProps = styled.div`
+      border-style: solid;
+      border-color: white;
+      color: #a6acb5;
+      padding: 5px 5px;
+      margin: 5px 5px;
+      font-size: 20px;
+      text-align: center;
+      border-radius: 0px;
+      background-color: white;
+      height: 30px;
+      z-index: -1;
+      font-family: "Arial";
+`;
+const CheckedBoxComplete = styled.div`
+    display: inline-block;
+    margin-left: 3px;
+    margin-bottom: 1px;
     border-style: solid;
     border-color: red;
-    height: 300px;
-    width: 400px;
+    color: white;
+    font-size: 30px;
+    background-color: red;
+    height: 25px;
+    width: 25px;
+    z-index: 100;
 `;
+
+const CheckedBoxInComplete = styled.div`
+    float: right;
+    float:top;
+    border-style: solid;
+    border-color: red;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    z-index: 100;
+`;
+
 class LessonComponent extends React.Component<Props>{
     render() {
         return(
-            <LessonDiv>This is a lesson with buttons to notes, worksheets, quizzes</LessonDiv>
+            <div>
+            <LessonBox>
+              <LessonTitle>{this.props.lessonName}</LessonTitle>
+              <LessonProps> Notes: {this.props.lessonNotes}</LessonProps>
+              <LessonProps> Worksheet: {this.props.worksheetName}</LessonProps>
+              <LessonProps> Quiz: {this.props.quizName} </LessonProps>
+            </LessonBox>
+            </div>
         );
     }
 
 }
-
-
-class AddLessonForm extends React.Component {
-    constructor() {
-        super();
-        this.state = {Lessons: [],
-                      newLessonName: '',
-                      newLessonNotes: '',
-                      newLessonWksht: '',
-                      newLessonQuiz: ''
-                     }
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        this.setState(
-            {
-                Lesson: this.state.push(data)
-            }
-        )
-    }
-  
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="Lesson Name">Lesson Name</label>
-                <input id="Lesson Name" name="Lesson Name" type="text" />
-  
-                <label htmlFor="Lesson Notes">Lesson Notes</label>
-                <input id="Lesson Notes" name="Lesson Notes" type="text" />
-  
-                <label htmlFor="Lesson Wksht">Lesson Worksheet</label>
-                <input id="Lesson Wksht" name="Lesson Wksht" type="text" />
-
-                <label htmlFor="Lesson Wksht">Lesson Worksheet</label>
-                <input id="Lesson Wksht" name="Lesson Wksht" type="text" />
-
-                <button>Add Lesson</button>
-            </form>
-      );
-    }
-  }
-
-
-
-
-
-// class AddLessonForm extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {Lessons: [],
-//                       newLessonName: '',
-//                       newLessonNotes: '',
-//                       newLessonWksht: '',
-//                       newLessonQuiz: ''
-//                     }
-//         this.handleInputChange = this.handleInputChange.bind(this);
-//     }
-
-//     handleInputChange(event) {
-//         const target = event.target;
-//         const name = target.name;
-
-//         this.setState({
-//         [name]: value
-//         });
-//     }
-
-//     onSubmit(event) {
-//         const lessons = this.state.Lessons;
-//         this.setState({
-//             Lessons: this.state.Lessons.push( { Name: event.target.name,
-//                                                 Notes: event.target.notes,
-//                                                 Wksht: event.target.wksht,
-//                                                 Quiz: event.target.quiz} 
-//                                             )
-//         });
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <form >
-//                 <label>
-//                     Lesson Name:
-//                     <input type="text" value={this.state.value} onChange={this.handleChange} />
-//                 </label>
-
-//                 <button onClick={this.onSubmit}>Add Lesson</button>
-//                 {this.state.Lessons.map(function(input, index) {
-//                     return (<LessonComponent lessonName = {this.state.newLessonName}
-//                                              lessonNotes = {this.state.newLessonNotes}
-//                                              worksheetName = {this.state.newLessonWksht}
-//                                              quizName = {this.state.newLessonQuiz}> ) 
-//                 })}
-//                 </form>
-//             </div>
-//         );
-//     }
-// }
 
 export default LessonComponent;
