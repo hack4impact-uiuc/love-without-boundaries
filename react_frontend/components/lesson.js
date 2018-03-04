@@ -5,6 +5,7 @@ type Props = {
   /**/
 }
 
+
 const LessonBox = styled.div`
     border-style: solid;
     border-color: #d7dce2;
@@ -66,6 +67,7 @@ const CheckedBoxInComplete = styled.div`
     background-color: white;
     z-index: 100;
 `;
+
 
 class LessonComponent extends React.Component<Props>{
     render() {

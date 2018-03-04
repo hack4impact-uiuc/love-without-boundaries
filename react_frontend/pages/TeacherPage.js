@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import LessonForm from './../components/lessonform';
 import Lesson from './../components/lesson';
 
 type Props = {
@@ -50,23 +51,17 @@ class TeacherPage extends React.Component<Props>{
 
     render() {
         return (
-            <div>I am a teacher page
-              <Lesson lessonName = {"Lesson 1"}
-                      lessonNotes = {"Nouns"}
-                      worksheetName = {"Worksheet 1"}
-                      worksheetIsChecked = {true}
-                      quizName = {"Nouns"}
-                      quizIsChecked = {true}
-                      quizPercentage = {'98%'}
-              >This is sample lesson Nouns</Lesson>
-              {/* {isChecked(this.props)}
-              <TeacherAddLessonBox>
-                <TeacherTitle> Add Lesson Here </TeacherTitle>
-                <TeacherButton> Google Docs Link </TeacherButton>
-                <TeacherButton> Upload Notes </TeacherButton>
-                <TeacherButton> Upload Quiz </TeacherButton>
-                <TeacherButton> Upload Worksheet </TeacherButton>
-              </TeacherAddLessonBox>*/}
+            <div>I am a teacher
+                <LessonForm> </LessonForm>
+
+                {/* {isChecked(this.props)}
+                <TeacherAddLessonBox>
+                    <TeacherTitle> Add Lesson Here </TeacherTitle>
+                    <TeacherButton> Google Docs Link </TeacherButton>
+                    <TeacherButton> Upload Notes </TeacherButton>
+                    <TeacherButton> Upload Quiz </TeacherButton>
+                    <TeacherButton> Upload Worksheet </TeacherButton>
+                </TeacherAddLessonBox>*/}
             </div>
         );
     }
