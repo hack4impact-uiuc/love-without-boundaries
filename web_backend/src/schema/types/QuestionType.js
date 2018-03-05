@@ -1,6 +1,5 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList} from 'graphql';
+import { GraphQLObjectType, GraphQLInputObjectType, GraphQLString, GraphQLList} from 'graphql';
 import AnswerType from '../types/AnswerType';
-
 const mongoose = require('mongoose');
 
 const Question = new GraphQLObjectType({
