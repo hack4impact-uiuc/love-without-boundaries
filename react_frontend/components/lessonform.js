@@ -6,7 +6,7 @@ class LessonForm extends React.Component {
     constructor() {
         super();
         this.state = {
-            Lessons: [],
+            lessons: [],
             name: '',
             notes: '',
             wksht: '',
@@ -20,14 +20,13 @@ class LessonForm extends React.Component {
         event.preventDefault();
         const data = event.target;
         this.setState({
-            Lesson: this.state.Lessons.push({
+            lessons: this.state.Lessons.push({
                 name: this.state.name,
                 notes: this.state.notes,
                 worksheet: this.state.wksht,
                 quiz: this.state.quiz,
             }),
         });
-
     }
 
     handleChange(event) {
@@ -41,22 +40,22 @@ class LessonForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <label htmlFor="Lesson Name">Lesson Name: </label>
-                        <input id="Lesson Name" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
+                        <label htmlFor="lesson_name_input">Lesson Name: </label>
+                        <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
                     </div>
                     <div>
-                        <label htmlFor="Lesson Notes">Lesson Notes: </label>
-                        <input id="Lesson Notes" name="notes" type="text" value={this.state.notes} onChange={this.handleChange} />
-                    </div>
-                    
-                    <div>
-                        <label htmlFor="Lesson Wksht">Lesson Worksheet: </label>
-                        <input id="Lesson Wksht" name="wksht" type="text" value={this.state.wksht} onChange={this.handleChange} />
+                        <label htmlFor="lesson_notes_input">Lesson Notes: </label>
+                        <input id="lesson_notes_input" name="notes" type="text" value={this.state.notes} onChange={this.handleChange} />
                     </div>
                     
                     <div>
-                        <label htmlFor="Lesson Wksht">Lesson Quiz: </label>
-                        <input id="Lesson Wksht" name="quiz" type="text" value={this.state.quiz} onChange={this.handleChange} />
+                        <label htmlFor="lesson_wksht_input">Lesson Worksheet: </label>
+                        <input id="lesson_wksht_input" name="wksht" type="text" value={this.state.wksht} onChange={this.handleChange} />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="lesson_quiz_input">Lesson Quiz: </label>
+                        <input id="lesson_quiz_input" name="quiz" type="text" value={this.state.quiz} onChange={this.handleChange} />
                     </div>
                     <div>
                         <button>Add Lesson</button>
@@ -76,6 +75,5 @@ class LessonForm extends React.Component {
         );
     }
 }
-
 
 export default LessonForm;
