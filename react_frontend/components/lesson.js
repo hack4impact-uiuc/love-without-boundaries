@@ -18,31 +18,32 @@ const LessonBox = styled.div`
 `;
 
 const LessonTitle = styled.div`
-      border-bottom-style: solid;
-      border-color: white;
-      color: white;
-      padding: 10px;
-      font-size: 35px;
-      text-align: right;
-      z-index = -1;
-      margin: 20px;
-      font-family: "Arial";
-  `;
+    border-bottom-style: solid;
+    border-color: white;
+    color: white;
+    padding: 10px;
+    font-size: 35px;
+    text-align: right;
+    z-index = -1;
+    margin: 20px;
+    font-family: "Arial";
+`;
 
 const LessonProps = styled.div`
-      border-style: solid;
-      border-color: white;
-      color: #a6acb5;
-      padding: 5px 5px;
-      margin: 5px 5px;
-      font-size: 20px;
-      text-align: center;
-      border-radius: 0px;
-      background-color: white;
-      height: 30px;
-      z-index: -1;
-      font-family: "Arial";
+    border-style: solid;
+    border-color: white;
+    color: #a6acb5;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 0px;
+    background-color: white;
+    height: 30px;
+    z-index: -1;
+    font-family: "Arial";
 `;
+
 const CheckedBoxComplete = styled.div`
     display: inline-block;
     margin-left: 3px;
@@ -73,12 +74,12 @@ class LessonComponent extends React.Component<Props>{
     render() {
         return(
             <div>
-            <LessonBox>
-              <LessonTitle>{this.props.lessonName}</LessonTitle>
-              <LessonProps> Notes: {this.props.lessonNotes}</LessonProps>
-              <LessonProps> Worksheet: {this.props.worksheetName}</LessonProps>
-              <LessonProps> Quiz: {this.props.quizName}, Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>
-            </LessonBox>
+                <LessonBox>
+                    <LessonTitle>{this.props.lessonName}</LessonTitle>
+                    <LessonProps> Notes: {this.props.lessonNotes}</LessonProps>
+                    <LessonProps> Worksheet: {this.props.worksheetName}</LessonProps>
+                    <LessonProps> Quiz: {this.props.quizName}, Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>
+                </LessonBox>
             </div>
         );
     }
