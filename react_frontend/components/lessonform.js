@@ -12,15 +12,12 @@ class LessonForm extends React.Component {
             wksht: '',
             quiz: '',
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
-        const data = event.target;
         this.setState({
-            lessons: this.state.Lessons.push({
+            lessons: this.state.lessons.concat({
                 name: this.state.name,
                 notes: this.state.notes,
                 worksheet: this.state.wksht,
@@ -29,7 +26,7 @@ class LessonForm extends React.Component {
         });
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -65,7 +62,7 @@ class LessonForm extends React.Component {
                 <div>
                     <div>
                         {
-                            this.state.Lessons.map(lesson => (
+                            this.state.lessons.map(lesson => (
                                 <LessonComponent lessonName={lesson.name} lessonNotes={lesson.notes} worksheetName={lesson.worksheet} quizName={lesson.quiz} />
                             ))
                         }
