@@ -1,4 +1,4 @@
-import { GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
+import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
 
 import Student from '../../models/student';
 import StudentType from '../types/StudentType';
@@ -47,6 +47,34 @@ const Mutation = new GraphQLObjectType({
           const q = new Quiz({ quizName, listofQuestions });
           return q.save()
         } 
+      },
+      deleteStudent: { 
+        type: StudentType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return students.delete(id)
+        }
+      },
+      deleteQuiz: { 
+        type: QuizType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return quizzes.delete(id)
+        }
+      },
+      deleteQuestion: { 
+        type: QuestionType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return questions.delete(id)
+        }
+      },
+      deleteAnswer: { 
+        type: AnswerType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return answers.delete(id)
+        }
       },
     };
   },
