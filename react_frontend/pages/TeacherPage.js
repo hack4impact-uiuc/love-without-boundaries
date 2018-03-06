@@ -4,7 +4,6 @@ import LessonForm from './../components/lessonform';
 import Lesson from './../components/lesson';
 
 import AddTodo from '../containers/AddTodo'
-import ToDoList from '../components/todoList';
 
 
 
@@ -54,20 +53,10 @@ const TeacherButton = styled.div`
 
 class TeacherPage extends React.Component<Props>{
 
-    constructor(props) {
-        super(props);
-        // this.getTodos.bind(this)
-    }
-
-    // getTodos() {
-    //     console.log(state.getState())
-    // }
-
     render() {
         return (
             <div>I am a teacher yo
                 <AddTodo />
-                {console.log(this.props)}
             </div>
         );
     }
