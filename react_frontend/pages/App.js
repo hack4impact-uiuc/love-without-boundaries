@@ -27,6 +27,7 @@ class App extends React.Component<Props>{
                         <ul>
                             <li>
                                 <Link to="/" >Home</Link>
+
                             </li>
                             <li>
                                 <Link to="/student" >Student</Link>
@@ -41,13 +42,13 @@ class App extends React.Component<Props>{
 
                         <hr />
 
-                        <Route exact path="/" component={HomePage} />
+                        {/* <Route exact path="/" component={HomePage} /> */}
                         <Route path="/student" component={StudentPage} />
                         <Route path="/teacher" component={TeacherPage} />
                         <Route path="/admin" component={AdminPage} />
                     </div>
                 </Router>
-                <QueryRenderer
+                {/* <QueryRenderer
                     environment={environment}
                     query={graphql`
                         query App_Query{
@@ -70,7 +71,7 @@ class App extends React.Component<Props>{
                             </div>
                         );
                     }}
-                />
+                /> */}
             </div>
         );
     }
