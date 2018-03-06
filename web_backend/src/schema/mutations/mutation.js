@@ -20,12 +20,6 @@ const Mutation = new GraphQLObjectType({
   description: 'Your Root Mutation',
   fields() {
     return {
-        args: { studentName: { type: GraphQLString } },
-        resolve(root, { studentName }, ctx) {
-          const s = new Student({ name });
-          return s.save()
-        } 
-      },
       createAnswer: {
         type: AnswerType,
         args: { answerName: { type: GraphQLString } , isCorrect: {type: GraphQLBoolean}},
