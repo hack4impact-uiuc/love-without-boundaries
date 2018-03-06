@@ -1,4 +1,3 @@
-
 import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
 
 import Student from '../../models/student';
@@ -44,18 +43,19 @@ const Mutation = new GraphQLObjectType({
           return q.save()
         } 
       },
-      deleteStudent: { 
+      createStudent: {
         type: StudentType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return students.delete(id)
-        }
+        args: { name: { type: GraphQLString },  teacher: { type: GraphQLString } },
+        resolve(root, { name, teacher}, ctx) {
+          const s = new Student({ name, teacher });
+          return s.save()
+        } 
       },
-      deleteQuiz: { 
-        type: QuizType,
+      deleteAnswer: { 
+        type: AnswerType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
         resolve(root, {id}, ctx){
-          return quizzes.delete(id)
+          return answers.delete(id)
         }
       },
       deleteQuestion: { 
@@ -65,20 +65,19 @@ const Mutation = new GraphQLObjectType({
           return questions.delete(id)
         }
       },
-      deleteAnswer: { 
-        type: AnswerType,
+      deleteQuiz: { 
+        type: QuizType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
         resolve(root, {id}, ctx){
-          return answers.delete(id)
+          return quizzes.delete(id)
         }
       },
-      createStudent: {
+      deleteStudent: { 
         type: StudentType,
-        args: { name: { type: GraphQLString },  teacher: { type: GraphQLString } },
-        resolve(root, { name, teacher}, ctx) {
-          const s = new Student({ name, teacher });
-          return s.save()
-        } 
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return students.delete(id)
+        }
       },
       addGrade: {
         type: StudentType,
