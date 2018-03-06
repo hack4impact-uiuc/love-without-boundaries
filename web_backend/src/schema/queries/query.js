@@ -8,6 +8,10 @@ import Quiz from '../../models/quiz';
 import QuizType from '../types/QuizType';
 import Question from '../../models/question';
 import QuestionType from '../types/QuestionType';
+import AdminType from '../types/AdminType'
+import Admin from '../../models/admin';
+import TeacherType from '../types/TeacherType'
+import Teacher from '../../models/teacher';
 
 const Query = new GraphQLObjectType({
   name: 'Query',
@@ -36,6 +40,18 @@ const Query = new GraphQLObjectType({
         type: new GraphQLList(QuizType),
         resolve() { 
           return Quiz.find()
+        }
+      },
+      teacher: {
+        type: new GraphQLList(TeacherType),
+        resolve() { 
+          return Teacher.find()
+        }
+      },
+      admin: {
+        type: new GraphQLList(AdminType),
+        resolve() { 
+          return Admin.find()
         }
       },
     };

@@ -9,11 +9,18 @@ import QuizType from '../types/QuizType';
 import Question from '../../models/question';
 import QuestionType from '../types/QuestionType';
 import InputAnswerType from '../types/InputAnswerType';
+import InputStudentType from '../types/InputStudentType';
 import InputQuestionType from '../types/InputQuestionType';
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 import GradeType from '../types/GradeType'
 import StudentType from '../types/StudentType'
 import Student from '../../models/student';
+import AdminType from '../types/AdminType'
+import Admin from '../../models/admin';
+import TeacherType from '../types/TeacherType'
+import Teacher from '../../models/teacher';
+import InputTeacherType from '../types/InputTeacherType';
+
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Your Root Mutation',
@@ -45,10 +52,33 @@ const Mutation = new GraphQLObjectType({
       },
       createStudent: {
         type: StudentType,
-        args: { name: { type: GraphQLString },  teacher: { type: GraphQLString } },
+        args: { name: { type: GraphQLString },  teacher: { type: InputTeacherType } },
         resolve(root, { name, teacher}, ctx) {
           const s = new Student({ name, teacher });
           return s.save()
+        } 
+      },
+      createTeacher: {
+        type: TeacherType,
+        args: { name: { type: GraphQLString }, 
+                email: { type: GraphQLString }, 
+                password: { type: GraphQLString }, 
+                listOfStudents: { type: new GraphQLList(InputStudentType) }  
+              },
+        resolve(root, { name, email, password, listOfStudents}, ctx) {
+          const t = new Student({ name, email, password, listOfStudents });
+          return t.save()
+        } 
+      },
+      createAdmin: {
+        type: AdminType,
+        args: { name: { type: GraphQLString },
+                email: { type: GraphQLString },
+                password: { type: GraphQLString } 
+              },
+        resolve(root, { name, email, password }, ctx) {
+          const a = new Student({ name, email, password });
+          return a.save()
         } 
       },
       deleteAnswer: { 
@@ -77,6 +107,20 @@ const Mutation = new GraphQLObjectType({
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
         resolve(root, {id}, ctx){
           return students.delete(id)
+        }
+      },
+      deleteTeacher: { 
+        type: TeacherType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return teachers.delete(id)
+        }
+      },
+      deleteAdmin: { 
+        type: AdminType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return admins.delete(id)
         }
       },
       addGrade: {
