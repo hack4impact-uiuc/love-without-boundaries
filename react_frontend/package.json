@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./webpack.config.js",
+    "start": "webpack-dev-server --config ./webpack.config.js",
     "relay": "relay-compiler --src . --schema ./schema.graphql"
   },
   "author": "",
@@ -32,6 +33,7 @@
     "flow-bin": "^0.65.0",
     "less": "^3.0.0",
     "less-loader": "^4.0.5",
+    "redux-devtools": "^3.4.1",
     "relay-compiler": "^1.4.1",
     "style-loader": "^0.20.1",
     "webpack": "^3.11.0",
@@ -39,10 +41,13 @@
   },
   "dependencies": {
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-relay": "^1.4.1",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
     "relay-runtime": "^1.4.1",
     "styled-components": "^3.1.6"
   }

@@ -1,3 +1,4 @@
+
 import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
 
 import Student from '../../models/student';
@@ -10,14 +11,15 @@ import Question from '../../models/question';
 import QuestionType from '../types/QuestionType';
 import InputAnswerType from '../types/InputAnswerType';
 import InputQuestionType from '../types/InputQuestionType';
-
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+import GradeType from '../types/GradeType'
+import StudentType from '../types/StudentType'
+import Student from '../../models/student';
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Your Root Mutation',
   fields() {
     return {
-      createStudent: {
-        type: StudentType,
         args: { studentName: { type: GraphQLString } },
         resolve(root, { studentName }, ctx) {
           const s = new Student({ name });
@@ -76,6 +78,22 @@ const Mutation = new GraphQLObjectType({
           return answers.delete(id)
         }
       },
+      createStudent: {
+        type: StudentType,
+        args: { name: { type: GraphQLString },  teacher: { type: GraphQLString } },
+        resolve(root, { name, teacher}, ctx) {
+          const s = new Student({ name, teacher });
+          return s.save()
+        } 
+      },
+      addGrade: {
+        type: StudentType,
+        args: { name: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
+        resolve(root, { name, lesson, score}, ctx) {
+          var grade = {"lesson": lesson, "score": score};
+          return Student.findOneAndUpdate({"name": name}, {$push: {"grades": grade}})
+        } 
+      }
     };
   },
 });

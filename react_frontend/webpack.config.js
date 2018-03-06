@@ -22,6 +22,7 @@ module.exports = {
         path: parentDir + '/dist',
         filename: 'bundle.js'
     },
+    devtool: 'source-map',
     devServer: {
         contentBase: parentDir,
         historyApiFallback: true
