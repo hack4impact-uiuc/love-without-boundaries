@@ -16,7 +16,7 @@ const InputTeacherType = new GraphQLInputObjectType({
         type: GraphQLString,
     },
     listOfStudents: {
-        //type: new GraphQLList(InputStudentType),
+        // type: new GraphQLList(InputStudentType),
         type: new GraphQLList(GraphQLString),
     },
   },

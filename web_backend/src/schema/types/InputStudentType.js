@@ -7,21 +7,21 @@ const InputStudentType = new GraphQLInputObjectType({
   name: 'InputStudent',
   description: 'Self Descriptive',
   fields: {
-      studentName: {
-        type: GraphQLString,
-      },
-      email: {
-        type: GraphQLString,
-      },
-      password: {
-        type: GraphQLString,
-      },
-      teacher: {
-        type: InputTeacherType,
-      },
-      grades: {
-        type: new GraphQLList(InputGradeType)
-      }
+    studentName: {
+      type: GraphQLString,
+    },
+    email: {
+      type: GraphQLString,
+    },
+    password: {
+      type: GraphQLString,
+    },
+    teacher: {
+      type: InputTeacherType,
+    },
+    grades: {
+      type: new GraphQLList(InputGradeType)
+    }
   },
 });
 

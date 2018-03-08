@@ -26,14 +26,14 @@ const Mutation = new GraphQLObjectType({
   description: 'Your Root Mutation',
   fields() {
     return {
-      createAnswer: {
-        type: AnswerType,
-        args: { answerName: { type: GraphQLString } , isCorrect: {type: GraphQLBoolean}},
-        resolve(root, { answerName, isCorrect }, ctx) {
-          const a = new Answer({ answerName, isCorrect });
-          return a.save()
-        } 
-      },
+      // createAnswer: {
+      //   type: AnswerType,
+      //   args: { answerName: { type: GraphQLString } , isCorrect: {type: GraphQLBoolean}},
+      //   resolve(root, { answerName, isCorrect }, ctx) {
+      //     const a = new Answer({ answerName, isCorrect });
+      //     return a.save()
+      //   } 
+      // },
       createQuestion: {
         type: QuestionType,
         args: { questionName: { type: GraphQLString }, listofAnswers: {type: new GraphQLList(InputAnswerType)}},
@@ -44,9 +44,9 @@ const Mutation = new GraphQLObjectType({
       },
       createQuiz: {
         type: QuizType,
-        args: { quizName: { type: GraphQLString } , listofQuestions: {type: new GraphQLList(InputQuestionType)}},
-        resolve(root, { quizName, listofQuestions }, ctx) {
-          const q = new Quiz({ quizName, listofQuestions });
+        args: { quizName: { type: GraphQLString } , listofQuestionIDs: {type: new GraphQLList(GraphQLString)}},
+        resolve(root, { quizName, listofQuestionIDs }, ctx) {
+          const q = new Quiz({ quizName, listofQuestionIDs });
           return q.save()
         } 
       },
@@ -81,13 +81,13 @@ const Mutation = new GraphQLObjectType({
           return a.save()
         } 
       },
-      deleteAnswer: { 
-        type: AnswerType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return answers.delete(id)
-        }
-      },
+      // deleteAnswer: { 
+      //   type: AnswerType,
+      //   args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+      //   resolve(root, {id}, ctx){
+      //     return answers.delete(id)
+      //   }
+      // },
       deleteQuestion: { 
         type: QuestionType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },

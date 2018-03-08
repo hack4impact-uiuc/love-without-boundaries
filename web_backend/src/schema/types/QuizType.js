@@ -10,8 +10,8 @@ const Quiz = new GraphQLObjectType({
       quizName: {
         type: GraphQLString,
       },
-      listOfQuestions: {
-      	type: new GraphQLNonNull(new GraphQLList(QuestionType)),
+      listOfQuestionIDs: {
+      	type: new GraphQLNonNull(new GraphQLList(GraphQLString)),
       },
     };
   },
