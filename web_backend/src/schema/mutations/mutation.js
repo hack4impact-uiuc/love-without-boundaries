@@ -1,9 +1,11 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLID } from 'graphql';
 
 import StudentType from '../types/StudentType'
 import Student from '../../models/student';
 import LessonType from '../types/LessonType'
 import Lesson from '../../models/lessons'
+
+import Note from '../types/NotesType'
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -23,11 +25,11 @@ const Mutation = new GraphQLObjectType({
       createLesson: {
         type: LessonType,
         args: { 
-          id: { type: GraphQLID}, 
-          name: {type: GraphQLString}, 
-          quiz: { type: GraphQLString}, 
+          id: { type: GraphQLID }, 
+          name: {type: GraphQLString }, 
+          quiz: { type: GraphQLString }, 
           worksheets: { type: GraphQLString}, 
-          notes: { type: GraphQLString}
+          notes: { type: new GraphQLList(GraphQLString) }
         },
         resolve(root, { id, name, quiz, worksheets, notes}, ctx) {
           const s = new Lesson({name, quiz, worksheets, notes})
@@ -39,7 +41,7 @@ const Mutation = new GraphQLObjectType({
       //   type: LessonType,
       //   args: { 
       //     id: {type: new GraphQLNonNull(GraphQLID)}
-      //   },
+      //   },`
       //   resolve(root, {id}, ctx){
       //     return lessons.delete(id)
       //   }

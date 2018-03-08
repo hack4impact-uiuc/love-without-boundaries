@@ -1,5 +1,7 @@
-import { GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
-const mongoose = require('mongoose');
+import { GraphQLObjectType, GraphQLString, GraphQLID , GraphQLList} from 'graphql';
+import mongoose from 'mongoose';
+
+import NoteType from './NotesType';
 
 const Lesson = new GraphQLObjectType({
   name: 'Lesson',
@@ -19,7 +21,7 @@ const Lesson = new GraphQLObjectType({
         type: GraphQLString,
       },
       notes: {
-        type: GraphQLString
+        type: new GraphQLList(NoteType)
       }
     };
   },
