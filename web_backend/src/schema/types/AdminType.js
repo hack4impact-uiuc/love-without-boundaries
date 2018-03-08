@@ -12,9 +12,6 @@ const Admin = new GraphQLObjectType({
       email: {
         type: GraphQLString,
       },
-      password: {
-        type: GraphQLString,
-      }
     };
   },
 });

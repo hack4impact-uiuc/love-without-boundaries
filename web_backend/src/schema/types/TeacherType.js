@@ -7,16 +7,13 @@ const Teacher = new GraphQLObjectType({
   description: 'Self Descriptive',
   fields() {
     return {
-      teacherID: {
+      id: {
         type: GraphQLID,
       },
-      teacherName: {
+      name: {
         type: GraphQLString,
       },
       email: {
-        type: GraphQLString,
-      },
-      password: {
         type: GraphQLString,
       },
       listOfStudentIDs: {

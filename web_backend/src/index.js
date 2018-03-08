@@ -5,7 +5,7 @@ const cors = require('micro-cors')()
 
 const mongoose = require('mongoose');
 
-const MONGO_URI = 'mongodb://aria:malkani@ds147228.mlab.com:47228/lwb';
+const MONGO_URI = 'mongodb://aria:malkani@ds261678.mlab.com:61678/lwb';
 
 
 mongoose.Promise = Promise;
