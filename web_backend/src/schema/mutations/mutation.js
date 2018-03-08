@@ -86,8 +86,8 @@ const Mutation = new GraphQLObjectType({
         args: {studentID: {type: GraphQLString}, teacherID: {type: GraphQLString}}, 
         resolve(root, {studentID, teacherID}, ctx) {
         if (Student.findById(studentID) && Teacher.findById(teacherID)) {
-          Teacher.findByIdAndUpdate(teacherID, {$push: {listOfStudentIDs: studentID}})
-          return  Student.findByIdAndUpdate(studentID, {$set: { teacherID: teacherID }})
+          Teacher.findByIdAndUpdate(teacherID, {$push: {"listOfStudentIDs": studentID}})
+          return Student.findByIdAndUpdate(studentID, {$set: { teacherID: teacherID }})
         }
         }
       }
