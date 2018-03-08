@@ -1,7 +1,6 @@
+# Examples
 
-
-## Examples
-
+## Create Student Mutation
 ```
 mutation createStudent{
   createStudent(name:"tim", email:"tk2@illinois.edu") {
@@ -16,14 +15,39 @@ mutation createStudent{
   }
 }
 ```
-
+Expected Result:
+```
+{
+  "data": {
+    "createStudent": {
+      "id": "5aa1c0ffd4b2411148869faa",
+      "email": "tk2@illinois.edu",
+      "name": "tim",
+      "teacherID": null,
+      "grades": []
+    }
+  }
+}
+```
+## Add Grade Mutation
 ```
 mutation m {
   addGrade(id:"5aa1a24b9a2c0da67ebdc1ef", lesson: "verbs", score:100) {
     id
+  }
 }
 ```
-
+Expected Result:
+```
+{
+  "data": {
+    "addGrade": {
+      "id": "5aa1a24b9a2c0da67ebdc1ef"
+    }
+  }
+}
+```
+## Student Query
 ```
 query getStudents{
   students {
@@ -38,9 +62,7 @@ query getStudents{
   }
 }
 ```
-
-
-
+Expected Result:
 ```
 {
   "data": {
@@ -65,7 +87,7 @@ query getStudents{
   }
 }
 ```
-
+## Create Teacher mutation
 ```
 mutation m{
 	createTeacher(name: "Aria", email: "aria@gmail.com") {
@@ -75,6 +97,37 @@ mutation m{
   }
 }
 ```
+Expected Result:
+```
+{
+  "data": {
+    "createTeacher": {
+      "id": "5aa1c1dfd4b2411148869fac",
+      "name": "Aria",
+      "email": "aria@gmail.com"
+    }
+  }
+}
+```
+## Assign Student to Teacher
+```
+mutation m {
+  assignStudentToTeacher(studentID:"5aa1a24b9a2c0da67ebdc1ef", teacherID: "5aa1a71837b5d2ac3f35dcde") {
+		id
+  }
+}
+```
+Expected Result:
+```
+{
+  "data": {
+    "assignStudentToTeacher": {
+      "id": "5aa1a71837b5d2ac3f35dcde"
+    }
+  }
+}
+```
+
 
 ```
 {
@@ -82,9 +135,11 @@ mutation m{
     id
     email
     name
+    listOfStudentIDs
   }
 }
 ```
+
 
 ```
 {
@@ -96,26 +151,6 @@ mutation m{
         "name": "Aria"
       }
     ]
-  }
-}
-```
-
-
-```
-mutation m {
-  assignStudentToTeacher(studentID:"5aa1a24b9a2c0da67ebdc1ef", teacherID: "5aa1a71837b5d2ac3f35dcde") {
-		id
-  }
-}
-```
-
-```
-{
-  teacher {
-    id
-    email
-    name
-    listOfStudentIDs
   }
 }
 ```
