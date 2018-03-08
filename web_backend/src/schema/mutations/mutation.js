@@ -1,92 +1,70 @@
-
 import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
-
-import Student from '../../models/student';
-import StudentType from '../types/StudentType';
-import Answer from '../../models/answer';
-import AnswerType from '../types/AnswerType';
-import Quiz from '../../models/quiz';
-import QuizType from '../types/QuizType';
-import Question from '../../models/question';
-import QuestionType from '../types/QuestionType';
-import InputAnswerType from '../types/InputAnswerType';
-import InputQuestionType from '../types/InputQuestionType';
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 import GradeType from '../types/GradeType'
 import StudentType from '../types/StudentType'
 import Student from '../../models/student';
+import AdminType from '../types/AdminType'
+import Admin from '../../models/admin';
+import TeacherType from '../types/TeacherType'
+import Teacher from '../../models/teacher';
+import teacher from '../../models/teacher';
+
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Your Root Mutation',
   fields() {
     return {
-      createAnswer: {
-        type: AnswerType,
-        args: { answerName: { type: GraphQLString } , isCorrect: {type: GraphQLBoolean}},
-        resolve(root, { answerName, isCorrect }, ctx) {
-          const a = new Answer({ answerName, isCorrect });
-          return a.save()
-        } 
-      },
-      createQuestion: {
-        type: QuestionType,
-        args: { questionName: { type: GraphQLString }, listofAnswers: {type: new GraphQLList(InputAnswerType)}},
-        resolve(root, { questionName, listofAnswers }, ctx) {
-          const q = new Question({ questionName, listofAnswers });
-          return q.save()
-        } 
-      },
-      createQuiz: {
-        type: QuizType,
-        args: { quizName: { type: GraphQLString } , listofQuestions: {type: new GraphQLList(InputQuestionType)}},
-        resolve(root, { quizName, listofQuestions }, ctx) {
-          const q = new Quiz({ quizName, listofQuestions });
-          return q.save()
-        } 
-      },
-      deleteStudent: { 
-        type: StudentType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return students.delete(id)
-        }
-      },
-      deleteQuiz: { 
-        type: QuizType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return quizzes.delete(id)
-        }
-      },
-      deleteQuestion: { 
-        type: QuestionType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return questions.delete(id)
-        }
-      },
-      deleteAnswer: { 
-        type: AnswerType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return answers.delete(id)
-        }
-      },
       createStudent: {
         type: StudentType,
-        args: { name: { type: GraphQLString },  teacher: { type: GraphQLString } },
-        resolve(root, { name, teacher}, ctx) {
-          const s = new Student({ name, teacher });
+        args: { name: { type: GraphQLString }, email: { type: GraphQLString } },
+        resolve(root, { name, email}, ctx) {
+          const s = new Student({ name, email });
           return s.save()
         } 
       },
+      createTeacher: {
+        type: TeacherType,
+        args: { name: { type: GraphQLString }, 
+                email: { type: GraphQLString }
+              },
+        resolve(root, { name, email }, ctx) {
+          const t = new Teacher({ name, email });
+          return t.save()
+        } 
+      },
+      createAdmin: {
+        type: AdminType,
+        args: { name: { type: GraphQLString },
+                email: { type: GraphQLString }
+              },
+        resolve(root, { name, email }, ctx) {
+          const a = new Admin({ name, email });
+          return a.save()
+        } 
+      },
+      deleteAdmin: { 
+        type: AdminType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return Admin.findByIdAndRemove(id);
+        }
+      },
       addGrade: {
         type: StudentType,
-        args: { name: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
-        resolve(root, { name, lesson, score}, ctx) {
+        args: { id: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
+        resolve(root, { id, lesson, score}, ctx) {
           var grade = {"lesson": lesson, "score": score};
-          return Student.findOneAndUpdate({"name": name}, {$push: {"grades": grade}})
+          return Student.findOneAndUpdate({"_id": id}, {$push: {"grades": grade}})
         } 
+      }, 
+      assignStudentToTeacher: {
+        type: StudentType, 
+        args: {studentID: {type: GraphQLString}, teacherID: {type: GraphQLString}}, 
+        resolve(root, {studentID, teacherID}, ctx) {
+        if (Student.findById(studentID) && Teacher.findById(teacherID)) {
+          return Student.findByIdAndUpdate(studentID, {$set: { teacherID: teacherID }}) && Teacher.findByIdAndUpdate(teacherID, {$push: {"listOfStudentIDs": studentID}})
+        }
+        }
       }
     };
   },
