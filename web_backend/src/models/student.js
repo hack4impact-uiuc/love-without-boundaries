@@ -6,7 +6,7 @@ const StudentSchema = new Schema({
   name: { type: String },
   email: { type: String },
   password: { type: String },
-  teacher: { Teacher: String },
+  teacherID: { type: String },
   grades: [{
     lesson: {type: String},
     score: {type: Number}

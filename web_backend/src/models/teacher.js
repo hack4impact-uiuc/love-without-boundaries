@@ -6,7 +6,7 @@ const TeacherSchema = new Schema({
     teacherName: { type: String },
     email: { type: String },
     password: { type: String },
-    listOfStudents: [{ Student: String }],
+    listOfStudentIDs: [{ type: String }],
   });
   
 export default mongoose.model('Teacher', TeacherSchema);
