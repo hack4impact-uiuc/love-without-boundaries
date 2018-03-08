@@ -9,14 +9,14 @@ import StudentListItem from './../components/studentListItem';
 import Button from './../components/button';
 import addStudent from './../relay/mutations/addStudent';
 
-import HomePage from './HomePage';
 import StudentPage from './StudentPage';
 import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
+import HomePage from './HomePage';
 
 type Props = {
     /**/ 
-  }
+}
 
 class App extends React.Component<Props>{ 
     render() {
@@ -27,7 +27,6 @@ class App extends React.Component<Props>{
                         <ul>
                             <li>
                                 <Link to="/" >Home</Link>
-
                             </li>
                             <li>
                                 <Link to="/student" >Student</Link>
@@ -42,7 +41,7 @@ class App extends React.Component<Props>{
 
                         <hr />
 
-                        {/* <Route exact path="/" component={HomePage} /> */}
+                        <Route exact path="/" component={ HomePage } /> 
                         <Route path="/student" component={StudentPage} />
                         <Route path="/teacher" component={TeacherPage} />
                         <Route path="/admin" component={AdminPage} />
