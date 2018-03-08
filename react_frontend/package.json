@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./webpack.config.js",
-    "start": "webpack-dev-server --config ./webpack.config.js",
+    "build": "webpack",
+    "start": "serve .",
     "relay": "relay-compiler --src . --schema ./schema.graphql"
   },
   "author": "",
@@ -35,6 +36,7 @@
     "less-loader": "^4.0.5",
     "redux-devtools": "^3.4.1",
     "relay-compiler": "^1.4.1",
+    "serve": "^6.5.2",
     "style-loader": "^0.20.1",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
