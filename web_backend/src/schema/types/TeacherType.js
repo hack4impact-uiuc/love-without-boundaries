@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } from 'graphql';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 import Student from './StudentType'
 
 const Teacher = new GraphQLObjectType({

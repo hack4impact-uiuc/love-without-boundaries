@@ -1,6 +1,4 @@
 import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
-
-
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 import GradeType from '../types/GradeType'
 import StudentType from '../types/StudentType'
@@ -34,14 +32,6 @@ const Mutation = new GraphQLObjectType({
           return t.save()
         } 
       },
-      // linkTeacherStudent: {
-      //   type: StudentType,
-      //   args: { studentID: { type: GraphQLString }, teacherID: { type: GraphQLString } },
-      //   resolve(root, { studentID, teacherID }, ctx) {
-      //     Teacher.findOneAndUpdate({"teacherID": teacherID}, {$push: {"listOfStudentIDs": studentID}})
-      //     return Student.findOneAndUpdate({"studentID": studentID}, {$push: {"teacherID": teacherID}})
-      //   } 
-      // },
       createAdmin: {
         type: AdminType,
         args: { name: { type: GraphQLString },
@@ -52,25 +42,11 @@ const Mutation = new GraphQLObjectType({
           return a.save()
         } 
       },
-      deleteStudent: { 
-        type: StudentType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return students.delete(id)
-        }
-      },
-      deleteTeacher: { 
-        type: TeacherType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return teachers.delete(id)
-        }
-      },
       deleteAdmin: { 
         type: AdminType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
         resolve(root, {id}, ctx){
-          return admins.delete(id)
+          return Admin.findByIdAndRemove(id);
         }
       },
       addGrade: {

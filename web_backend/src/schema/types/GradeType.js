@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { GraphQLObjectType, GraphQLInt } from 'graphql';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Grade = new GraphQLObjectType({
   name: 'Grade',

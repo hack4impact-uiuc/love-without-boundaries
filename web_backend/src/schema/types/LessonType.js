@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLInputObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
 import Quiz from './QuizType';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Lesson = new GraphQLObjectType({
   name: 'Lesson',
