@@ -6,17 +6,14 @@ class Question extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            opt1: '',
-            opt1val: false,
-            opt2: '',
-            opt2val: false,
-            opt3: '',
-            opt3val: false,
-            opt4: '',
-            opt4val: false
+            question: this.props.question,
+            a: this.props.a,
+            b: this.props.b,
+            c: this.props.c,
+            d: this.props.d,
+            correct: ""
         }
     }
-    name = this.props.name
     update1 = event => {
         this.setState({opt1 : event.target.value})
     }
