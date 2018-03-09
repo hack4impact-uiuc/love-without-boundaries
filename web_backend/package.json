@@ -4,10 +4,9 @@
   "description": "micro-graphql",
   "main": "dist/bundle.js",
   "scripts": {
-    "start": "micro dist/bundle.js -p 8080",
-    "build": "webpack",
-    "watch": "webpack -w",
-    "exportSchema": "babel-node ./src/scripts/exportSchema.js"
+    "start": "micro dist/ -p 8080",
+    "build": "babel src/ -d dist/",
+    "exportSchema": "node ./dist/scripts/exportSchema.js"
   },
   "repository": "https://github.com/hyperfuse/micro-graphql.git",
   "author": "Aria Malkani",
@@ -17,6 +16,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "express-graphql": "^0.6.1",
     "graphql": "^0.8.2",
+    "graphql-relay": "^0.5.4",
     "micro": "^6.2.0",
     "micro-compress": "^1.0.0",
     "micro-cors": "^0.1.0",

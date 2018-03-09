@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const StudentSchema = new Schema({
   name: { type: String },
   email: { type: String },
-  teacherID: { type: String },
   grades: [{
     lesson: {type: String},
     score: {type: Number}
