@@ -14,14 +14,18 @@ import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
 import HomePage from './HomePage';
 
+import styled from 'styled-components';
+
 type Props = {
     /**/ 
 }
-
+const TopDiv = styled.div`
+    font-family: 'Roboto Slab', serif;
+`;
 class App extends React.Component<Props>{ 
     render() {
         return (
-            <div>
+            <TopDiv>
                 <Router>
                     <div>
                         <ul>
@@ -71,7 +75,7 @@ class App extends React.Component<Props>{
                         );
                     }}
                 /> */}
-            </div>
+            </TopDiv>
         );
     }
 }
