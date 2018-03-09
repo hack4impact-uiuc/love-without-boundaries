@@ -154,3 +154,36 @@ Expected Result:
   }
 }
 ```
+## Quiz Stuff
+```
+query q{
+  quiz{
+    id
+    name
+    questions{
+    	questionName
+    }
+  }
+}
+```
+```
+mutation create{
+  createQuiz(name: "queez"){
+    name
+  }
+}
+```
+```
+mutation delete{
+  deleteQuiz(id: "5aa227a5a4ba471a30c382c7"){
+    name
+  }
+}
+```
+```
+mutation add{
+  addQuestion(id: "5aa227d4a4ba471a30c382c8", question: {questionName: "q1"}) {
+    name
+  }
+}
+```

@@ -7,7 +7,9 @@ import AdminType from '../types/AdminType'
 import Admin from '../../models/admin';
 import TeacherType from '../types/TeacherType'
 import Teacher from '../../models/teacher';
-import teacher from '../../models/teacher';
+import QuizType from '../types/QuizType'
+import Quiz from '../../models/quiz';
+import InputQuestionType from '../types/InputQuestionType.js'
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -42,11 +44,28 @@ const Mutation = new GraphQLObjectType({
           return a.save()
         } 
       },
+      createQuiz: {
+        type: QuizType,
+        args: { name: { type: GraphQLString },
+                questions: { type: new GraphQLList(InputQuestionType) }
+              },
+        resolve(root, { name, questions }, ctx) {
+          const q = new Quiz({ name, questions });
+          return q.save()
+        } 
+      },
       deleteAdmin: { 
         type: AdminType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
         resolve(root, {id}, ctx){
           return Admin.findByIdAndRemove(id);
+        }
+      },
+      deleteQuiz: { 
+        type: QuizType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return Quiz.findByIdAndRemove(id);
         }
       },
       addGrade: {
@@ -65,7 +84,14 @@ const Mutation = new GraphQLObjectType({
           return Student.findByIdAndUpdate(studentID, {$set: { teacherID: teacherID }}) && Teacher.findByIdAndUpdate(teacherID, {$push: {"listOfStudentIDs": studentID}})
         }
         }
-      }
+      },
+      addQuestion: {
+        type: QuizType,
+        args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
+        resolve(root, { id, question }, ctx) {
+          return Quiz.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
+        } 
+      }, 
     };
   },
 });

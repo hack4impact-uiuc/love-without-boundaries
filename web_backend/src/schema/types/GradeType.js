@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
-import { GraphQLObjectType, GraphQLInt } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 import mongoose from 'mongoose';
 
 const Grade = new GraphQLObjectType({
