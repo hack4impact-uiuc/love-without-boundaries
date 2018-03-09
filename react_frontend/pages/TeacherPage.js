@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import LessonForm from './../components/lessonform';
 import Lesson from './../components/lesson';
 
-import AddTodo from '../containers/addTodo'
-
 
 type Props = {
     /**/
@@ -54,8 +52,7 @@ class TeacherPage extends React.Component<Props>{
 
     render() {
         return (
-            <div>I am a teacher yo
-                <AddTodo />
+            <div>I am a teacher 
             </div>
         );
     }
