@@ -162,6 +162,10 @@ query q{
     name
     questions{
     	questionName
+      answers {
+        answerName
+        isCorrect
+      }
     }
   }
 }
@@ -182,7 +186,7 @@ mutation delete{
 ```
 ```
 mutation add{
-  addQuestion(id: "5aa227d4a4ba471a30c382c8", question: {questionName: "q1"}) {
+  addQuestion(id: "5aa227d4a4ba471a30c382c8", question: {questionName: "q1", answers: {answerName: "A", isCorrect: false}}) {
     name
   }
 }
