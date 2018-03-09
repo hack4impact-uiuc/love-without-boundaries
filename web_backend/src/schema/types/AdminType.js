@@ -1,14 +1,14 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLID } from 'graphql';
 import mongoose from 'mongoose';
 
+import { nodeInterface, globalId } from '../core'
+
 const Admin = new GraphQLObjectType({
   name: 'Admin',
   description: 'Self Descriptive',
   fields() {
     return {
-      id: {
-        type: GraphQLID,
-      },
+      id: globalId('Admin'),
       name: {
         type: GraphQLString,
       },
@@ -16,6 +16,7 @@ const Admin = new GraphQLObjectType({
         type: GraphQLString,
       },
     };
+    interfaces: [nodeInterface]
   },
 });
 
