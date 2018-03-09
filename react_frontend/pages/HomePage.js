@@ -7,19 +7,13 @@ type Props = {
     /**/ 
 }
 const HomeSection = styled.div`
-    //background: url("https://file-bbzuvotrbb.now.sh/") no-repeat center center fixed;   
-    // background: #000000;
+    // background: url("https://file-bbzuvotrbb.now.sh/") no-repeat center center fixed;   
+    // background: #ffffff;
     width: 100%;
     height: 5000px;
     display: block;
 `
-const LoginBtns = styled.button`
-    padding: 10px;
-    color: white;
-    float: right;
-    background-color: #3472b5;
-    margin: 10px;
-`
+
 const SignInSection = styled.div`
     border-style: solid;
     height: 200px;
