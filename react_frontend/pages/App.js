@@ -25,7 +25,7 @@ class App extends React.Component<Props>{
             <div>
                 <Router>
                     <div>
-                        <Navbar style={{color:"blue"}}>
+                        <Navbar>
                                 <Navbar.Header>
                                     <a href="/"> <img src="./assets/lovewithout_logo.png" alt="Love Without Boundaries" ></img></a>
                                 </Navbar.Header>
@@ -41,7 +41,7 @@ class App extends React.Component<Props>{
                                     <NavItem eventKey={3} href="/admin">
                                     Admin
                                     </NavItem>
-                                </Nav>
+                                </Nav>                                
                             </Navbar>
                         <hr />
                         <Route exact path="/" component={ HomePage } /> 
