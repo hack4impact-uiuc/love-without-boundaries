@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import LessonForm from './../components/lessonform';
 import Lesson from './../components/lesson';
 
-import AddTodo from '../containers/AddTodo'
-
+import AddTodo from '../containers/addTodo'
 
 
 type Props = {
