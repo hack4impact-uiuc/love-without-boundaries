@@ -72,14 +72,6 @@ class HomePage extends React.Component<Props>{
                         </SignInSection>
                     </Col>
                 </LogoRow>
-                
-                <Row>
-                    <Col xs={0} sm={4}></Col>
-                    <Col xs={12} sm={4}>
-                        
-                    </Col>
-                </Row>
-                
             </HomeSection>
         );
     }
