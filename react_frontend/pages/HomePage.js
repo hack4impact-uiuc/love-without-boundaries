@@ -20,7 +20,7 @@ const LoginBtns = styled.button`
     background-color: #3472b5;
     margin: 10px;
 `
-const StyledDiv = styled.div`
+const SignInSection = styled.div`
     border-style: solid;
     height: 200px;
     padding: 20px;
@@ -44,17 +44,17 @@ class HomePage extends React.Component<Props>{
             <HomeSection className="container">
                 { 
                     this.state.signup ? 
-                    <StyledDiv>
+                    <SignInSection>
                         <p>Are you a...</p>
                         <Button bsStyle="primary">Student</Button>
                         <Button bsStyle="primary">Teacher</Button>
                         <Button bsStyle="primary">Admin</Button>
-                    </StyledDiv>
+                    </SignInSection>
                     : 
-                    <StyledDiv>
+                    <SignInSection>
                         <Button bsStyle="primary">Login</Button>
                         <Button bsStyle="primary" onClick={this.onSignUp}>Sign Up</Button>
-                    </StyledDiv>
+                    </SignInSection>
                 }
             </HomeSection>
         );
