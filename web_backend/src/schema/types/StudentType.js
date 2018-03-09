@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } from 'graphql';
 import mongoose from 'mongoose';
 
-import { nodeInterface, globalId } from '../core'
+// import { nodeInterface, globalId } from '../core'
 import Grade from './GradeType'
 import Teacher from './TeacherType'
 
@@ -10,7 +10,7 @@ const Student = new GraphQLObjectType({
   description: 'Self Descriptive',
   fields() {
     return {
-      id: globalId('Student'),
+      // id: globalId('Student'),
       name: {
         type: GraphQLString,
       },
@@ -28,7 +28,7 @@ const Student = new GraphQLObjectType({
       },
     };
   },
-  interfaces: [nodeInterface]
+  // interfaces: [nodeInterface]
 });
 
 export default Student;

@@ -1,4 +1,4 @@
-import { nodeDefinitions, globalIdField } from 'graphql-relay'
+import { nodeDefinitions, globalIdField, fromGlobalId } from 'graphql-relay'
 
 import Student from '../models/student';
 import StudentType from './types/StudentType';
@@ -7,7 +7,7 @@ import Admin from '../models/admin';
 import TeacherType from './types/TeacherType'
 import Teacher from '../models/teacher';
 
-const x = nodeDefinitions(
+export const { nodeInterface, nodeField } = nodeDefinitions(
     (globalId) => {
         const {type, id} = fromGlobalId(globalId);
         let collection;
@@ -31,6 +31,4 @@ const x = nodeDefinitions(
     }
 );
 
-x.globalId = mongoModelName => globalIdField(mongoModelName, obj => obj._id);
-
-export default globalIdField;
+export const globalId = mongoModelName => globalIdField(mongoModelName, obj => obj._id);

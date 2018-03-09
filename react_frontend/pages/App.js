@@ -47,7 +47,7 @@ class App extends React.Component<Props>{
                         <Route path="/admin" component={AdminPage} />
                     </div>
                 </Router>
-                {/* <QueryRenderer
+                <QueryRenderer
                     environment={environment}
                     query={graphql`
                         query App_Query{
@@ -66,11 +66,11 @@ class App extends React.Component<Props>{
                         return (
                             <div>
                                 {props.students.map(s => <StudentListItem student={s} />)}
-                                <Button onClick={() => addStudent(environment, 'Pranay')}>Add Pranay</Button>
+                                {/* <Button onClick={() => addStudent(environment, 'Pranay')}>Add Pranay</Button> */}
                             </div>
                         );
                     }}
-                /> */}
+                />
             </div>
         );
     }
