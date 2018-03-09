@@ -1,13 +1,10 @@
 import { GraphQLObjectType, GraphQLList} from 'graphql';
 
-import { nodeField } from '../core'
 import Student from '../../models/student';
-import StudentType from '../types/StudentType';
-import AdminType from '../types/AdminType'
 import Admin from '../../models/admin';
-import TeacherType from '../types/TeacherType'
 import Teacher from '../../models/teacher';
 
+import { nodeField, TeacherType, AdminType, StudentType } from '../types/Nodes'
 
 const Query = new GraphQLObjectType({
   name: 'Query',
@@ -21,13 +18,13 @@ const Query = new GraphQLObjectType({
           return Student.find()
         }
       }, 
-      teacher: {
+      teachers: {
         type: new GraphQLList(TeacherType),
         resolve() {
           return Teacher.find()
         }
       },
-      admin: {
+      admins: {
         type: new GraphQLList(AdminType),
         resolve() { 
           return Admin.find()

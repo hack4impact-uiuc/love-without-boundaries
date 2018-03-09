@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --config ./webpack.config.js",
-    "build": "webpack",
+    "dev": "webpack-dev-server --config ./webpack.config.js --open",
+    "build": "webpack && cp src/index.html dist",
     "start": "serve .",
-    "relay": "relay-compiler --src . --schema ./schema.graphql"
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql"
   },
   "author": "",
   "license": "ISC",
@@ -35,7 +35,6 @@
     "less": "^3.0.0",
     "less-loader": "^4.0.5",
     "redux-devtools": "^3.4.1",
-    "relay-compiler": "^1.4.1",
     "serve": "^6.5.2",
     "style-loader": "^0.20.1",
     "webpack": "^3.11.0",
@@ -46,11 +45,12 @@
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
-    "react-relay": "^1.4.1",
+    "react-relay": "^1.5.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "relay-runtime": "^1.4.1",
+    "relay-compiler": "^1.5.0",
+    "relay-runtime": "^1.5.0",
     "styled-components": "^3.1.6"
   }
 }

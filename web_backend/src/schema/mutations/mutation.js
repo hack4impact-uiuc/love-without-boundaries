@@ -1,12 +1,11 @@
 import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList, GraphQLInt } from 'graphql';
-import GradeType from '../types/GradeType'
-import StudentType from '../types/StudentType'
+import { fromGlobalId } from 'graphql-relay';
+
 import Student from '../../models/student';
-import AdminType from '../types/AdminType'
 import Admin from '../../models/admin';
-import TeacherType from '../types/TeacherType'
 import Teacher from '../../models/teacher';
-import teacher from '../../models/teacher';
+
+import { nodeField, TeacherType, AdminType, StudentType } from '../types/Nodes'
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -58,11 +57,16 @@ const Mutation = new GraphQLObjectType({
       }, 
       assignStudentToTeacher: {
         type: StudentType, 
-        args: {studentID: {type: GraphQLString}, teacherID: {type: GraphQLString}}, 
-        resolve(root, {studentID, teacherID}, ctx) {
-        if (Student.findById(studentID) && Teacher.findById(teacherID)) {
-          return Student.findByIdAndUpdate(studentID, {$set: { teacherID: teacherID }}) && Teacher.findByIdAndUpdate(teacherID, {$push: {"listOfStudentIDs": studentID}})
-        }
+        args: {
+          studentID: {type: GraphQLID},
+          teacherID: {type: GraphQLID}
+        }, 
+        resolve(root, args, ctx) {
+          const {id: studentID} = fromGlobalId(args.studentID);
+          const {id: teacherID} = fromGlobalId(args.teacherID);
+          if (Student.findById(studentID) && Teacher.findById(teacherID)) {
+            return Student.findByIdAndUpdate(studentID, {$set: { teacherID }}) && Teacher.findByIdAndUpdate(teacherID, {$push: {"listOfStudentIDs": studentID}})
+          }
         }
       }
     };

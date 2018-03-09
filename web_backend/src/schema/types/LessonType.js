@@ -1,10 +1,10 @@
-import { GraphQLObjectType, GraphQLInputObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
 import Quiz from './QuizType';
 import mongoose from 'mongoose';
 
-const Lesson = new GraphQLObjectType({
+const LessonType = new GraphQLObjectType({
   name: 'Lesson',
-  description: 'Self Descriptive',
+  description: 'Lesson',
   fields() {
     return {
       lessonName: {
@@ -23,4 +23,4 @@ const Lesson = new GraphQLObjectType({
   },
 });
 
-export default Lesson;
+export default LessonType;
