@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -24,23 +25,25 @@ class App extends React.Component<Props>{
             <div>
                 <Router>
                     <div>
-                        <ul>
-                            <li>
-                                <Link to="/" >Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/student" >Student</Link>
-                            </li>
-                            <li>
-                                <Link to="/teacher" >Teacher</Link>
-                            </li>
-                            <li>
-                                <Link to="/admin" >Admin</Link>
-                            </li>
-                        </ul>
+                        <Navbar>
+                                <Navbar.Header>
+                                    <a href="/"> <img src="./assets/lovewithout_logo.png" alt="Love Without Boundaries" ></img></a>
+                                </Navbar.Header>
+                                <Nav>
+                                    <NavItem eventKey={1} href="/student">
+                                    Students
+                                    </NavItem>
 
+                                    <NavItem eventKey={2} href="/teacher">
+                                    Teacher
+                                    </NavItem>
+
+                                    <NavItem eventKey={3} href="/admin">
+                                    Admin
+                                    </NavItem>
+                                </Nav>                                
+                            </Navbar>
                         <hr />
-
                         <Route exact path="/" component={ HomePage } /> 
                         <Route path="/student" component={StudentPage} />
                         <Route path="/teacher" component={TeacherPage} />
