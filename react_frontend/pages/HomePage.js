@@ -45,6 +45,7 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
+
     render() {
         return (
             <HomeSection className="container">
