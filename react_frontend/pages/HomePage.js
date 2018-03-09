@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledButton from '../components/button';
 import { Grid, Col, Row, Image } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
