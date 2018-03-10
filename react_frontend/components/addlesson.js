@@ -1,6 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
+import {Button} from 'react-bootstrap';
+
+var id = 0;
 
 class AddLesson extends React.Component {
     constructor() {
@@ -20,6 +23,7 @@ class AddLesson extends React.Component {
         event.preventDefault();
         this.setState({
             lessons: this.state.lessons.concat({
+                id: id,
                 name: this.state.name,
                 notes: this.state.notes,
                 notes_link: this.state.notes_link,
@@ -28,7 +32,14 @@ class AddLesson extends React.Component {
                 quiz: this.state.quiz,
             }),
         });
+        id++;
     }
+
+    // handleDelete = (event) => {
+    //     this.setState({
+    //         lessons: this.state.lessons.splice(this.state.id + 1, 1)
+    //     })
+    // }
 
     handleChange = (event) => {
         this.setState({
@@ -39,7 +50,7 @@ class AddLesson extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>Add Lesson:
                     <div>
                         <label htmlFor="lesson_name_input">Lesson Name: </label>
                         <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
@@ -72,14 +83,14 @@ class AddLesson extends React.Component {
                         <button>Add Lesson</button>
                     </div>
                 </form>
-
                 <div>
                     <div>
                         {
                             this.state.lessons.map(lesson => (
-                                <LessonComponent lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={true}/>
-                                // <DeleteLesson />
-                                // <EditLesson />
+                                <div>
+                                    <LessonComponent lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={true}/>
+                                    <Button index={id}>Delete Lesson</Button>
+                                </div>
                             ))
                         }
                     </div>
