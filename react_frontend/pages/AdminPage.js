@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AddLesson from './../components/addlesson';
-import LessonForm from './../components/lessonform';
+// import LessonForm from './../components/lessonform';
 import NavBar from '../components/navBar';
 type Props = {
     /**/ 
