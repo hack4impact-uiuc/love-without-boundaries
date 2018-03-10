@@ -1,38 +1,37 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import StyledButton from '../components/button';
-import { Button, Grid, Jumbotron,  } from 'react-bootstrap';
+import { Grid, Col, Row, Image } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 type Props = {
     /**/ 
 }
 const HomeSection = styled.div`
-    // background: url("https://file-bbzuvotrbb.now.sh/") no-repeat center center fixed;   
-    // background: #ffffff;
+    background: url("https://file-xvqjcpzhcj.now.sh");
+    background-size: cover;  
     width: 100%;
-    height: 5000px;
     display: block;
+    height: 700px;
 `
 
 const SignInSection = styled.div`
-    border-style: solid;
-    height: 200px;
-    padding: 20px;
-    width: 400px;
-    float:right;
-`
-const wellStyles = { maxWidth: 400, margin: '0 auto 10px' };
-
-const buttonsInstance = (
-  <div className="well" style={wellStyles}>
-    <Button bsStyle="primary" bsSize="large" block>
-      Block level button
-    </Button>
-    <Button bsSize="large" block>
-      Block level button
-    </Button>
-  </div>
-);
+    text-align: center;
+`;
+const SignInButton = styled.div`
+    background-color: #C04448;
+    color: #ffffff;
+    height: 50px;
+    width: 100px;
+    padding: 12px 20px;
+    margin: 10px 10px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 16px;
+    vertical-align: middle;
+`;
+const LogoRow = styled.div`
+    padding-top: 20px;
+`;
 class HomePage extends React.Component<Props>{
     constructor(props){
         super(props);
@@ -48,35 +47,32 @@ class HomePage extends React.Component<Props>{
 
     render() {
         return (
-            <div>
-                <Jumbotron>
-                    <h1>Love Without Boundaries Education Portal</h1>
-                    <p>
-                        This is an educational tool used to help students in Cambodia
-                        study for the national english exam.
-                    </p>
-                    <p>
-                        <Button bsStyle="primary">Learn more</Button>
-                    </p>
-                </Jumbotron>
-
-                <HomeSection className="container">
-                    { 
-                        this.state.signup ? 
+            <HomeSection className="container">
+                <LogoRow className="row">
+                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
+                        <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
+                    </Col>
+                    <Col xs={1} sm={6}></Col>
+                    <Col xs={5} sm={2}>
                         <SignInSection>
-                            <p>Are you a...</p>
-                            <Button bsStyle="primary">Student</Button>
-                            <Button bsStyle="primary">Teacher</Button>
-                            <Button bsStyle="primary">Admin</Button>
+                        { 
+                            this.state.signup ?
+                            <div>
+                                <p>Are you a...</p>
+                                <SignInButton className="btn">Student</SignInButton>
+                                <SignInButton className="btn">Teacher</SignInButton>
+                                <SignInButton className="btn">Admin</SignInButton>
+                            </div>
+                            : 
+                            <div>
+                                <Link to="/student" ><SignInButton className="btn">Login</SignInButton></Link>
+                                <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
+                            </div>
+                        }
                         </SignInSection>
-                        : 
-                        <SignInSection>
-                            <Button bsStyle="primary">Login</Button>
-                            <Button bsStyle="primary" onClick={this.onSignUp}>Sign Up</Button>
-                        </SignInSection>
-                    }
-                </HomeSection>
-            </div>
+                    </Col>
+                </LogoRow>
+            </HomeSection>
         );
     }
 }

@@ -15,35 +15,20 @@ import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
 import HomePage from './HomePage';
 
+import styled from 'styled-components';
+
 type Props = {
     /**/ 
 }
-
+const TopDiv = styled.div`
+    font-family: 'Roboto Slab', serif;
+`;
 class App extends React.Component<Props>{ 
     render() {
         return (
-            <div>
+            <TopDiv>
                 <Router>
                     <div>
-                        <Navbar>
-                                <Navbar.Header>
-                                    <a href="/"> <img src="./assets/lovewithout_logo.png" alt="Love Without Boundaries" ></img></a>
-                                </Navbar.Header>
-                                <Nav>
-                                    <NavItem eventKey={1} href="/student">
-                                    Students
-                                    </NavItem>
-
-                                    <NavItem eventKey={2} href="/teacher">
-                                    Teacher
-                                    </NavItem>
-
-                                    <NavItem eventKey={3} href="/admin">
-                                    Admin
-                                    </NavItem>
-                                </Nav>                                
-                            </Navbar>
-                        <hr />
                         <Route exact path="/" component={ HomePage } /> 
                         <Route path="/student" component={StudentPage} />
                         <Route path="/teacher" component={TeacherPage} />
@@ -74,7 +59,7 @@ class App extends React.Component<Props>{
                         );
                     }}
                 /> */}
-            </div>
+            </TopDiv>
         );
     }
 }
