@@ -76,7 +76,7 @@ class LessonComponent extends React.Component<Props>{
         return(
             <div>
                 <LessonBox>
-                    <LessonTitle>{this.props.lessonName}</LessonTitle>
+                    <LessonTitle>{this.props.lessonName} ID: {this.props.id}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
                     <LessonProps> <Button bsStyle="primary"> Take Quiz </Button> Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>

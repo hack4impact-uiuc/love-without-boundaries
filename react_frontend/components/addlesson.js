@@ -16,6 +16,7 @@ class AddLesson extends React.Component {
             wksht: '',
             wksht_link: '',
             quiz: '',
+            delete_id: '',
         };
     }
 
@@ -35,12 +36,13 @@ class AddLesson extends React.Component {
         id++;
     }
 
-    // handleDelete = (event) => {
-    //     this.setState({
-    //         lessons: this.state.lessons.splice(this.state.id + 1, 1)
-    //     })
-    // }
 
+    handleDelete = (event) => {
+        event.preventDefault();
+        var len = this.state.lessons.length;
+        var index = parseInt(this.state.delete_id);
+        this.setState({lessons: this.state.lessons.filter(lesson => lesson.id != index)});
+    }
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -83,13 +85,23 @@ class AddLesson extends React.Component {
                         <button>Add Lesson</button>
                     </div>
                 </form>
+
+                <form onSubmit={this.handleDelete}>Delete Lesson:
+                    <div>
+                        <label htmlFor="delete_lesson_id">ID:</label>
+                        <input id="delete_lesson_id" name="delete_id" type="text" value={this.state.delete_id} onChange={this.handleChange} />
+                    </div>
+                    <div>
+                        <button>Delete Lesson</button>
+                    </div>
+                </form>
+
                 <div>
                     <div>
                         {
                             this.state.lessons.map(lesson => (
                                 <div>
-                                    <LessonComponent lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={true}/>
-                                    <Button index={id}>Delete Lesson</Button>
+                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={true}/>
                                 </div>
                             ))
                         }
