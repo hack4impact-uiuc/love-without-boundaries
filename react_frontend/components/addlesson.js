@@ -61,7 +61,7 @@ class AddLesson extends React.Component {
                     </div>
 
                     <div>
-                        <label htmlFor="lesson_wksht_link_input">Lesson Worksheet: </label>
+                        <label htmlFor="lesson_wksht_link_input">Lesson Worksheet Link: </label>
                         <input id="lesson_wksht_link_input" name="wksht_link" type="text" value={this.state.wksht_link} onChange={this.handleChange} />
                     </div>
                     

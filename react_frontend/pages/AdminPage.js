@@ -11,7 +11,7 @@ class AdminPage extends React.Component<Props>{
     render() {
         return (
             <div>I am an admin
-                <AddLesson />
+                <AddLesson style="float:right;"/>
             </div>
 
         );

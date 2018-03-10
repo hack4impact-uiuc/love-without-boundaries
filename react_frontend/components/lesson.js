@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import {Button} from 'react-bootstrap';
 
 type Props = {
   /**/
@@ -39,7 +40,7 @@ const LessonProps = styled.div`
     text-align: center;
     border-radius: 0px;
     background-color: white;
-    height: 30px;
+    height: 50px;
     z-index: -1;
     font-family: "Arial";
 `;
@@ -77,8 +78,8 @@ class LessonComponent extends React.Component<Props>{
                 <LessonBox>
                     <LessonTitle>{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
-                    <LessonProps> <a href={this.props.lessonWkshtLink}>Notes: {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz: {this.props.quizName}, Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>
+                    <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
+                    <LessonProps> <Button bsStyle="primary"> Take Quiz </Button> Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>
                 </LessonBox>
             </div>
         );
