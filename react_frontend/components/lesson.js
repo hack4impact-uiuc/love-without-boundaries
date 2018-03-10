@@ -50,10 +50,10 @@ const CheckedBoxComplete = styled.div`
     margin-left: 3px;
     margin-bottom: 1px;
     border-style: solid;
-    border-color: red;
+    border-color: green;
     color: white;
     font-size: 30px;
-    background-color: red;
+    background-color: green;
     height: 25px;
     width: 25px;
     z-index: 100;
@@ -66,20 +66,27 @@ const CheckedBoxInComplete = styled.div`
     border-color: red;
     height: 25px;
     width: 25px;
-    background-color: white;
+    background-color: red;
     z-index: 100;
 `;
 
 
 class LessonComponent extends React.Component<Props>{
     render() {
+        let quiz = null;
+        if (this.props.quizIsChecked) {
+            quiz = <LessonProps> <Button bsStyle="primary"> Review Quiz </Button> Grade: {this.props.quizPercentage}, Completed: <CheckedBoxComplete/> </LessonProps>;
+        } 
+        else {
+            quiz = <LessonProps> <Button bsStyle="primary"> Take Quiz </Button> Grade: {this.props.quizPercentage}, Completed: <CheckedBoxInComplete/> </LessonProps>;
+        }
         return(
             <div>
                 <LessonBox>
-                    <LessonTitle>{this.props.lessonName} ID: {this.props.id}</LessonTitle>
+                    <LessonTitle>{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> <Button bsStyle="primary"> Take Quiz </Button> Grade: {this.props.quizPercentage}, Completed: {isChecked(this.props)} </LessonProps>
+                    {quiz}
                 </LessonBox>
             </div>
         );
@@ -87,17 +94,17 @@ class LessonComponent extends React.Component<Props>{
 
 }
 
-function isChecked(props) {
-    if (props.quizIsChecked){
-        return(
-            <CheckedBoxComplete></CheckedBoxComplete>
-        )
-    }
-    else{
-        return(
-            <CheckedBoxInComplete></CheckedBoxInComplete>
-        )
-    }
-}
+// function isChecked(props) {
+//     if (props.quizIsChecked){
+//         return(
+//             <CheckedBoxComplete></CheckedBoxComplete>
+//         )
+//     }
+//     else{
+//         return(
+//             <CheckedBoxInComplete></CheckedBoxInComplete>
+//         )
+//     }
+// }
 
 export default LessonComponent;

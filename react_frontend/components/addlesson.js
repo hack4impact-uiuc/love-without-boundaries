@@ -17,6 +17,7 @@ class AddLesson extends React.Component {
             wksht_link: '',
             quiz: '',
             delete_id: '',
+            quiz_done: '',
         };
     }
 
@@ -101,7 +102,7 @@ class AddLesson extends React.Component {
                         {
                             this.state.lessons.map(lesson => (
                                 <div>
-                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={true}/>
+                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
                                 </div>
                             ))
                         }
