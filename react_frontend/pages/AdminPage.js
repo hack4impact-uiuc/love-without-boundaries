@@ -1,8 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import LessonForm from './../components/lessonform';
+import AddLesson from './../components/addlesson';
 import NavBar from '../components/navBar';
-
 type Props = {
     /**/ 
   }
@@ -11,10 +10,8 @@ class AdminPage extends React.Component<Props>{
 
     render() {
         return (
-            <div>
-                <NavBar />
-                I am an admin
-                <LessonForm />
+            <div>I am an admin
+                <AddLesson/>
             </div>
 
         );

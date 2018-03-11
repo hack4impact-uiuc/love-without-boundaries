@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Lesson from './../components/lesson';
 import NavBar from '../components/navBar';

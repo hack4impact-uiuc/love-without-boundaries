@@ -1,14 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+
 type Props = {
     /**/ 
 }
 class NavBarComponent extends React.Component<Props> {
     render(){
         return(
-            <Navbar>
-                <Navbar.Header>
+            <div>
+                NavBar Goes here
+                {/* <Navbar.Header>
                     <a href="/"> <img src="./assets/lovewithout_logo.png" alt="Love Without Boundaries" ></img></a>
                 </Navbar.Header>
                 <Nav>
@@ -23,8 +23,8 @@ class NavBarComponent extends React.Component<Props> {
                     <NavItem eventKey={3} href="/admin">
                     Admin
                     </NavItem>
-                </Nav>                                
-            </Navbar>
+                </Nav>                                 */}
+            </div>
         );
     }
 }
