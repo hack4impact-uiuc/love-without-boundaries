@@ -1,7 +1,6 @@
 // @flow
 
 import { commitMutation, graphql } from 'react-relay';
-
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
@@ -13,22 +12,21 @@ const mutation = graphql`
 `;
 
 function addStudent(environment: Environment, name: string) {
-  const variables = {
-    name,
-  };
+	const variables = {
+		name,
+	};
 
   commitMutation(
     environment,
     {
-      mutation,
-      variables,
-      onCompleted: (response) => {
-        console.log('Response received from server.');
-      },
-      onError: err => console.error(err),
+		mutation,
+		variables,
+		onCompleted: (response) => {
+			console.log('Response received from server.');
+		},
+		onError: err => console.error(err),
     },
   );
 }
 
-export default addStudent
-;
+export default addStudent;
