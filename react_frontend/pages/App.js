@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -9,62 +10,59 @@ import StudentListItem from './../components/studentListItem';
 import Button from './../components/button';
 import addStudent from './../relay/mutations/addStudent';
 
-import HomePage from './HomePage';
 import StudentPage from './StudentPage';
 import TeacherPage from './TeacherPage';
-import AdminPage from './AdminPage';  
+import AdminPage from './AdminPage'; 
+import QuizPage from './QuizPage'; 
+import HomePage from './HomePage';
+import styled from 'styled-components';
 
-export default () => (
-    <div>
-        <Router>
-            <div>
-                <ul>
-                    <li>
-                        <Link to="/" >Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/student" >Student</Link>
-                    </li>
-                    <li>
-                        <Link to="/teacher" >Teacher</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin" >Admin</Link>
-                    </li>
-                </ul>
-
-                <hr />
-
-                <Route exact path="/" component={HomePage} />
-                <Route path="/student" component={StudentPage} />
-                <Route path="/teacher" component={TeacherPage} />
-                <Route path="/admin" component={AdminPage} />
-            </div>
-        </Router>
-        <QueryRenderer
-            environment={environment}
-            query={graphql`
-                query App_Query{
-                    students {
-                        ...studentListItem_student
-                    }
-                }   
-            `}
-            variables={{}}
-            render={({ props }) => {
-                if (!props) {
-                    return(
-                        <div>Cant get query</div>
-                    )
-                }
-                return (
+type Props = {
+    /**/ 
+}
+const TopDiv = styled.div`
+    font-family: 'Roboto Slab', serif;
+`;
+class App extends React.Component<Props>{ 
+    render() {
+        return (
+            <TopDiv>
+                <Router>
                     <div>
-                        {props.students.map(s => <StudentListItem student={s} />)}
-                        <Button onClick={() => addStudent(environment, 'Pranay')}>Add Pranay</Button>
+                        <Route exact path="/" component={ HomePage } /> 
+                        <Route path="/student" component={StudentPage} />
+                        <Route path="/teacher" component={TeacherPage} />
+                        <Route path="/admin" component={AdminPage} />
+                        <Route path="/quiz" component={QuizPage} />
                     </div>
-                );
-            }}
-        />
-    </div>
-);
+                </Router>
+                {/* <QueryRenderer
+                    environment={environment}
+                    query={graphql`
+                        query App_Query{
+                            students {
+                                ...studentListItem_student
+                            }
+                        }   
+                    `}
+                    variables={{}}
+                    render={({ props }) => {
+                        if (!props) {
+                            return (
+                                <div>Cant get query</div>
+                            );
+                        }
+                        return (
+                            <div>
+                                {props.students.map(s => <StudentListItem student={s} />)}
+                                <Button onClick={() => addStudent(environment, 'Pranay')}>Add Pranay</Button>
+                            </div>
+                        );
+                    }}
+                /> */}
+            </TopDiv>
+        );
+    }
+}
 
+export default App;

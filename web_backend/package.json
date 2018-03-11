@@ -16,7 +16,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-stage-0": "^6.24.1",
     "express-graphql": "^0.6.1",
-    "graphql": "^0.8.2",
+    "graphql": "0.12.3",
     "micro": "^6.2.0",
     "micro-compress": "^1.0.0",
     "micro-cors": "^0.1.0",
