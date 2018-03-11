@@ -12,9 +12,9 @@ import addStudent from './../relay/mutations/addStudent';
 
 import StudentPage from './StudentPage';
 import TeacherPage from './TeacherPage';
-import AdminPage from './AdminPage';  
+import AdminPage from './AdminPage'; 
+import QuizPage from './QuizPage'; 
 import HomePage from './HomePage';
-
 import styled from 'styled-components';
 
 type Props = {
@@ -33,6 +33,7 @@ class App extends React.Component<Props>{
                         <Route path="/student" component={StudentPage} />
                         <Route path="/teacher" component={TeacherPage} />
                         <Route path="/admin" component={AdminPage} />
+                        <Route path="/quiz" component={QuizPage} />
                     </div>
                 </Router>
                 {/* <QueryRenderer
