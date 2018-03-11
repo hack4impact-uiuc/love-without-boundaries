@@ -12,7 +12,7 @@ type Props = {
 }
 const HomeSection = styled.div`
     background: url("https://file-xvqjcpzhcj.now.sh");
-    background-size: covser;  
+    background-size: cover;  
     width: 100%;
     display: block;
     height: 700px;

@@ -1,31 +1,3 @@
-// import React from 'react';
-// import styled from 'styled-components';
-// import AddLesson from './../components/addlesson';
-// import Lesson from './../components/lesson';
-// import NavBar from '../components/navBar';
-
-
-// type Props = {
-//     /**/
-// }
-
-
-
-// class TeacherPage extends React.Component<Props>{
-
-//     render() {
-//         return (
-//             <div>
-//                 <NavBar />
-//                 I am a teacher 
-//             </div>
-//         );
-//     }
-// }
-
-// export default TeacherPage;
-
-
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
