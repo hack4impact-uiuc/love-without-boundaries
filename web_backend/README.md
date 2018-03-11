@@ -266,3 +266,27 @@ mutation deleteWorksheet {
   }
 }
 ```
+
+##Nodes
+```
+{
+  node(id: "VGVhY2hlcjo1YWEyMWRkNjE0OTg4NTdjM2Q5Yzc2ZmQ=") {
+    id
+    __typename
+    ... on Student{
+      name
+      email
+      teacher {
+        name
+      }
+    }
+    ... on Teacher {
+      name
+      students {
+        name
+      }
+    }
+  }
+  
+}
+```
