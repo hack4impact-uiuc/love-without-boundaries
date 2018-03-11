@@ -7,28 +7,31 @@
 'use strict';
 
 /*::
-import type {ConcreteFragment} from 'relay-runtime';
+import type { ConcreteFragment } from 'relay-runtime';
+import type { FragmentReference } from 'relay-runtime';
+declare export opaque type studentListItem_student$ref: FragmentReference;
 export type studentListItem_student = {|
-  +name: ?string;
+  +name: ?string,
+  +$refType: studentListItem_student$ref,
 |};
 */
 
 
-const fragment /*: ConcreteFragment*/ = {
-  "argumentDefinitions": [],
+const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "metadata": null,
   "name": "studentListItem_student",
+  "type": "Student",
+  "metadata": null,
+  "argumentDefinitions": [],
   "selections": [
     {
       "kind": "ScalarField",
       "alias": null,
-      "args": null,
       "name": "name",
+      "args": null,
       "storageKey": null
     }
-  ],
-  "type": "Student"
+  ]
 };
-
-module.exports = fragment;
+(node/*: any*/).hash = '650f99dca902f4ebfeea903cf75dbd5b';
+module.exports = node;
