@@ -73,12 +73,11 @@ const CheckedBoxInComplete = styled.div`
 
 class LessonComponent extends React.Component<Props>{
     render() {
-        let quiz = null;
+        let quiz = "Take Quiz"
+        let box = <CheckedBoxInComplete/>
         if (this.props.quizIsChecked) {
-            quiz = <LessonProps> <Button bsStyle="primary"> Review Quiz </Button> Grade: {this.props.quizPercentage}, Completed: <CheckedBoxComplete/> </LessonProps>;
-        } 
-        else {
-            quiz = <LessonProps> <Button bsStyle="primary"> Take Quiz </Button> Grade: {this.props.quizPercentage}, Completed: <CheckedBoxInComplete/> </LessonProps>;
+            quiz = "Review Quiz"
+            box = <CheckedBoxComplete/>
         }
         return(
             <div>
@@ -86,25 +85,12 @@ class LessonComponent extends React.Component<Props>{
                     <LessonTitle>{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
-                    {quiz}
+                    <LessonProps> <Button bsStyle="primary">{quiz}</Button> Grade: {this.props.quizPercentage}, Completed: {box}</LessonProps>;
                 </LessonBox>
             </div>
         );
     }
 
 }
-
-// function isChecked(props) {
-//     if (props.quizIsChecked){
-//         return(
-//             <CheckedBoxComplete></CheckedBoxComplete>
-//         )
-//     }
-//     else{
-//         return(
-//             <CheckedBoxInComplete></CheckedBoxInComplete>
-//         )
-//     }
-// }
 
 export default LessonComponent;
