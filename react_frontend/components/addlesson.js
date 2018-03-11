@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
 
-var id = 0;
 
 class AddLesson extends React.Component {
     constructor() {
@@ -15,9 +14,6 @@ class AddLesson extends React.Component {
             notes_link: '',
             wksht: '',
             wksht_link: '',
-            quiz: '',
-            delete_id: '',
-            quiz_done: '',
         };
     }
 
@@ -25,7 +21,6 @@ class AddLesson extends React.Component {
         event.preventDefault();
         this.setState({
             lessons: this.state.lessons.concat({
-                id: id,
                 name: this.state.name,
                 notes: this.state.notes,
                 notes_link: this.state.notes_link,
@@ -34,16 +29,8 @@ class AddLesson extends React.Component {
                 quiz: this.state.quiz,
             }),
         });
-        id++;
     }
 
-
-    handleDelete = (event) => {
-        event.preventDefault();
-        var len = this.state.lessons.length;
-        var index = parseInt(this.state.delete_id);
-        this.setState({lessons: this.state.lessons.filter(lesson => lesson.id != index)});
-    }
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -61,40 +48,25 @@ class AddLesson extends React.Component {
 
                     <div>
                         <label htmlFor="lesson_notes_input">Lesson Notes: </label>
-                        <input id="lesson_notes_input" name="notes" type="text" value={this.state.notes} onChange={this.handleChange} />
+                        <input id="lesson_notes_input" name="notes" value={this.state.notes} onChange={this.handleChange} />
                     </div>
 
                     <div>
                         <label htmlFor="lesson_notes_link_input">Lesson Notes Link: </label>
-                        <input id="lesson_notes_link_input" name="notes_link" type="text" value={this.state.notes_link} onChange={this.handleChange} />
+                        <input id="lesson_notes_link_input" name="notes_link" value={this.state.notes_link} onChange={this.handleChange} />
                     </div>
 
                     <div>
                         <label htmlFor="lesson_wksht_input">Lesson Worksheet: </label>
-                        <input id="lesson_wksht_input" name="wksht" type="text" value={this.state.wksht} onChange={this.handleChange} />
+                        <input id="lesson_wksht_input" name="wksht" value={this.state.wksht} onChange={this.handleChange} />
                     </div>
 
                     <div>
                         <label htmlFor="lesson_wksht_link_input">Lesson Worksheet Link: </label>
-                        <input id="lesson_wksht_link_input" name="wksht_link" type="text" value={this.state.wksht_link} onChange={this.handleChange} />
+                        <input id="lesson_wksht_link_input" name="wksht_link" value={this.state.wksht_link} onChange={this.handleChange} />
                     </div>
                     
-                    <div>
-                        <button>Add Quiz</button>
-                    </div>
-                    <div>
-                        <button>Add Lesson</button>
-                    </div>
-                </form>
-
-                <form onSubmit={this.handleDelete}>Delete Lesson:
-                    <div>
-                        <label htmlFor="delete_lesson_id">ID:</label>
-                        <input id="delete_lesson_id" name="delete_id" type="text" value={this.state.delete_id} onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <button>Delete Lesson</button>
-                    </div>
+                    <button>Add Lesson</button>
                 </form>
 
                 <div>
