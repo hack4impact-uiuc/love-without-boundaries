@@ -29,7 +29,6 @@ const Query = new GraphQLObjectType({
           resolve(){
             return Lesson.find()
           }
-        }
       }, 
       teacher: {
         type: new GraphQLList(TeacherType),
