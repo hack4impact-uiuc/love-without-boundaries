@@ -198,3 +198,69 @@ mutation m {
   }
 }
 ```
+## Lesson Stuff
+query allLessons{
+  lessons
+  {
+    name
+    id
+    quiz
+    notesName
+    notesURL
+    worksheetName
+    worksheetURL
+  }
+}
+```
+```
+mutation createLesson {
+  createLesson(name: "Nouns", quiz: "Nouns Quiz", worksheetName: "Nouns Worksheet", notesName: "Noun Notes") {
+    id
+    name
+    quiz
+    worksheetName
+    worksheetURL
+    notesName
+    notesURL
+  }
+}
+```
+```
+mutation addNote {
+  addNote(id: "Lesson ID goes here", name: "Noun Notes", URL: "URL goes here") {
+    id
+    notesName
+    notesURL
+  }
+}
+```
+```
+mutation addWorksheet {
+  addNote(id: "Lesson ID goes here", name: "Noun Worksheet", URL: "URL goes here") {
+    id
+    worksheetName
+    worksheetURL
+
+  }
+}
+```
+```
+mutation deleteLesson {
+  deleteLesson(id: "Lesson ID goes here") {
+    id
+  }
+}
+```
+```
+mutation deleteNote {
+  deleteNote(id: "Lesson ID goes here") {
+    id
+  }
+}
+```
+mutation deleteWorksheet {
+  deleteWorksheet(id: "Lesson ID goes here") {
+    id
+  }
+}
+```
