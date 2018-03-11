@@ -16,9 +16,7 @@ class QuizPage extends Component{
             <div>
                 Quiz Page
                 <br />
-                {
-                    this.state.qMap.map( () => <div><Question /><br /></div> )
-                }
+                {this.state.qMap.map( () => <div><Question /><br /></div> )}
                 <button onClick={this.addQuestion}>Add Question</button>
                 <br />
                 <button onClick={this.finish}>Finish</button>

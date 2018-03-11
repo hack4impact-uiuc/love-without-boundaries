@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddLesson from './../components/addlesson';
-import Lesson from './../components/lesson';
-import NavBar from '../components/navBar';
-
+import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { graphql, QueryRenderer } from 'react-relay';
+import StyledButton from '../components/button';
+import StudentListItem from '../components/studentListItem'
+import environment from '../relay/environment';
 
 type Props = {
-    /**/
+    /**/ 
 }
 
 const TeacherAddLessonBox = styled.div`
@@ -48,15 +50,37 @@ const TeacherButton = styled.div`
     z-index: -1;
     font-family: "Arial";
 `;
-
 class TeacherPage extends React.Component<Props>{
 
     render() {
         return (
-            <div>
-                <NavBar />
-                I am a teacher 
-            </div>
+            
+            <QueryRenderer
+                    environment={environment}
+                    query={graphql`
+                        query TeacherPage_Query{
+                            students {
+                                id
+                                ...studentListItem_student
+                            }
+                        }   
+                    `}
+                    variables={{}}
+                    render={({ props }) => {
+                        if (!props) {
+                            return (
+                                <div>Loading...</div>
+                            );
+                        }
+                        return (
+                            <div>
+                                I am a teacher 
+                                <h3>My Students</h3> 
+                                {props.students.map(student => <StudentListItem key={student.id} student={student} />)}
+                            </div>
+                        );
+                    }}
+                />
         );
     }
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image } from 'react-bootstrap';
+import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { graphql, QueryRenderer } from 'react-relay';
+import StyledButton from '../components/button';
+import StudentListItem from '../components/studentListItem'
+import environment from '../relay/environment';
 
 type Props = {
     /**/ 
@@ -47,32 +51,56 @@ class HomePage extends React.Component<Props>{
 
     render() {
         return (
-            <HomeSection className="container">
-                <LogoRow className="row">
-                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
-                        <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
-                    </Col>
-                    <Col xs={1} sm={6}></Col>
-                    <Col xs={5} sm={2}>
-                        <SignInSection>
-                        { 
-                            this.state.signup ?
-                            <div>
-                                <p>Are you a...</p>
-                                <SignInButton className="btn">Student</SignInButton>
-                                <SignInButton className="btn">Teacher</SignInButton>
-                                <SignInButton className="btn">Admin</SignInButton>
-                            </div>
-                            : 
-                            <div>
-                                <Link to="/student" ><SignInButton className="btn">Login</SignInButton></Link>
-                                <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
-                            </div>
+            
+            <QueryRenderer
+                    environment={environment}
+                    query={graphql`
+                        query HomePage_Query{
+                            students {
+                                id
+                                ...studentListItem_student
+                            }
+                        }   
+                    `}
+                    variables={{}}
+                    render={({ props }) => {
+                        if (!props) {
+                            return (
+                                <div>Loading...</div>
+                            );
                         }
-                        </SignInSection>
-                    </Col>
-                </LogoRow>
-            </HomeSection>
+                        return (
+                            <div> 
+                            <HomeSection className="container">
+                                <LogoRow className="row">
+                                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
+                                        <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
+                                    </Col>
+                                    <Col xs={1} sm={6}></Col>
+                                    <Col xs={5} sm={2}>
+                                        <SignInSection>
+                                        { 
+                                            this.state.signup ?
+                                            <div>
+                                                <p>Are you a...</p>
+                                                <SignInButton className="btn">Student</SignInButton>
+                                                <SignInButton className="btn">Teacher</SignInButton>
+                                                <SignInButton className="btn">Admin</SignInButton>
+                                            </div>
+                                            : 
+                                            <div>
+                                                <Link to="/student" ><SignInButton className="btn">Login</SignInButton></Link>
+                                                <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
+                                            </div>
+                                        }
+                                        </SignInSection>
+                                    </Col>
+                                </LogoRow>
+                            </HomeSection>
+                            </div>
+                        );
+                    }}
+                />
         );
     }
 }
