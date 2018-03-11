@@ -191,3 +191,10 @@ mutation add{
   }
 }
 ```
+```
+mutation m {
+  deleteQuiz(id:"5aa227d7a4ba471a30c382c9" ) {
+    name
+  }
+}
+```
