@@ -96,7 +96,8 @@ const Mutation = new GraphQLObjectType({
         type: QuizType,
         args: { id: { type: GraphQLString }, qName: { type: GraphQLString } },
         resolve(root, { id, qName }, ctx) {
-          return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
+          return Quiz.findByIdAndRemove(id)
+          // return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
         } 
       }, 
     };
