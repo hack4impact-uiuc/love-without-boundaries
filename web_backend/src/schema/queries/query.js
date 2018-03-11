@@ -1,47 +1,42 @@
-
-import { GraphQLObjectType, GraphQLList, GraphQLID } from 'graphql';
-import StudentType from '../types/StudentType'
-import LessonType from '../types/LessonType'
-import Student from '../../models/student';
-import Lesson from '../../models/lessons'
 import { GraphQLObjectType, GraphQLList} from 'graphql';
-import StudentType from '../types/StudentType';
 import Student from '../../models/student';
-import AdminType from '../types/AdminType'
 import Admin from '../../models/admin';
-import TeacherType from '../types/TeacherType'
 import Teacher from '../../models/teacher';
-import QuizType from '../types/QuizType'
 import Quiz from '../../models/quiz';
+import Lesson from '../../models/lessons'
+
+import { nodeField, TeacherType, AdminType, StudentType, LessonType, QuizType } from '../types/Nodes'
 
 const Query = new GraphQLObjectType({
   name: 'Query',
   description: 'Your Root Query',
   fields() {
     return {
+      node: nodeField,
       students: {
         type: new GraphQLList(StudentType),
         resolve() { 
           return Student.find()
         }
-      },lessons:{
+      }, 
+      teachers: {
+        type: new GraphQLList(TeacherType),
+        resolve() {
+          return Teacher.find()
+        }
+      },
+      admins: {
+        type: new GraphQLList(AdminType),
+        resolve() { 
+          return Admin.find()
+        }
+      }, 
+      lessons: {
           type: new GraphQLList(LessonType),
           resolve(){
             return Lesson.find()
           }
       }, 
-      teacher: {
-        type: new GraphQLList(TeacherType),
-        resolve() { 
-          return Teacher.find()
-        }
-      },
-      admin: {
-        type: new GraphQLList(AdminType),
-        resolve() { 
-          return Admin.find()
-        }
-      },
       quiz: {
         type: new GraphQLList(QuizType),
         resolve() { 

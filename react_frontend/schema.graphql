@@ -1,14 +1,118 @@
+# Administrator
+type Admin {
+  # The ID of an object
+  id: ID!
+  name: String
+  email: String
+}
+
+# Self Descriptive
+type Answer {
+  answerName: String
+  isCorrect: Boolean
+}
+
+# Grade received on a quiz
+type Grade {
+  lesson: String
+  score: Int
+}
+
+# Self Descriptive
+input InputAnswer {
+  answerName: String
+  isCorrect: Boolean
+}
+
+# Self Descriptive
+input InputQuestion {
+  questionName: String
+  answers: [InputAnswer]
+}
+
+# Schema design for lessons
+type Lesson {
+  # The ID of an object
+  id: ID!
+  name: String
+  quiz: String
+  worksheetName: String
+  worksheetURL: String
+  notesName: String
+  notesURL: String
+}
+
 # Your Root Mutation
 type Mutation {
-  createStudent(name: String): Student
+  createStudent(name: String, email: String): Student
+  createTeacher(name: String, email: String): Teacher
+  createAdmin(name: String, email: String): Admin
+  createQuiz(name: String, questions: [InputQuestion]): Quiz
+  deleteAdmin(id: ID!): Admin
+  deleteQuiz(id: ID!): Quiz
+  addGrade(id: String, lesson: String, score: Int): Student
+  assignStudentToTeacher(studentID: String, teacherID: String): Student
+  addQuestion(id: String, question: InputQuestion): Quiz
+  deleteQuestion(id: String, qName: String): Quiz
+  createLesson(name: String, quiz: String, worksheetName: String, worksheetURL: String, notesName: String, notesURL: String): Lesson
+  deleteLesson(id: ID!): Lesson
+  addNote(id: String, name: String, url: String): Lesson
+  deleteNote(id: String): Lesson
+  addWorksheet(id: String, name: String, url: String): Lesson
+  deleteWorksheet(id: String): Lesson
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
 }
 
 # Your Root Query
 type Query {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
   students: [Student]
+  teachers: [Teacher]
+  admins: [Admin]
+  lessons: [Lesson]
+  quiz: [Quiz]
 }
 
 # Self Descriptive
-type Student {
+type Question {
+  questionName: String
+  answers: [Answer]
+}
+
+# Self Descriptive
+type Quiz {
+  # The ID of an object
+  id: ID!
   name: String
+  questions: [Question]
+}
+
+# Self Descriptive
+type Student implements Node {
+  # The ID of an object
+  id: ID!
+  name: String
+  email: String
+  teacher: Teacher
+  grades: [Grade]
+}
+
+# Teacher
+type Teacher implements Node {
+  # The ID of an object
+  id: ID!
+  name: String
+  email: String
+
+  # Students that the teacher teachers
+  students: [Student]
 }

@@ -1,23 +1,16 @@
 
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLID } from 'graphql';
-
-import StudentType from '../types/StudentType';
-import Student from '../../models/student';
-import LessonType from '../types/LessonType';
-import Lesson from '../../models/lessons';
-
-import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
-import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInputObjectType, GraphQLBoolean } from 'graphql';
+import AnswerType from '../types/AnswerType'
 import GradeType from '../types/GradeType'
-import StudentType from '../types/StudentType'
+import QuestionType from '../types/QuestionType'
+import InputAnswerType from '../types/InputAnswerType'
+import InputQuestionType from '../types/InputQuestionType'
 import Student from '../../models/student';
-import AdminType from '../types/AdminType'
 import Admin from '../../models/admin';
-import TeacherType from '../types/TeacherType'
 import Teacher from '../../models/teacher';
-import QuizType from '../types/QuizType'
 import Quiz from '../../models/quiz';
-import InputQuestionType from '../types/InputQuestionType.js'
+import Lesson from '../../models/lessons'
+import {  TeacherType, AdminType, StudentType, LessonType, QuizType } from '../types/Nodes'
 
 
 const Mutation = new GraphQLObjectType({

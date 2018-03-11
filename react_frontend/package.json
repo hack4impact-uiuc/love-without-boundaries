@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --config ./webpack.config.js",
-    "build": "webpack",
+    "dev": "webpack-dev-server --config ./webpack.config.js --open",
+    "build": "webpack && cp src/index.html dist",
     "start": "serve .",
-    "relay": "relay-compiler --src . --schema ./schema.graphql"
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql"
   },
   "author": "",
   "license": "ISC",
