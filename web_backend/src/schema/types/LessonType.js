@@ -1,7 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLID , GraphQLList} from 'graphql';
 import mongoose from 'mongoose';
 
-import NoteType from './NotesType';
 
 const Lesson = new GraphQLObjectType({
   name: 'Lesson',
@@ -17,12 +16,18 @@ const Lesson = new GraphQLObjectType({
       quiz: {
         type: GraphQLString, //Change to Quiz later
       },
-      worksheets: {
+      worksheetName: {
         type: GraphQLString,
       },
-      notes: {
-        type: new GraphQLList(NoteType)
-      }
+      worksheetURL: {
+        type: GraphQLString
+      },
+      notesName: {
+        type: GraphQLString,
+      },
+      notesURL: {
+        type: GraphQLString,
+      },
     };
   },
 });
