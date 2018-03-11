@@ -154,3 +154,47 @@ Expected Result:
   }
 }
 ```
+## Quiz Stuff
+```
+query q{
+  quiz{
+    id
+    name
+    questions{
+    	questionName
+      answers {
+        answerName
+        isCorrect
+      }
+    }
+  }
+}
+```
+```
+mutation create{
+  createQuiz(name: "queez"){
+    name
+  }
+}
+```
+```
+mutation delete{
+  deleteQuiz(id: "5aa227a5a4ba471a30c382c7"){
+    name
+  }
+}
+```
+```
+mutation add{
+  addQuestion(id: "5aa227d4a4ba471a30c382c8", question: {questionName: "q1", answers: {answerName: "A", isCorrect: false}}) {
+    name
+  }
+}
+```
+```
+mutation m {
+  deleteQuiz(id:"5aa227d7a4ba471a30c382c9" ) {
+    name
+  }
+}
+```
