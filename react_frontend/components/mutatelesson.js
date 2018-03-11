@@ -39,7 +39,6 @@ class MutateLesson extends React.Component {
         id++;
     }
 
-
     handleDelete = (event) => {
         event.preventDefault();
         var len = this.state.lessons.length;
@@ -56,47 +55,11 @@ class MutateLesson extends React.Component {
         return (
             <div>
                 <form onSubmit={this.props.handler}>Add Lesson:
-                    <div>
-                        <label htmlFor="lesson_name_input">Lesson Name: </label>
-                        <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
-                    </div>
-
-                    <div>
-                        <label htmlFor="lesson_notes_input">Lesson Notes: </label>
-                        <input id="lesson_notes_input" name="notes" type="text" value={this.state.notes} onChange={this.handleChange} />
-                    </div>
-
-                    <div>
-                        <label htmlFor="lesson_notes_link_input">Lesson Notes Link: </label>
-                        <input id="lesson_notes_link_input" name="notes_link" type="text" value={this.state.notes_link} onChange={this.handleChange} />
-                    </div>
-
-                    <div>
-                        <label htmlFor="lesson_wksht_input">Lesson Worksheet: </label>
-                        <input id="lesson_wksht_input" name="wksht" type="text" value={this.state.wksht} onChange={this.handleChange} />
-                    </div>
-
-                    <div>
-                        <label htmlFor="lesson_wksht_link_input">Lesson Worksheet Link: </label>
-                        <input id="lesson_wksht_link_input" name="wksht_link" type="text" value={this.state.wksht_link} onChange={this.handleChange} />
-                    </div>
-                    
-                    <div>
-                        <button>Add Quiz</button>
-                    </div>
-                    <div>
-                        <button>Add Lesson</button>
-                    </div>
+                    <AddLessonForm/>
                 </form>
 
                 <form onSubmit={this.props.handler}>Delete Lesson:
-                    <div>
-                        <label htmlFor="delete_lesson_id">ID:</label>
-                        <input id="delete_lesson_id" name="delete_id" type="text" value={this.state.delete_id} onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <button>Delete Lesson</button>
-                    </div>
+                   <DeleteLessonForm/>
                 </form>
 
                 <div>

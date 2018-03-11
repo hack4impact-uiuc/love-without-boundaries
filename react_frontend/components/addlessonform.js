@@ -9,10 +9,10 @@ class AddLessonForm extends React.Component<Props>{
 
     render() {
         return (
-            <form onSubmit={this.props.handler}>Add Lesson:
+            <div>
                 <div>
-                    <label htmlFor="lesson_name_input">Lesson Name: </label>
-                    <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
+                <label htmlFor="lesson_name_input">Lesson Name: </label>
+                <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
                 </div>
 
                 <div>
@@ -38,10 +38,11 @@ class AddLessonForm extends React.Component<Props>{
                 <div>
                     <button>Add Quiz</button>
                 </div>
+                
                 <div>
                     <button>Add Lesson</button>
                 </div>
-            </form>
+            </div>
         );
     }
 }
