@@ -5,7 +5,7 @@ const parentDir = path.join(__dirname, '');
 
 module.exports = {
     entry: [
-        path.join(parentDir, 'index.js'),
+        path.join(parentDir, 'src/index.js'),
     ],
     module: {
         loaders: [{
@@ -19,12 +19,12 @@ module.exports = {
         ],
     },
     output: {
-        path: `${ parentDir }/dist`,
+        path: path.join(parentDir, '/dist'),
         filename: 'bundle.js',
     },
     devtool: 'source-map',
     devServer: {
-        contentBase: parentDir,
+        contentBase: path.join(parentDir, '/src'),
         historyApiFallback: true,
     },
 };
