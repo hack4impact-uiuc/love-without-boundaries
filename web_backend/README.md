@@ -199,6 +199,7 @@ mutation m {
 }
 ```
 ## Lesson Stuff
+```
 query allLessons{
   lessons
   {
