@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AddLesson from './../components/addlesson';
 import NavBar from '../components/navBar';
+import AdminList from '../components/adminList'
 type Props = {
     /**/ 
   }
@@ -18,6 +19,7 @@ class AdminPage extends React.Component<Props>{
             <div>I am an admin
                 <AddLesson/>
                 <button onClick = {this.gotoQuiz}>Create Quiz</button>
+                <AdminList/>
             </div>
         );
     }
