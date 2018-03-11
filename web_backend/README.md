@@ -259,6 +259,7 @@ mutation deleteNote {
   }
 }
 ```
+```
 mutation deleteWorksheet {
   deleteWorksheet(id: "Lesson ID goes here") {
     id
