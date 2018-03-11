@@ -1,3 +1,11 @@
+
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLID } from 'graphql';
+
+import StudentType from '../types/StudentType';
+import Student from '../../models/student';
+import LessonType from '../types/LessonType';
+import Lesson from '../../models/lessons';
+
 import { GraphQLID, GraphQLInputObjectType, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 import GradeType from '../types/GradeType'
@@ -10,6 +18,7 @@ import Teacher from '../../models/teacher';
 import QuizType from '../types/QuizType'
 import Quiz from '../../models/quiz';
 import InputQuestionType from '../types/InputQuestionType.js'
+
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -100,6 +109,69 @@ const Mutation = new GraphQLObjectType({
           // return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
         } 
       }, 
+      createLesson: {
+        type: LessonType,
+        args: {
+          name: {type: GraphQLString }, 
+          quiz: { type: GraphQLString }, 
+          worksheetName: { type: GraphQLString}, 
+          worksheetURL: { type: GraphQLString},
+          notesName: {type: GraphQLString},
+          notesURL: {type: GraphQLString},
+        },
+        resolve(root, { name, quiz, worksheetName, worksheetURL, notesName, notesURL}, ctx) {
+          const s = new Lesson({name, quiz, worksheetName, worksheetURL, notesName, notesURL})
+          return s.save()
+        }
+      },
+      deleteLesson: { 
+        type: LessonType,
+        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        resolve(root, {id}, ctx){
+          return Lesson.findByIdAndRemove(id);
+        }
+      },
+      addNote: {
+        type: LessonType,
+        args: {
+          id: {type: GraphQLString},
+          name: {type: GraphQLString},
+          url: {type: GraphQLString}  
+        },
+        resolve(root, { id, name, url}, ctx) {
+          return Lesson.findByIdAndUpdate(id, {$set: {"notesName" : name, "notesURL" : url}})
+        }
+      },
+      deleteNote: {
+        type: LessonType,
+        args: {
+          id: {type: GraphQLString},
+        },
+        resolve(root, {id}) {
+          return Lesson.findByIdAndUpdate(id, {$set: {"notesName" : null, "notesURL" : null}})
+        }
+      },
+      addWorksheet: {
+        type: LessonType,
+        args: {
+          id: {type: GraphQLString},
+          name: {type: GraphQLString},
+          url: {type: GraphQLString} 
+        },
+        resolve(root, { id, name, url}, ctx) {
+          return Lesson.findByIdAndUpdate(id, {$set: {"worksheetName": name, "worksheetURL": url}})
+        }
+      },
+      deleteWorksheet: {
+        type: LessonType,
+        args: {
+          id: {type: GraphQLString},
+        },
+        resolve(root, {id}) {
+          return Lesson.findByIdAndUpdate(id, {$set: {"worksheetName" : null, "worksheetURL" : null}})
+        }
+      },
+      
     };
   },
 });

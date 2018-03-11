@@ -1,23 +1,32 @@
-import { GraphQLObjectType, GraphQLInputObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
-import Quiz from './QuizType';
+import { GraphQLObjectType, GraphQLString, GraphQLID , GraphQLList} from 'graphql';
 import mongoose from 'mongoose';
+
 
 const Lesson = new GraphQLObjectType({
   name: 'Lesson',
-  description: 'Self Descriptive',
+  description: 'Schema design for lessons',
   fields() {
     return {
-      lessonName: {
+      id: {
+        type: GraphQLID
+      },
+      name: {
         type: GraphQLString,
       },
-      listOfQuizzes: {
-      	type: new GraphQLNonNull(new GraphQLList(Quiz)),
+      quiz: {
+        type: GraphQLString, //Change to Quiz later
       },
-      listOfWorksheets: {
-        type: new GraphQLNonNull(new GraphQLList(Worksheet)),
+      worksheetName: {
+        type: GraphQLString,
       },
-      listOfNotes: {
-        type: new GraphQLNonNull(new GraphQLList(Note)),
+      worksheetURL: {
+        type: GraphQLString
+      },
+      notesName: {
+        type: GraphQLString,
+      },
+      notesURL: {
+        type: GraphQLString,
       },
     };
   },
