@@ -6,6 +6,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
+import Login from '../components/login';
 
 type Props = {
     /**/ 
@@ -64,11 +65,11 @@ class HomePage extends React.Component<Props>{
                     `}
                     variables={{}}
                     render={({ props }) => {
-                        if (!props) {
-                            return (
-                                <div>Loading...</div>
-                            );
-                        }
+                        // if (!props) {
+                        //     return (
+                        //         <div>Loading...</div>
+                        //     );
+                        // }
                         return (
                             <div> 
                             <HomeSection className="container">
@@ -89,7 +90,7 @@ class HomePage extends React.Component<Props>{
                                             </div>
                                             : 
                                             <div>
-                                                <Link to="/student" ><SignInButton className="btn">Login</SignInButton></Link>
+                                                <Login/>
                                                 <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                             </div>
                                         }
