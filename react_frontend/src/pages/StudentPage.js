@@ -39,9 +39,7 @@ class StudentPage extends React.Component<Props>{
                                 <h1>My Lessons</h1>
                                 {
                                 props.lessons.map(lesson => (
-                                    <div>
-                                        <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
-                                    </div>
+                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
                                 ))
                                 }
                             </div>
