@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
 import NavBar from '../components/navBar';
 import { graphql, QueryRenderer } from 'react-relay';
@@ -38,15 +37,13 @@ class StudentPage extends React.Component<Props>{
                             <div>
                                 <NavBar />
                                 <h1>My Lessons</h1>
-                                <div>
-                                    {
-                                    props.lessons.map(lesson => (
-                                        <div>
-                                            <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
-                                        </div>
-                                    ))
-                                    }
-                                </div>
+                                {
+                                props.lessons.map(lesson => (
+                                    <div>
+                                        <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
+                                    </div>
+                                ))
+                                }
                             </div>
                     );
                 }}
