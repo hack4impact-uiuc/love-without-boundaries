@@ -122,7 +122,7 @@ const LessonType = new GraphQLObjectType({
           type: GraphQLString,
         },
         quiz: {
-          type: GraphQLString, 
+          type: QuizType, 
         },
         worksheetName: {
           type: GraphQLString,

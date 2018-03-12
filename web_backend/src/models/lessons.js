@@ -18,8 +18,6 @@ const LessonSchema = new Schema({
     worksheetURL: { type: String} ,
     notesName: {type: String},
     notesURL: {type: String}
-
-    
   });
   
 export default mongoose.model('Lesson', LessonSchema);
