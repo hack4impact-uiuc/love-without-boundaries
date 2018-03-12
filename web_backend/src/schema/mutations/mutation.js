@@ -1,16 +1,16 @@
 
 import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInputObjectType, GraphQLBoolean } from 'graphql';
-import AnswerType from '../types/AnswerType'
-import GradeType from '../types/GradeType'
-import QuestionType from '../types/QuestionType'
-import InputAnswerType from '../types/InputAnswerType'
-import InputQuestionType from '../types/InputQuestionType'
+import AnswerType from '../types/AnswerType';
+import GradeType from '../types/GradeType';
+import QuestionType from '../types/QuestionType';
+import InputAnswerType from '../types/InputAnswerType';
+import InputQuestionType from '../types/InputQuestionType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
 import Quiz from '../../models/quiz';
-import Lesson from '../../models/lessons'
-import {  TeacherType, AdminType, StudentType, LessonType, QuizType } from '../types/Nodes'
+import Lesson from '../../models/lessons';
+import {  TeacherType, AdminType, StudentType, LessonType, QuizType } from '../types/Nodes';
 
 
 const Mutation = new GraphQLObjectType({
