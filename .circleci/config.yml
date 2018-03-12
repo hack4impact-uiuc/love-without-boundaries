@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:8.4.0
+    working_directory: /home/love-without-boundaries/
+    steps:
+      - checkout
+      - run: cd react_frontend
+      - run: npm install
+      - run: npm test
