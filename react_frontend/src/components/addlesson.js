@@ -37,6 +37,14 @@ class AddLesson extends React.Component {
         });
     }
 
+    delete = lesson => {
+        const newState = this.state.lessons.slice();
+        if (newState.indexOf(lesson) > -1) {
+          newState.splice(newState.indexOf(lesson), 1);
+          this.setState({lessons: newState})
+        }
+      }
+
     render() {
         return (
             <div>
@@ -75,6 +83,7 @@ class AddLesson extends React.Component {
                             this.state.lessons.map(lesson => (
                                 <div>
                                     <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
+                                    <button onClick={() => this.delete(lesson)}>Delete Lesson</button>
                                 </div>
                             ))
                         }
