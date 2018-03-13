@@ -19,3 +19,10 @@ workflows:
   build_and_test:
     jobs:
       - build
+  build_test_approval:
+    jobs:
+      - build
+      - test
+        type: approval
+        requires:
+          - build
