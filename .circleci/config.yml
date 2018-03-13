@@ -3,19 +3,20 @@ jobs:
   build:
     docker:
       - image: node:8.4.0
-    working_directory: /home/love-without-boundaries/react_frontend
+    working_directory: /home/love-without-boundaries
     steps:
       - checkout
-        - path: /home/love-without-boundaries
-      - run: npm install
-      - run: npm run dev
+      - run: 
+        - >- 
+          cd react_frontend &&
+          npm install
   test:
     docker:
       - image: node:8.4.0
     working_directory: /home/love-without-boundaries/
     steps:
       - checkout
-        - path: /home/love-without-boundaries
+      - run: cd react_frontend
       - run: npm install
       - run: npm test
 workflows:
@@ -23,4 +24,3 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test
