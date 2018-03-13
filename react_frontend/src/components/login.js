@@ -6,6 +6,8 @@ import { GoogleLogin } from 'react-google-login';
 class Login extends React.Component {
     responseGoogle = (response) => {
         console.log(response);
+        // check if user exists + permission levels + jwt
+        // set HTML storage to store jwt
         this.props.history.push('/student');
     }
     failedGoogle = (response) =>{

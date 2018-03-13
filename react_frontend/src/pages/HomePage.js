@@ -52,51 +52,36 @@ class HomePage extends React.Component<Props>{
 
     render() {
         return (
-            
-            <QueryRenderer
-                    environment={environment}
-                    query={graphql`
-                        query HomePage_Query{
-                            students {
-                                id
-                                ...studentListItem_student
+            <div> 
+                <HomeSection className="container">
+                    <LogoRow className="row">
+                        <Col xs={5} sm={4} style={{paddingLeft: 15}}>
+                            <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
+                        </Col>
+                        <Col xs={1} sm={6}></Col>
+                        <Col xs={5} sm={2}>
+                            <SignInSection>
+                            { 
+                                this.state.signup ?
+                                <div>
+                                    <p>Are you a...</p>
+                                    <SignInButton className="btn">Student</SignInButton>
+                                    <SignInButton className="btn">Teacher</SignInButton>
+                                    <SignInButton className="btn">Admin</SignInButton>
+                                </div>
+                                : 
+                                <div>
+                                    <Login/>
+                                    <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
+                                </div>
                             }
-                        }   
-                    `}
-                    variables={{}}
-                    render={({ props }) => {
-                        return (
-                            <div> 
-                            <HomeSection className="container">
-                                <LogoRow className="row">
-                                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
-                                        <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
-                                    </Col>
-                                    <Col xs={1} sm={6}></Col>
-                                    <Col xs={5} sm={2}>
-                                        <SignInSection>
-                                        { 
-                                            this.state.signup ?
-                                            <div>
-                                                <p>Are you a...</p>
-                                                <SignInButton className="btn">Student</SignInButton>
-                                                <SignInButton className="btn">Teacher</SignInButton>
-                                                <SignInButton className="btn">Admin</SignInButton>
-                                            </div>
-                                            : 
-                                            <div>
-                                                <Login/>
-                                                <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
-                                            </div>
-                                        }
-                                        </SignInSection>
-                                    </Col>
-                                </LogoRow>
-                            </HomeSection>
-                            </div>
-                        );
-                    }}
-                />
+                            </SignInSection>
+                        </Col>
+                    </LogoRow>
+                </HomeSection>
+            </div>
+                        
+                
         );
     }
 }
