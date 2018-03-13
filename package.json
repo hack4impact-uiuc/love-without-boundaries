@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "graphql-relay": "^0.5.4"
+  }
+}

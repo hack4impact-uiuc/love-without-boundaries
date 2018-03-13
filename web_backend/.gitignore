@@ -3,3 +3,4 @@ node_modules
 /dist
 dist
 flow-typed
+package-lock.json

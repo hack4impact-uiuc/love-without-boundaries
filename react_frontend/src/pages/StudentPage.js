@@ -4,6 +4,9 @@ import NavBar from '../components/navBar';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 
+import Button from '../components/button'
+import addStudent from '../relay/mutations/addStudent'
+
 type Props = {
     /**/ 
   }
@@ -36,6 +39,10 @@ class StudentPage extends React.Component<Props>{
                     return (
                             <div>
                                 <NavBar />
+                                <h1>Add Student</h1>
+                                {
+                                    <Button onClick={() => addStudent(environment, 'Pranay', 'pranay.gp@gmail.com')}>Add Pranay</Button>
+                                }
                                 <h1>My Lessons</h1>
                                 {
                                 props.lessons.map(lesson => (

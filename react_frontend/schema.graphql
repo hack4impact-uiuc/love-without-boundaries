@@ -12,22 +12,21 @@ type Answer {
   isCorrect: Boolean
 }
 
+input CreateStudentInput {
+  name: String!
+  email: String!
+  clientMutationId: String
+}
+
+type CreateStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
 # Grade received on a quiz
 type Grade {
   lesson: String
   score: Int
-}
-
-# Self Descriptive
-input InputAnswer {
-  answerName: String
-  isCorrect: Boolean
-}
-
-# Self Descriptive
-input InputQuestion {
-  questionName: String
-  answers: [InputAnswer]
 }
 
 # Schema design for lessons
@@ -44,22 +43,7 @@ type Lesson {
 
 # Your Root Mutation
 type Mutation {
-  createStudent(name: String, email: String): Student
-  createTeacher(name: String, email: String): Teacher
-  createAdmin(name: String, email: String): Admin
-  createQuiz(name: String, questions: [InputQuestion]): Quiz
-  deleteAdmin(id: ID!): Admin
-  deleteQuiz(id: ID!): Quiz
-  addGrade(id: String, lesson: String, score: Int): Student
-  assignStudentToTeacher(studentID: String, teacherID: String): Student
-  addQuestion(id: String, question: InputQuestion): Quiz
-  deleteQuestion(id: String, qName: String): Quiz
-  createLesson(name: String, quiz: String, worksheetName: String, worksheetURL: String, notesName: String, notesURL: String): Lesson
-  deleteLesson(id: ID!): Lesson
-  addNote(id: String, name: String, url: String): Lesson
-  deleteNote(id: String): Lesson
-  addWorksheet(id: String, name: String, url: String): Lesson
-  deleteWorksheet(id: String): Lesson
+  createStudent(input: CreateStudentInput!): CreateStudentPayload
 }
 
 # An object with an ID
