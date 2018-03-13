@@ -6,7 +6,7 @@ jobs:
     working_directory: /home/love-without-boundaries
     steps:
       - checkout
-      - run: cd react_frontend && npm install
+      - run: cd react_frontend && npm install && npm build
   test:
     docker:
       - image: node:8.4.0
@@ -19,10 +19,3 @@ workflows:
   build_and_test:
     jobs:
       - build
-  build_test_approval:
-    jobs:
-      - build
-      - test
-        type: approval
-        requires:
-          - build
