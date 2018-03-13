@@ -18,7 +18,6 @@ const HomeSection = styled.div`
     display: block;
     height: 700px;
 `
-
 const SignInSection = styled.div`
     text-align: center;
 `;
