@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList, GraphQLID } from 'graphql';
 import mongoose from 'mongoose';
 import Answer from './AnswerType'
 
@@ -7,6 +7,9 @@ const Question = new GraphQLObjectType({
   description: 'Self Descriptive',
   fields() {
     return {
+      id: {
+        type: GraphQLID,
+      },
       questionName: {
         type: GraphQLString,
       },

@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
 import { nodeDefinitions, globalIdField, fromGlobalId } from 'graphql-relay'
 import mongoose from 'mongoose';
 
@@ -10,6 +10,8 @@ import Lesson from '../../models/lessons'
 
 import QuestionType from './QuestionType.js'
 import GradeType from './GradeType';
+import PastQuizType from './PastQuizType.js'
+// import SubmittedAnswerType from './SubmittedAnswerType.js'
 
 const { nodeInterface, nodeField } = nodeDefinitions(
     (globalId) => {
@@ -28,6 +30,9 @@ const { nodeInterface, nodeField } = nodeDefinitions(
             case 'Quiz':
                 collection = Quiz;
                 break;
+            // case 'PastQuiz':
+            //     collection = PastQuiz;
+            //     break;
             case 'Lesson':
                 collection = Lesson;
                 break;
@@ -66,6 +71,9 @@ const StudentType = new GraphQLObjectType({
       grades: {
         type: new GraphQLList(GradeType)
       },
+      pastQuizzes: {
+        type: new GraphQLList(PastQuizType)
+      }
     };
   },
   interfaces: [nodeInterface]
@@ -158,5 +166,20 @@ const QuizType = new GraphQLObjectType({
     },
 });
 
+// const PastQuizType = new GraphQLObjectType({
+//   name: 'PastQuiz',
+//   description: 'Self Descriptive',
+//   fields() {
+//       return {
+//           id: globalId('PastQuiz'),
+//           quizName: { type: GraphQLString },
+//           score: { type: GraphQLInt },
+//           submittedAnswers: {
+//             type: new GraphQLList(SubmittedAnswerType)
+//           }
+//       };
+//       interfaces: [nodeInterface]
+//   },
+// });
 
-export { AdminType, TeacherType, StudentType, LessonType, QuizType, nodeField };
+export { AdminType, TeacherType, StudentType, LessonType, QuizType, PastQuizType, nodeField };

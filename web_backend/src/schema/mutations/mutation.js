@@ -11,6 +11,8 @@ import Teacher from '../../models/teacher';
 import Quiz from '../../models/quiz';
 import Lesson from '../../models/lessons'
 import {  TeacherType, AdminType, StudentType, LessonType, QuizType } from '../types/Nodes'
+import Question from '../types/QuestionType';
+import InputPastQuizType from '../types/InputPastQuizType';
 
 
 const Mutation = new GraphQLObjectType({
@@ -87,6 +89,16 @@ const Mutation = new GraphQLObjectType({
         }
         }
       },
+      submitQuiz: {
+        type: StudentType,
+        args: {
+          id: {type: GraphQLString},
+          pastQuiz: {type: InputPastQuizType},
+        },
+        resolve(root, { id, pastQuiz }, ctx) {
+          return Student.findByIdAndUpdate(id, {$push: {"pastQuizzes": pastQuiz}})
+        }
+      },
       addQuestion: {
         type: QuizType,
         args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
@@ -96,9 +108,10 @@ const Mutation = new GraphQLObjectType({
       }, 
       deleteQuestion: {
         type: QuizType,
-        args: { id: { type: GraphQLString }, qName: { type: GraphQLString } },
+        args: { id: { type: GraphQLString }, qID: { type: GraphQLString } },
         resolve(root, { id, qName }, ctx) {
-          return Quiz.findByIdAndRemove(id)
+          return Quiz.findById(id, Question.findByIdAndRemove(qID))
+          // return Quiz.findByIdAndRemove(id)
           // return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
         } 
       }, 
