@@ -65,11 +65,6 @@ class HomePage extends React.Component<Props>{
                     `}
                     variables={{}}
                     render={({ props }) => {
-                        // if (!props) {
-                        //     return (
-                        //         <div>Loading...</div>
-                        //     );
-                        // }
                         return (
                             <div> 
                             <HomeSection className="container">
