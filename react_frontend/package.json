@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./webpack.config.js --open",
     "build": "webpack && cp src/index.html dist",
-    "start": "serve .",
+    "start": "serve dist",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql"
   },
   "author": "",
@@ -42,10 +42,10 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-google-login": "^3.0.10",
     "react-popout": "^1.0.1",
     "react-redux": "^5.0.7",
     "react-relay": "^1.4.1",

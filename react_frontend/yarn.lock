@@ -9,6 +9,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@types/react@*":
+  version "16.0.40"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.40.tgz#caabc2296886f40b67f6fc80f0f3464476461df9"
+
 "@zeit/check-updates@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@zeit/check-updates/-/check-updates-1.1.0.tgz#d0f65026a36f27cd1fd54c647d8294447c1d2d8b"
@@ -5177,6 +5181,13 @@ react-dom@^16.2.0:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+    prop-types "^15.6.0"
+
+react-google-login@^3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-3.0.10.tgz#161066f811db1d99fa94b0ebc5a878ff5665a1bd"
+  dependencies:
+    "@types/react" "*"
     prop-types "^15.6.0"
 
 react-overlays@^0.8.0:
