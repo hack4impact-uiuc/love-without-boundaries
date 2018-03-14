@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 
 
@@ -15,6 +15,7 @@ class Login extends React.Component {
     }
     render(){
         return(
+            console.log(this.props.signUp)
             <GoogleLogin
                 className='btn'
                 style={{

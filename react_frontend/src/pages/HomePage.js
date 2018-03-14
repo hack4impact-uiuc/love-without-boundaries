@@ -65,9 +65,8 @@ class HomePage extends React.Component<Props>{
                                 this.state.signup ?
                                 <div>
                                     <p>Are you a...</p>
-                                    <SignInButton className="btn">Student</SignInButton>
+                                    <Login className="btn">Student</Login>
                                     <SignInButton className="btn">Teacher</SignInButton>
-                                    <SignInButton className="btn">Admin</SignInButton>
                                 </div>
                                 : 
                                 <div>
