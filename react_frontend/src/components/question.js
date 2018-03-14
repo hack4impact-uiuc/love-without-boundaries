@@ -7,18 +7,21 @@ class Question extends React.Component{
         super(props)
         this.state = {
             name : "",
-            locked : false
+            locked : this.props.locked
         }
+    }
+    componentWillReceiveProps(newProps) {
+        this.setState({locked : newProps.locked})
     }
     updateQuestion = event => {
         this.setState({name : event.target.value})
     }
-    edit = () => {
+    /*edit = () => {
         this.setState({locked : false})
     }
     lock = () => {
         this.setState({locked : true})
-    }
+    }*/
     render() {
         return(
             <div>
@@ -27,8 +30,8 @@ class Question extends React.Component{
                 <Answer letter="B" locked={this.state.locked} />
                 <Answer letter="C" locked={this.state.locked} />
                 <Answer letter="D" locked={this.state.locked} />
-                <button onClick = {this.edit}>Edit</button>
-                <button onClick = {this.lock}>Submit</button>
+                {/*<button onClick = {this.edit}>Edit</button>
+                <button onClick = {this.lock}>Submit</button>*/}
             </div>
         );
     }

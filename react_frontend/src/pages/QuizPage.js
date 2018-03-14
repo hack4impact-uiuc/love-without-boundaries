@@ -14,22 +14,32 @@ class QuizPage extends Component{
     
     constructor(props){
         super(props)
-        this.state = {qNum: 0, qMap : []}
+        this.state = {qNum: 0, qMap : [], locked : false}
     }
     
     finish = () => {window.location = '/admin'}
     addQuestion = () => {
         this.setState({qNum : this.state.qNum + 1, qMap : [...this.state.qMap, this.state.qNum + 1]})
     }
+    lock = () => {
+        this.setState({locked : true})
+    }
+    unlock = () => {
+        this.setState({locked : false})
+    }
     render() {
         return (
             <div>
                 <h1>Quiz Page</h1>
                 <br />
-                {this.state.qMap.map( () => <div><Question /><br /></div> )}
-                <CopiedButton classname="btn" onClick={this.addQuestion}>Add Question</CopiedButton>
+                {this.state.qMap.map( () => <div><Question locked={this.state.locked}/><br /></div> )}
+                <CopiedButton onClick={this.addQuestion}>Add Question</CopiedButton>
                 <br/>
-                <CopiedButton classname="btn" onClick={this.finish}>Finish Quiz</CopiedButton>
+                <CopiedButton onClick={this.unlock}>Edit Questions</CopiedButton>
+                <br/>
+                <CopiedButton onClick={this.lock}>Submit Questions</CopiedButton>
+                <br/>
+                <CopiedButton onClick={this.finish}>Finish Quiz</CopiedButton>
             </div>
         );
     }
