@@ -48,17 +48,6 @@ const Mutation = new GraphQLObjectType({
           return a.save()
         } 
       },
-      // createQuiz: {
-      //   type: QuizType,
-      //   args: { name: { type: GraphQLString },
-      //           questions: { type: new GraphQLList(InputQuestionType) },
-      //           lessonID: { type: GraphQLString},
-      //         },
-      //   resolve(root, { name, questions, lessonID }, ctx) {
-      //     const q = new Quiz({ name, questions, lessonID });
-      //     return q.save()
-      //   } 
-      // },
       deleteAdmin: { 
         type: AdminType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
@@ -66,13 +55,6 @@ const Mutation = new GraphQLObjectType({
           return Admin.findByIdAndRemove(id);
         }
       },
-      // deleteQuiz: { 
-      //   type: QuizType,
-      //   args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-      //   resolve(root, {id}, ctx){
-      //     return Quiz.findByIdAndRemove(id);
-      //   }
-      // },
       addGrade: {
         type: StudentType,
         args: { id: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
@@ -90,13 +72,6 @@ const Mutation = new GraphQLObjectType({
         }
         }
       },
-      addQuestion: {
-        type: LessonType,
-        args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
-        resolve(root, { id, question }, ctx) {
-          return Lesson.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
-        } 
-      }, 
       createLesson: {
         type: LessonType,
         args: {
@@ -114,11 +89,25 @@ const Mutation = new GraphQLObjectType({
       },
       deleteLesson: { 
         type: LessonType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+        args: { id: {type: GraphQLString} },
         resolve(root, {id}, ctx){
           return Lesson.findByIdAndRemove(id);
         }
       },
+      addQuestion: {
+        type: LessonType,
+        args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
+        resolve(root, { id, question }, ctx) {
+          return Lesson.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
+        } 
+      }, 
+      // deleteQuestion: {
+      //   type: LessonType,
+      //   args: { id: { type: GraphQLString} },
+      //   resolve(root, {id}, ctx) {
+      //     return Lesson.
+      //   }
+      // },
       addNote: {
         type: LessonType,
         args: {
