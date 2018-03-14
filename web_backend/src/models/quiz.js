@@ -10,6 +10,7 @@ const QuizSchema = new Schema({
             isCorrect: { type: Boolean }
         }]
     }],
+    lessonID: { type: String }
 });
   
 export default mongoose.model('Quiz', QuizSchema);

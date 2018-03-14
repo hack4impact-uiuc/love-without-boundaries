@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const LessonSchema = new Schema({
-    // id: { type: String},
     name: { type: String },
     quiz: {
       name: { type: String },
@@ -13,7 +12,7 @@ const LessonSchema = new Schema({
               isCorrect: { type: Boolean }
           }]
       }],
-    }, //Change to Quiz later
+    },
     worksheetName: { type: String}, 
     worksheetURL: { type: String} ,
     notesName: {type: String},

@@ -5,6 +5,7 @@ import GradeType from '../types/GradeType';
 import QuestionType from '../types/QuestionType';
 import InputAnswerType from '../types/InputAnswerType';
 import InputQuestionType from '../types/InputQuestionType';
+import InputQuizType from '../types/InputQuizType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
@@ -49,10 +50,11 @@ const Mutation = new GraphQLObjectType({
       createQuiz: {
         type: QuizType,
         args: { name: { type: GraphQLString },
-                questions: { type: new GraphQLList(InputQuestionType) }
+                questions: { type: new GraphQLList(InputQuestionType) },
+                lessonID: { type: GraphQLString},
               },
-        resolve(root, { name, questions }, ctx) {
-          const q = new Quiz({ name, questions });
+        resolve(root, { name, questions, lessonID }, ctx) {
+          const q = new Quiz({ name, questions, lessonID });
           return q.save()
         } 
       },
@@ -106,7 +108,7 @@ const Mutation = new GraphQLObjectType({
         type: LessonType,
         args: {
           name: {type: GraphQLString }, 
-          quiz: { type: GraphQLString }, 
+          quiz: {type: InputQuizType}, 
           worksheetName: { type: GraphQLString}, 
           worksheetURL: { type: GraphQLString},
           notesName: {type: GraphQLString},

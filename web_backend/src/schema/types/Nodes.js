@@ -121,9 +121,9 @@ const LessonType = new GraphQLObjectType({
         name: {
           type: GraphQLString,
         },
-        quiz: {
-          type: QuizType, 
-        },
+        // quiz: {
+        //   type: QuizType, 
+        // },
         worksheetName: {
           type: GraphQLString,
         },
@@ -153,6 +153,7 @@ const QuizType = new GraphQLObjectType({
             questions: {
                 type: new GraphQLList(QuestionType)
             },
+            lessonID: {type: GraphQLString}
         };
         interfaces: [nodeInterface]
     },
