@@ -90,21 +90,13 @@ const Mutation = new GraphQLObjectType({
         }
         }
       },
-      // addQuestion: {
-      //   type: QuizType,
-      //   args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
-      //   resolve(root, { id, question }, ctx) {
-      //     return Quiz.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
-      //   } 
-      // }, 
-      // deleteQuestion: {
-      //   type: QuizType,
-      //   args: { id: { type: GraphQLString }, qName: { type: GraphQLString } },
-      //   resolve(root, { id, qName }, ctx) {
-      //     return Quiz.findByIdAndRemove(id)
-      //     // return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
-      //   } 
-      // }, 
+      addQuestion: {
+        type: LessonType,
+        args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
+        resolve(root, { id, question }, ctx) {
+          return Lesson.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
+        } 
+      }, 
       createLesson: {
         type: LessonType,
         args: {
