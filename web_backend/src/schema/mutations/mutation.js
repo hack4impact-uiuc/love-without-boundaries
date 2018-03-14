@@ -167,7 +167,6 @@ const Mutation = new GraphQLObjectType({
           return Lesson.findByIdAndUpdate(id, {$set: {"worksheetName" : null, "worksheetURL" : null}})
         }
       },
-      
     };
   },
 });
