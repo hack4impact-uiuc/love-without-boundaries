@@ -6,12 +6,13 @@ import QuestionType from '../types/QuestionType';
 import InputAnswerType from '../types/InputAnswerType';
 import InputQuestionType from '../types/InputQuestionType';
 import InputQuizType from '../types/InputQuizType';
+import QuizType from '../types/QuizType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
 import Quiz from '../../models/quiz';
 import Lesson from '../../models/lessons';
-import {  TeacherType, AdminType, StudentType, LessonType, QuizType } from '../types/Nodes';
+import {  TeacherType, AdminType, StudentType, LessonType} from '../types/Nodes';
 
 
 const Mutation = new GraphQLObjectType({
@@ -47,17 +48,17 @@ const Mutation = new GraphQLObjectType({
           return a.save()
         } 
       },
-      createQuiz: {
-        type: QuizType,
-        args: { name: { type: GraphQLString },
-                questions: { type: new GraphQLList(InputQuestionType) },
-                lessonID: { type: GraphQLString},
-              },
-        resolve(root, { name, questions, lessonID }, ctx) {
-          const q = new Quiz({ name, questions, lessonID });
-          return q.save()
-        } 
-      },
+      // createQuiz: {
+      //   type: QuizType,
+      //   args: { name: { type: GraphQLString },
+      //           questions: { type: new GraphQLList(InputQuestionType) },
+      //           lessonID: { type: GraphQLString},
+      //         },
+      //   resolve(root, { name, questions, lessonID }, ctx) {
+      //     const q = new Quiz({ name, questions, lessonID });
+      //     return q.save()
+      //   } 
+      // },
       deleteAdmin: { 
         type: AdminType,
         args: { id: {type: new GraphQLNonNull(GraphQLID)} },
@@ -65,13 +66,13 @@ const Mutation = new GraphQLObjectType({
           return Admin.findByIdAndRemove(id);
         }
       },
-      deleteQuiz: { 
-        type: QuizType,
-        args: { id: {type: new GraphQLNonNull(GraphQLID)} },
-        resolve(root, {id}, ctx){
-          return Quiz.findByIdAndRemove(id);
-        }
-      },
+      // deleteQuiz: { 
+      //   type: QuizType,
+      //   args: { id: {type: new GraphQLNonNull(GraphQLID)} },
+      //   resolve(root, {id}, ctx){
+      //     return Quiz.findByIdAndRemove(id);
+      //   }
+      // },
       addGrade: {
         type: StudentType,
         args: { id: { type: GraphQLString }, lesson: { type: GraphQLString }, score: { type: GraphQLInt } },
@@ -89,21 +90,21 @@ const Mutation = new GraphQLObjectType({
         }
         }
       },
-      addQuestion: {
-        type: QuizType,
-        args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
-        resolve(root, { id, question }, ctx) {
-          return Quiz.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
-        } 
-      }, 
-      deleteQuestion: {
-        type: QuizType,
-        args: { id: { type: GraphQLString }, qName: { type: GraphQLString } },
-        resolve(root, { id, qName }, ctx) {
-          return Quiz.findByIdAndRemove(id)
-          // return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
-        } 
-      }, 
+      // addQuestion: {
+      //   type: QuizType,
+      //   args: { id: { type: GraphQLString }, question: { type: InputQuestionType } },
+      //   resolve(root, { id, question }, ctx) {
+      //     return Quiz.findOneAndUpdate({"_id": id}, {$push: {"questions": question}})
+      //   } 
+      // }, 
+      // deleteQuestion: {
+      //   type: QuizType,
+      //   args: { id: { type: GraphQLString }, qName: { type: GraphQLString } },
+      //   resolve(root, { id, qName }, ctx) {
+      //     return Quiz.findByIdAndRemove(id)
+      //     // return Quiz.findOneAndUpdate({"_id": id}, {$pullAll: {"questions": [Quiz.find({questionName: qName})]}})
+      //   } 
+      // }, 
       createLesson: {
         type: LessonType,
         args: {

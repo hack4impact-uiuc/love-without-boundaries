@@ -8,6 +8,7 @@ import Teacher from '../../models/teacher';
 import Quiz from '../../models/quiz';
 import Lesson from '../../models/lessons'
 
+import QuizType from './QuizType'
 import QuestionType from './QuestionType.js'
 import GradeType from './GradeType';
 
@@ -121,9 +122,9 @@ const LessonType = new GraphQLObjectType({
         name: {
           type: GraphQLString,
         },
-        // quiz: {
-        //   type: QuizType, 
-        // },
+        quiz: {
+          type: QuizType, 
+        },
         worksheetName: {
           type: GraphQLString,
         },
@@ -141,23 +142,6 @@ const LessonType = new GraphQLObjectType({
     },
   });
   
-const QuizType = new GraphQLObjectType({
-    name: 'Quiz',
-    description: 'Self Descriptive',
-    fields() {
-        return {
-            id: globalId('Quiz'),
-            name: {
-                type: GraphQLString,
-            },
-            questions: {
-                type: new GraphQLList(QuestionType)
-            },
-            lessonID: {type: GraphQLString}
-        };
-        interfaces: [nodeInterface]
-    },
-});
 
 
-export { AdminType, TeacherType, StudentType, LessonType, QuizType, nodeField };
+export { AdminType, TeacherType, StudentType, LessonType, nodeField };
