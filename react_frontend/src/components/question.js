@@ -23,10 +23,10 @@ class Question extends React.Component{
         return(
             <div>
                 <input type="text" onChange={this.updateQuestion} readOnly={this.state.locked} />?
-                <Answer letter="A" locked={this.state.locked} locked={this.state.locked} />
-                <Answer letter="B" locked={this.state.locked} locked={this.state.locked} />
-                <Answer letter="C" locked={this.state.locked} locked={this.state.locked} />
-                <Answer letter="D" locked={this.state.locked} locked={this.state.locked} />
+                <Answer letter="A" locked={this.state.locked} />
+                <Answer letter="B" locked={this.state.locked} />
+                <Answer letter="C" locked={this.state.locked} />
+                <Answer letter="D" locked={this.state.locked} />
                 <button onClick = {this.edit}>Edit</button>
                 <button onClick = {this.lock}>Submit</button>
             </div>
