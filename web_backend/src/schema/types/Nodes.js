@@ -10,6 +10,7 @@ import Lesson from '../../models/lessons'
 
 import QuestionType from './QuestionType.js'
 import GradeType from './GradeType';
+import WorksheetType from './WorksheetType';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
     (globalId) => {
@@ -66,6 +67,9 @@ const StudentType = new GraphQLObjectType({
       grades: {
         type: new GraphQLList(GradeType)
       },
+      worksheets: {
+        type: new GraphQLList(WorksheetType)
+      }
     };
   },
   interfaces: [nodeInterface]
