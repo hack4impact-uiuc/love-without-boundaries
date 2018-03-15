@@ -25,13 +25,14 @@ type Props = {
     background-color: #f2f2f2;
       border: 1px solid #ddd;
       padding: 8px;
-      display: flex;
-
+      padding-left: 30px;
+      margin-left:20px;
   `;
   const OddElem = styled.div`
       border: 1px solid #ddd;
       padding: 8px;
-      margin:0px;
+      padding-left: 30px;
+      margin-left:20px;
   `;
 
   const ChangeButton = styled.button`
@@ -40,7 +41,25 @@ type Props = {
       padding: 10px;
       color: white;
       font-size: 20px;
-      margin: 5px;
+      margin: 20px;
+  `;
+
+  const DeleteButton = styled.button`
+      background-color: red;
+      border: 1px solid #ddd;
+      padding: 8px;
+      color: white;
+      font-size: 12px;
+      margin-left: 50%;
+  `;
+
+  const AssignButton = styled.button`
+      background-color: blue;
+      border: 1px solid #ddd;
+      padding: 8px;
+      color: white;
+      font-size: 12px;
+      margin-left: 5px;
   `;
 
   let student = false
@@ -116,51 +135,30 @@ class AdminPage extends React.Component<Props>{
     }
 }
 
+function showsearch(elem) {
+  return <div><input value="search here" /> {elem}</div>
+}
 
 function EvenOddElem(elem, index) {
   if(index % 2 === 0){
-    return <EvenElem> {elem} </EvenElem>
+    return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton > Assign </AssignButton> </EvenElem>
   }
-  return <OddElem> {elem} </OddElem>
+  return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton> Assign </AssignButton> </OddElem>
 }
 
 function getList(props, showStudentorTutor) {
     if (showStudentorTutor === student){
         return(
-          <div>{props.students.map(student => <StudentListItem key={student.id} student={student} />)}</div>
+           <div>{props.students.map( (student, index) =>  EvenOddElem(<StudentListItem key={student.id} student={student} />, index) )} </div>
             //<div>{studentList.map((item, index) => <ul key={item.id}>{EvenOddElem(item.value, index)} </ul>)}</div>
         )
     }
     else{
         return(
-          <div>{props.teachers.map(teacher => <TeacherListItem key={teacher.id} teacher={teacher} />)}</div>
+          <div>{props.teachers.map( (teacher, index) => EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index)  )} </div>
           //<div>{tutorList.map((item, index) => <ul key={item.id}>{EvenOddElem(item.value, index)} </ul>)}</div>
         )
     }
 }
-
-const studentList = [
-  { id: 'chicken', value: 'Emileeee' },
-  { id: 'shrek', value: 'Mical' },
-  { id: 'leave', value: 'Shreyas is one with the nuggets' },
-  { id: 'no', value: 'Teja hair' },
-  { id: 'croissant', value: 'kiwi' },
-  {
-    id: 'memeless',
-    value: 'memeless'
-  }
-]
-
-const tutorList = [
-  { id: 'shrek2', value: 'Timmeh' },
-  { id: 'shrek3', value: 'Aria grande' },
-  { id: 'shrek4', value: 'Alvin and the buttmunks' },
-  { id: 'shrek5', value: 'megha_dum' },
-  { id: 'shrek6', value: 'sniffles' },
-  {
-    id: 'shrek7',
-    value: 'memeless and less'
-  }
-]
 
 export default AdminPage;
