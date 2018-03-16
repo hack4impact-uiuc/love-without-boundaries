@@ -72,6 +72,8 @@ const CheckedBoxInComplete = styled.div`
 
 
 class LessonComponent extends React.Component<Props>{
+
+    gotoQuiz = () => {window.location = '/takequiz'}
     render() {
         let quiz = "Take Quiz"
         let box = <CheckedBoxInComplete/>
@@ -85,7 +87,7 @@ class LessonComponent extends React.Component<Props>{
                     <LessonTitle>{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} <Button bsStyle="primary">{quiz}</Button> </LessonProps>;
+                    <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} <Button onClick={this.gotoQuiz} bsStyle="primary">{quiz}</Button> </LessonProps>;
                 </LessonBox>
             </div>
         );
