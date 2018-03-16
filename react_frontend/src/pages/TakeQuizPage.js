@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom'
 import Quiz from '../components/quiz';
 
 class TakeQuizPage extends Component{
@@ -7,7 +8,7 @@ class TakeQuizPage extends Component{
         super(props)
         this.state = {qNum: 0, qMap : []}
     }
-    finish = () => {window.location = '/student'}
+    finish = () => {this.props.history.push('/student');}
     render() {
         return (
             //TODO: replace with some sort of query rendered for lesson-specific quiz?
@@ -20,4 +21,4 @@ class TakeQuizPage extends Component{
     }
 }
 
-export default TakeQuizPage;
+export default withRouter(TakeQuizPage);
