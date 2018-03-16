@@ -1,5 +1,6 @@
 // @flow
 
+// This was too buggy and is now unused
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 
