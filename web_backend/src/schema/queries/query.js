@@ -37,12 +37,12 @@ const Query = new GraphQLObjectType({
             return Lesson.find()
           }
       }, 
-      quiz: {
-        type: new GraphQLList(QuizType),
-        resolve() { 
-          return Quiz.find()
-        }
-      },
+      // quiz: {
+      //   type: new GraphQLList(QuizType),
+      //   resolve() { 
+      //     return Quiz.find()
+      //   }
+      // },
     };
   },
 });

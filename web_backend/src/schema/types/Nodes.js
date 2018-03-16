@@ -7,7 +7,7 @@ import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
 import Quiz from '../../models/quiz';
 import Lesson from '../../models/lessons'
-
+import QuizType from './QuizType.js'
 import QuestionType from './QuestionType.js'
 import GradeType from './GradeType';
 import PastQuizType from './PastQuizType.js'
@@ -130,7 +130,7 @@ const LessonType = new GraphQLObjectType({
           type: GraphQLString,
         },
         quiz: {
-          type: GraphQLString, 
+          type: QuizType, 
         },
         worksheetName: {
           type: GraphQLString,
@@ -149,22 +149,22 @@ const LessonType = new GraphQLObjectType({
     },
   });
   
-const QuizType = new GraphQLObjectType({
-    name: 'Quiz',
-    description: 'Self Descriptive',
-    fields() {
-        return {
-            id: globalId('Quiz'),
-            name: {
-                type: GraphQLString,
-            },
-            questions: {
-                type: new GraphQLList(QuestionType)
-            },
-        };
-        interfaces: [nodeInterface]
-    },
-});
+// const QuizType = new GraphQLObjectType({
+//     name: 'Quiz',
+//     description: 'Self Descriptive',
+//     fields() {
+//         return {
+//             id: globalId('Quiz'),
+//             name: {
+//                 type: GraphQLString,
+//             },
+//             questions: {
+//                 type: new GraphQLList(QuestionType)
+//             },
+//         };
+//         interfaces: [nodeInterface]
+//     },
+// });
 
 // const PastQuizType = new GraphQLObjectType({
 //   name: 'PastQuiz',
@@ -182,4 +182,4 @@ const QuizType = new GraphQLObjectType({
 //   },
 // });
 
-export { AdminType, TeacherType, StudentType, LessonType, QuizType, PastQuizType, nodeField };
+export { AdminType, TeacherType, StudentType, LessonType, PastQuizType, nodeField };
