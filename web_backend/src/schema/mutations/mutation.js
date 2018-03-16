@@ -129,36 +129,9 @@ const Mutation = new GraphQLObjectType({
   fields() {
     return {
       createStudent,
-      // createStudent: {
-      //   type: StudentType,
-      //   args: { name: { type: GraphQLString }, email: { type: GraphQLString } },
-      //   resolve(root, { name, email}, ctx) {
-      //     const s = new Student({ name, email });
-      //     return s.save()
-      //   } 
-      // },
       createTeacher, 
-      // createTeacher: {
-      //   type: TeacherType,
-      //   args: { name: { type: GraphQLString }, 
-      //           email: { type: GraphQLString }
-      //         },
-      //   resolve(root, { name, email }, ctx) {
-      //     const t = new Teacher({ name, email });
-      //     return t.save()
-      //   } 
-      // },
       createAdmin,
-      // createAdmin: {
-      //   type: AdminType,
-      //   args: { name: { type: GraphQLString },
-      //           email: { type: GraphQLString }
-      //         },
-      //   resolve(root, { name, email }, ctx) {
-      //     const a = new Admin({ name, email });
-      //     return a.save()
-      //   } 
-      // },
+      //TODO: Everything beyond this point doesnt work yet
       // createQuiz: {
       //   type: QuizType,
       //   args: { name: { type: GraphQLString },
