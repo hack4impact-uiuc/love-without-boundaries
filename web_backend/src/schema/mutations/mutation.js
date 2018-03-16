@@ -81,14 +81,14 @@ const Mutation = new GraphQLObjectType({
       addStudentWorksheetCopy: {
         type: StudentType,
         args: { studentID: { type: GraphQLString }, lessonID: { type: GraphQLString }, url: { type: GraphQLString } },
-        resolve(root, { studentID, lessonID, url}, ctx) {
-          var worksheet = {"lessonID": lessonID, "url": url}
-          return Student.findOneAndUpdate({"_id": studentID}, {$push: {"worksheets": worksheet}})
+        resolve(root, { studentID, lessonID, url }, ctx ) {
+          const worksheet = { "lessonID": lessonID, "url": url }
+          return Student.findByIdAndUpdate(studentID, { $push: { "worksheets" : worksheet }})
        } 
       },
       removeStudentWorksheetCopy: {
         type: StudentType,
-        args: { studentID: { type: GraphQLString } },
+        args: { studentID: { type: GraphQLID } },
         resolve(root, { studentID, lessonID, url}, ctx) {
           var worksheet = {"lessonID": null, "url": null}
           return Student.findOneAndUpdate({"_id": studentID}, {$push: {"worksheets": worksheet}})

@@ -10,7 +10,7 @@ import Lesson from '../../models/lessons'
 
 import QuestionType from './QuestionType.js'
 import GradeType from './GradeType';
-import WorksheetType from './WorksheetType';
+
 
 const { nodeInterface, nodeField } = nodeDefinitions(
     (globalId) => {
@@ -68,13 +68,27 @@ const StudentType = new GraphQLObjectType({
         type: new GraphQLList(GradeType)
       },
       worksheets: {
-        type: new GraphQLList(WorksheetType)
+        type: new GraphQLList(StudentWorksheetType)
       }
     };
   },
   interfaces: [nodeInterface]
 });
 
+const StudentWorksheetType = new GraphQLObjectType({
+  name: 'Worksheet',
+  description: 'Student worksheet for a specific lesson',
+  fields() {
+    return {
+      lessonID: {
+        type: GraphQLID,
+      },
+      url: {
+        type: GraphQLString,
+      }
+    };
+  },
+});
 const TeacherType = new GraphQLObjectType({
   name: 'Teacher',
   description: 'Teacher',
