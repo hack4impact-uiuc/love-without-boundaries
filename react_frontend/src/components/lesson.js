@@ -74,7 +74,7 @@ const CheckedBoxInComplete = styled.div`
 
 class LessonComponent extends React.Component<Props>{
 
-    gotoQuiz = () => {window.location = '/takequiz'}
+    gotoQuiz = () => {this.props.history.push('/takequiz')}
     render() {
         let quiz = "Take Quiz"
         let box = <CheckedBoxInComplete/>
