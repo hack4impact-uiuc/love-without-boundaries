@@ -59,10 +59,10 @@ class QuizPage extends Component{
                         return (
                             <div>
                                 <h1>Quiz Page</h1>
-                                {props.quiz.map(quiz => //map through quizzes
+                                {/* {props.quiz.map(quiz => //map through quizzes
                                     quiz.questions.map(q => //map through questions in quizzes
                                     <div>{q.questionName}</div>
-                                ))}
+                                ))} */}
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
                                     // qNum is index, editable is index if propped, number if unpropped
