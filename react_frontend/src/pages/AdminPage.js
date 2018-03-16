@@ -93,11 +93,13 @@ class AdminPage extends React.Component<Props>{
                               ...studentListItem_student
                           }
                           teachers {
+                              name
                               id
                               ...teacherListItem_teacher
                           }
                       }
                   `}
+
                   variables={{}}
                   render={({ props }) => {
                       if (!props) {
@@ -105,8 +107,11 @@ class AdminPage extends React.Component<Props>{
                               <div>Loading...</div>
                           );
                       }
+  
+
                       return (
                           <div>
+
                               I am an admin
                                   <AddLesson/>
                                   <button onClick = {this.gotoQuiz}>Create Quiz</button>
@@ -120,45 +125,68 @@ class AdminPage extends React.Component<Props>{
                       );
                   }}
               />
-
-
-
-
-            // <div>I am an admin
-            //     <AddLesson/>
-            //     <button onClick = {this.gotoQuiz}>Create Quiz</button>
-            //     <AdminList/>
-            // </div>
-            //{props.students.map(student => <StudentListItem key={student.id} student={student} />)}
-            //{props.teachers.map(teacher => <TeacherListItem key={teacher.id} teacher={teacher} />)}
         );
     }
 }
 
-function showsearch(elem) {
-  return <div><input value="search here" /> {elem}</div>
+function showsearch() {
+  return <div><input style = "hidden:none" id = "myDIV" type="text" placeholder="search here"/></div>
 }
 
-function EvenOddElem(elem, index) {
-  if(index % 2 === 0){
-    return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton > Assign </AssignButton> </EvenElem>
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if ( x && x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function EvenOddElem(elem, index, isTeacher) {
+  if(isTeacher === true){
+    if(index % 2 === 0){
+      return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
+    }
+    return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
   }
-  return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton> Assign </AssignButton> </OddElem>
+  if(index % 2 === 0){
+    return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = "myFunction()" > Assign </AssignButton>  </EvenElem>
+  }
+  return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = "myFunction()" > Assign </AssignButton> </OddElem>
 }
 
 function getList(props, showStudentorTutor) {
     if (showStudentorTutor === student){
         return(
-           <div>{props.students.map( (student, index) =>  EvenOddElem(<StudentListItem key={student.id} student={student} />, index) )} </div>
-            //<div>{studentList.map((item, index) => <ul key={item.id}>{EvenOddElem(item.value, index)} </ul>)}</div>
+           <div>{props.students.map( (student, index) =>  EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false) )} </div>
         )
     }
     else{
         return(
-          <div>{props.teachers.map( (teacher, index) => EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index)  )} </div>
-          //<div>{tutorList.map((item, index) => <ul key={item.id}>{EvenOddElem(item.value, index)} </ul>)}</div>
+          <div>{props.teachers.map( (teacher, index) => EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true)  )} </div>
         )
     }
 }
+
+function makeTeacherList(props) {
+  const teachers = props.teachers
+  const teacherList = teachers.map((teacher) => <li id={teacher.id}>{teacher}</li>)
+  return <ul>{teacherList}</ul>
+}
+function makeStudentList(props) {
+  const students = props.students
+  const studentList = students.map((students) => <li id={student.id}>{student}</li>)
+  return <ul>{studentList}</ul>
+}
+
+// const teacherList = props.teachers.map((teacher) => <li>{teacher}</li>
+// const studentList = props.students.map((student) => <li>{student}</li>
+
+// let teacherList = makeTeacherList(props)
+// let studentList = makeTeacherList(props)
+
+// <makeTeacherList teachers={props.teachers} />,
+//     document.getElementById('root')
+
 
 export default AdminPage;
