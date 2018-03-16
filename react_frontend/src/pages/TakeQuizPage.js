@@ -11,9 +11,29 @@ class TakeQuizPage extends Component{
     finish = () => {window.location = '/student'}
     render() {
         return (
-            //return some sort of query rendered for lesson-specific quiz?
+            //TODO: replace with some sort of query rendered for lesson-specific quiz?
             <div>
             <h1>Quiz 1</h1>
+                <div>
+                Question 1: ???
+                <Answer letter="A" />
+                <Answer letter="B" />
+                <Answer letter="C" />
+                <Answer letter="D" />
+                <br/>
+                Question 2: ???
+                <Answer letter="A" />
+                <Answer letter="B" />
+                <Answer letter="C" />
+                <Answer letter="D" />
+                <br/>
+                Question 3: ???
+                <Answer letter="A" />
+                <Answer letter="B" />
+                <Answer letter="C" />
+                <Answer letter="D" />
+                <br/>
+                </div>
             <button onClick={this.finish}>Finish</button>
             </div>
         );
