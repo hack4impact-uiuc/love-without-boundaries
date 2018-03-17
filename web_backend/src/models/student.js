@@ -9,6 +9,10 @@ const StudentSchema = new Schema({
   grades: [{
     lesson: {type: String},
     score: {type: Number}
+  }],
+  worksheets: [{
+    lessonID: {type: String},
+    url: {type: String}
   }]
 });
 export default mongoose.model('Student', StudentSchema);

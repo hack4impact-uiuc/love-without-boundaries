@@ -77,7 +77,23 @@ const Mutation = new GraphQLObjectType({
           var grade = {"lesson": lesson, "score": score};
           return Student.findOneAndUpdate({"_id": id}, {$push: {"grades": grade}})
         } 
-      }, 
+      },
+      addStudentWorksheetCopy: {
+        type: StudentType,
+        args: { studentID: { type: GraphQLString }, lessonID: { type: GraphQLString }, url: { type: GraphQLString } },
+        resolve(root, { studentID, lessonID, url }, ctx ) {
+          const worksheet = { "lessonID": lessonID, "url": url }
+          return Student.findByIdAndUpdate(studentID, { $push: { "worksheets" : worksheet }})
+       } 
+      },
+      removeStudentWorksheetCopy: {
+        type: StudentType,
+        args: { studentID: { type: GraphQLID } },
+        resolve(root, { studentID, lessonID, url}, ctx) {
+          var worksheet = {"lessonID": null, "url": null}
+          return Student.findOneAndUpdate({"_id": studentID}, {$push: {"worksheets": worksheet}})
+       } 
+      },  
       assignStudentToTeacher: {
         type: StudentType, 
         args: {studentID: {type: GraphQLString}, teacherID: {type: GraphQLString}}, 
