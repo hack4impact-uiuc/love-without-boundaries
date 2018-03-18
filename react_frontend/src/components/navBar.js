@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
     /**/ 
 }
-class NavBarComponent extends React.Component<Props> {
+class NavBar extends React.Component<Props> {
     render(){
         return(
             <div>
@@ -28,4 +28,4 @@ class NavBarComponent extends React.Component<Props> {
         );
     }
 }
-export default NavBarComponent;
+export default NavBar;
