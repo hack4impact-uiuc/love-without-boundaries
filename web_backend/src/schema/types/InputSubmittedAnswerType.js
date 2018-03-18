@@ -1,16 +1,15 @@
-import { GraphQLInputObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
-import mongoose from 'mongoose';
+import { GraphQLInputObjectType, GraphQLString } from 'graphql';
 
 const InputSubmittedAnswer = new GraphQLInputObjectType({
-  name: 'InputSubmittedAnswer',
-  description: 'Self Descriptive',
-  fields() {
-    return {
-        questionID: { type: GraphQLString },
-        answerChosen: { type: GraphQLString },
-        correctAnswer: { type: GraphQLString }
-    };
-  },
+    name: 'InputSubmittedAnswer',
+    description: 'Self Descriptive',
+    fields() {
+        return {
+            questionID: { type: GraphQLString },
+            answerChosen: { type: GraphQLString },
+            correctAnswer: { type: GraphQLString },
+        };
+    },
 });
 
 export default InputSubmittedAnswer;

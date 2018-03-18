@@ -1,19 +1,18 @@
-import { GraphQLObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList, GraphQLInt } from 'graphql';
-import mongoose from 'mongoose';
-import SubmittedAnswer from './SubmittedAnswerType.js'
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
+import SubmittedAnswer from './SubmittedAnswerType';
 
 const PastQuiz = new GraphQLObjectType({
-  name: 'PastQuiz',
-  description: 'Self Descriptive',
-  fields() {
-    return {
-        quizName: { type: GraphQLString },
-        score: { type: GraphQLInt },
-        questions: {
-            type: new GraphQLList(SubmittedAnswer),
-        },
-    };
-  },
+    name: 'PastQuiz',
+    description: 'Self Descriptive',
+    fields() {
+        return {
+            quizName: { type: GraphQLString },
+            score: { type: GraphQLInt },
+            questions: {
+                type: new GraphQLList(SubmittedAnswer),
+            },
+        };
+    },
 });
 
 export default PastQuiz;
