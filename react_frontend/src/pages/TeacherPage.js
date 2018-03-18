@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
+import StudentPage from './StudentPage'
 
 type Props = {
     /**/ 
 }
+
 
 const TeacherAddLessonBox = styled.div`
     color: white;
@@ -51,36 +53,36 @@ const TeacherButton = styled.div`
     font-family: "Arial";
 `;
 class TeacherPage extends React.Component<Props>{
-
+    
     render() {
         return (
             
             <QueryRenderer
-                    environment={environment}
-                    query={graphql`
-                        query TeacherPage_Query{
-                            students {
-                                id
-                                ...studentListItem_student
-                            }
-                        }   
-                    `}
-                    variables={{}}
-                    render={({ props }) => {
-                        if (!props) {
-                            return (
-                                <div>Loading...</div>
-                            );
+                environment={environment}
+                query={graphql`
+                    query TeacherPage_Query{
+                        students {
+                            id
+                            ...studentListItem_student
                         }
+                    }  
+                `}
+                variables={{}}
+                render={({ props }) => {
+                    if (!props) {
                         return (
-                            <div>
-                                I am a teacher 
-                                <h3>My Students</h3> 
-                                {props.students.map(student => <StudentListItem key={student.id} student={student} />)}
-                            </div>
+                            <div>Loading...</div>
                         );
-                    }}
-                />
+                    }
+                    return (
+                        <div>
+                            I am a teacher 
+                            <h3>My Students</h3> 
+                            {props.students.map(student => <StudentListItem key={student.id} student={student} />)}
+                        </div>
+                    );
+                }}
+            />
         );
     }
 }

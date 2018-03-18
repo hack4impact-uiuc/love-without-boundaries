@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 import StudentPage from './StudentPage';
 import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
