@@ -9,6 +9,20 @@ type Props = {
   }
 
 class StudentPage extends React.Component<Props>{
+    constructor(props){
+        super(props);
+        this.state = {
+            defaultTitle: "My Lessons"
+        }
+    }
+    setTitle = () => {
+        if (this.props.studentName) {
+            this.setState({
+                defaultTitle: this.props.studentName + "'s Lessons"
+            }
+            )
+        }
+    }
     render() {
         return (
             <QueryRenderer
@@ -35,7 +49,8 @@ class StudentPage extends React.Component<Props>{
                     return (
                             <div>
                                 <NavBar />
-                                <h2>My Lessons</h2>
+                                {this.setTitle()}
+                                <h2>{this.state.defaultTitle}</h2>
                                 {
                                 props.lessons.map(lesson => (
                                     <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"50%"} quizIsChecked={false}/>

@@ -19,7 +19,7 @@ const StudentListItem = props => (
             </ul>
 
             <hr />
-            <Route path="/student" component={StudentPage} />
+            <Route path="/student" render={() => <StudentPage studentName={props.student.name} />} />
         </div>
     </Router>
 );
