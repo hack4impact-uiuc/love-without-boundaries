@@ -4,7 +4,7 @@ import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
 
 
-class AddLesson extends React.Component {
+class LessonForm extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -94,4 +94,4 @@ class AddLesson extends React.Component {
     }
 }
 
-export default AddLesson;
+export default LessonForm;

@@ -4,6 +4,7 @@ import AddLesson from './../components/addlesson';
 import NavBar from '../components/navBar';
 import AdminList from '../components/adminList'
 import { withRouter } from 'react-router-dom'
+import LessonForm from './../components/lessonform';
 
 type Props = {
     /**/ 
@@ -19,7 +20,7 @@ class AdminPage extends React.Component<Props>{
     render() {
         return (
             <div>I am an admin
-                <AddLesson/>
+                <LessonForm/>
                 <button onClick = {this.gotoQuiz}>Create Quiz</button>
                 <AdminList/>
             </div>
