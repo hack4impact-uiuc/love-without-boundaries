@@ -2,6 +2,7 @@ import React from 'react';
 import LessonComponent from './../components/lesson';
 import NavBar from '../components/navBar';
 import { graphql, QueryRenderer } from 'react-relay';
+import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import environment from '../relay/environment';
 
 type Props = {
@@ -66,4 +67,4 @@ class StudentPage extends React.Component<Props>{
     
 
 
-export default StudentPage;
+export default withRouter(StudentPage);

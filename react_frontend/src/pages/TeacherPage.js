@@ -85,7 +85,7 @@ class TeacherPage extends React.Component<Props>{
                         <div>
                             I am a teacher 
                             <h3>My Students</h3> 
-                            {props.students.map(student => <StudentListItem onClick={this.gotoStudent} key={student.id} student={student} />)}
+                            {props.students.map(student => <StudentListItem key={student.id} student={student} />)}
                         </div>
                     );
                 }}
