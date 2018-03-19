@@ -23,12 +23,14 @@ type Props = {
       padding: 8px;
       padding-left: 30px;
       margin-left:20px;
+      width: 50%;
   `;
   const OddElem = styled.div`
       border: 1px solid #ddd;
       padding: 8px;
       padding-left: 30px;
       margin-left:20px;
+      width: 50%;
   `;
 
   const ChangeButton = styled.button`
@@ -58,11 +60,23 @@ type Props = {
       margin-left: 5px;
   `;
 
+  const AssignTeacherButton = styled.button`
+      background-color: blue;
+      border: 1px solid #ddd;
+      color: white;
+      font-size: 12px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      padding-left: 10px;
+      margin-left: 5px;
+      padding-right: 25px;
+  `;
+
   const PopUpList = styled.div`
-      display: none;
       background-color: white;
       position: absolute;
       left: 80%;
+      top:50%;
   `;
 
   const TeacherElem = styled.div`
@@ -82,7 +96,8 @@ class AdminPage extends React.Component<Props>{
     constructor(props){
         super(props)
         this.state = {
-          studentOrTutor: tutor
+          studentOrTutor: tutor,
+          showAssignList: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -110,6 +125,61 @@ class AdminPage extends React.Component<Props>{
       this.setState({
         studentOrTutor: student
       })
+    }
+
+    onClickShowAssignList(e) {
+      if(this.state.showAssignList === true){
+        this.setState({
+          showAssignList:false
+        }, function () {
+          console.log(this.state.showAssignList);
+        });
+      }else{
+        this.setState({
+          showAssignList:true
+        }, function () {
+          console.log(this.state.showAssignList);
+        });
+      }
+
+    }
+
+    EvenOddElem(elem, index, isTeacher) {
+      if(isTeacher === true){
+        if(index % 2 === 0){
+          return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
+        }
+        return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
+      }
+      if(index % 2 === 0){
+        return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton>  </EvenElem>
+      }
+      return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton> </OddElem>
+    }
+
+    getList(props, showStudentorTutor) {
+        if (showStudentorTutor === student){
+            return(
+               <div>{props.students.map( (student, index) =>  this.EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false) )} </div>
+            )
+        }
+        else{
+            return(
+              <div>{props.teachers.map( (teacher, index) => this.EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true)  )} </div>
+            )
+        }
+    }
+
+    getPopList(props, showList) {
+        if (showList === true){
+          console.log("it shoulda changed?");
+            return(
+              <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
+               <AssignTeacherButton> Assign to Teacher </AssignTeacherButton></PopUpList>
+          )
+        }
+        console.log("no change");
+
     }
 
     render() {
@@ -142,14 +212,14 @@ class AdminPage extends React.Component<Props>{
                       return (
                           <div>
                               I am an admin
-                              <PopUpList>{teacherList}</PopUpList>
                                   <AddLesson/>
                                   <button onClick = {this.gotoQuiz}>Create Quiz</button>
                                 <div>
                                 <h2> View Tutors or Students</h2>
                                 <ChangeButton onClick={this.onClickMakeStudent.bind(this)}> Students </ChangeButton>
                                 <ChangeButton onClick={this.onClickMakeTutor.bind(this)}> Tutors </ChangeButton>
-                                <div> {getList(props, this.state.studentOrTutor)} </div>
+                                <div> {this.getList(props, this.state.studentOrTutor)} </div>
+                                <div> {this.getPopList(props, this.state.showAssignList)}</div>
                                 </div>
                           </div>
                       );
@@ -172,31 +242,31 @@ function myFunction() {
     }
 }
 
-function EvenOddElem(elem, index, isTeacher) {
-  if(isTeacher === true){
-    if(index % 2 === 0){
-      return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
-    }
-    return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
-  }
-  if(index % 2 === 0){
-    return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton>  </EvenElem>
-  }
-  return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton> </OddElem>
-}
-
-function getList(props, showStudentorTutor) {
-    if (showStudentorTutor === student){
-        return(
-           <div>{props.students.map( (student, index) =>  EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false) )} </div>
-        )
-    }
-    else{
-        return(
-          <div>{props.teachers.map( (teacher, index) => EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true)  )} </div>
-        )
-    }
-}
+// function EvenOddElem(elem, index, isTeacher) {
+//   if(isTeacher === true){
+//     if(index % 2 === 0){
+//       return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
+//     }
+//     return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
+//   }
+//   if(index % 2 === 0){
+//     return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton>  </EvenElem>
+//   }
+//   return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton> </OddElem>
+// }
+//
+// function getList(props, showStudentorTutor) {
+//     if (showStudentorTutor === student){
+//         return(
+//            <div>{props.students.map( (student, index) =>  EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false) )} </div>
+//         )
+//     }
+//     else{
+//         return(
+//           <div>{props.teachers.map( (teacher, index) => EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true)  )} </div>
+//         )
+//     }
+// }
 
 function makeTeacherList(props) {
   const teachers = props.teachers
