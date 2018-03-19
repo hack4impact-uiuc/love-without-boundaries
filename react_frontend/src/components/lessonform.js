@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
+import addLesson from '../relay/mutations/addLesson';
+import environment from '../relay/environment';
 
 
 class LessonForm extends React.Component {
@@ -10,6 +12,7 @@ class LessonForm extends React.Component {
         this.state = {
             lessons: [],
             name: '',
+            quiz: '',
             notes: '',
             notes_link: '',
             wksht: '',
@@ -48,7 +51,7 @@ class LessonForm extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>Add Lesson:
+                <form onSubmit={() => addLesson(environment, this.state.name, this.state.quiz, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)}>Add Lesson:
                     <div>
                         <label htmlFor="lesson_name_input">Lesson Name: </label>
                         <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />

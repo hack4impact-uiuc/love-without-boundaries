@@ -12,6 +12,32 @@ type Answer {
   isCorrect: Boolean
 }
 
+input CreateStudentInput {
+  name: String!
+  email: String!
+  clientMutationId: String
+}
+
+type CreateStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input CreateLessonInput {
+  name: String!
+  quiz: String!
+  worksheetName: String!
+  worksheetNameURL: String!
+  notesName: String!
+  noteURL: String!
+  clientMutationId: String
+}
+
+type CreateLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
 # Grade received on a quiz
 type Grade {
   lesson: String
@@ -44,22 +70,22 @@ type Lesson {
 
 # Your Root Mutation
 type Mutation {
-  createStudent(name: String, email: String): Student
-  createTeacher(name: String, email: String): Teacher
-  createAdmin(name: String, email: String): Admin
-  createQuiz(name: String, questions: [InputQuestion]): Quiz
-  deleteAdmin(id: ID!): Admin
-  deleteQuiz(id: ID!): Quiz
-  addGrade(id: String, lesson: String, score: Int): Student
-  assignStudentToTeacher(studentID: String, teacherID: String): Student
-  addQuestion(id: String, question: InputQuestion): Quiz
-  deleteQuestion(id: String, qName: String): Quiz
-  createLesson(name: String, quiz: String, worksheetName: String, worksheetURL: String, notesName: String, notesURL: String): Lesson
-  deleteLesson(id: ID!): Lesson
-  addNote(id: String, name: String, url: String): Lesson
-  deleteNote(id: String): Lesson
-  addWorksheet(id: String, name: String, url: String): Lesson
-  deleteWorksheet(id: String): Lesson
+  createStudent(input: CreateStudentInput!): CreateStudentPayload
+  createLesson(input: CreateLessonInput!): CreateLessonPayload
+  # createTeacher(name: String, email: String): Teacher
+  # createAdmin(name: String, email: String): Admin
+  # createQuiz(name: String, questions: [InputQuestion]): Quiz
+  # deleteAdmin(id: ID!): Admin
+  # deleteQuiz(id: ID!): Quiz
+  # addGrade(id: String, lesson: String, score: Int): Student
+  # assignStudentToTeacher(studentID: String, teacherID: String): Student
+  # addQuestion(id: String, question: InputQuestion): Quiz
+  # deleteQuestion(id: String, qName: String): Quiz
+  # deleteLesson(id: ID!): Lesson
+  # addNote(id: String, name: String, url: String): Lesson
+  # deleteNote(id: String): Lesson
+  # addWorksheet(id: String, name: String, url: String): Lesson
+  # deleteWorksheet(id: String): Lesson
 }
 
 # An object with an ID

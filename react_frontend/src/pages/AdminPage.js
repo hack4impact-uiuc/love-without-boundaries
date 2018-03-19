@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddLesson from './../components/addlesson';
+import LessonForm from './../components/lessonform';
 import NavBar from '../components/navBar';
 import AdminList from '../components/adminList'
 import { withRouter } from 'react-router-dom'
-import LessonForm from './../components/lessonform';
 
 type Props = {
     /**/ 

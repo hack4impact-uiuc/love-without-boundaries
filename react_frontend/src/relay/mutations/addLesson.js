@@ -1,8 +1,7 @@
 // @flow
 
 import { commitMutation, graphql } from 'react-relay';
-import typeimport AddLesson from '../../components/addlesson';
- { Environment } from 'relay-runtime';
+import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
     mutation addLessonMutation(
@@ -16,7 +15,7 @@ const mutation = graphql`
     }
 `;
 
-function createLesson(environment: Environment, name: string, quiz: string, worksheetName: string, worksheetURL: string, notesName: string, notesURL: string) {
+function addLesson(environment: Environment, name: string, quiz: string, worksheetName: string, worksheetURL: string, notesName: string, notesURL: string) {
 	const variables = {
 		input: {
             name,
