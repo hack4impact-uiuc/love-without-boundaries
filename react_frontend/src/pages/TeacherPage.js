@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
-import StudentPage from './StudentPage'
-import { withRouter } from 'react-router-dom'
+import StudentPage from './StudentPage';
 
 type Props = {
     /**/ 
@@ -57,7 +56,11 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
     }
-    gotoStudent = () => {this.props.history.push('/student')}
+    gotoStudent = () => {this.props.history.push({
+                                                        pathname: '/student',
+                                                        studentName: 'Shreyas'
+                                                    })
+                            }
     render() {
         return (
             

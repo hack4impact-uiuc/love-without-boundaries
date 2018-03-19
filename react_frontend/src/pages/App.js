@@ -36,7 +36,7 @@ class App extends React.Component<Props>{
 
                         <hr />
                         <Route exact path="/" component={ HomePage } /> 
-                        <Route path="/student" component={StudentPage} />
+                        <Route path="/student" component={StudentPage} studentName="Shreyas"/>
                         <Route path="/teacher" component={TeacherPage} />
                         <Route path="/admin" component={AdminPage} />
                         <Route path="/quiz" component={QuizPage} />
