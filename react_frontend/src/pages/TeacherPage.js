@@ -56,11 +56,11 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
     }
-    gotoStudent = () => {this.props.history.push({
-                                                        pathname: '/student',
-                                                        studentName: 'Shreyas'
-                                                    })
-                            }
+    // gotoStudent = () => {this.props.history.push({
+    //                                                     pathname: '/student',
+    //                                                     studentName: 'Shreyas'
+    //                                                 })
+    //                         }
     render() {
         return (
             
