@@ -16,10 +16,6 @@ type Props = {
     /**/
   }
 
-  const Elem = styled.div`
-      border: 1px solid #ddd;
-      padding: 8px;
-  `;
 
   const EvenElem = styled.div`
     background-color: #f2f2f2;
@@ -62,19 +58,53 @@ type Props = {
       margin-left: 5px;
   `;
 
+  const PopUpList = styled.div`
+      display: none;
+      background-color: white;
+      position: absolute;
+      left: 80%;
+  `;
+
+  const TeacherElem = styled.div`
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      padding: 10px;
+      padding-left: 0px;
+      margin-left: 5px;
+      padding-right: 25px;
+
+  `;
+
   let student = false
   let tutor = true
 
 class AdminPage extends React.Component<Props>{
     constructor(props){
         super(props)
-        this.state = {}
+        this.state = {
+          studentOrTutor: tutor
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
+
+    handleInputChange(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      const id = target.value;
+      this.setState({
+        selectedTeacherId: id
+      }, function () {
+        console.log(this.state.selectedTeacherId);
+      });
+    }
+
     onClickMakeTutor(e) {
       this.setState({
         studentOrTutor: tutor
       })
     }
+
 
     onClickMakeStudent(e) {
       this.setState({
@@ -107,12 +137,12 @@ class AdminPage extends React.Component<Props>{
                               <div>Loading...</div>
                           );
                       }
-  
+                      const teacherList = props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)
 
                       return (
                           <div>
-
                               I am an admin
+                              <PopUpList>{teacherList}</PopUpList>
                                   <AddLesson/>
                                   <button onClick = {this.gotoQuiz}>Create Quiz</button>
                                 <div>
@@ -129,12 +159,12 @@ class AdminPage extends React.Component<Props>{
     }
 }
 
-function showsearch() {
-  return <div><input style = "hidden:none" id = "myDIV" type="text" placeholder="search here"/></div>
-}
+// function showsearch() {
+//   return <div><input style = "hidden:none" id = "myDIV" type="text" placeholder="search here"/></div>
+// }
 
 function myFunction() {
-    var x = document.getElementById("myDIV");
+    var x = {teacherList};
     if ( x && x.style.display === "none") {
         x.style.display = "block";
     } else {
@@ -150,9 +180,9 @@ function EvenOddElem(elem, index, isTeacher) {
     return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
   }
   if(index % 2 === 0){
-    return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = "myFunction()" > Assign </AssignButton>  </EvenElem>
+    return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton>  </EvenElem>
   }
-  return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = "myFunction()" > Assign </AssignButton> </OddElem>
+  return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton> </OddElem>
 }
 
 function getList(props, showStudentorTutor) {
