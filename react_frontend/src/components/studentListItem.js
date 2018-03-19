@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const StudentListItem = props => (
     <div>
-        <button onClick={props.onClick}>{props.student.name}</button>
+        <button >{props.student.name}</button>
         <div />
     </div>
 );

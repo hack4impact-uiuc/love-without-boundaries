@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fde9fa032d67db2bf99b4b2ff4701775
+ * @relayHash ca26f5414f32d047326453b9efb55b12
  */
 
 /* eslint-disable */
@@ -9,12 +9,11 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type studentListItem_student$ref = any;
 export type TeacherPage_QueryVariables = {| |};
 export type TeacherPage_QueryResponse = {|
   +students: ?$ReadOnlyArray<?{|
     +id: string,
-    +$fragmentRefs: studentListItem_student$ref,
+    +name: ?string,
   |}>,
 |};
 */
@@ -24,29 +23,45 @@ export type TeacherPage_QueryResponse = {|
 query TeacherPage_Query {
   students {
     id
-    ...studentListItem_student
+    name
   }
-}
-
-fragment studentListItem_student on Student {
-  name
 }
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
+var v0 = [
+  {
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "students",
+    "storageKey": null,
+    "args": null,
+    "concreteType": "Student",
+    "plural": true,
+    "selections": [
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "id",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "name",
+        "args": null,
+        "storageKey": null
+      }
+    ]
+  }
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "TeacherPage_Query",
   "id": null,
-  "text": "query TeacherPage_Query {\n  students {\n    id\n    ...studentListItem_student\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n",
+  "text": "query TeacherPage_Query {\n  students {\n    id\n    name\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -54,53 +69,15 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "students",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Student",
-        "plural": true,
-        "selections": [
-          v0,
-          {
-            "kind": "FragmentSpread",
-            "name": "studentListItem_student",
-            "args": null
-          }
-        ]
-      }
-    ]
+    "selections": v0
   },
   "operation": {
     "kind": "Operation",
     "name": "TeacherPage_Query",
     "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "students",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Student",
-        "plural": true,
-        "selections": [
-          v0,
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "name",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "selections": v0
   }
 };
 })();
-(node/*: any*/).hash = 'e16167f57e8c700a2b17fd428c812b26';
+(node/*: any*/).hash = '18dfb3e5ebfec458aff143c19594084b';
 module.exports = node;

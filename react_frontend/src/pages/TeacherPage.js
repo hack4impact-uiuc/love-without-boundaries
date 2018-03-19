@@ -4,7 +4,7 @@ import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
-import StudentListItem from '../components/studentListItem'
+// import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import StudentPage from './StudentPage';
 
@@ -56,7 +56,7 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
     }
-    gotoStudent = () => {this.props.history.push('/student')}
+    // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
             
@@ -66,7 +66,7 @@ class TeacherPage extends React.Component<Props>{
                     query TeacherPage_Query{
                         students {
                             id
-                            ...studentListItem_student
+                            name
                         }
                     }  
                 `}
@@ -81,7 +81,11 @@ class TeacherPage extends React.Component<Props>{
                         <div>
                             I am a teacher 
                             <h3>My Students</h3> 
-                            {props.students.map(student => <StudentListItem onClick={this.gotoStudent} key={student.id} student={student} />)}
+                            {props.students.map(student => 
+                                <Link style={{display:'block'}}to={{ pathname: '/student', state:{ student: student } }}>
+                                    <button class="btn btn-primary">{student.name}</button>
+                                </Link>
+                            )}
                         </div>
                     );
                 }}
