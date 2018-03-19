@@ -56,11 +56,7 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
     }
-    // gotoStudent = () => {this.props.history.push({
-    //                                                     pathname: '/student',
-    //                                                     studentName: 'Shreyas'
-    //                                                 })
-    //                         }
+    gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
             
@@ -85,7 +81,7 @@ class TeacherPage extends React.Component<Props>{
                         <div>
                             I am a teacher 
                             <h3>My Students</h3> 
-                            {props.students.map(student => <StudentListItem key={student.id} student={student} />)}
+                            {props.students.map(student => <StudentListItem onClick={this.gotoStudent} key={student.id} student={student} />)}
                         </div>
                     );
                 }}
