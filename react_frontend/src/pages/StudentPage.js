@@ -13,13 +13,13 @@ class StudentPage extends React.Component<Props>{
     constructor(props){
         super(props);
         this.state = {
-            defaultTitle: "My Lessons"
+            title: "My Lessons"
         }
     }
     setTitle = () => {
         if (this.props.studentName) {
             this.setState({
-                defaultTitle: this.props.location.state.student.name + "'s Lessons"
+                title: this.props.location.state.student.name + "'s Lessons"
             }
             )
         }
@@ -53,7 +53,7 @@ class StudentPage extends React.Component<Props>{
                                 <NavBar />
                                 <h2>
                                     {
-                                        this.props.location.state != undefined ? this.props.location.state.student + "'s Lessons" : "My Lessons" 
+                                        this.props.location.state != undefined ? this.props.location.state.student.name + "'s Lessons" : "My Lessons" 
                                     }
                                 </h2>
                                 {
