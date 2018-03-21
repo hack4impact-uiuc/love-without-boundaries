@@ -6,41 +6,36 @@ import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
 import Lesson from '../../models/lessons';
 import QuizType from './QuizType';
-import QuestionType from './QuestionType';
 import GradeType from './GradeType';
 import PastQuizType from './PastQuizType';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
-  (globalId) => {
-      const { type, id } = fromGlobalId(globalId);
-      let collection;
-      switch (type) {
-      case 'Admin':
-          collection = Admin;
-          break;
-      case 'Student':
-          collection = Student;
-          break;
-      case 'Teacher':
-          collection = Teacher;
-          break;
-      case 'Quiz':
-          collection = Quiz;
-          break;
-      case 'Lesson':
-          collection = Lesson;
-          break;
-      default:
-      }
-      return collection.findById(id);
-  },
-  (obj) => {
-      if (obj.grades) return StudentType;
-      if (obj.listOfStudentIDs) return TeacherType;
-      if (obj.worksheetName) return LessonType;
-      if (obj.questions) return QuestionType;
-      return AdminType;
-  },
+    (globalId) => {
+        const { type, id } = fromGlobalId(globalId);
+        let collection;
+        switch (type) {
+        case 'Admin':
+            collection = Admin;
+            break;
+        case 'Student':
+            collection = Student;
+            break;
+        case 'Teacher':
+            collection = Teacher;
+            break;
+        case 'Lesson':
+            collection = Lesson;
+            break;
+        default:
+        }
+        return collection.findById(id);
+    },
+    (obj) => {
+        if (obj.grades) return StudentType;
+        if (obj.listOfStudentIDs) return TeacherType;
+        if (obj.worksheetName) return LessonType;
+        return AdminType;
+    },
 );
 
 const globalId = mongoModelName => globalIdField(mongoModelName, obj => obj._id);
@@ -109,8 +104,8 @@ const AdminType = new GraphQLObjectType({
                 type: GraphQLString,
             },
         };
-        [nodeInterface];
     },
+    interfaces: [nodeInterface],
 });
 
 const LessonType = new GraphQLObjectType({
@@ -138,8 +133,8 @@ const LessonType = new GraphQLObjectType({
                 type: GraphQLString,
             },
         };
-        [nodeInterface];
     },
+    interfaces: [nodeInterface],
 });
 
 export { AdminType, TeacherType, StudentType, LessonType, nodeField };
