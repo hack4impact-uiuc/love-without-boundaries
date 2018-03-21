@@ -97,7 +97,8 @@ class AdminPage extends React.Component<Props>{
         super(props)
         this.state = {
           studentOrTutor: tutor,
-          showAssignList: false
+          showAssignList: false,
+          selectedTeacherId: ''
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -144,6 +145,14 @@ class AdminPage extends React.Component<Props>{
 
     }
 
+    assignStudentToTeachers = (e) => {
+        console.log("Assigning Student to Tutor " + this.state.selectedTeacherId);
+        this.setState({
+            selectedTeacherId: '',
+            showAssignList: false
+        })
+    }
+
     EvenOddElem(elem, index, isTeacher) {
       if(isTeacher === true){
         if(index % 2 === 0){
@@ -175,7 +184,7 @@ class AdminPage extends React.Component<Props>{
           console.log("it shoulda changed?");
             return(
               <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
-               <AssignTeacherButton> Assign to Teacher </AssignTeacherButton></PopUpList>
+               <AssignTeacherButton onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton></PopUpList>
           )
         }
         console.log("no change");
