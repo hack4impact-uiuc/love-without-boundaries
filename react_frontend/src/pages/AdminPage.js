@@ -131,13 +131,14 @@ class AdminPage extends React.Component<Props>{
     onClickShowAssignList(e) {
       if(this.state.showAssignList === true){
         this.setState({
-          showAssignList:false
+            showAssignList: false
         }, function () {
           console.log(this.state.showAssignList);
         });
       }else{
         this.setState({
-          showAssignList:true
+          showAssignList:true,
+          selectedStudentId: e.target.name
         }, function () {
           console.log(this.state.showAssignList);
         });
@@ -146,14 +147,14 @@ class AdminPage extends React.Component<Props>{
     }
 
     assignStudentToTeachers = (e) => {
-        console.log("Assigning Student to Tutor " + this.state.selectedTeacherId);
+        console.log("Assigning Student to Tutor " + this.state.selectedTeacherId + " studentId: " + this.state.selectedStudentId);
         this.setState({
             selectedTeacherId: '',
             showAssignList: false
         })
     }
 
-    EvenOddElem(elem, index, isTeacher) {
+    EvenOddElem(elem, index, isTeacher,student) {
       if(isTeacher === true){
         if(index % 2 === 0){
           return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
@@ -161,20 +162,20 @@ class AdminPage extends React.Component<Props>{
         return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
       }
       if(index % 2 === 0){
-        return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton>  </EvenElem>
+        return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton name={student.id} onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton>  </EvenElem>
       }
-      return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton> </OddElem>
+      return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton name={student.id} onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton> </OddElem>
     }
 
     getList(props, showStudentorTutor) {
         if (showStudentorTutor === student){
             return(
-               <div>{props.students.map( (student, index) =>  this.EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false) )} </div>
+               <div>{props.students.map( (student, index) =>  this.EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false, student) )} </div>
             )
         }
         else{
             return(
-              <div>{props.teachers.map( (teacher, index) => this.EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true)  )} </div>
+              <div>{props.teachers.map( (teacher, index) => this.EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true, student)  )} </div>
             )
         }
     }
@@ -199,6 +200,7 @@ class AdminPage extends React.Component<Props>{
                       query AdminPage_Query{
                           students {
                               id
+                              name
                               ...studentListItem_student
                           }
                           teachers {
