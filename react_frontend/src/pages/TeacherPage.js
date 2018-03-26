@@ -7,6 +7,8 @@ import StyledButton from '../components/button';
 // import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import StudentPage from './StudentPage';
+import jwt_decode from 'jwt-decode';
+
 
 type Props = {
     /**/ 
@@ -55,7 +57,11 @@ const TeacherButton = styled.div`
 class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
+        this.state = {
+            teacherID: jwt_decode(localStorage.getItem('token'))
+        }
     }
+    
     // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
@@ -63,14 +69,19 @@ class TeacherPage extends React.Component<Props>{
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query TeacherPage_Query{
-                        students {
-                            id
-                            name
+                    query TeacherPage_Query($teacher_id: ID!){
+                        node(id: $teacher_id) {
+                            ... on Teacher {
+                                students {
+                                    name
+                                }
+                            }
                         }
-                    }  
+                    }
                 `}
-                variables={{}}
+                variables={{
+                    teacher_id: this.state.teacherID
+                }}
                 render={({ props }) => {
                     if (!props) {
                         return (
