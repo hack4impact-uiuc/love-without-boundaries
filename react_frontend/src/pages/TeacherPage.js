@@ -58,12 +58,12 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
         this.state = {
-            teacherID: jwt_decode(localStorage.getItem('token'))
+            teacherID: jwt_decode(localStorage.getItem('token')).userID
         }
     }
-    
     // gotoStudent = () => {this.props.history.push('/student')}
     render() {
+        console.log(this.state.teacherID)
         return (
             
             <QueryRenderer
