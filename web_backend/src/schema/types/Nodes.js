@@ -8,6 +8,7 @@ import Lesson from '../../models/lessons';
 import QuizType from './QuizType';
 import GradeType from './GradeType';
 import PastQuizType from './PastQuizType';
+import StudentWorksheetType from './StudentWorksheetType';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
     (globalId) => {
@@ -61,6 +62,9 @@ const StudentType = new GraphQLObjectType({
             },
             pastQuizzes: {
                 type: new GraphQLList(PastQuizType),
+            },
+            worksheets: {
+                type: new GraphQLList(StudentWorksheetType),
             },
         };
     },

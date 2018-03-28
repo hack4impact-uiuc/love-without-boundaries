@@ -271,6 +271,33 @@ const deleteWorksheet = mutationWithClientMutationId({
     },
 });
 
+const addStudentWorksheetCopy = mutationWithClientMutationId({
+    name: 'AddStudentWorksheetCopy',
+    inputFields: {
+        studentID: { type: GraphQLString },
+        lessonID: { type: GraphQLString },
+        url: { type: GraphQLString },
+    },
+    mutateAndGetPayload: ({ studentID, lessonID, url }) => {
+        const worksheet = { lessonID, url };
+        return Student.findByIdAndUpdate(
+            fromGlobalId(studentID).id,
+            { $push: { worksheets: worksheet } },
+        );
+    },
+});
+// const removeStudentWorksheetCopy = mutationWithClientMutationId({
+//     type: StudentType,
+//     inputFields: {
+//         studentID: { type: GraphQLString },
+//         lessonID: { type: GraphQLString },
+//     },
+//     resolve(root, { studentID, lessonID  }, ctx) {
+//         const worksheet = { lessonID: null, url: null };
+//         return Student.findOneAndUpdate({ '_id': studentID }, { $push: { worksheets: worksheet } });
+//     },
+// });
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -290,6 +317,7 @@ const Mutation = new GraphQLObjectType({
             deleteNote,
             addWorksheet,
             deleteWorksheet,
+            addStudentWorksheetCopy,
         };
     },
 });
