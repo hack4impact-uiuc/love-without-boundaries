@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4e58b184ace7f274f8e5d0c4fcca33a6
+ * @relayHash b36121c66c9f963cc731f9c6b3facae7
  */
 
 /* eslint-disable */
@@ -15,6 +15,7 @@ export type AdminPage_QueryVariables = {| |};
 export type AdminPage_QueryResponse = {|
   +students: ?$ReadOnlyArray<?{|
     +id: string,
+    +name: ?string,
     +$fragmentRefs: studentListItem_student$ref,
   |}>,
   +teachers: ?$ReadOnlyArray<?{|
@@ -30,6 +31,7 @@ export type AdminPage_QueryResponse = {|
 query AdminPage_Query {
   students {
     id
+    name
     ...studentListItem_student
   }
   teachers {
@@ -68,7 +70,7 @@ return {
   "operationKind": "query",
   "name": "AdminPage_Query",
   "id": null,
-  "text": "query AdminPage_Query {\n  students {\n    id\n    ...studentListItem_student\n  }\n  teachers {\n    name\n    id\n    ...teacherListItem_teacher\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n\nfragment teacherListItem_teacher on Teacher {\n  name\n}\n",
+  "text": "query AdminPage_Query {\n  students {\n    id\n    name\n    ...studentListItem_student\n  }\n  teachers {\n    name\n    id\n    ...teacherListItem_teacher\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n\nfragment teacherListItem_teacher on Teacher {\n  name\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -87,6 +89,7 @@ return {
         "plural": true,
         "selections": [
           v0,
+          v1,
           {
             "kind": "FragmentSpread",
             "name": "studentListItem_student",
@@ -149,5 +152,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '7902cc4d198760685a49814f04a18005';
+(node/*: any*/).hash = 'e2edabea98ff8ed039462ee4550ac5c6';
 module.exports = node;

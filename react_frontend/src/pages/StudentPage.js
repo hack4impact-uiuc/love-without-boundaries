@@ -5,7 +5,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 
 type Props = {
-    /**/ 
+    /**/
   }
 
 class StudentPage extends React.Component<Props>{
@@ -18,13 +18,12 @@ class StudentPage extends React.Component<Props>{
                     query StudentPage_Query{
                         lessons{
                             name
-                            quiz
                             worksheetName
                             worksheetURL
                             notesName
                             notesURL
                         }
-                    }   
+                    }
                 `}
                 variables={{}}
                 render={({ props }) => {
@@ -49,7 +48,7 @@ class StudentPage extends React.Component<Props>{
         )
     }
 }
-    
+
 
 
 export default StudentPage;

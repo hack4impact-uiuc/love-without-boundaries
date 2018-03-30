@@ -1,15 +1,14 @@
-import { GraphQLObjectType, GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
-import mongoose from 'mongoose';
+import { GraphQLObjectType, GraphQLBoolean, GraphQLString } from 'graphql';
 
 const Answer = new GraphQLObjectType({
-  name: 'Answer',
-  description: 'Self Descriptive',
-  fields() {
-    return {
-        answerName: { type: GraphQLString },
-        isCorrect: { type: GraphQLBoolean }
-    };
-  },
+    name: 'Answer',
+    description: 'Self Descriptive',
+    fields() {
+        return {
+            answerName: { type: GraphQLString },
+            isCorrect: { type: GraphQLBoolean },
+        };
+    },
 });
 
 export default Answer;

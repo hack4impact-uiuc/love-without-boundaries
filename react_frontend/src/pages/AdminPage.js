@@ -13,6 +13,7 @@ import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import TeacherListItem from '../components/teacherListItem'
 import environment from '../relay/environment';
+import assignTeacher from '../relay/mutations/assignTeacher'
 
 type Props = {
     /**/
@@ -75,8 +76,8 @@ type Props = {
   `;
 
   const PopUpList = styled.div`
+      position: fixed;
       background-color: white;
-      position: absolute;
       left: 80%;
       top:50%;
   `;
@@ -88,7 +89,6 @@ type Props = {
       padding-left: 0px;
       margin-left: 5px;
       padding-right: 25px;
-
   `;
 
   let student = false
@@ -168,29 +168,9 @@ class AdminPage extends React.Component<Props>{
               }
             }
           `;
-          //assign_kiddos(environment, teach, stu);
+          assignTeacher(environment, studentID, teacherID, mutation);
         });
     }
-
-    AdminPage(environment: Environment, studentID: string, teacherID: string) {
-    const variables = {
-      input: {
-        studentID,
-        teacherID,
-      },
-    };
-    commitMutation(
-      environment,
-      {
-        mutation,
-        variables,
-        onCompleted: (response) => {
-          console.log('Response received from server.')
-        },
-        onError: err => console.error(err),
-      },
-    );
-  }
 
     EvenOddElem(elem, index, isTeacher,student) {
       if(isTeacher === true){
@@ -220,13 +200,11 @@ class AdminPage extends React.Component<Props>{
 
     getPopList(props, showList) {
         if (showList === true){
-          console.log("it shoulda changed?");
             return(
               <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
                <AssignTeacherButton onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton></PopUpList>
           )
         }
-        console.log("no change");
 
     }
 
@@ -290,6 +268,7 @@ function myFunction() {
         x.style.display = "none";
     }
 }
+
 
 // function EvenOddElem(elem, index, isTeacher) {
 //   if(isTeacher === true){

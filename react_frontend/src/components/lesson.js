@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Button} from 'react-bootstrap';
+import { withRouter } from 'react-router-dom'
 
 type Props = {
   /**/
@@ -72,6 +73,8 @@ const CheckedBoxInComplete = styled.div`
 
 
 class LessonComponent extends React.Component<Props>{
+
+    gotoQuiz = () => {this.props.history.push('/takequiz')}
     render() {
         let quiz = "Take Quiz"
         let box = <CheckedBoxInComplete/>
@@ -84,8 +87,8 @@ class LessonComponent extends React.Component<Props>{
                 <LessonBox>
                     <LessonTitle>{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
-                    <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} <Button bsStyle="primary">{quiz}</Button> </LessonProps>;
+                    <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
+                    <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} <Button onClick={this.gotoQuiz} bsStyle="primary">{quiz}</Button> </LessonProps>
                 </LessonBox>
             </div>
         );
@@ -93,4 +96,4 @@ class LessonComponent extends React.Component<Props>{
 
 }
 
-export default LessonComponent;
+export default withRouter(LessonComponent);
