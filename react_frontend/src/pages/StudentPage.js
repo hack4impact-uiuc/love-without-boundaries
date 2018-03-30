@@ -4,6 +4,7 @@ import NavBar from '../components/navBar';
 import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import environment from '../relay/environment';
+import GoogleDocButton from '../components/googleDocButton'
 
 type Props = {
     /**/ 
@@ -49,6 +50,7 @@ class StudentPage extends React.Component<Props>{
                     return (
                         
                             <div>
+                                <GoogleDocButton url = "https://www.docs.google.com"/>
                                 <NavBar />
                                 <h2>
                                     {
