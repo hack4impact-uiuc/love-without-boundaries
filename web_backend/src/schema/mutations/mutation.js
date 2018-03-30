@@ -86,7 +86,7 @@ const createLesson = mutationWithClientMutationId({
         notesURL: { type: GraphQLString },
     },
     outputFields: {
-        admin: {
+        lesson: {
             type: LessonType,
             resolve: payload => payload,
         },
@@ -109,7 +109,7 @@ const deleteAdmin = mutationWithClientMutationId({
         },
     },
     outputFields: {
-        student: {
+        admin: {
             type: AdminType,
             resolve: payload => payload,
         },
@@ -174,6 +174,12 @@ const submitQuiz = mutationWithClientMutationId({
         type: StudentType,
         resolve: payload => payload,
     },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+    },
     mutateAndGetPayload: ({ id, pastQuiz }) => {
         Student.findByIdAndUpdate(id, { $push: { pastQuizzes: pastQuiz } });
     },
@@ -189,6 +195,12 @@ const addQuestion = mutationWithClientMutationId({
         type: LessonType,
         resolve: payload => payload,
     },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
     mutateAndGetPayload: ({ id, question }) => {
         Lesson.findOneAndUpdate({ _id: id }, { $push: { questions: question } });
     },
@@ -202,6 +214,12 @@ const deleteLesson = mutationWithClientMutationId({
     lesson: {
         type: LessonType,
         resolve: payload => payload,
+    },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
     },
     mutateAndGetPayload: ({ id }) => {
         const obj = fromGlobalId(id);
@@ -220,6 +238,12 @@ const addNote = mutationWithClientMutationId({
         type: LessonType,
         resolve: payload => payload,
     },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
     mutateAndGetPayload: ({ id, name, url }) => {
         Lesson.findByIdAndUpdate(id, { $set: { notesName: name, notesURL: url } });
     },
@@ -233,6 +257,12 @@ const deleteNote = mutationWithClientMutationId({
     lesson: {
         type: LessonType,
         resolve: payload => payload,
+    },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
     },
     mutateAndGetPayload: ({ id }) => {
         const obj = fromGlobalId(id);
@@ -251,6 +281,12 @@ const addWorksheet = mutationWithClientMutationId({
         type: LessonType,
         resolve: payload => payload,
     },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
     mutateAndGetPayload: ({ id, name, url }) => {
         Lesson.findByIdAndUpdate(id, { $set: { worksheetName: name, worksheetURL: url } });
     },
@@ -265,6 +301,12 @@ const deleteWorksheet = mutationWithClientMutationId({
         type: LessonType,
         resolve: payload => payload,
     },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
     mutateAndGetPayload: ({ id }) => {
         const obj = fromGlobalId(id);
         return Lesson.findByIdAndUpdate(obj.id, { $set: { worksheetName: null, worksheetURL: null } });
@@ -277,6 +319,12 @@ const addStudentWorksheetCopy = mutationWithClientMutationId({
         studentID: { type: GraphQLString },
         lessonID: { type: GraphQLString },
         url: { type: GraphQLString },
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
     },
     mutateAndGetPayload: ({ studentID, lessonID, url }) => {
         const worksheet = { lessonID, url };
@@ -292,6 +340,12 @@ const removeStudentWorksheetCopy = mutationWithClientMutationId({
     inputFields: {
         studentID: { type: GraphQLString },
         lessonID: { type: GraphQLString },
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
     },
     mutateAndGetPayload: ({ studentID, lessonID }) =>
         Student.findByIdAndUpdate(
