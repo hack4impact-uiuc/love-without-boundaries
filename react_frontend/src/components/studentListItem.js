@@ -2,9 +2,14 @@
 
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import StudentPage from '../pages/StudentPage';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const StudentListItem = props => (
-    <div>{props.student.name}</div>
+    <div>
+        <button >{props.student.name}</button>
+        <div />
+    </div>
 );
 
 export default createFragmentContainer(
