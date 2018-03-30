@@ -83,22 +83,26 @@ class TeacherPage extends React.Component<Props>{
                     teacher_id: this.state.teacherID
                 }}
                 render={({ props }) => {
-                    if (!props) {
+                    console.log('props: ', props);
+                    if (props) {
+                        return (
+                            <div>
+                                I am a teacher 
+                                <h3>My Students</h3> 
+                                { props.node.students.length == 0 ? <p>You have no assigned students.</p> : props.node.students.map(student => 
+                                    <Link style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
+                                        <button class="btn btn-primary">{student.name}</button>
+                                    </Link>
+                                )}
+                                
+                            </div>
+                        );
+                    }
+                    else {
                         return (
                             <div>Loading...</div>
                         );
                     }
-                    return (
-                        <div>
-                            I am a teacher 
-                            <h3>My Students</h3> 
-                            {props.students.map(student => 
-                                <Link style={{display:'block'}}to={{ pathname: '/student', state:{ student: student } }}>
-                                    <button class="btn btn-primary">{student.name}</button>
-                                </Link>
-                            )}
-                        </div>
-                    );
                 }}
             />
         );

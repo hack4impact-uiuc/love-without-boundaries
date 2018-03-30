@@ -32,7 +32,6 @@ class StudentPage extends React.Component<Props>{
                     query StudentPage_Query{
                         lessons{
                             name
-                            quiz
                             worksheetName
                             worksheetURL
                             notesName
