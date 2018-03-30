@@ -1,34 +1,29 @@
 import React from 'react';
 import LessonComponent from './../components/lesson';
 import NavBar from '../components/navBar';
+import deleteLesson from '../relay/mutations/deleteLesson'
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
+import button from '../components/button'
 
 type Props = {
     /**/ 
   }
 
-class StudentPage extends React.Component<Props>{
-    constructor(props){
-        super(props);
-        this.state = {
-            defaultTitle: "My Lessons"
-        }
+class LessonList extends React.Component<Props>{
+    delete = (id) => {
+        deleteLesson(environment, id)
     }
-    setTitle = () => {
-        if (this.props.studentName) {
-            this.setState({
-                defaultTitle: this.props.studentName + "'s Lessons"
-            }
-            )
-        }
+    handleClick = e => {
+        const id = e.target.name
+        deleteLesson(environment, id)
     }
     render() {
         return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query StudentPage_Query{
+                    query lessonListQuery{
                         lessons{
                             name
                             worksheetName
@@ -47,14 +42,11 @@ class StudentPage extends React.Component<Props>{
                     }
                     return (
                             <div>
-                                <NavBar />
-                                {this.setTitle()}
-                                <h2>{this.state.defaultTitle}</h2>
                                 {
                                 props.lessons.map(lesson => (
                                     <div>
-                                        <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizPercentage={"50%"} quizIsChecked={false}/>
-                                        <button onClick={() => this.delete(lesson.id)}>Delete Lesson</button>
+                                        <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
+                                        <button name={lesson.id} onClick={this.handleClick}>Delete Lesson</button>
                                     </div>
                                 ))
                                 }
@@ -68,4 +60,4 @@ class StudentPage extends React.Component<Props>{
     
 
 
-export default StudentPage;
+export default LessonList;
