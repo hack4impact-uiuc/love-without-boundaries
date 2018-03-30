@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Question from '../components/question';
-import StyledButton from '../components/button';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 const CopiedButton = styled.button`
@@ -40,12 +39,8 @@ class QuizPage extends Component{
                     environment={environment}
                     query={graphql`
                         query QuizPage_Query{
-                            quiz {
-                                id
-                                name
-                                questions {
-                                    questionName
-                                }
+                            lessons{
+                                quiz
                             }
                         }   
                     `}
@@ -59,13 +54,19 @@ class QuizPage extends Component{
                         return (
                             <div>
                                 <h1>Quiz Page</h1>
-                                {props.quiz.map(quiz => //map through quizzes
+                                {props.lessons.quiz.map(quiz => //map through quizzes
                                     quiz.questions.map(q => //map through questions in quizzes
                                     <div>{q.questionName}</div>
                                 ))}
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
                                     // qNum is index, editable is index if propped, number if unpropped
+                                    /*
+                                    pass function to Question and newprops (pass state back/forth)
+                                    also pass the index
+                                    if edit button pressed, passed is true, override with index
+                                    otherwise editable is the number of the question, -1 to get index
+                                    */
                                     <div><Question 
                                         locked={this.state.passed
                                                 ? qNum != this.state.editable

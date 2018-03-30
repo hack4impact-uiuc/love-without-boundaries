@@ -28,12 +28,6 @@ class Question extends React.Component{
     unlock = () => {
         this.props.passBack(this.props.num);
     }
-    /*edit = () => {
-        this.setState({locked : false})
-    }
-    lock = () => {
-        this.setState({locked : true})
-    }*/
     render() {
         return(
             <div>

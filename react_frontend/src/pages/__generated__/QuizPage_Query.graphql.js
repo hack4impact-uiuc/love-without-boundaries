@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 77a6c107523a125961d6b6bbffedda96
+ * @relayHash 24095514a4fc087a8ecf5fe5b97a50e2
  */
 
 /* eslint-disable */
@@ -11,12 +11,8 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type QuizPage_QueryVariables = {| |};
 export type QuizPage_QueryResponse = {|
-  +quiz: ?$ReadOnlyArray<?{|
-    +id: string,
-    +name: ?string,
-    +questions: ?$ReadOnlyArray<?{|
-      +questionName: ?string,
-    |}>,
+  +lessons: ?$ReadOnlyArray<?{|
+    +quiz: ?string,
   |}>,
 |};
 */
@@ -24,68 +20,27 @@ export type QuizPage_QueryResponse = {|
 
 /*
 query QuizPage_Query {
-  quiz {
+  lessons {
+    quiz
     id
-    name
-    questions {
-      questionName
-    }
   }
 }
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "quiz",
-    "storageKey": null,
-    "args": null,
-    "concreteType": "Quiz",
-    "plural": true,
-    "selections": [
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "id",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "name",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "questions",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Question",
-        "plural": true,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "questionName",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
-  }
-];
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "quiz",
+  "args": null,
+  "storageKey": null
+};
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "QuizPage_Query",
   "id": null,
-  "text": "query QuizPage_Query {\n  quiz {\n    id\n    name\n    questions {\n      questionName\n    }\n  }\n}\n",
+  "text": "query QuizPage_Query {\n  lessons {\n    quiz\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -93,15 +48,48 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
-    "selections": v0
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "lessons",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Lesson",
+        "plural": true,
+        "selections": [
+          v0
+        ]
+      }
+    ]
   },
   "operation": {
     "kind": "Operation",
     "name": "QuizPage_Query",
     "argumentDefinitions": [],
-    "selections": v0
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "lessons",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Lesson",
+        "plural": true,
+        "selections": [
+          v0,
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          }
+        ]
+      }
+    ]
   }
 };
 })();
-(node/*: any*/).hash = 'fe245f7a92b65d93208cfd2a1ad24826';
+(node/*: any*/).hash = 'c7386459deb4b52e1bf3ef677af319ca';
 module.exports = node;
