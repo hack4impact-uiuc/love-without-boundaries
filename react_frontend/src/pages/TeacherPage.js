@@ -4,7 +4,6 @@ import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
-// import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import StudentPage from './StudentPage';
 import jwt_decode from 'jwt-decode';
@@ -83,7 +82,6 @@ class TeacherPage extends React.Component<Props>{
                     teacher_id: this.state.teacherID
                 }}
                 render={({ props }) => {
-                    console.log('props: ', props);
                     if (props) {
                         return (
                             <div>
