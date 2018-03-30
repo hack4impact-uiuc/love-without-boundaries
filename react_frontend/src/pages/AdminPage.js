@@ -6,7 +6,9 @@ import AdminList from '../components/adminList'
 
 import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import { graphql, QueryRenderer } from 'react-relay';
+import { graphql, QueryRenderer, commitMutation } from 'react-relay';
+import type { Environment } from 'relay-runtime';
+
 import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import TeacherListItem from '../components/teacherListItem'
@@ -146,13 +148,49 @@ class AdminPage extends React.Component<Props>{
 
     }
 
+
     assignStudentToTeachers = (e) => {
         console.log("Assigning Student to Tutor " + this.state.selectedTeacherId + " studentId: " + this.state.selectedStudentId);
         this.setState({
             selectedTeacherId: '',
             showAssignList: false
-        })
+        }, function () {
+          const studentID = this.state.selectedStudentId;
+          const teacherID = this.state.selectedTeacherId;
+            const mutation = graphql`
+            mutation AdminPageMutation(
+              $input: AssignStudentToTeacherInput!
+            ) {
+              assignStudentToTeacher(input: $input) {
+                student {
+                  name
+                }
+              }
+            }
+          `;
+          //assign_kiddos(environment, teach, stu);
+        });
     }
+
+    AdminPage(environment: Environment, studentID: string, teacherID: string) {
+    const variables = {
+      input: {
+        studentID,
+        teacherID,
+      },
+    };
+    commitMutation(
+      environment,
+      {
+        mutation,
+        variables,
+        onCompleted: (response) => {
+          console.log('Response received from server.')
+        },
+        onError: err => console.error(err),
+      },
+    );
+  }
 
     EvenOddElem(elem, index, isTeacher,student) {
       if(isTeacher === true){
