@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e00d9acc02cce6d295e9d06ba46c655e
+ * @relayHash 00443cd09872148569db361956cad209
  */
 
 /* eslint-disable */
@@ -12,19 +12,30 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type addLessonMutationVariables = {|
   input: {
     name: string,
-    quiz: string,
-    worksheetName: string,
-    worksheetNameURL: string,
-    notesName: string,
-    noteURL: string,
+    quiz?: ?{
+      name?: ?string,
+      questions?: ?$ReadOnlyArray<?{
+        questionName?: ?string,
+        answers?: ?$ReadOnlyArray<?{
+          answerName?: ?string,
+          isCorrect?: ?boolean,
+        }>,
+      }>,
+      lessonID?: ?string,
+    },
+    worksheetName?: ?string,
+    worksheetURL?: ?string,
+    notesName?: ?string,
+    notesURL?: ?string,
     clientMutationId?: ?string,
   },
 |};
 export type addLessonMutationResponse = {|
   +createLesson: ?{|
-    +lesson: ?{|
+    +admin: ?{|
       +name: ?string,
     |},
+    +clientMutationId: ?string,
   |},
 |};
 */
@@ -35,10 +46,11 @@ mutation addLessonMutation(
   $input: CreateLessonInput!
 ) {
   createLesson(input: $input) {
-    lesson {
+    admin {
       name
       id
     }
+    clientMutationId
   }
 }
 */
@@ -66,13 +78,20 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "clientMutationId",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "addLessonMutation",
   "id": null,
-  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      name\n      id\n    }\n  }\n}\n",
+  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    admin {\n      name\n      id\n    }\n    clientMutationId\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -93,7 +112,7 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "lesson",
+            "name": "admin",
             "storageKey": null,
             "args": null,
             "concreteType": "Lesson",
@@ -101,7 +120,8 @@ return {
             "selections": [
               v2
             ]
-          }
+          },
+          v3
         ]
       }
     ]
@@ -123,7 +143,7 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "lesson",
+            "name": "admin",
             "storageKey": null,
             "args": null,
             "concreteType": "Lesson",
@@ -138,12 +158,13 @@ return {
                 "storageKey": null
               }
             ]
-          }
+          },
+          v3
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '0b647e73fbf8568c9a1da0f01cd68a8a';
+(node/*: any*/).hash = '54eb4393c16cabf4f51a0a01ee49dc13';
 module.exports = node;

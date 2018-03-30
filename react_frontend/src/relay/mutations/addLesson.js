@@ -8,18 +8,18 @@ const mutation = graphql`
         $input: CreateLessonInput!
     ) {
         createLesson(input: $input){
-            lesson {
+            admin {
                 name
             }
+            clientMutationId
         }
     }
 `;
 
-function addLesson(environment: Environment, name: string, quiz: string, worksheetName: string, worksheetURL: string, notesName: string, notesURL: string) {
+function addLesson(environment: Environment, name: string, worksheetName: string, worksheetURL: string, notesName: string, notesURL: string) {
 	const variables = {
 		input: {
             name,
-            quiz,
             worksheetName,
             worksheetURL,
             notesName,
