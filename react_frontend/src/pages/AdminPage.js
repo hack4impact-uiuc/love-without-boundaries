@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 
 type Props = {
     /**/ 
-  }
+}
 
 class AdminPage extends React.Component<Props>{
     constructor(props){
