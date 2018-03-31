@@ -11,11 +11,8 @@ type Props = {
   }
 
 class LessonList extends React.Component<Props>{
-    delete = (id) => {
-        deleteLesson(environment, id)
-    }
-    handleClick = e => {
-        const id = e.target.name
+    handleClick(id) {
+        console.log(id)
         deleteLesson(environment, id)
     }
     render() {
@@ -25,6 +22,7 @@ class LessonList extends React.Component<Props>{
                 query={graphql`
                     query lessonListQuery{
                         lessons{
+                            id
                             name
                             worksheetName
                             worksheetURL
@@ -45,8 +43,8 @@ class LessonList extends React.Component<Props>{
                                 {
                                 props.lessons.map(lesson => (
                                     <div>
-                                        <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
-                                        <button name={lesson.id} onClick={this.handleClick}>Delete Lesson</button>
+                                        <LessonComponent key={lesson.id} id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
+                                        <button key={lesson.id} value={lesson.id} onClick={() => this.handleClick(lesson.id)}>Delete Lesson</button>
                                     </div>
                                 ))
                                 }
