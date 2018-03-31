@@ -158,10 +158,10 @@ const assignStudentToTeacher = mutationWithClientMutationId({
     mutateAndGetPayload: ({ studentID, teacherID }) => {
       const studentDatabaseID = fromGlobalId(studentID);
       const teacherDatabaseID = fromGlobalId(teacherID);
-      console.log(studentID)
+      console.log(studentID);
             return Student.findByIdAndUpdate(studentDatabaseID.id, { $set: { teacherID: teacherDatabaseID.id } })
               && Teacher.findByIdAndUpdate(teacherDatabaseID.id, { $push: { listOfStudentIDs: studentDatabaseID.id } });
-        return null;
+        // return null;
     },
 });
 

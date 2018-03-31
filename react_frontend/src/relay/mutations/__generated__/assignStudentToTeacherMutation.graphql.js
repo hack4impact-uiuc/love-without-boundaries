@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 45b6c571b38d7bb4ab8962b1eecf63fe
+ * @relayHash 0b356716812772ea3830bb5d7a674af5
  */
 
 /* eslint-disable */
@@ -9,14 +9,14 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type AdminPageMutationVariables = {|
+export type assignStudentToTeacherMutationVariables = {|
   input: {
     studentID?: ?string,
     teacherID?: ?string,
     clientMutationId?: ?string,
   },
 |};
-export type AdminPageMutationResponse = {|
+export type assignStudentToTeacherMutationResponse = {|
   +assignStudentToTeacher: ?{|
     +student: ?{|
       +name: ?string,
@@ -27,7 +27,7 @@ export type AdminPageMutationResponse = {|
 
 
 /*
-mutation AdminPageMutation(
+mutation assignStudentToTeacherMutation(
   $input: AssignStudentToTeacherInput!
 ) {
   assignStudentToTeacher(input: $input) {
@@ -66,13 +66,13 @@ v2 = {
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "AdminPageMutation",
+  "name": "assignStudentToTeacherMutation",
   "id": null,
-  "text": "mutation AdminPageMutation(\n  $input: AssignStudentToTeacherInput!\n) {\n  assignStudentToTeacher(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
+  "text": "mutation assignStudentToTeacherMutation(\n  $input: AssignStudentToTeacherInput!\n) {\n  assignStudentToTeacher(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "AdminPageMutation",
+    "name": "assignStudentToTeacherMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -104,7 +104,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "AdminPageMutation",
+    "name": "assignStudentToTeacherMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -141,5 +141,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = 'b1b3791c312803d61069a76f5b4a08e7';
+(node/*: any*/).hash = '1aa2c51af12c9a653573e6ad787e8996';
 module.exports = node;

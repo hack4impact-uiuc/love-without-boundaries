@@ -13,7 +13,7 @@ import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import TeacherListItem from '../components/teacherListItem'
 import environment from '../relay/environment';
-import assignTeacher from '../relay/mutations/assignTeacher'
+import assignStudentToTeacher from '../relay/mutations/assignStudentToTeacher'
 
 type Props = {
     /**/
@@ -152,23 +152,11 @@ class AdminPage extends React.Component<Props>{
     assignStudentToTeachers = (e) => {
         console.log("Assigning Student to Tutor " + this.state.selectedTeacherId + " studentId: " + this.state.selectedStudentId);
         this.setState({
-            selectedTeacherId: '',
             showAssignList: false
         }, function () {
           const studentID = this.state.selectedStudentId;
           const teacherID = this.state.selectedTeacherId;
-            const mutation = graphql`
-            mutation AdminPageMutation(
-              $input: AssignStudentToTeacherInput!
-            ) {
-              assignStudentToTeacher(input: $input) {
-                student {
-                  name
-                }
-              }
-            }
-          `;
-          assignTeacher(environment, studentID, teacherID, mutation);
+          assignStudentToTeacher(environment, studentID, teacherID);
         });
     }
 
