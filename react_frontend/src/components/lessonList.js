@@ -14,6 +14,7 @@ class LessonList extends React.Component<Props>{
     handleClick(id) {
         console.log(id)
         deleteLesson(environment, id)
+        window.location.reload();
     }
     render() {
         return (

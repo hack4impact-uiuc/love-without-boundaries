@@ -54,7 +54,6 @@ class StudentPage extends React.Component<Props>{
                                 props.lessons.map(lesson => (
                                     <div>
                                         <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizPercentage={"50%"} quizIsChecked={false}/>
-                                        <button onClick={() => this.delete(lesson.id)}>Delete Lesson</button>
                                     </div>
                                 ))
                                 }

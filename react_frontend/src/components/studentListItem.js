@@ -6,10 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import StudentPage from '../pages/StudentPage';
 
 const StudentListItem = props => (
-    // <div>
-    //     <StyledButton>{props.student.name}</StyledButton>
-    //     <div> </div>
-    // </div>
     <Router>
         <div>
             <ul>
