@@ -43,7 +43,7 @@ class LessonForm extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={() => addLesson(environment, this.state.name, this.state.quiz, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)}>Add Lesson:
+                <form onSubmit={() => addLesson(environment, this.state.name, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)}>Add Lesson:
                     <div>
                         <label htmlFor="lesson_name_input">Lesson Name: </label>
                         <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
