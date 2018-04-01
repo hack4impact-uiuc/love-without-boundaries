@@ -62,7 +62,6 @@ class TeacherPage extends React.Component<Props>{
     }
     // gotoStudent = () => {this.props.history.push('/student')}
     render() {
-        console.log(this.state.teacherID)
         return (
             
             <QueryRenderer

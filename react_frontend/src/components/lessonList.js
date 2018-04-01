@@ -12,7 +12,6 @@ type Props = {
 
 class LessonList extends React.Component<Props>{
     handleClick(id) {
-        console.log(id)
         deleteLesson(environment, id)
         window.location.reload();
     }
@@ -42,10 +41,10 @@ class LessonList extends React.Component<Props>{
                     return (
                             <div>
                                 {
-                                props.lessons.map(lesson => (
-                                    <div>
-                                        <LessonComponent key={lesson.id} id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
-                                        <button key={lesson.id} value={lesson.id} onClick={() => this.handleClick(lesson.id)}>Delete Lesson</button>
+                                props.lessons.map((lesson, idx) => (
+                                    <div key={idx}>
+                                        <LessonComponent lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
+                                        <button value={lesson.id} onClick={() => this.handleClick(lesson.id)}>Delete Lesson</button> 
                                     </div>
                                 ))
                                 }

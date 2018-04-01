@@ -19,7 +19,6 @@ function deleteLesson(environment: Environment, id: string) {
             id
         }
     };
-    console.log(variables)
 
   commitMutation(
     environment,
