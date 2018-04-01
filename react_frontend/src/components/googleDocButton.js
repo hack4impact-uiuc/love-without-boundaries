@@ -7,7 +7,7 @@ class googleDocButton extends React.Component {
         return (
             <div>
                 <a href={this.props.url}>
-                    <button type="button" className="btn btn-info">Button</button>
+                    <button type="button" className="btn btn-info">Google Docs Playground</button>
                 </a>
             </div>
         );
