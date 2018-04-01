@@ -8,7 +8,7 @@ import LessonList from './../components/lessonList';
 
 type Props = {
     /**/ 
-  }
+}
 
 class AdminPage extends React.Component<Props>{
     constructor(props){

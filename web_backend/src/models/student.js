@@ -19,5 +19,9 @@ const StudentSchema = new Schema({
             correctAnswer: { type: String },
         }],
     }],
+    worksheets: [{
+        lessonID: { type: String },
+        url: { type: String },
+    }],
 });
 export default mongoose.model('Student', StudentSchema);

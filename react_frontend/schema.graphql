@@ -31,6 +31,17 @@ type AddQuestionPayload {
   clientMutationId: String
 }
 
+input AddStudentWorksheetCopyInput {
+  studentID: String
+  lessonID: String
+  url: String
+  clientMutationId: String
+}
+
+type AddStudentWorksheetCopyPayload {
+  clientMutationId: String
+}
+
 input AddWorksheetInput {
   id: String
   name: String
@@ -220,6 +231,8 @@ type Mutation {
   deleteNote(input: DeleteNoteInput!): DeleteNotePayload
   addWorksheet(input: AddWorksheetInput!): AddWorksheetPayload
   deleteWorksheet(input: DeleteWorksheetInput!): DeleteWorksheetPayload
+  addStudentWorksheetCopy(input: AddStudentWorksheetCopyInput!): AddStudentWorksheetCopyPayload
+  removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
 }
 
 # An object with an ID
@@ -271,6 +284,7 @@ type Student implements Node {
   teacher: Teacher
   grades: [Grade]
   pastQuizzes: [PastQuiz]
+  worksheets: [Worksheet]
 }
 
 input SubmitQuizInput {
@@ -299,4 +313,21 @@ type Teacher implements Node {
 
   # Students that the teacher teachers
   students: [Student]
+}
+
+input undefinedInput {
+  studentID: String
+  lessonID: String
+  clientMutationId: String
+}
+
+type undefinedPayload {
+  clientMutationId: String
+}
+
+# Student worksheet for a specific lesson
+type Worksheet {
+  # The ID of an object
+  lessonID: ID!
+  url: String
 }
