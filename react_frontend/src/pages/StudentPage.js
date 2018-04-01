@@ -38,7 +38,7 @@ class StudentPage extends React.Component<Props>{
                             notesName
                             notesURL
                         }
-                    }   
+                    }  
                 `}
                 variables={{}}
                 render={({ props }) => {

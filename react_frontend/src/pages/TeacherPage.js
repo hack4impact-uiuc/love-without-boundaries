@@ -62,7 +62,6 @@ class TeacherPage extends React.Component<Props>{
     }
     // gotoStudent = () => {this.props.history.push('/student')}
     render() {
-        console.log(this.state.teacherID)
         return (
             
             <QueryRenderer
@@ -87,9 +86,9 @@ class TeacherPage extends React.Component<Props>{
                             <div>
                                 I am a teacher 
                                 <h3>My Students</h3> 
-                                { props.node.students.length == 0 ? <p>You have no assigned students.</p> : props.node.students.map(student => 
-                                    <Link style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
-                                        <button class="btn btn-primary">{student.name}</button>
+                                { props.node.students.length == 0 ? <p>You have no assigned students.</p> : props.node.students.map((student, idx) => 
+                                    <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
+                                        <button >{student.name}</button>
                                     </Link>
                                 )}
                                 
