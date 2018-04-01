@@ -12,7 +12,6 @@ class LessonForm extends React.Component {
         this.state = {
             lessons: [],
             name: '',
-            quiz: '',
             notes: '',
             notes_link: '',
             wksht: '',
@@ -28,8 +27,7 @@ class LessonForm extends React.Component {
                 notes: this.state.notes,
                 notes_link: this.state.notes_link,
                 worksheet: this.state.wksht,
-                worksheet_link: this.state.wksht_link,
-                quiz: this.state.quiz,
+                worksheet_link: this.state.wksht_link
             }),
         });
     }
