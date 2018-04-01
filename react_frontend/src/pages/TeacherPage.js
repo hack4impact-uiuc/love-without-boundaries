@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-do
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import StudentPage from './StudentPage'
 import StudentPage from './StudentPage';
 import jwt_decode from 'jwt-decode';
 
