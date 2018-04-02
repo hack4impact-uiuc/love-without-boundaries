@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a6d32eb7ca9883081bcb3d26b8862276
+ * @relayHash 1df06f8e64767e20800fe00f51cd24cd
  */
 
 /* eslint-disable */
@@ -8,115 +8,138 @@
 'use strict';
 
 /*::
-import type {ConcreteBatch} from 'relay-runtime';
+import type { ConcreteRequest } from 'relay-runtime';
 export type addStudentMutationVariables = {|
-  name: string;
+  input: {
+    name: string,
+    email: string,
+    clientMutationId?: ?string,
+  },
 |};
 export type addStudentMutationResponse = {|
   +createStudent: ?{|
-    +name: ?string;
-  |};
+    +student: ?{|
+      +name: ?string,
+    |},
+  |},
 |};
 */
 
 
 /*
 mutation addStudentMutation(
-  $name: String!
+  $input: CreateStudentInput!
 ) {
-  createStudent(name: $name) {
-    name
+  createStudent(input: $input) {
+    student {
+      name
+      id
+    }
   }
 }
 */
 
-const batch /*: ConcreteBatch*/ = {
-  "fragment": {
-    "argumentDefinitions": [
-      {
-        "kind": "LocalArgument",
-        "name": "name",
-        "type": "String!",
-        "defaultValue": null
-      }
-    ],
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "addStudentMutation",
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "name",
-            "variableName": "name",
-            "type": "String"
-          }
-        ],
-        "concreteType": "Student",
-        "name": "createStudent",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "name",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ],
-    "type": "Mutation"
-  },
-  "id": null,
-  "kind": "Batch",
-  "metadata": {},
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "input",
+    "type": "CreateStudentInput!",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "input",
+    "variableName": "input",
+    "type": "CreateStudentInput!"
+  }
+],
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+};
+return {
+  "kind": "Request",
+  "operationKind": "mutation",
   "name": "addStudentMutation",
-  "query": {
-    "argumentDefinitions": [
-      {
-        "kind": "LocalArgument",
-        "name": "name",
-        "type": "String!",
-        "defaultValue": null
-      }
-    ],
-    "kind": "Root",
+  "id": null,
+  "text": "mutation addStudentMutation(\n  $input: CreateStudentInput!\n) {\n  createStudent(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
+  "metadata": {},
+  "fragment": {
+    "kind": "Fragment",
     "name": "addStudentMutation",
-    "operation": "mutation",
+    "type": "Mutation",
+    "metadata": null,
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "name",
-            "variableName": "name",
-            "type": "String"
-          }
-        ],
-        "concreteType": "Student",
         "name": "createStudent",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "CreateStudentPayload",
         "plural": false,
         "selections": [
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
+            "name": "student",
+            "storageKey": null,
             "args": null,
-            "name": "name",
-            "storageKey": null
+            "concreteType": "Student",
+            "plural": false,
+            "selections": [
+              v2
+            ]
           }
-        ],
-        "storageKey": null
+        ]
       }
     ]
   },
-  "text": "mutation addStudentMutation(\n  $name: String!\n) {\n  createStudent(name: $name) {\n    name\n  }\n}\n"
+  "operation": {
+    "kind": "Operation",
+    "name": "addStudentMutation",
+    "argumentDefinitions": v0,
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "createStudent",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "CreateStudentPayload",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "student",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Student",
+            "plural": false,
+            "selections": [
+              v2,
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "id",
+                "args": null,
+                "storageKey": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
-
-module.exports = batch;
+})();
+(node/*: any*/).hash = 'c746901b72605e4ddf14a71878899990';
+module.exports = node;

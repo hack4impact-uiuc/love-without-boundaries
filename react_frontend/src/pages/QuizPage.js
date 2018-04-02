@@ -11,6 +11,12 @@ const CopiedButton = styled.button`
     font-size: 15px;
     margin: 5px;
 `;
+/* todo:
+add question mutation
+query answers
+edit question mutation
+past quizzes
+*/
 class QuizPage extends Component{
     
     constructor(props){
@@ -40,7 +46,12 @@ class QuizPage extends Component{
                     query={graphql`
                         query QuizPage_Query{
                             lessons{
-                                quiz
+                                quiz{
+                                    name
+                                    questions{
+                                        questionName
+                                    }
+                                }
                             }
                         }   
                     `}
@@ -54,10 +65,13 @@ class QuizPage extends Component{
                         return (
                             <div>
                                 <h1>Quiz Page</h1>
-                                {props.lessons.quiz.map(quiz => //map through quizzes
-                                    quiz.questions.map(q => //map through questions in quizzes
-                                    <div>{q.questionName}</div>
-                                ))}
+                                {
+                                    props.lessons.map(lesson => {
+                                        if(lesson.quiz.question != null){
+                                            lesson.quiz.question.map(q => <div>{q.questionName}</div>)
+                                        }
+                                    }) 
+                                }
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
                                     // qNum is index, editable is index if propped, number if unpropped

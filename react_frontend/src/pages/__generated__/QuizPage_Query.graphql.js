@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 24095514a4fc087a8ecf5fe5b97a50e2
+ * @relayHash 7e8afd27b47a13909297feae0721e238
  */
 
 /* eslint-disable */
@@ -12,7 +12,12 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type QuizPage_QueryVariables = {| |};
 export type QuizPage_QueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
-    +quiz: ?string,
+    +quiz: ?{|
+      +name: ?string,
+      +questions: ?$ReadOnlyArray<?{|
+        +questionName: ?string,
+      |}>,
+    |},
   |}>,
 |};
 */
@@ -21,7 +26,13 @@ export type QuizPage_QueryResponse = {|
 /*
 query QuizPage_Query {
   lessons {
-    quiz
+    quiz {
+      name
+      questions {
+        questionName
+        id
+      }
+    }
     id
   }
 }
@@ -31,7 +42,21 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "quiz",
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "questionName",
+  "args": null,
+  "storageKey": null
+},
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
   "args": null,
   "storageKey": null
 };
@@ -40,7 +65,7 @@ return {
   "operationKind": "query",
   "name": "QuizPage_Query",
   "id": null,
-  "text": "query QuizPage_Query {\n  lessons {\n    quiz\n    id\n  }\n}\n",
+  "text": "query QuizPage_Query {\n  lessons {\n    quiz {\n      name\n      questions {\n        questionName\n        id\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -58,7 +83,30 @@ return {
         "concreteType": "Lesson",
         "plural": true,
         "selections": [
-          v0
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "quiz",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Quiz",
+            "plural": false,
+            "selections": [
+              v0,
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "questions",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "Question",
+                "plural": true,
+                "selections": [
+                  v1
+                ]
+              }
+            ]
+          }
         ]
       }
     ]
@@ -77,19 +125,37 @@ return {
         "concreteType": "Lesson",
         "plural": true,
         "selections": [
-          v0,
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
-            "name": "id",
+            "name": "quiz",
+            "storageKey": null,
             "args": null,
-            "storageKey": null
-          }
+            "concreteType": "Quiz",
+            "plural": false,
+            "selections": [
+              v0,
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "questions",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "Question",
+                "plural": true,
+                "selections": [
+                  v1,
+                  v2
+                ]
+              }
+            ]
+          },
+          v2
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = 'c7386459deb4b52e1bf3ef677af319ca';
+(node/*: any*/).hash = '34df64df3cffb264f41a261a649c581f';
 module.exports = node;

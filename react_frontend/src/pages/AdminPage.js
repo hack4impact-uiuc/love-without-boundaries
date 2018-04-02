@@ -3,16 +3,18 @@ import styled from 'styled-components';
 import AddLesson from './../components/addlesson';
 import NavBar from '../components/navBar';
 import AdminList from '../components/adminList'
+import { withRouter } from 'react-router-dom'
+
 type Props = {
     /**/ 
-  }
+}
 
 class AdminPage extends React.Component<Props>{
     constructor(props){
         super(props)
         this.state = {}
     }
-    gotoQuiz = () => {window.location = '/quiz'}
+    gotoQuiz = () => {this.props.history.push('/quiz')}
 
     render() {
         return (
@@ -25,4 +27,4 @@ class AdminPage extends React.Component<Props>{
     }
 }
 
-export default AdminPage;
+export default withRouter(AdminPage);

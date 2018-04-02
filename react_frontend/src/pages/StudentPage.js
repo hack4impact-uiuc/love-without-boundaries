@@ -9,7 +9,6 @@ type Props = {
   }
 
 class StudentPage extends React.Component<Props>{
-
     render() {
         return (
             <QueryRenderer
@@ -18,7 +17,6 @@ class StudentPage extends React.Component<Props>{
                     query StudentPage_Query{
                         lessons{
                             name
-                            quiz
                             worksheetName
                             worksheetURL
                             notesName
@@ -36,10 +34,10 @@ class StudentPage extends React.Component<Props>{
                     return (
                             <div>
                                 <NavBar />
-                                <h1>My Lessons</h1>
+                                <h2>My Lessons</h2>
                                 {
                                 props.lessons.map(lesson => (
-                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
+                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"50%"} quizIsChecked={false}/>
                                 ))
                                 }
                             </div>

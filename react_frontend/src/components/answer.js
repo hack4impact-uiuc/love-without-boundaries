@@ -13,9 +13,11 @@ class Answer extends Component{
     }
     updateAns = event => {
         this.setState({opt : event.target.value})
+        this.props.passAns(event.target.value, this.props.letter)
     }
     correct = event => {
         this.setState({correct : event.target.value})
+        this.props.passCorrect(this.props.letter)
     }
     componentWillReceiveProps(newProps) {
         this.setState({locked : newProps.locked})
@@ -23,7 +25,7 @@ class Answer extends Component{
     render() {
         return(
             <div>
-                <input type="radio" value={true} onChange={this.correct} 
+                <input type="radio" name={this.props.letter} value={true} onChange={this.correct} 
                     readOnly = {this.state.locked} /> {this.props.letter}
                 <label>
                     <input type="text" onChange={this.updateAns} readOnly = {this.state.locked} />

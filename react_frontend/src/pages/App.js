@@ -8,6 +8,7 @@ import TeacherPage from './TeacherPage';
 import AdminPage from './AdminPage';  
 import HomePage from './HomePage';
 import QuizPage from './QuizPage';
+import TakeQuizPage from './TakeQuizPage';
 
 type Props = {
     /**/ 
@@ -40,6 +41,7 @@ class App extends React.Component<Props>{
                         <Route path="/teacher" component={TeacherPage} />
                         <Route path="/admin" component={AdminPage} />
                         <Route path="/quiz" component={QuizPage} />
+                        <Route path="/takequiz" component={TakeQuizPage}/>
                     </div>
                 </Router>
             </div>
