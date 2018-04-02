@@ -1,5 +1,5 @@
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql';
 import InputQuestionType from '../types/InputQuestionType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
@@ -8,6 +8,7 @@ import InputQuizType from '../types/InputQuizType';
 import Lesson from '../../models/lessons';
 import { TeacherType, AdminType, StudentType, LessonType } from '../types/Nodes';
 import InputPastQuizType from '../types/InputPastQuizType';
+import SubmittedAnswerType from '../types/SubmittedAnswerType';
 
 const createStudent = mutationWithClientMutationId({
     name: 'CreateStudent',
@@ -171,7 +172,9 @@ const submitQuiz = mutationWithClientMutationId({
     name: 'SubmitQuiz',
     inputFields: {
         id: { type: GraphQLID },
-        pastQuiz: { type: InputPastQuizType },
+        lessonID: { type: GraphQLID },
+        questions: { type: new GraphQLList(GraphQLString) },
+        answers: { type: new GraphQLList(GraphQLString) },
     },
     student: {
         type: StudentType,
@@ -183,9 +186,28 @@ const submitQuiz = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ id, pastQuiz }) => {
-        const obj = fromGlobalId(id);
-        Student.findByIdAndUpdate(obj.id, { $push: { pastQuizzes: pastQuiz } });
+    mutateAndGetPayload: ({
+        id, lessonID, questions, answers,
+    }) => {
+        const sObj = fromGlobalId(id);
+        const lObj = fromGlobalId(lessonID);
+        const q1 = Lesson.findById(lObj.id).quiz;
+        const quizName = q1.name;
+        let score = 0;
+        let submittedAnswers = [];
+        for (let i = 0; i < questions.length; i += 1) {
+            const q = q1.questions.find({ questionName: questions[i] });
+            const question = answers[i];
+            const qid = q.id;
+            const a = q.answers.find({ answerName: answers[i] });
+            const correctA = q.answers.find({ isCorrect: true });
+            if (a.isCorrect) {
+                score += 1;
+            }
+            submittedAnswers.push({ qid, question, correctA });
+        }
+        const pastQuiz = { quizName, score, submittedAnswers };
+        Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
     },
 });
 

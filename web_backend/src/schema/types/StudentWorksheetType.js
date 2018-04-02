@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-const globalId = mongoModelName => globalIdField(mongoModelName, obj => obj._id);
+const globalId = mongoModelName => globalIdField(mongoModelName, obj => obj.id);
 
 const StudentWorksheetType = new GraphQLObjectType({
     name: 'Worksheet',
