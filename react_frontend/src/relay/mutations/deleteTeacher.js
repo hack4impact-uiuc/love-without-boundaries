@@ -18,7 +18,6 @@ const variables = {
   },
 };
 console.log(variables)
-console.log(id)
 commitMutation(
   environment,
   {
