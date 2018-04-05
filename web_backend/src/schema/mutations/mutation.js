@@ -141,6 +141,7 @@ const addGrade = mutationWithClientMutationId({
     },
 });
 
+// ID's are broken they become the same thing somehow.
 const assignStudentToTeacher = mutationWithClientMutationId({
     name: 'AssignStudentToTeacher',
     inputFields: {
@@ -165,6 +166,25 @@ const assignStudentToTeacher = mutationWithClientMutationId({
               && Teacher.findByIdAndUpdate(tObj.id, { $push: { listOfStudentIDs: studentID } });
         }
         return null;
+    },
+});
+
+const deleteTeacher = mutationWithClientMutationId({
+    name: 'DeleteTeacher',
+    inputFields: {
+        id: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+    },
+    outputFields: {
+        teacher: {
+            type: TeacherType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id }) => {
+        const obj = fromGlobalId(id);
+        return Teacher.findByIdAndRemove(obj.id);
     },
 });
 
@@ -212,6 +232,7 @@ const submitQuiz = mutationWithClientMutationId({
     },
 });
 
+// Same issue as submitQuiz
 const addQuestion = mutationWithClientMutationId({
     name: 'AddQuestion',
     inputFields: {
@@ -274,7 +295,7 @@ const addNote = mutationWithClientMutationId({
     },
     mutateAndGetPayload: ({ id, name, url }) => {
         const obj = fromGlobalId(id);
-        Lesson.findByIdAndUpdate(obj.id, { $set: { notesName: name, notesURL: url } });
+        return Lesson.findByIdAndUpdate(obj.id, { $set: { notesName: name, notesURL: url } });
     },
 });
 
@@ -318,7 +339,7 @@ const addWorksheet = mutationWithClientMutationId({
     },
     mutateAndGetPayload: ({ id, name, url }) => {
         const obj = fromGlobalId(id);
-        Lesson.findByIdAndUpdate(obj.id, { $set: { worksheetName: name, worksheetURL: url } });
+        return Lesson.findByIdAndUpdate(obj.id, { $set: { worksheetName: name, worksheetURL: url } });
     },
 });
 
@@ -395,6 +416,7 @@ const Mutation = new GraphQLObjectType({
             deleteAdmin,
             addGrade,
             assignStudentToTeacher,
+            deleteTeacher,
             submitQuiz,
             addQuestion,
             createLesson,
