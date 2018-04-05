@@ -236,8 +236,8 @@ const submitQuiz = mutationWithClientMutationId({
 const addQuestion = mutationWithClientMutationId({
     name: 'AddQuestion',
     inputFields: {
-        id: { type: GraphQLID },
         question: { type: InputQuestionType },
+        lessonId: { type: GraphQLString },
     },
     lesson: {
         type: LessonType,
@@ -249,9 +249,9 @@ const addQuestion = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ id, question }) => {
-        const obj = fromGlobalId(id);
-        Lesson.findOneAndUpdate({ _id: obj.id }, { $push: { questions: question } });
+    mutateAndGetPayload: ({ question, lessonId }) => {
+        const obj = fromGlobalId(lessonId);
+        return Lesson.findByIdAndUpdate(obj.id, { $push: { 'quiz.questions': question } }, { new: true });
     },
 });
 
