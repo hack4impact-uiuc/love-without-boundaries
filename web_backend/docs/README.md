@@ -319,10 +319,54 @@ DOESNT WORK RIGHT NOW
 ```
 ## Add Question Mutation
 ```
-DOESNT WORK RIGHT NOW
+mutation addQuestion{
+  addQuestion(input:{
+    				 lessonId: "TGVzc29uOjVhYzVhNzg0YmVkYTkyMTU4MzA0ODdlOQ==",
+    				 question: {
+              questionName: "Who is Tim?",
+              answers: [{
+                answerName: "Yes.",
+                isCorrect: true
+              }]
+            }
+  }) {
+    lesson {
+      name
+      id
+      quiz{
+        questions {
+          questionName
+        }
+      }
+  	}
+  }
+}
 ```
+Expected Result:
 ```
-DOESNT WORK RIGHT NOW
+{
+  "data": {
+    "addQuestion": {
+      "lesson": {
+        "name": "Algebra",
+        "id": "TGVzc29uOjVhYzVhNzg0YmVkYTkyMTU4MzA0ODdlOQ==",
+        "quiz": {
+          "questions": [
+            {
+              "questionName": "What is 1+1?"
+            },
+            {
+              "questionName": "What is 2+2?"
+            },
+            {
+              "questionName": "Who is Tim?"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
 ```
 ## Delete Lesson Mutation
 ```
