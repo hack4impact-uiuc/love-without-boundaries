@@ -168,6 +168,7 @@ const assignStudentToTeacher = mutationWithClientMutationId({
     },
 });
 
+// DOESNT WORK
 const submitQuiz = mutationWithClientMutationId({
     name: 'SubmitQuiz',
     inputFields: {
@@ -191,7 +192,7 @@ const submitQuiz = mutationWithClientMutationId({
     }) => {
         const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
-        const q1 = Lesson.findById(lObj.id).quiz;
+        const q1 = Lesson.findById(lObj.id, 'name');
         const quizName = q1.name;
         let score = 0;
         let submittedAnswers = [];
