@@ -109,7 +109,7 @@ const deleteAdmin = mutationWithClientMutationId({
         },
     },
     outputFields: {
-        student: {
+        admin: {
             type: AdminType,
             resolve: payload => payload,
         },
@@ -117,6 +117,44 @@ const deleteAdmin = mutationWithClientMutationId({
     mutateAndGetPayload: ({ id }) => {
         const obj = fromGlobalId(id);
         return Admin.findByIdAndRemove(obj.id);
+    },
+});
+
+const deleteStudent = mutationWithClientMutationId({
+    name: 'DeleteStudent',
+    inputFields: {
+        studentID: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id }) => {
+        const obj = fromGlobalId(id);
+        return Student.findByIdAndRemove(obj.id);
+    },
+});
+
+const deleteTeacher = mutationWithClientMutationId({
+    name: 'DeleteTeacher',
+    inputFields: {
+        teacherID: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+    },
+    outputFields: {
+        teacher: {
+            type: TeacherType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id }) => {
+        const obj = fromGlobalId(id);
+        return Teacher.findByIdAndRemove(obj.id);
     },
 });
 
@@ -310,6 +348,8 @@ const Mutation = new GraphQLObjectType({
             createTeacher,
             createAdmin,
             deleteAdmin,
+            deleteStudent,
+            deleteTeacher,
             addGrade,
             assignStudentToTeacher,
             submitQuiz,
