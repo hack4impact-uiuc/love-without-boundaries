@@ -584,3 +584,28 @@ Expected Result:
   }
 }
 ```
+## Delete Student Mutation
+```
+mutation deleteStudent{
+	deleteStudent(input: {
+    id: "U3R1ZGVudDo1YWE1YTFlNTFkZjQxMTBlNjZlNjY0NWQ="}){
+    student {
+      id
+      name
+    }
+  }
+}
+```
+Expected Result:
+```
+{
+  "data": {
+    "deleteStudent": {
+      "student": {
+        "id": "U3R1ZGVudDo1YWE1YTFlNTFkZjQxMTBlNjZlNjY0NWQ=",
+        "name": "kiwiwiwiwi"
+      }
+    }
+  }
+}
+```

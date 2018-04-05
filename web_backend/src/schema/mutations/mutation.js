@@ -162,8 +162,7 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         const sObj = fromGlobalId(studentID);
         const tObj = fromGlobalId(teacherID);
         if (Student.findById(sObj.id) && Teacher.findById(tObj.id)) {
-            return Student.findByIdAndUpdate(sObj.id, { $set: { teacherID } })
-              && Teacher.findByIdAndUpdate(tObj.id, { $push: { listOfStudentIDs: studentID } });
+            return Teacher.findByIdAndUpdate(tObj.id, { $push: { students: studentID } }) && Student.findByIdAndUpdate(sObj.id, { $set: { teacher: teacherID } });
         }
         return null;
     },
@@ -212,8 +211,12 @@ const submitQuiz = mutationWithClientMutationId({
     }) => {
         const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
-        const q1 = Lesson.findById(lObj.id, 'quiz');
+        const q1 = Lesson.findById(lObj.id, 'quiz -name -worksheetName -worksheetURL');
+        console.log(q1);
         const quizName = q1.name;
+        console.log(q1.quiz);
+        console.log(q1.name);
+
         let score = 0;
         let submittedAnswers = [];
         for (let i = 0; i < questions.length; i += 1) {
@@ -232,7 +235,6 @@ const submitQuiz = mutationWithClientMutationId({
     },
 });
 
-// Same issue as submitQuiz
 const addQuestion = mutationWithClientMutationId({
     name: 'AddQuestion',
     inputFields: {
@@ -405,6 +407,25 @@ const removeStudentWorksheetCopy = mutationWithClientMutationId({
         ),
 });
 
+const deleteStudent = mutationWithClientMutationId({
+    name: 'DeleteStudent',
+    inputFields: {
+        id: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id }) => {
+        const obj = fromGlobalId(id);
+        return Student.findByIdAndRemove(obj.id);
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -427,6 +448,7 @@ const Mutation = new GraphQLObjectType({
             deleteWorksheet,
             addStudentWorksheetCopy,
             removeStudentWorksheetCopy,
+            deleteStudent,
         };
     },
 });
