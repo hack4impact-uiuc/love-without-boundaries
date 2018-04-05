@@ -5,6 +5,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import environment from '../relay/environment';
 import GoogleDocButton from '../components/googleDocButton'
+import jwt_decode from 'jwt-decode';
 
 type Props = {
     /**/ 
@@ -14,7 +15,8 @@ class StudentPage extends React.Component<Props>{
     constructor(props){
         super(props);
         this.state = {
-            title: "My Lessons"
+            title: "My Lessons",
+            userType: jwt_decode(localStorage.getItem('token')).userType
         }
     }
     setTitle = () => {
