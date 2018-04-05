@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7e8afd27b47a13909297feae0721e238
+ * @relayHash fa4173993cff5d4bc4bac43f60ed9a23
  */
 
 /* eslint-disable */
@@ -13,7 +13,6 @@ export type QuizPage_QueryVariables = {| |};
 export type QuizPage_QueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +quiz: ?{|
-      +name: ?string,
       +questions: ?$ReadOnlyArray<?{|
         +questionName: ?string,
       |}>,
@@ -27,7 +26,6 @@ export type QuizPage_QueryResponse = {|
 query QuizPage_Query {
   lessons {
     quiz {
-      name
       questions {
         questionName
         id
@@ -42,18 +40,11 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
   "name": "questionName",
   "args": null,
   "storageKey": null
 },
-v2 = {
+v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
@@ -65,7 +56,7 @@ return {
   "operationKind": "query",
   "name": "QuizPage_Query",
   "id": null,
-  "text": "query QuizPage_Query {\n  lessons {\n    quiz {\n      name\n      questions {\n        questionName\n        id\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query QuizPage_Query {\n  lessons {\n    quiz {\n      questions {\n        questionName\n        id\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -92,7 +83,6 @@ return {
             "concreteType": "Quiz",
             "plural": false,
             "selections": [
-              v0,
               {
                 "kind": "LinkedField",
                 "alias": null,
@@ -102,7 +92,7 @@ return {
                 "concreteType": "Question",
                 "plural": true,
                 "selections": [
-                  v1
+                  v0
                 ]
               }
             ]
@@ -134,7 +124,6 @@ return {
             "concreteType": "Quiz",
             "plural": false,
             "selections": [
-              v0,
               {
                 "kind": "LinkedField",
                 "alias": null,
@@ -144,18 +133,18 @@ return {
                 "concreteType": "Question",
                 "plural": true,
                 "selections": [
-                  v1,
-                  v2
+                  v0,
+                  v1
                 ]
               }
             ]
           },
-          v2
+          v1
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '34df64df3cffb264f41a261a649c581f';
+(node/*: any*/).hash = '2c4004771bea617794544c0d36479472';
 module.exports = node;

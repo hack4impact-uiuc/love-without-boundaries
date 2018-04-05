@@ -18,7 +18,7 @@ class QuizPage extends Component{
         this.state = {qNum : 0, qMap : [], editable : 0, passed : false}
     }
     
-    finish = () => {window.location = '/admin'}
+    finish = () => {this.props.history.push('/admin')}
     addQuestion = () => {
         this.setState({
             qNum : this.state.qNum + 1,
@@ -37,11 +37,11 @@ class QuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
+                    /* How to get specific quiz?? */
                     query={graphql`
                         query QuizPage_Query{
                             lessons{
                                 quiz{
-                                    name
                                     questions{
                                         questionName
                                     }
