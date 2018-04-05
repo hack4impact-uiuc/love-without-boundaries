@@ -11,12 +11,6 @@ const CopiedButton = styled.button`
     font-size: 15px;
     margin: 5px;
 `;
-/* todo:
-add question mutation
-query answers
-edit question mutation
-past quizzes
-*/
 class QuizPage extends Component{
     
     constructor(props){
@@ -67,21 +61,14 @@ class QuizPage extends Component{
                                 <h1>Quiz Page</h1>
                                 {
                                     props.lessons.map(lesson => {
-                                        if(lesson.quiz.question != null){
+                                        if(lesson.quiz.question){
                                             lesson.quiz.question.map(q => <div>{q.questionName}</div>)
                                         }
                                     }) 
                                 }
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
-                                    // qNum is index, editable is index if propped, number if unpropped
-                                    /*
-                                    pass function to Question and newprops (pass state back/forth)
-                                    also pass the index
-                                    if edit button pressed, passed is true, override with index
-                                    otherwise editable is the number of the question, -1 to get index
-                                    */
-                                    <div><Question 
+                                    <div key={qNum}><Question 
                                         locked={this.state.passed
                                                 ? qNum != this.state.editable
                                                 : qNum != this.state.editable - 1} 

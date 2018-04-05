@@ -11,10 +11,6 @@ const CopiedButton = styled.button`
     font-size: 15px;
     margin: 5px;
 `;
-/*
-TODO:
-only one radio button at a time ?? idk if this was broken before or no
-*/ 
 class Question extends React.Component{
     constructor(props){
         super(props)
@@ -52,23 +48,22 @@ class Question extends React.Component{
                 {Number(this.props.num) + 1}. 
                 <input type="text" onChange={this.updateQuestion} readOnly={this.state.locked}/>
                 <CopiedButton onClick={this.unlock}>Edit</CopiedButton>
-                
                 <Answer letter="A" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
-                    />
+                />
                 <Answer letter="B" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
-                    />
+                />
                 <Answer letter="C" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
-                    />
+                />
                 <Answer letter="D" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
-                    />
+                />
             </div>
         );
     }
