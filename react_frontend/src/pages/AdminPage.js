@@ -14,6 +14,8 @@ import StudentListItem from '../components/studentListItem'
 import TeacherListItem from '../components/teacherListItem'
 import environment from '../relay/environment';
 import assignStudentToTeacher from '../relay/mutations/assignStudentToTeacher'
+import deleteStudent from '../relay/mutations/deleteStudent'
+import deleteTeacher from '../relay/mutations/deleteTeacher'
 
 type Props = {
     /**/
@@ -145,7 +147,6 @@ class AdminPage extends React.Component<Props>{
           console.log(this.state.showAssignList);
         });
       }
-
     }
 
 
@@ -160,17 +161,30 @@ class AdminPage extends React.Component<Props>{
         });
     }
 
-    EvenOddElem(elem, index, isTeacher,student) {
+    onClickDeleteStudent = (e) => {
+        const deleteStudentId = e.target.name;
+        deleteStudent(environment, deleteStudentId);
+        window.location.reload();
+    }
+
+    onClickDeleteTeacher = (e) => {
+        const deleteTeacherId = e.target.name;
+        console.log("deleting TeacherId: " + deleteTeacherId);
+        deleteTeacher(environment, deleteTeacherId);
+        window.location.reload();
+    }
+
+    EvenOddElem(elem, index, isTeacher, student) {
       if(isTeacher === true){
         if(index % 2 === 0){
-          return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
+          return <EvenElem> {elem} <DeleteButton name={student.id} onClick = {this.onClickDeleteTeacher}> Delete </DeleteButton>  </EvenElem>
         }
-        return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
+        return <OddElem> {elem} <DeleteButton name={student.id} onClick = {this.onClickDeleteTeacher}> Delete </DeleteButton>  </OddElem>
       }
       if(index % 2 === 0){
-        return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton name={student.id} onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton>  </EvenElem>
+        return <EvenElem> {elem} <DeleteButton name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton name={student.id} onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton>  </EvenElem>
       }
-      return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton name={student.id} onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton> </OddElem>
+      return <OddElem> {elem} <DeleteButton name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton name={student.id} onClick = {this.onClickShowAssignList.bind(this)} > Assign </AssignButton> </OddElem>
     }
 
     getList(props, showStudentorTutor) {
@@ -181,7 +195,7 @@ class AdminPage extends React.Component<Props>{
         }
         else{
             return(
-              <div>{props.teachers.map( (teacher, index) => this.EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true, student)  )} </div>
+              <div>{props.teachers.map( (teacher, index) => this.EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true, teacher)  )} </div>
             )
         }
     }
@@ -193,7 +207,6 @@ class AdminPage extends React.Component<Props>{
                <AssignTeacherButton onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton></PopUpList>
           )
         }
-
     }
 
     render() {
@@ -244,10 +257,6 @@ class AdminPage extends React.Component<Props>{
     }
 }
 
-// function showsearch() {
-//   return <div><input style = "hidden:none" id = "myDIV" type="text" placeholder="search here"/></div>
-// }
-
 function myFunction() {
     var x = {teacherList};
     if ( x && x.style.display === "none") {
@@ -256,33 +265,6 @@ function myFunction() {
         x.style.display = "none";
     }
 }
-
-
-// function EvenOddElem(elem, index, isTeacher) {
-//   if(isTeacher === true){
-//     if(index % 2 === 0){
-//       return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton>  </EvenElem>
-//     }
-//     return <OddElem> {elem} <DeleteButton> Delete </DeleteButton>  </OddElem>
-//   }
-//   if(index % 2 === 0){
-//     return <EvenElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton>  </EvenElem>
-//   }
-//   return <OddElem> {elem} <DeleteButton> Delete </DeleteButton> <AssignButton onClick = {myFunction()} > Assign </AssignButton> </OddElem>
-// }
-//
-// function getList(props, showStudentorTutor) {
-//     if (showStudentorTutor === student){
-//         return(
-//            <div>{props.students.map( (student, index) =>  EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false) )} </div>
-//         )
-//     }
-//     else{
-//         return(
-//           <div>{props.teachers.map( (teacher, index) => EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true)  )} </div>
-//         )
-//     }
-// }
 
 function makeTeacherList(props) {
   const teachers = props.teachers
@@ -294,15 +276,5 @@ function makeStudentList(props) {
   const studentList = students.map((students) => <li id={student.id}>{student}</li>)
   return <ul>{studentList}</ul>
 }
-
-// const teacherList = props.teachers.map((teacher) => <li>{teacher}</li>
-// const studentList = props.students.map((student) => <li>{student}</li>
-
-// let teacherList = makeTeacherList(props)
-// let studentList = makeTeacherList(props)
-
-// <makeTeacherList teachers={props.teachers} />,
-//     document.getElementById('root')
-
 
 export default AdminPage;
