@@ -82,7 +82,6 @@ class LessonComponent extends React.Component<Props>{
             quiz = "Review Quiz"
             box = <CheckedBoxComplete/>
         }
-        
         return(
             <div>
                 <LessonBox>
