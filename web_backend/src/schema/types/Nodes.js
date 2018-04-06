@@ -54,8 +54,8 @@ const StudentType = new GraphQLObjectType({
                 type: GraphQLString,
             },
             teacher: {
-                type: GraphQLID,
-                // resolve: student => Teacher.findOne({ listOfStudentIDs: student.id }),
+                type: TeacherType,
+                resolve: student => Teacher.findOne({ "_id": student.teacherID } ),
             },
             grades: {
                 type: new GraphQLList(GradeType),
@@ -84,11 +84,11 @@ const TeacherType = new GraphQLObjectType({
                 type: GraphQLString,
             },
             students: {
-                // description: 'Students that the teacher teachers',
-                type: new GraphQLList(GraphQLID),
-                // resolve(teacher) {
-                //     return Student.find({ _id: { $in: teacher.listOfStudentIDs } });
-                // },
+                description: 'Students that the teacher teachers',
+                type: new GraphQLList(StudentType),
+                async resolve(teacher) {
+                    return Student.find({_id: {$in: teacher.listOfStudentIDs}} );
+                },
             },
         };
     },

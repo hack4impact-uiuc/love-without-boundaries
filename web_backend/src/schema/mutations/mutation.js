@@ -142,11 +142,37 @@ const addGrade = mutationWithClientMutationId({
 });
 
 // ID's are broken they become the same thing somehow.
+// const assignStudentToTeacher = mutationWithClientMutationId({
+//     name: 'AssignStudentToTeacher',
+//     inputFields: {
+//         studentID: { type: GraphQLID },
+//         teacherID: { type: GraphQLID },
+//     },
+//     outputFields: {
+//         student: {
+//             type: StudentType,
+//             resolve: payload => payload,
+//         },
+//         teacher: {
+//             type: TeacherType,
+//             resolve: payload => payload,
+//         },
+//     },
+//     mutateAndGetPayload: ({ studentID, teacherID }) => {
+//         const sObj = fromGlobalId(studentID);
+//         const tObj = fromGlobalId(teacherID);
+//         if (Student.findById(sObj.id) && Teacher.findById(tObj.id)) {
+//             return Teacher.findByIdAndUpdate(tObj.id, { $push: { students: studentID } }) && Student.findByIdAndUpdate(sObj.id, { $set: { teacher: teacherID } });
+//         }
+//         return null;
+//     },
+// });
+
 const assignStudentToTeacher = mutationWithClientMutationId({
     name: 'AssignStudentToTeacher',
     inputFields: {
-        studentID: { type: GraphQLID },
-        teacherID: { type: GraphQLID },
+        studentID: { type: GraphQLString },
+        teacherID: { type: GraphQLString },
     },
     outputFields: {
         student: {
@@ -158,15 +184,17 @@ const assignStudentToTeacher = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ studentID, teacherID }) => {
-        const sObj = fromGlobalId(studentID);
-        const tObj = fromGlobalId(teacherID);
-        if (Student.findById(sObj.id) && Teacher.findById(tObj.id)) {
-            return Teacher.findByIdAndUpdate(tObj.id, { $push: { students: studentID } }) && Student.findByIdAndUpdate(sObj.id, { $set: { teacher: teacherID } });
+    mutateAndGetPayload: async ({ studentID, teacherID }) => {
+        const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null
+        const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null
+        if (realStudentId && realTeacherId) {
+            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } });
+            await Teacher.findByIdAndUpdate(fromGlobalId(teacherID).id, { $push: { listOfStudentIDs: fromGlobalId(studentID).id } });
         }
-        return null;
+        return Student.findById(fromGlobalId(studentID).id) && Teacher.findById(fromGlobalId(teacherID).id);
     },
 });
+
 
 const deleteTeacher = mutationWithClientMutationId({
     name: 'DeleteTeacher',
@@ -222,25 +250,25 @@ const submitQuiz = mutationWithClientMutationId({
             q1.quiz.questions[indexOfQuestion].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
             numCorrect += isCorrect;
         });
-        let submittedAnswers = [];
+        const submittedAnswers = [];
         q1.quiz.questions.forEach((q, i) => {
             const isCorrect = true;
             const indexOfAnswer = (questions.findIndex(element => element === q.questionName));
             if (indexOfAnswer != -1) {
-                submittedAnswers.push({ 'questionID': i, 'answerChosen': answers[indexOfAnswer] });
+                submittedAnswers.push({ questionID: i, answerChosen: answers[indexOfAnswer] });
             } else {
-                submittedAnswers.push({ 'questionID': i, 'answerChosen': 'No answer selected' });
+                submittedAnswers.push({ questionID: i, answerChosen: 'No answer selected' });
             }
         });
 
-        
+
         const pastQuiz = {
             quizName: q1.name,
             score: (numCorrect / questionNames.length),
             submittedAnswers,
         };
         console.log(pastQuiz);
-        return Student.findByIdAndUpdate(sObj.id, { $push: { 'pastQuizzes': pastQuiz } });
+        return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
     },
 });
 
