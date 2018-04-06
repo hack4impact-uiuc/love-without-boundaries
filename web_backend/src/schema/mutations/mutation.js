@@ -210,23 +210,12 @@ const submitQuiz = mutationWithClientMutationId({
     mutateAndGetPayload: async ({
         id, lessonID, questions, answers,
     }) => {
-        // const sObj = fromGlobalId(id);
+        const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
-        // console.log("hi");
         const q1 = await Lesson.findById(lObj.id).exec();
-        // const quizName = q1.name;
-        // let score = 0;
-        // let submittedAnswers = [];
-
-        // console.log(questions[0]);
-        // console.log(answers[0]);
-        // console.log(q1.quiz.questions[0].answers)
-        // // numberCorrect = 0;
         const questionNames = q1.quiz.questions.map(q => q.questionName);
         const answerNames = q1.quiz.questions.map(q => q.answers);
 
-        // console.log(questionNames);
-        // console.log(answerNames);
         let numCorrect = 0;
         questions.forEach((q, i) => {
             let isCorrect = true;
@@ -234,83 +223,24 @@ const submitQuiz = mutationWithClientMutationId({
             q1.quiz.questions[indexOfQuestion].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
             numCorrect += isCorrect;
         });
-
-        // pastQuizzes: [{
-        //     quizName: { type: String },
-        //     score: { type: Number },
-        //     submittedAnswers: [{
-        //         questionID: { type: String },
-        //         answerChosen: { type: String },
-        //         correctAnswer: { type: String },
-        //     }],
-        // }],
-
-        var selectedAnswers = []
+        let submittedAnswers = [];
         q1.quiz.questions.forEach((q, i) => {
-            let isCorrect = true;
-            console.log(q.questionName)
-            // questionNames.findIndex(q.questionName)
-            // const answerChosen = questionNames.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
-            const indexOfAnswer = ( questions.findIndex(element => element === q.questionName) )
+            const isCorrect = true;
+            const indexOfAnswer = (questions.findIndex(element => element === q.questionName));
             if (indexOfAnswer != -1) {
-                selectedAnswers.push(answers[indexOfAnswer])
-
+                submittedAnswers.push({ 'questionID': i, 'answerChosen': answers[indexOfAnswer] });
             } else {
-                selectedAnswers.push("No answer selected");
+                submittedAnswers.push({ 'questionID': i, 'answerChosen': 'No answer selected' });
             }
-            numCorrect += isCorrect;
         });
 
-        console.log(selectedAnswers)
-        const pastQuizzes = {
+        
+        const pastQuiz = {
             quizName: q1.name,
             score: (numCorrect / questionNames.length),
-            submittedAnswers: 'lol',
+            submittedAnswers,
         };
-        console.log(pastQuizzes);
-        // console.log(q1.name)
-
-        console.log(numCorrect / questionNames.length);
-
-
-        // const quizAnswers = q1.quiz.questions.map(q => answers)
-        // console.log(quizAnswers)
-
-        // for (question in q1.quiz.questions){
-        //     console.log(question);
-        // }
-
-        // q1.quiz.questions.forEach(element => {
-        //     console.log(element)
-        // });
-        // .map(q => q.questionName, q. );
-        // questionID: { type: String },
-        //     answerChosen: { type: String },
-        //     correctAnswer: { type: String },
-
-        // const questionId = await q1.question.find(questionName, questions[0])
-        // console.log(q1);
-        // await Promise.all(questions.map(async (questionName, answers) => {
-        //     console.log(questionName);
-        //     console.log(answers);
-        //     // const q = await q1.questions.find({ questionName }).exec();
-        //     // console.log('lo2l');
-        //     // const ans = answers[i];
-        //     // const qid = q.id;
-        //     // const a = q.answers.find({ answerName: answers[i] });
-        //     // const correctA = q.answers.find({ isCorrect: true });
-        //     // if (a.isCorrect) {
-        //     //     score += 1;
-        //     // }
-        //     // submittedAnswers.push({ qid, ans, correctA });
-
-        //     // submittedAnswers.push("hi");
-        // }));
-        // console.log('lol');
-        // submittedAnswers.push("hi");
-        // console.log(submittedAnswers);
-        // const pastQuiz = { quizName, score, submittedAnswers };
-        // Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
+        return Student.findByIdAndUpdate(sObj.id, { $push: { 'pastQuizzes': pastQuiz } });
     },
 });
 
