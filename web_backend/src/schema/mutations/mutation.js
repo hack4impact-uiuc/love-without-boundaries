@@ -7,8 +7,6 @@ import Teacher from '../../models/teacher';
 import InputQuizType from '../types/InputQuizType';
 import Lesson from '../../models/lessons';
 import { TeacherType, AdminType, StudentType, LessonType } from '../types/Nodes';
-import InputPastQuizType from '../types/InputPastQuizType';
-import SubmittedAnswerType from '../types/SubmittedAnswerType';
 
 const createStudent = mutationWithClientMutationId({
     name: 'CreateStudent',
