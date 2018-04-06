@@ -15,7 +15,7 @@ class QuizPage extends Component{
     
     constructor(props){
         super(props)
-        this.state = {qNum : 0, qMap : [], editable : 0, passed : false}
+        this.state = {qNum : 0, qMap : [], editable : 0}
     }
     
     finish = () => {this.props.history.push('/admin')}
@@ -23,8 +23,7 @@ class QuizPage extends Component{
         this.setState({
             qNum : this.state.qNum + 1,
             qMap : [...this.state.qMap, this.state.qNum + 1],
-            editable : this.state.qNum + 1,
-            passed : false
+            editable : this.state.qNum + 1
         })
     }
     lock = () => {
@@ -69,11 +68,9 @@ class QuizPage extends Component{
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
                                     <div key={qNum}><Question 
-                                        locked={this.state.passed
-                                                ? qNum != this.state.editable
-                                                : qNum != this.state.editable - 1} 
+                                        locked={qNum != this.state.editable - 1} 
                                         passBack={this.passBack} 
-                                        num={qNum}/>
+                                        num={Number(qNum) + 1}/>
                                     <br/></div>
                                 )}
                                 <CopiedButton onClick={this.addQuestion}>Add Question</CopiedButton>

@@ -45,7 +45,7 @@ class Question extends React.Component{
     render() {
         return(
             <div>
-                {Number(this.props.num) + 1}. 
+                {this.props.num}. 
                 <input type="text" onChange={this.updateQuestion} readOnly={this.state.locked}/>
                 <CopiedButton onClick={this.unlock}>Edit</CopiedButton>
                 <Answer letter="A" locked={this.state.locked} 
