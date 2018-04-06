@@ -141,33 +141,6 @@ const addGrade = mutationWithClientMutationId({
     },
 });
 
-// ID's are broken they become the same thing somehow.
-// const assignStudentToTeacher = mutationWithClientMutationId({
-//     name: 'AssignStudentToTeacher',
-//     inputFields: {
-//         studentID: { type: GraphQLID },
-//         teacherID: { type: GraphQLID },
-//     },
-//     outputFields: {
-//         student: {
-//             type: StudentType,
-//             resolve: payload => payload,
-//         },
-//         teacher: {
-//             type: TeacherType,
-//             resolve: payload => payload,
-//         },
-//     },
-//     mutateAndGetPayload: ({ studentID, teacherID }) => {
-//         const sObj = fromGlobalId(studentID);
-//         const tObj = fromGlobalId(teacherID);
-//         if (Student.findById(sObj.id) && Teacher.findById(tObj.id)) {
-//             return Teacher.findByIdAndUpdate(tObj.id, { $push: { students: studentID } }) && Student.findByIdAndUpdate(sObj.id, { $set: { teacher: teacherID } });
-//         }
-//         return null;
-//     },
-// });
-
 const assignStudentToTeacher = mutationWithClientMutationId({
     name: 'AssignStudentToTeacher',
     inputFields: {
@@ -177,10 +150,6 @@ const assignStudentToTeacher = mutationWithClientMutationId({
     outputFields: {
         student: {
             type: StudentType,
-            resolve: payload => payload,
-        },
-        teacher: {
-            type: TeacherType,
             resolve: payload => payload,
         },
     },
