@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fa4173993cff5d4bc4bac43f60ed9a23
+ * @relayHash 238aea7f8af55ed69cb5d25cf1517413
  */
 
 /* eslint-disable */
@@ -15,6 +15,10 @@ export type QuizPage_QueryResponse = {|
     +quiz: ?{|
       +questions: ?$ReadOnlyArray<?{|
         +questionName: ?string,
+        +answers: ?$ReadOnlyArray<?{|
+          +answerName: ?string,
+          +isCorrect: ?boolean,
+        |}>,
       |}>,
     |},
   |}>,
@@ -28,6 +32,10 @@ query QuizPage_Query {
     quiz {
       questions {
         questionName
+        answers {
+          answerName
+          isCorrect
+        }
         id
       }
     }
@@ -45,6 +53,31 @@ var v0 = {
   "storageKey": null
 },
 v1 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "answers",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Answer",
+  "plural": true,
+  "selections": [
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "answerName",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "isCorrect",
+      "args": null,
+      "storageKey": null
+    }
+  ]
+},
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
@@ -56,7 +89,7 @@ return {
   "operationKind": "query",
   "name": "QuizPage_Query",
   "id": null,
-  "text": "query QuizPage_Query {\n  lessons {\n    quiz {\n      questions {\n        questionName\n        id\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query QuizPage_Query {\n  lessons {\n    quiz {\n      questions {\n        questionName\n        answers {\n          answerName\n          isCorrect\n        }\n        id\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -92,7 +125,8 @@ return {
                 "concreteType": "Question",
                 "plural": true,
                 "selections": [
-                  v0
+                  v0,
+                  v1
                 ]
               }
             ]
@@ -134,17 +168,18 @@ return {
                 "plural": true,
                 "selections": [
                   v0,
-                  v1
+                  v1,
+                  v2
                 ]
               }
             ]
           },
-          v1
+          v2
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '2c4004771bea617794544c0d36479472';
+(node/*: any*/).hash = 'e31c8194ef18e97299a11d110be17397';
 module.exports = node;

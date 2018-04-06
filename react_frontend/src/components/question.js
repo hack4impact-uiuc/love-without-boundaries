@@ -51,18 +51,22 @@ class Question extends React.Component{
                 <Answer letter="A" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
+                    radio={this.state.correct=="A"}
                 />
                 <Answer letter="B" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
+                    radio={this.state.correct=="B"}
                 />
                 <Answer letter="C" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
+                    radio={this.state.correct=="C"}
                 />
                 <Answer letter="D" locked={this.state.locked} 
                     passAns={this.passAns}
                     passCorrect={this.passCorrect}
+                    radio={this.state.correct=="D"}
                 />
             </div>
         );
