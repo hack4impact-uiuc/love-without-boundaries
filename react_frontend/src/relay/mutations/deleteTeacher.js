@@ -11,10 +11,10 @@ const mutation = graphql`
     }
 `;
 
-function deleteTeacher(environment: Environment, teacherID: string) {
+function deleteTeacher(environment: Environment, id: string) {
 const variables = {
   input: {
-    teacherID
+    id
   },
 };
 console.log(variables)

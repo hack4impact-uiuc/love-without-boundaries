@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import LessonForm from './../components/lessonform';
 import NavBar from '../components/navBar';
 import AdminList from '../components/adminList'
 
@@ -16,7 +15,6 @@ import environment from '../relay/environment';
 import assignStudentToTeacher from '../relay/mutations/assignStudentToTeacher'
 import deleteStudent from '../relay/mutations/deleteStudent'
 import deleteTeacher from '../relay/mutations/deleteTeacher'
-import AdminList from '../components/adminList';
 import { withRouter } from 'react-router-dom';
 import LessonList from './../components/lessonList';
 
@@ -118,7 +116,6 @@ class AdminPage extends React.Component<Props>{
       this.setState({
         selectedTeacherId: id
       }, function () {
-        console.log(this.state.selectedTeacherId);
       });
     }
 
@@ -140,21 +137,18 @@ class AdminPage extends React.Component<Props>{
         this.setState({
             showAssignList: false
         }, function () {
-          console.log(this.state.showAssignList);
         });
       }else{
         this.setState({
           showAssignList:true,
           selectedStudentId: e.target.name
         }, function () {
-          console.log(this.state.showAssignList);
         });
       }
     }
 
 
     assignStudentToTeachers = (e) => {
-        console.log("Assigning Student to Tutor " + this.state.selectedTeacherId + " studentId: " + this.state.selectedStudentId);
         this.setState({
             showAssignList: false
         }, function () {
@@ -172,7 +166,6 @@ class AdminPage extends React.Component<Props>{
 
     onClickDeleteTeacher = (e) => {
         const deleteTeacherId = e.target.name;
-        console.log("deleting TeacherId: " + deleteTeacherId);
         deleteTeacher(environment, deleteTeacherId);
         window.location.reload();
     }
@@ -243,7 +236,6 @@ class AdminPage extends React.Component<Props>{
                       return (
                           <div>
                               I am an admin
-                                  <AddLesson/>
                                   <button onClick = {this.gotoQuiz}>Create Quiz</button>
                                 <div>
                                 <h2> View Tutors or Students</h2>
@@ -258,26 +250,6 @@ class AdminPage extends React.Component<Props>{
               />
         );
     }
-}
-
-function myFunction() {
-    var x = {teacherList};
-    if ( x && x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-
-function makeTeacherList(props) {
-  const teachers = props.teachers
-  const teacherList = teachers.map((teacher) => <li id={teacher.id}>{teacher}</li>)
-  return <ul>{teacherList}</ul>
-}
-function makeStudentList(props) {
-  const students = props.students
-  const studentList = students.map((students) => <li id={student.id}>{student}</li>)
-  return <ul>{studentList}</ul>
 }
 
 export default AdminPage;
