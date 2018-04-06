@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 // reactClass --
 class googleDocButton extends React.Component {
     render() {
-        console.log(this.props.url);
         return (
             <div>
                 <a href={this.props.url}>
