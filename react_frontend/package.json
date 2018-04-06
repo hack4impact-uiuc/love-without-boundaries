@@ -42,13 +42,15 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "google-login": "^1.0.3",
+    "jwt-decode": "^2.2.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-google-login": "^3.0.10",
     "react-popout": "^1.0.1",
     "react-redux": "^5.0.7",
-    "react-relay": "^1.4.1",
+    "react-relay": "^1.5.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",

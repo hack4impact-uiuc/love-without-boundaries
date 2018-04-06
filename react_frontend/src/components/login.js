@@ -5,11 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 
 class Login extends React.Component {
     responseGoogle = (response) => {
-        console.log(response);
         this.props.history.push('/student');
-    }
-    failedGoogle = (response) =>{
-        console.log(response);
     }
     render(){
         return(
@@ -30,7 +26,6 @@ class Login extends React.Component {
                 clientId='162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com'
                 buttonText='Login'
                 onSuccess={this.responseGoogle}
-                onFailure={this.failedGoogle}
             />
         );
     }
