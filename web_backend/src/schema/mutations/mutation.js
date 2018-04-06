@@ -239,6 +239,7 @@ const submitQuiz = mutationWithClientMutationId({
             score: (numCorrect / questionNames.length),
             submittedAnswers,
         };
+        console.log(pastQuiz);
         return Student.findByIdAndUpdate(sObj.id, { $push: { 'pastQuizzes': pastQuiz } });
     },
 });
