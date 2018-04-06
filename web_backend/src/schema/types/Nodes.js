@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLID } from 'graphql';
 import { nodeDefinitions, globalIdField, fromGlobalId } from 'graphql-relay';
 
 import Student from '../../models/student';
@@ -54,8 +54,8 @@ const StudentType = new GraphQLObjectType({
                 type: GraphQLString,
             },
             teacher: {
-                type: TeacherType,
-                resolve: student => Teacher.findOne({ listOfStudentIDs: student.id }),
+                type: GraphQLID,
+                // resolve: student => Teacher.findOne({ listOfStudentIDs: student.id }),
             },
             grades: {
                 type: new GraphQLList(GradeType),
@@ -84,11 +84,11 @@ const TeacherType = new GraphQLObjectType({
                 type: GraphQLString,
             },
             students: {
-                description: 'Students that the teacher teachers',
-                type: new GraphQLList(StudentType),
-                resolve(teacher) {
-                    return Student.find({ _id: { $in: teacher.listOfStudentIDs } });
-                },
+                // description: 'Students that the teacher teachers',
+                type: new GraphQLList(GraphQLID),
+                // resolve(teacher) {
+                //     return Student.find({ _id: { $in: teacher.listOfStudentIDs } });
+                // },
             },
         };
     },

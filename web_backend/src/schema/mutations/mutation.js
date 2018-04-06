@@ -162,8 +162,7 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         const sObj = fromGlobalId(studentID);
         const tObj = fromGlobalId(teacherID);
         if (Student.findById(sObj.id) && Teacher.findById(tObj.id)) {
-            return Student.findByIdAndUpdate(sObj.id, { $set: { teacherID } })
-              && Teacher.findByIdAndUpdate(tObj.id, { $push: { listOfStudentIDs: studentID } });
+            return Teacher.findByIdAndUpdate(tObj.id, { $push: { students: studentID } }) && Student.findByIdAndUpdate(sObj.id, { $set: { teacher: teacherID } });
         }
         return null;
     },
@@ -244,7 +243,6 @@ const submitQuiz = mutationWithClientMutationId({
     },
 });
 
-// Same issue as submitQuiz
 const addQuestion = mutationWithClientMutationId({
     name: 'AddQuestion',
     inputFields: {
@@ -417,6 +415,25 @@ const removeStudentWorksheetCopy = mutationWithClientMutationId({
         ),
 });
 
+const deleteStudent = mutationWithClientMutationId({
+    name: 'DeleteStudent',
+    inputFields: {
+        id: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id }) => {
+        const obj = fromGlobalId(id);
+        return Student.findByIdAndRemove(obj.id);
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -439,6 +456,7 @@ const Mutation = new GraphQLObjectType({
             deleteWorksheet,
             addStudentWorksheetCopy,
             removeStudentWorksheetCopy,
+            deleteStudent,
         };
     },
 });
