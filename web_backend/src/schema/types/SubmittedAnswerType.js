@@ -6,8 +6,7 @@ const SubmittedAnswer = new GraphQLObjectType({
     fields() {
         return {
             questionID: { type: GraphQLString },
-            answerChosen: { type: GraphQLString },
-            correctAnswer: { type: GraphQLString },
+            answerChosen: { type: GraphQLString }
         };
     },
 });
