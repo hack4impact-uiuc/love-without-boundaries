@@ -16,9 +16,11 @@ class StudentPage extends React.Component<Props>{
         super(props);
         this.state = {
             title: "My Lessons",
-            userType: jwt_decode(localStorage.getItem('token')).userType
+            isTeacher: jwt_decode(localStorage.getItem('token')).userType == "teacher"
         }
+
     }
+
     setTitle = () => {
         if (this.props.studentName) {
             this.setState({
@@ -61,7 +63,7 @@ class StudentPage extends React.Component<Props>{
                                 </h2>
                                 {
                                     props.lessons.map((lesson, idx) => (
-                                        <LessonComponent key={ idx }id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"50%"} quizIsChecked={false}/>
+                                        <LessonComponent key={ idx }id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} quizName={lesson.quiz} quizPercentage={"50%"} quizIsChecked={false} isTeacher={this.state.isTeacher}/>
                                     ))
                                 }
                             </div>
