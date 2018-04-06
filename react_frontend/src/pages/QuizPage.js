@@ -38,7 +38,17 @@ class QuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
-                    
+                    // query={graphql`
+                    //     query QuizPage_Query{
+                    //         quiz {
+                    //             id
+                    //             name
+                    //             questions {
+                    //                 questionName
+                    //             }
+                    //         }
+                    //     }
+                    // `}
                     variables={{}}
                     render={({ props }) => {
                         if (!props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddLesson from './../components/addlesson';
+import LessonForm from './../components/lessonform';
 import NavBar from '../components/navBar';
 import AdminList from '../components/adminList'
 
@@ -16,6 +16,9 @@ import environment from '../relay/environment';
 import assignStudentToTeacher from '../relay/mutations/assignStudentToTeacher'
 import deleteStudent from '../relay/mutations/deleteStudent'
 import deleteTeacher from '../relay/mutations/deleteTeacher'
+import AdminList from '../components/adminList';
+import { withRouter } from 'react-router-dom';
+import LessonList from './../components/lessonList';
 
 type Props = {
     /**/
