@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
+import addLesson from '../relay/mutations/addLesson';
+import environment from '../relay/environment';
 
 
-class AddLesson extends React.Component {
+class LessonForm extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -25,8 +27,7 @@ class AddLesson extends React.Component {
                 notes: this.state.notes,
                 notes_link: this.state.notes_link,
                 worksheet: this.state.wksht,
-                worksheet_link: this.state.wksht_link,
-                quiz: this.state.quiz,
+                worksheet_link: this.state.wksht_link
             }),
         });
     }
@@ -37,18 +38,10 @@ class AddLesson extends React.Component {
         });
     }
 
-    delete = lesson => {
-        const newState = this.state.lessons.slice();
-        if (newState.indexOf(lesson) > -1) {
-          newState.splice(newState.indexOf(lesson), 1);
-          this.setState({lessons: newState})
-        }
-      }
-
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>Add Lesson:
+                <form onSubmit={() => addLesson(environment, this.state.name, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)}>Add Lesson:
                     <div>
                         <label htmlFor="lesson_name_input">Lesson Name: </label>
                         <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
@@ -78,20 +71,10 @@ class AddLesson extends React.Component {
                 </form>
 
                 <div>
-                    <div>
-                        {
-                            this.state.lessons.map(lesson => (
-                                <div>
-                                    <LessonComponent id={lesson.id} lessonName={lesson.name} lessonNotes={lesson.notes} lessonNotesLink={lesson.notes_link} lessonWorksheetLink={lesson.worksheet_link} worksheetName={lesson.worksheet} quizName={lesson.quiz} quizPercentage={"0%"} quizIsChecked={false}/>
-                                    <button onClick={() => this.delete(lesson)}>Delete Lesson</button>
-                                </div>
-                            ))
-                        }
-                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default AddLesson;
+export default LessonForm;
