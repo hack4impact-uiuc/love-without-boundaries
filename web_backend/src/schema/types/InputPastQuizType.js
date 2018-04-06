@@ -8,7 +8,7 @@ const InputPastQuiz = new GraphQLInputObjectType({
         return {
             quizName: { type: GraphQLString },
             score: { type: GraphQLInt },
-            questions: {
+            submittedAnswers: {
                 type: new GraphQLList(InputSubmittedAnswer),
             },
         };

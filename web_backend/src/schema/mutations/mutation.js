@@ -206,32 +206,40 @@ const submitQuiz = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({
+    mutateAndGetPayload: async ({
         id, lessonID, questions, answers,
     }) => {
         const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
-        const q1 = Lesson.findById(lObj.id, 'quiz -name -worksheetName -worksheetURL');
-        console.log(q1);
-        const quizName = q1.name;
-        console.log(q1.quiz);
-        console.log(q1.name);
+        const q1 = await Lesson.findById(lObj.id).exec();
+        const questionNames = q1.quiz.questions.map(q => q.questionName);
+        const answerNames = q1.quiz.questions.map(q => q.answers);
 
-        let score = 0;
+        let numCorrect = 0;
+        questions.forEach((q, i) => {
+            let isCorrect = true;
+            const indexOfQuestion = questionNames.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
+            q1.quiz.questions[indexOfQuestion].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
+            numCorrect += isCorrect;
+        });
         let submittedAnswers = [];
-        for (let i = 0; i < questions.length; i += 1) {
-            const q = q1.questions.find({ questionName: questions[i] });
-            const question = answers[i];
-            const qid = q.id;
-            const a = q.answers.find({ answerName: answers[i] });
-            const correctA = q.answers.find({ isCorrect: true });
-            if (a.isCorrect) {
-                score += 1;
+        q1.quiz.questions.forEach((q, i) => {
+            const isCorrect = true;
+            const indexOfAnswer = (questions.findIndex(element => element === q.questionName));
+            if (indexOfAnswer != -1) {
+                submittedAnswers.push({ 'questionID': i, 'answerChosen': answers[indexOfAnswer] });
+            } else {
+                submittedAnswers.push({ 'questionID': i, 'answerChosen': 'No answer selected' });
             }
-            submittedAnswers.push({ qid, question, correctA });
-        }
-        const pastQuiz = { quizName, score, submittedAnswers };
-        Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
+        });
+
+        
+        const pastQuiz = {
+            quizName: q1.name,
+            score: (numCorrect / questionNames.length),
+            submittedAnswers,
+        };
+        return Student.findByIdAndUpdate(sObj.id, { $push: { 'pastQuizzes': pastQuiz } });
     },
 });
 
