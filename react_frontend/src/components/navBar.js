@@ -1,29 +1,33 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Image } from 'react-bootstrap';
 
 type Props = {
-    /**/ 
+    /**/
 }
+
+const Block = styled.div`
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: rgb(192, 68, 72);
+    color: rgb(255, 255, 255);
+    height: 200px;
+`;
+
+const Image= styled.div`
+    height: 200px;
+`;
+
+
+
+
 class NavBar extends React.Component<Props> {
     render(){
         return(
             <div>
-                NavBar Goes here
-                {/* <Navbar.Header>
-                    <a href="/"> <img src="./assets/lovewithout_logo.png" alt="Love Without Boundaries" ></img></a>
-                </Navbar.Header>
-                <Nav>
-                    <NavItem eventKey={1} href="/student">
-                    Students
-                    </NavItem>
-
-                    <NavItem eventKey={2} href="/teacher">
-                    Teacher
-                    </NavItem>
-
-                    <NavItem eventKey={3} href="/admin">
-                    Admin
-                    </NavItem>
-                </Nav>                                 */}
+                <Block>
+                <Image src = "https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" />
+                </Block>
             </div>
         );
     }
