@@ -8,7 +8,7 @@ const mutation = graphql`
         $input: CreateLessonInput!
     ) {
         createLesson(input: $input){
-            admin {
+            lesson {
                 name
             }
             clientMutationId

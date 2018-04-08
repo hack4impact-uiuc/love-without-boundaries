@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 00443cd09872148569db361956cad209
+ * @relayHash 1f1bf63caad65fc337153ea6517f948e
  */
 
 /* eslint-disable */
@@ -32,7 +32,7 @@ export type addLessonMutationVariables = {|
 |};
 export type addLessonMutationResponse = {|
   +createLesson: ?{|
-    +admin: ?{|
+    +lesson: ?{|
       +name: ?string,
     |},
     +clientMutationId: ?string,
@@ -46,7 +46,7 @@ mutation addLessonMutation(
   $input: CreateLessonInput!
 ) {
   createLesson(input: $input) {
-    admin {
+    lesson {
       name
       id
     }
@@ -91,7 +91,7 @@ return {
   "operationKind": "mutation",
   "name": "addLessonMutation",
   "id": null,
-  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    admin {\n      name\n      id\n    }\n    clientMutationId\n  }\n}\n",
+  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      name\n      id\n    }\n    clientMutationId\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -112,7 +112,7 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "admin",
+            "name": "lesson",
             "storageKey": null,
             "args": null,
             "concreteType": "Lesson",
@@ -143,7 +143,7 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "admin",
+            "name": "lesson",
             "storageKey": null,
             "args": null,
             "concreteType": "Lesson",
@@ -166,5 +166,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '54eb4393c16cabf4f51a0a01ee49dc13';
+(node/*: any*/).hash = '527c0a3a01ac1eb43c06fc4981fb7dbd';
 module.exports = node;
