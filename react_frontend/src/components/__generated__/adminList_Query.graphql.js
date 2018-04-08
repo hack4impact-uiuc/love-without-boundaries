@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b36121c66c9f963cc731f9c6b3facae7
+ * @relayHash 6b2558a4f38b26a2d2a6f7058abf4df8
  */
 
 /* eslint-disable */
@@ -11,8 +11,8 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type studentListItem_student$ref = any;
 type teacherListItem_teacher$ref = any;
-export type AdminPage_QueryVariables = {| |};
-export type AdminPage_QueryResponse = {|
+export type adminList_QueryVariables = {| |};
+export type adminList_QueryResponse = {|
   +students: ?$ReadOnlyArray<?{|
     +id: string,
     +name: ?string,
@@ -28,7 +28,7 @@ export type AdminPage_QueryResponse = {|
 
 
 /*
-query AdminPage_Query {
+query adminList_Query {
   students {
     id
     name
@@ -68,13 +68,13 @@ v1 = {
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "AdminPage_Query",
+  "name": "adminList_Query",
   "id": null,
-  "text": "query AdminPage_Query {\n  students {\n    id\n    name\n    ...studentListItem_student\n  }\n  teachers {\n    name\n    id\n    ...teacherListItem_teacher\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n\nfragment teacherListItem_teacher on Teacher {\n  name\n}\n",
+  "text": "query adminList_Query {\n  students {\n    id\n    name\n    ...studentListItem_student\n  }\n  teachers {\n    name\n    id\n    ...teacherListItem_teacher\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n\nfragment teacherListItem_teacher on Teacher {\n  name\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "AdminPage_Query",
+    "name": "adminList_Query",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -119,7 +119,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "AdminPage_Query",
+    "name": "adminList_Query",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -152,5 +152,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = 'e2edabea98ff8ed039462ee4550ac5c6';
+(node/*: any*/).hash = '0ae94c7b28901d0e7c27953369361a86';
 module.exports = node;
