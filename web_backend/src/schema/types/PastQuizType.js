@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat } from 'graphql';
 import SubmittedAnswer from './SubmittedAnswerType';
 
 const PastQuiz = new GraphQLObjectType({
@@ -7,8 +7,8 @@ const PastQuiz = new GraphQLObjectType({
     fields() {
         return {
             quizName: { type: GraphQLString },
-            score: { type: GraphQLInt },
-            questions: {
+            score: { type: GraphQLFloat },
+            submittedAnswers: {
                 type: new GraphQLList(SubmittedAnswer),
             },
         };

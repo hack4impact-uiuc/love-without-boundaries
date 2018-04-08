@@ -11,45 +11,49 @@ type AddGradePayload {
 }
 
 input AddNoteInput {
-  id: String
+  id: ID
   name: String
   url: String
   clientMutationId: String
 }
 
 type AddNotePayload {
+  lesson: Lesson
   clientMutationId: String
 }
 
 input AddQuestionInput {
-  id: String
   question: InputQuestion
+  lessonId: String
   clientMutationId: String
 }
 
 type AddQuestionPayload {
+  lesson: Lesson
   clientMutationId: String
 }
 
 input AddStudentWorksheetCopyInput {
-  studentID: String
-  lessonID: String
+  studentID: ID
+  lessonID: ID
   url: String
   clientMutationId: String
 }
 
 type AddStudentWorksheetCopyPayload {
+  student: Student
   clientMutationId: String
 }
 
 input AddWorksheetInput {
-  id: String
+  id: ID
   name: String
   url: String
   clientMutationId: String
 }
 
 type AddWorksheetPayload {
+  lesson: Lesson
   clientMutationId: String
 }
 
@@ -75,7 +79,6 @@ input AssignStudentToTeacherInput {
 
 type AssignStudentToTeacherPayload {
   student: Student
-  teacher: Teacher
   clientMutationId: String
 }
 
@@ -101,7 +104,7 @@ input CreateLessonInput {
 }
 
 type CreateLessonPayload {
-  admin: Lesson
+  lesson: Lesson
   clientMutationId: String
 }
 
@@ -133,34 +136,57 @@ input DeleteAdminInput {
 }
 
 type DeleteAdminPayload {
-  student: Admin
+  admin: Admin
   clientMutationId: String
 }
 
 input DeleteLessonInput {
-  id: String!
+  id: ID!
   clientMutationId: String
 }
 
 type DeleteLessonPayload {
+  lesson: Lesson
   clientMutationId: String
 }
 
 input DeleteNoteInput {
-  id: String
+  id: ID
   clientMutationId: String
 }
 
 type DeleteNotePayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input DeleteStudentInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input DeleteTeacherInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteTeacherPayload {
+  teacher: Teacher
   clientMutationId: String
 }
 
 input DeleteWorksheetInput {
-  id: String
+  id: ID
   clientMutationId: String
 }
 
 type DeleteWorksheetPayload {
+  lesson: Lesson
   clientMutationId: String
 }
 
@@ -177,13 +203,6 @@ input InputAnswer {
 }
 
 # Self Descriptive
-input InputPastQuiz {
-  quizName: String
-  score: Int
-  questions: [InputSubmittedAnswer]
-}
-
-# Self Descriptive
 input InputQuestion {
   questionName: String
   answers: [InputAnswer]
@@ -194,13 +213,6 @@ input InputQuiz {
   name: String
   questions: [InputQuestion]
   lessonID: String
-}
-
-# Self Descriptive
-input InputSubmittedAnswer {
-  questionID: String
-  answerChosen: String
-  correctAnswer: String
 }
 
 # Schema design for lessons
@@ -223,6 +235,7 @@ type Mutation {
   deleteAdmin(input: DeleteAdminInput!): DeleteAdminPayload
   addGrade(input: AddGradeInput!): AddGradePayload
   assignStudentToTeacher(input: AssignStudentToTeacherInput!): AssignStudentToTeacherPayload
+  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   submitQuiz(input: SubmitQuizInput!): SubmitQuizPayload
   addQuestion(input: AddQuestionInput!): AddQuestionPayload
   createLesson(input: CreateLessonInput!): CreateLessonPayload
@@ -233,6 +246,7 @@ type Mutation {
   deleteWorksheet(input: DeleteWorksheetInput!): DeleteWorksheetPayload
   addStudentWorksheetCopy(input: AddStudentWorksheetCopyInput!): AddStudentWorksheetCopyPayload
   removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
+  deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
 }
 
 # An object with an ID
@@ -244,8 +258,8 @@ interface Node {
 # Self Descriptive
 type PastQuiz {
   quizName: String
-  score: Int
-  questions: [SubmittedAnswer]
+  score: Float
+  submittedAnswers: [SubmittedAnswer]
 }
 
 # Your Root Query
@@ -288,12 +302,15 @@ type Student implements Node {
 }
 
 input SubmitQuizInput {
-  id: String
-  pastQuiz: InputPastQuiz
+  id: ID
+  lessonID: ID
+  questions: [String]
+  answers: [String]
   clientMutationId: String
 }
 
 type SubmitQuizPayload {
+  student: Student
   clientMutationId: String
 }
 
@@ -301,7 +318,6 @@ type SubmitQuizPayload {
 type SubmittedAnswer {
   questionID: String
   answerChosen: String
-  correctAnswer: String
 }
 
 # Teacher
@@ -322,6 +338,7 @@ input undefinedInput {
 }
 
 type undefinedPayload {
+  student: Student
   clientMutationId: String
 }
 
