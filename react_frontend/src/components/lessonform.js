@@ -4,8 +4,9 @@ import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
 import addLesson from '../relay/mutations/addLesson';
 import environment from '../relay/environment';
+import google from 'googleapis';
 
-
+const drive = google.drive('v3');
 class LessonForm extends React.Component {
     constructor() {
         super();
@@ -36,6 +37,24 @@ class LessonForm extends React.Component {
         this.setState({
             [event.target.name]: event.target.value,
         });
+    }
+
+    submitLesson = (environment, name, notes, notesLink, wksht, wkshtLink) => {
+        let fileID = function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
+        drive.permissions.create({
+            auth: 'AIzaSyCNtUcu4OZGxB3o4R4lzFOvkIq7ozXycwo',
+            fileId: fileID,
+            access_token: 'ya29.GluVBb3QL11AkxZFShM7Qp1bScwIa3Noe9ZBVBIl4-y7QRb4mlKgrO2Z0vbI_U76eeYDpyMvf4gHYKXvmEBXhsC2LhYR-f3b2w00ehZBNLN4XgbmG8-KIzZLAYwE',
+            role: 'reader',
+            type: 'anyone'
+        }, (err, response) => {
+            if (err) {
+                console.error(err);
+                throw err;
+            }
+            console.log(response.data.displayName);
+        });
+        addLesson(environment, this.state.name, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)
     }
 
     render() {
