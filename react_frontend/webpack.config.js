@@ -29,6 +29,17 @@ module.exports = {
             test: /\.css$/,
             include: /node_modules/,
             use: ['style-loader', 'css-loader'],
+        }, {
+            test: /\.(gif|png|jpe?g|svg)$/i,
+            use: [
+                'file-loader',
+                {
+                    loader: 'url-loader',
+                    options: {
+                        bypassOnDebug: true,
+                    },
+                },
+            ],
         },
         ],
     },

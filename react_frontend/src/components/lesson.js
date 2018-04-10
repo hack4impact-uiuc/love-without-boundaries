@@ -8,14 +8,15 @@ type Props = {
 
 
 const LessonBox = styled.div`
-    border-style: solid;
-    border-color: #d7dce2;
     color: white;
     background-color: #a6acb5;
-    height: 300px;
-    width: 500px;
+    height: 30%;
+    width: 50%;
     z-index: -1;
     font-family: "Arial";
+    margin: 10px;
+    border-radius: 25px;
+    align: center;
 `;
 
 const LessonTitle = styled.div`

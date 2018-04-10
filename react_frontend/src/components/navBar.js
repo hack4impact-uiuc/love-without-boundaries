@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Image } from 'react-bootstrap';
 import './Hover.css';
+import lovewithout_white from './lovewithout_white.png';
 
 type Props = {
     /**/
@@ -10,7 +11,7 @@ type Props = {
 const Block = styled.div`
     border: 1px solid #ddd;
     padding: 8px;
-    background-color: #ccc5c5;
+    background-color: #B33C42;
     color: rgb(255, 255, 255);
     height: 80px;
     position sticky;
@@ -22,7 +23,7 @@ const Block = styled.div`
 
 const Text = styled.a`
     padding: 8px;
-    color: #c13030;
+    color: #FFFFFF;
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 800;
@@ -37,12 +38,12 @@ const Text = styled.a`
 
 const HomeText = styled.a`
     padding: 8px;
-    color: #c13030;
+    color: #FFFFFF;
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 800;
     font-size: 18px;
-    border-bottom-style: solid;
+    border-bottom: 3px solid white;
     display: inline-block;
     padding: .6rem 0;
     margin: 0.5rem 2rem ;
@@ -52,12 +53,12 @@ const HomeText = styled.a`
 
 const LessonText = styled.a`
     padding: 8px;
-    color: #c13030;
+    color: #FFFFFF;
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 800;
     font-size: 18px;
-    border-bottom-style: solid;
+    border-bottom: 3px solid white;
     display: inline-block;
     padding: .6rem 0;
     margin: 0.5rem 2rem ;
@@ -66,12 +67,12 @@ const LessonText = styled.a`
 `;
 const LogText = styled.a`
     padding: 8px;
-    color: #c13030;
+    color: #FFFFFF;
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 800;
     font-size: 18px;
-    border-bottom-style: solid;
+    border-bottom: 3px solid white;
     display: inline-block;
     padding: .6rem 0;
     margin: 0.5rem 1rem ;
@@ -90,10 +91,10 @@ class NavBar extends React.Component<Props> {
                     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine"></link>
                 </head>
                 <Block>
-                    <Image class="img-fluid"  src = "https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" height="100%" />
-                    <HomeText>Home</HomeText>
-                    <LessonText>Lessons</LessonText>
-                    <LogText>Logout</LogText>
+                    <Image className="img-fluid"  src = {lovewithout_white} height="100%" />
+                    <HomeText className="navbar" >Home</HomeText>
+                    <LessonText className="navbar">Lessons</LessonText>
+                    <LogText className="navbar">Logout</LogText>
                 </Block>
             </div>
         );

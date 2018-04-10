@@ -1,8 +1,9 @@
-a:hover {
-    background-color:#c13030;
-	color: #ccc5c5;
+
+a.navbar:hover {
+	background-color:#c13030;
+	color: white;
 	padding: 1.5%;
 	margin:auto;
 	border-radius: 10px;
-
+	border-bottom: 0px;
 }
