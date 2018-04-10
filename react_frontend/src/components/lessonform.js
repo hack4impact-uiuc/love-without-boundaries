@@ -4,9 +4,8 @@ import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
 import addLesson from '../relay/mutations/addLesson';
 import environment from '../relay/environment';
-import google from 'googleapis';
 
-const drive = google.drive('v3');
+
 class LessonForm extends React.Component {
     constructor() {
         super();

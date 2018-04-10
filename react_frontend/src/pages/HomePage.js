@@ -7,6 +7,7 @@ import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import Login from '../components/login';
+import { getFileInfo } from '../Gapi';
 
 type Props = {
     /**/ 
@@ -49,7 +50,9 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
-
+    getInfo = (e) => {
+        getFileInfo('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => console.log(r));
+    }
     render() {
         return (
             
@@ -85,6 +88,7 @@ class HomePage extends React.Component<Props>{
                                             </div>
                                             : 
                                             <div>
+                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button>
                                                 <Login/>
                                                 <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                             </div>
