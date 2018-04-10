@@ -182,7 +182,6 @@ const deleteTeacher = mutationWithClientMutationId({
     },
 });
 
-// DOESNT WORK
 const submitQuiz = mutationWithClientMutationId({
     name: 'SubmitQuiz',
     inputFields: {
@@ -227,14 +226,11 @@ const submitQuiz = mutationWithClientMutationId({
                 submittedAnswers.push({ questionID: i, answerChosen: 'No answer selected' });
             }
         });
-
-
         const pastQuiz = {
             quizName: q1.name,
             score: (numCorrect / questionNames.length),
             submittedAnswers,
         };
-        console.log(pastQuiz);
         return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
     },
 });
@@ -430,6 +426,28 @@ const deleteStudent = mutationWithClientMutationId({
     },
 });
 
+const addURL = mutationWithClientMutationId({
+    name: 'AddURL',
+    inputFields: {
+        id: { type: GraphQLID },
+        url: { type: GraphQLString },
+    },
+    student: {
+        type: StudentType,
+        resolve: payload => payload,
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id, url }) => {
+        const obj = fromGlobalId(id);
+        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } });
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -453,6 +471,7 @@ const Mutation = new GraphQLObjectType({
             addStudentWorksheetCopy,
             removeStudentWorksheetCopy,
             deleteStudent,
+            addURL,
         };
     },
 });

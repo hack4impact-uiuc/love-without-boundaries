@@ -22,5 +22,6 @@ const StudentSchema = new Schema({
         lessonID: { type: String },
         url: { type: String },
     }],
+    URL: { type: String },
 });
 export default mongoose.model('Student', StudentSchema);
