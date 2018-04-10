@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Image } from 'react-bootstrap';
-import './Hover.css';
-import lovewithout_white from './lovewithout_white.png';
+import './../../assets/Hover.css';
+import lovewithout_white from './../../assets/lovewithout_white.png';
 
 type Props = {
     /**/
@@ -21,7 +21,7 @@ const Block = styled.div`
 //     margin-right: 5rem ;
 // `;
 
-const Text = styled.a`
+const Text = styled.div`
     padding: 8px;
     color: #FFFFFF;
     text-transform: uppercase;
@@ -36,7 +36,7 @@ const Text = styled.a`
     position: absolute;
 `;
 
-const HomeText = styled.a`
+const HomeText = styled.div`
     padding: 8px;
     color: #FFFFFF;
     text-transform: uppercase;
@@ -46,12 +46,12 @@ const HomeText = styled.a`
     border-bottom: 3px solid white;
     display: inline-block;
     padding: .6rem 0;
-    margin: 0.5rem 2rem ;
-    right: 32%;
+    margin: 0.5rem 1rem ;
+    right: 33%;
     position: absolute;
 `;
 
-const LessonText = styled.a`
+const LessonText = styled.div`
     padding: 8px;
     color: #FFFFFF;
     text-transform: uppercase;
@@ -61,11 +61,11 @@ const LessonText = styled.a`
     border-bottom: 3px solid white;
     display: inline-block;
     padding: .6rem 0;
-    margin: 0.5rem 2rem ;
-    right: 19%;
+    margin: 0.5rem 1rem ;
+    right: 20%;
     position: absolute;
 `;
-const LogText = styled.a`
+const LogText = styled.div`
     padding: 8px;
     color: #FFFFFF;
     text-transform: uppercase;

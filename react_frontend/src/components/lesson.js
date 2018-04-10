@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Button} from 'react-bootstrap';
+import './../../assets/Hover.css';
 
 type Props = {
   /**/
@@ -14,8 +15,8 @@ const LessonBox = styled.div`
     width: 50%;
     z-index: -1;
     font-family: "Arial";
-    margin: 10px;
-    border-radius: 25px;
+    margin: auto;
+    border-radius: 0px 40px;
     align: center;
 `;
 
@@ -34,7 +35,7 @@ const LessonTitle = styled.div`
 const LessonProps = styled.div`
     border-style: solid;
     border-color: white;
-    color: #a6acb5;
+    color: #337ab7;
     padding: 5px 5px;
     margin: 5px 5px;
     font-size: 20px;
@@ -44,6 +45,8 @@ const LessonProps = styled.div`
     height: 50px;
     z-index: -1;
     font-family: "Arial";
+    border-radius: 0px 30px;
+
 `;
 
 const CheckedBoxComplete = styled.div`
@@ -82,11 +85,12 @@ class LessonComponent extends React.Component<Props>{
         }
         return(
             <div>
-                <LessonBox>
-                    <LessonTitle>{this.props.lessonName}</LessonTitle>
+                <LessonBox className="lessonBox">
+                    <LessonTitle >{this.props.lessonName}</LessonTitle>
+                    <span class="oi" data-glyph="bookmark"></span> {/*TODO back here*/}
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWkshtLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} <Button bsStyle="primary">{quiz}</Button> </LessonProps>;
+                    <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} <Button class="quizButton" bsStyle="primary">{quiz}</Button> </LessonProps>
                 </LessonBox>
             </div>
         );
