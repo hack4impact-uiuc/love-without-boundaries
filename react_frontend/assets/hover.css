@@ -1,0 +1,42 @@
+
+
+
+#days {
+	font-family: arial;
+	
+	* {        
+    transition: all 0.1s ease-in;
+    }
+    
+    a:hover {
+        background-color: red;
+        color: white;
+    }
+	
+	.day {
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		border-radius: 50%;
+		display: block;
+		float: left;
+		background: #CCC;
+		text-align: center;
+		line-height: 30px;
+		margin: 0 2px;
+		
+		&.sibling {
+			transform: scale(1.3);
+		}
+		&.current {
+			transform: scale(1.8);
+			z-index: 5;
+			position:relative;
+		}
+		&:hover {
+			background: #BBB;
+		}
+		
+		
+	}
+}
