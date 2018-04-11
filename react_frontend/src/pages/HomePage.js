@@ -7,7 +7,7 @@ import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import Login from '../components/login';
-import { getFileInfo } from '../Gapi';
+import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit } from '../Gapi';
 
 type Props = {
     /**/ 
@@ -51,7 +51,7 @@ class HomePage extends React.Component<Props>{
         });
     }
     getInfo = (e) => {
-        getFileInfo('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => console.log(r));
+        copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllEdit(r.id)).then(r => console.log(r));
     }
     render() {
         return (
