@@ -122,7 +122,7 @@ const deleteAdmin = mutationWithClientMutationId({
 const deleteStudent = mutationWithClientMutationId({
     name: 'DeleteStudent',
     inputFields: {
-        studentID: {
+        id: {
             type: new GraphQLNonNull(GraphQLID),
         },
     },
@@ -141,7 +141,7 @@ const deleteStudent = mutationWithClientMutationId({
 const deleteTeacher = mutationWithClientMutationId({
     name: 'DeleteTeacher',
     inputFields: {
-        teacherID: {
+        id: {
             type: new GraphQLNonNull(GraphQLID),
         },
     },
