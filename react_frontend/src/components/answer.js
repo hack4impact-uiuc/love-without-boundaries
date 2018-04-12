@@ -7,24 +7,26 @@ class Answer extends Component{
         super(props)
         this.state = {
             opt: "",
-            correct: false,
+            correct: this.props.radio,
             locked: this.props.locked
         }
     }
     updateAns = event => {
         this.setState({opt : event.target.value})
+        this.props.passAns(event.target.value, this.props.letter)
     }
     correct = event => {
         this.setState({correct : event.target.value})
+        this.props.passCorrect(this.props.letter)
     }
     componentWillReceiveProps(newProps) {
-        this.setState({locked : newProps.locked})
+        this.setState({locked : newProps.locked, correct : newProps.radio})
     }
     render() {
         return(
             <div>
-                <input type="radio" value={true} onChange={this.correct} 
-                    readOnly = {this.state.locked} /> {this.props.letter}
+                <input type="radio" name={this.props.letter} value={true} onChange={this.correct} 
+                    disabled = {this.state.locked} checked={this.state.correct}/> {this.props.letter}
                 <label>
                     <input type="text" onChange={this.updateAns} readOnly = {this.state.locked} />
                 </label>

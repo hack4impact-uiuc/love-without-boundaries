@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Question from '../components/question';
-import StyledButton from '../components/button';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 const CopiedButton = styled.button`
@@ -16,16 +15,15 @@ class QuizPage extends Component{
     
     constructor(props){
         super(props)
-        this.state = {qNum : 0, qMap : [], editable : 0, passed : false}
+        this.state = {qNum : 0, qMap : [], editable : 0}
     }
     
-    finish = () => {window.location = '/admin'}
+    finish = () => {this.props.history.push('/admin')}
     addQuestion = () => {
         this.setState({
             qNum : this.state.qNum + 1,
             qMap : [...this.state.qMap, this.state.qNum + 1],
-            editable : this.state.qNum + 1,
-            passed : false
+            editable : this.state.qNum + 1
         })
     }
     lock = () => {
@@ -38,17 +36,18 @@ class QuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
-                    // query={graphql`
-                    //     query QuizPage_Query{
-                    //         quiz {
-                    //             id
-                    //             name
-                    //             questions {
-                    //                 questionName
-                    //             }
-                    //         }
-                    //     }   
-                    // `}
+                    /* How to get specific quiz?? */
+                    query={graphql`
+                        query QuizPage_Query{
+                            lessons{
+                                quiz{
+                                    questions{
+                                        questionName
+                                    }
+                                }
+                            }
+                        }   
+                    `}
                     variables={{}}
                     render={({ props }) => {
                         if (!props) {
@@ -59,19 +58,19 @@ class QuizPage extends Component{
                         return (
                             <div>
                                 <h1>Quiz Page</h1>
-                                {/* {props.quiz.map(quiz => //map through quizzes
-                                    quiz.questions.map(q => //map through questions in quizzes
-                                    <div>{q.questionName}</div>
-                                ))} */}
+                                {
+                                    props.lessons.map(lesson => {
+                                        if(lesson.quiz.question){
+                                            lesson.quiz.question.map(q => <div>{q.questionName}</div>)
+                                        }
+                                    }) 
+                                }
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
-                                    // qNum is index, editable is index if propped, number if unpropped
-                                    <div><Question 
-                                        locked={this.state.passed
-                                                ? qNum != this.state.editable
-                                                : qNum != this.state.editable - 1} 
+                                    <div key={qNum}><Question 
+                                        locked={qNum != this.state.editable - 1} 
                                         passBack={this.passBack} 
-                                        num={qNum}/>
+                                        num={Number(qNum) + 1}/>
                                     <br/></div>
                                 )}
                                 <CopiedButton onClick={this.addQuestion}>Add Question</CopiedButton>
