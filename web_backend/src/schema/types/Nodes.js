@@ -66,6 +66,9 @@ const StudentType = new GraphQLObjectType({
             worksheets: {
                 type: new GraphQLList(StudentWorksheetType),
             },
+            URL: {
+                type: GraphQLString,
+            },
         };
     },
     interfaces: [nodeInterface],
