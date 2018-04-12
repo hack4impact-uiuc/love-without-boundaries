@@ -11,6 +11,7 @@ const StudentSchema = new Schema({
         score: { type: Number },
     }],
     pastQuizzes: [{
+        lessonID: { type: String },
         quizName: { type: String },
         score: { type: Number },
         submittedAnswers: [{
@@ -22,5 +23,6 @@ const StudentSchema = new Schema({
         lessonID: { type: String },
         url: { type: String },
     }],
+    URL: { type: String },
 });
 export default mongoose.model('Student', StudentSchema);
