@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Answer from '../components/answer';
-import StyledButton from '../components/button';
+import Answer from './answer';
+import addQuestion from '../relay/mutations/addQuestion'
+import environment from '../relay/environment';
 const CopiedButton = styled.button`
     background-color: #4CAF50;
     border: 1px solid #ddd;
@@ -10,17 +11,26 @@ const CopiedButton = styled.button`
     font-size: 15px;
     margin: 5px;
 `;
-
 class Question extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             name : "",
-            locked : this.props.locked
+            locked : this.props.locked,
+            A: "",
+            B: "",
+            C: "",
+            D: "",
+            correct: "",
+            submitted: false
         }
     }
     componentWillReceiveProps(newProps) {
-        this.setState({locked : newProps.locked})
+        if(newProps.locked != this.state.locked){
+            this.setState({locked : newProps.locked})
+            if(newProps.locked == true)
+                addQuestion(environment, this.state.name, this.state.A, this.state.B, this.state.C, this.state.D, this.state.correct)
+        }
     }
     updateQuestion = event => {
         this.setState({name : event.target.value})
@@ -28,23 +38,40 @@ class Question extends React.Component{
     unlock = () => {
         this.props.passBack(this.props.num);
     }
-    /*edit = () => {
-        this.setState({locked : false})
+
+    passAns = (passUp, letter) => {
+        this.setState({[letter] : passUp})
     }
-    lock = () => {
-        this.setState({locked : true})
-    }*/
+    passCorrect = passUp => {
+        this.setState({correct : passUp})
+    }
+
     render() {
         return(
             <div>
-                {Number(this.props.num) + 1}. 
+                {this.props.num}. 
                 <input type="text" onChange={this.updateQuestion} readOnly={this.state.locked}/>
                 <CopiedButton onClick={this.unlock}>Edit</CopiedButton>
-                
-                <Answer letter="A" locked={this.state.locked} />
-                <Answer letter="B" locked={this.state.locked} />
-                <Answer letter="C" locked={this.state.locked} />
-                <Answer letter="D" locked={this.state.locked} />
+                <Answer letter="A" locked={this.state.locked} 
+                    passAns={this.passAns}
+                    passCorrect={this.passCorrect}
+                    radio={this.state.correct=="A"}
+                />
+                <Answer letter="B" locked={this.state.locked} 
+                    passAns={this.passAns}
+                    passCorrect={this.passCorrect}
+                    radio={this.state.correct=="B"}
+                />
+                <Answer letter="C" locked={this.state.locked} 
+                    passAns={this.passAns}
+                    passCorrect={this.passCorrect}
+                    radio={this.state.correct=="C"}
+                />
+                <Answer letter="D" locked={this.state.locked} 
+                    passAns={this.passAns}
+                    passCorrect={this.passCorrect}
+                    radio={this.state.correct=="D"}
+                />
             </div>
         );
     }
