@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7d785e84729bb6b59e11c992c8ace0a7
+ * @relayHash d06839568f25a52c5bfa47f4ff2ac865
  */
 
 /* eslint-disable */
@@ -11,7 +11,6 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type addQuestionMutationVariables = {|
   input: {
-    id?: ?string,
     question?: ?{
       questionName?: ?string,
       answers?: ?$ReadOnlyArray<?{
@@ -19,6 +18,7 @@ export type addQuestionMutationVariables = {|
         isCorrect?: ?boolean,
       }>,
     },
+    lessonId?: ?string,
     clientMutationId?: ?string,
   },
 |};

@@ -18,12 +18,12 @@ const mutation = graphql`
 function addQuestion(environment: Environment, questionName: string, a: string, b: string, c: string, d: string, correct: string) {
     const variables = {
 		input: {
-            questionName,
-            answers : [ {answerName: a, isCorrect: "a" == correct},
-                        {answerName: b, isCorrect: "b" == correct},
-                        {answerName: c, isCorrect: "c" == correct},
-                        {answerName: d, isCorrect: "d" == correct} ]  
-        }
+            question: {questionName: questionName,
+                        answers : [ {answerName: a, isCorrect: "A" == correct},
+                                    {answerName: b, isCorrect: "B" == correct},
+                                    {answerName: c, isCorrect: "C" == correct},
+                                    {answerName: d, isCorrect: "D" == correct} ]  
+        }}
 	};
 
   commitMutation(

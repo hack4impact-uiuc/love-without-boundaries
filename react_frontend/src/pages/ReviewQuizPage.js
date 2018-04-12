@@ -21,9 +21,9 @@ class ReviewQuizPage extends Component{
                                 pastQuizzes{
                                     quizName
                                     score
-                                    questions{
+                                    submittedAnswers{
                                         answerChosen
-                                        correctAnswer
+                                        questionID
                                     }
                                 }
                             }

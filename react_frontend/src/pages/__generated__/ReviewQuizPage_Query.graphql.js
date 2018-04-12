@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 64ae48e1172fe77548b16ced0ba794b8
+ * @relayHash 128d34b62fcf8b98510ae18db8e84ffd
  */
 
 /* eslint-disable */
@@ -15,9 +15,9 @@ export type ReviewQuizPage_QueryResponse = {|
     +pastQuizzes: ?$ReadOnlyArray<?{|
       +quizName: ?string,
       +score: ?number,
-      +questions: ?$ReadOnlyArray<?{|
+      +submittedAnswers: ?$ReadOnlyArray<?{|
         +answerChosen: ?string,
-        +correctAnswer: ?string,
+        +questionID: ?string,
       |}>,
     |}>,
   |}>,
@@ -31,9 +31,9 @@ query ReviewQuizPage_Query {
     pastQuizzes {
       quizName
       score
-      questions {
+      submittedAnswers {
         answerChosen
-        correctAnswer
+        questionID
       }
     }
     id
@@ -68,7 +68,7 @@ var v0 = {
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "questions",
+      "name": "submittedAnswers",
       "storageKey": null,
       "args": null,
       "concreteType": "SubmittedAnswer",
@@ -84,7 +84,7 @@ var v0 = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "correctAnswer",
+          "name": "questionID",
           "args": null,
           "storageKey": null
         }
@@ -97,7 +97,7 @@ return {
   "operationKind": "query",
   "name": "ReviewQuizPage_Query",
   "id": null,
-  "text": "query ReviewQuizPage_Query {\n  students {\n    pastQuizzes {\n      quizName\n      score\n      questions {\n        answerChosen\n        correctAnswer\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query ReviewQuizPage_Query {\n  students {\n    pastQuizzes {\n      quizName\n      score\n      submittedAnswers {\n        answerChosen\n        questionID\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -148,5 +148,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '69250d57be13f7ca32caca755b7860a7';
+(node/*: any*/).hash = '0f0d7824f95c916e54b1babf9d6461fb';
 module.exports = node;
