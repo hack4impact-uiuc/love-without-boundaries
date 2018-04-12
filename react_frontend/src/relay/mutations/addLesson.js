@@ -25,7 +25,9 @@ function addLesson(environment: Environment, name: string, worksheetName: string
             notesName,
             notesURL
         }
-	};
+    };
+    
+    let finalResponse = {}
 
   commitMutation(
     environment,
@@ -33,11 +35,14 @@ function addLesson(environment: Environment, name: string, worksheetName: string
 		mutation,
 		variables,
 		onCompleted: (response) => {
-			console.log('Response received from server.');
+            console.log('Response received from server.');
+            finalResponse.res = response
+            
 		},
 		onError: err => console.error(err),
     },
   );
+  return finalResponse
 }
 
 export default addLesson;
