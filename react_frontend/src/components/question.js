@@ -21,12 +21,16 @@ class Question extends React.Component{
             B: "",
             C: "",
             D: "",
-            correct: ""
+            correct: "",
+            submitted: false
         }
     }
     componentWillReceiveProps(newProps) {
-        this.setState({locked : newProps.locked})
-        addQuestion(environment, this.state.name, this.state.A, this.state.B, this.state.C, this.state.D, this.state.correct)
+        if(newProps.locked != this.state.locked){
+            this.setState({locked : newProps.locked})
+            if(newProps.locked == true)
+                addQuestion(environment, this.state.name, this.state.A, this.state.B, this.state.C, this.state.D, this.state.correct)
+        }
     }
     updateQuestion = event => {
         this.setState({name : event.target.value})
