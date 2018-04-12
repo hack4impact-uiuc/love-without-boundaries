@@ -29,20 +29,25 @@ class LessonForm extends React.Component {
 
     submitLesson = (e, students) => {
         e.preventDefault();
+        console.log(this.state)
         console.log(this.state.wksht_link)
         const NotesFileID = getIdFromUrl(this.state.notes_link);
         const WkshtFileID = getIdFromUrl(this.state.wksht_link);
+        if (!NotesFileID || !WkshtFileID) {
+            alert("Please Insert Notes Link and Worksheet Link");
+        }
         // TODO: Check whether NotesFileId, WksfhtFileID are NULL
+        addLesson(environment, this.state.name, this.state.wksht, this.state.wksht_link, this.state.notes, this.state.notes_link).then(res => {
+            students.map((student) => (
+                addStudentWorksheetCopy(environment, student.id, res.admin.id, this.state.wksht_link)
+            ))
+        })
         setPermissionToAllRead(NotesFileID[0]);
-        addLesson(environment, this.state.name, this.state.wksht, this.state.wksht_link, this.state.notes, this.state.notes_link)
-        students.map((student) => (
-            addStudentWorksheetCopy(environment, student.id, "hello", this.state.wksht_link)
-        ))
         setPermissionToAllRead(WkshtFileID[0]);
         // this.setState({
         //     name: '',
         //     notes: '',
-        //     notes_link: '',
+        //     notes_link: '',cd dsfsdf
         //     wksht: '',
         //     wksht_link: '',
         // });

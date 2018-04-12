@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 function getGapiAccessToken() {
     // return jwtDecode(localStorage.getItem('token')).gapi_access_token;
     // hard code token for now
-    return "ya29.GlybBROmSx4H31n9DFw6w9gT9ngXiy-mhTQiTl3X7P3KTZayEb31oYRicn-MkJai98l911v_HJUTP4S_YoweR97L7FhVTJB3PTdNCh-FitqDlPUZXVy1IFUJfL81tg"
+    return "ya29.GlybBeVWupg9aj-JLl9FPkI9oQku017awC71IeBEr0O0n…HGfXs7A2QShiHYIm5dRQQg44ypDy5mEXHyVXkgYb0UFH_cLLg"
 }
 
 function setPermissionToAllRead(fileId) {
@@ -22,7 +22,7 @@ function setPermissionToAllRead(fileId) {
 }
 
 function getIdFromUrl(url) {
-    return url.match(/[-\w]{25,}/); 
+    return url.match(/[-\w]{25,}/);
 }
 
 function setPermissionToAllEdit(fileId) {
@@ -49,6 +49,7 @@ function copyFile(fileId) {
 function getFileInfo(fileId) {
     return fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?access_token=${getGapiAccessToken()}`).then(res => res.json());
 }
+
 export {
     setPermissionToAllRead,
     getFileInfo,
