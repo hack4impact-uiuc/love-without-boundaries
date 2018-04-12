@@ -4,6 +4,7 @@ import LessonComponent from './../components/lesson';
 import {Button} from 'react-bootstrap';
 import addLesson from '../relay/mutations/addLesson';
 import environment from '../relay/environment';
+import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, getIdFromUrl } from '../Gapi';
 
 
 class LessonForm extends React.Component {
@@ -38,28 +39,19 @@ class LessonForm extends React.Component {
         });
     }
 
-    submitLesson = (environment, name, notes, notesLink, wksht, wkshtLink) => {
-        let fileID = function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
-        drive.permissions.create({
-            auth: 'AIzaSyCNtUcu4OZGxB3o4R4lzFOvkIq7ozXycwo',
-            fileId: fileID,
-            access_token: 'ya29.GluVBb3QL11AkxZFShM7Qp1bScwIa3Noe9ZBVBIl4-y7QRb4mlKgrO2Z0vbI_U76eeYDpyMvf4gHYKXvmEBXhsC2LhYR-f3b2w00ehZBNLN4XgbmG8-KIzZLAYwE',
-            role: 'reader',
-            type: 'anyone'
-        }, (err, response) => {
-            if (err) {
-                console.error(err);
-                throw err;
-            }
-            console.log(response.data.displayName);
-        });
-        addLesson(environment, this.state.name, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)
+    submitLesson = (e) => {
+        //const fileID = getIdFromUrl();
+        //console.log(fileID[0]);
+        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => {
+            console.log(r)
+            //addLesson(environment, this.state.name, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)
+        })
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={() => addLesson(environment, this.state.name, this.state.notes, this.state.notes_link, this.state.wksht, this.state.wksht_link)}>Add Lesson:
+                <form onSubmit={this.submitLesson}>Add Lesson:
                     <div>
                         <label htmlFor="lesson_name_input">Lesson Name: </label>
                         <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
