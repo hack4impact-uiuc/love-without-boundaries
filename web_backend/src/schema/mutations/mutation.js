@@ -207,18 +207,16 @@ const submitQuiz = mutationWithClientMutationId({
         const lObj = fromGlobalId(lessonID);
         const q1 = await Lesson.findById(lObj.id).exec();
         const questionNames = q1.quiz.questions.map(q => q.questionName);
-        const answerNames = q1.quiz.questions.map(q => q.answers);
-
+        // const answerNames = q1.quiz.questions.map(q => q.answers.map(a => [a.answerName, a.isCorrect]));
         let numCorrect = 0;
         questions.forEach((q, i) => {
             let isCorrect = true;
             const indexOfQuestion = questionNames.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
-            q1.quiz.questions[indexOfQuestion].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
+            q1.quiz.questions[indexOfQuestion[0]].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
             numCorrect += isCorrect;
         });
         const submittedAnswers = [];
         q1.quiz.questions.forEach((q, i) => {
-            const isCorrect = true;
             const indexOfAnswer = (questions.findIndex(element => element === q.questionName));
             if (indexOfAnswer != -1) {
                 submittedAnswers.push({ questionID: i, answerChosen: answers[indexOfAnswer] });
@@ -226,7 +224,9 @@ const submitQuiz = mutationWithClientMutationId({
                 submittedAnswers.push({ questionID: i, answerChosen: 'No answer selected' });
             }
         });
+        const lid = lessonID;
         const pastQuiz = {
+            lessonID: lid,
             quizName: q1.name,
             score: (numCorrect / questionNames.length),
             submittedAnswers,

@@ -312,10 +312,129 @@ mutation m {
 ```
 ## Submit Quiz Mutation
 ```
-DOESNT WORK RIGHT NOW
+mutation submit{
+  submitQuiz(input:{id: "U3R1ZGVudDo1YWNhNmNiZmQ1NTYzODcwODAwZWQzZjk=", 
+    				 lessonID: "TGVzc29uOjVhY2E2OWQ0OWE2NDY5NjY4MTIzZDkyOA==",
+    				 questions: ["Who is Tim?"],
+  					 answers: ["Yes."]
+  }) {
+    student {
+      name
+      id
+      pastQuizzes {
+        quizName
+        score
+        submittedAnswers {
+          answerChosen
+        }
+      }
+  	}
+  }
+}
 ```
 ```
-DOESNT WORK RIGHT NOW
+{
+  "data": {
+    "submitQuiz": {
+      "student": {
+        "name": "hana",
+        "id": "U3R1ZGVudDo1YWNhNmNiZmQ1NTYzODcwODAwZWQzZjk=",
+        "pastQuizzes": [
+          {
+            "quizName": "verbs",
+            "score": 0,
+            "submittedAnswers": [
+              {
+                "answerChosen": "No answer selected"
+              },
+              {
+                "answerChosen": "No answer selected"
+              },
+              {
+                "answerChosen": "No answer selected"
+              }
+            ]
+          },
+          {
+            "quizName": "verbs",
+            "score": 0.3333333333333333,
+            "submittedAnswers": [
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              }
+            ]
+          },
+          {
+            "quizName": "verbs",
+            "score": 0.3333333333333333,
+            "submittedAnswers": [
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              }
+            ]
+          },
+          {
+            "quizName": "verbs",
+            "score": 0.3333333333333333,
+            "submittedAnswers": [
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              }
+            ]
+          },
+          {
+            "quizName": "verbs",
+            "score": 0.3333333333333333,
+            "submittedAnswers": [
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              }
+            ]
+          },
+          {
+            "quizName": "verbs",
+            "score": 0.3333333333333333,
+            "submittedAnswers": [
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              },
+              {
+                "answerChosen": "Yes."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
 ```
 ## Add Question Mutation
 ```
@@ -604,6 +723,34 @@ Expected Result:
       "student": {
         "id": "U3R1ZGVudDo1YWE1YTFlNTFkZjQxMTBlNjZlNjY0NWQ=",
         "name": "kiwiwiwiwi"
+      }
+    }
+  }
+}
+```
+## Add URL Mutation
+```
+mutation addURL{
+  addURL(input:{id: "U3R1ZGVudDo1YWNhOTU4NDVkNTM3ODc4ZDQ1YjVlNWQ=",
+  							url: "www.meetspin.com"
+  							}){
+    student{
+      name
+      id
+      URL
+    }
+  }
+}
+```
+Expected Result:
+```
+{
+  "data": {
+    "addURL": {
+      "student": {
+        "name": "shreyas",
+        "id": "U3R1ZGVudDo1YWNhOTU4NDVkNTM3ODc4ZDQ1YjVlNWQ=",
+        "URL": "www.meetspin.com"
       }
     }
   }

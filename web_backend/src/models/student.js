@@ -11,6 +11,7 @@ const StudentSchema = new Schema({
         score: { type: Number },
     }],
     pastQuizzes: [{
+        lessonID: { type: String },
         quizName: { type: String },
         score: { type: Number },
         submittedAnswers: [{
