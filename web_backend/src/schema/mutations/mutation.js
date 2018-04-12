@@ -238,7 +238,6 @@ const submitQuiz = mutationWithClientMutationId({
         return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
     },
 });
-
 const addQuestion = mutationWithClientMutationId({
     name: 'AddQuestion',
     inputFields: {
