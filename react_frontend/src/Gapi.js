@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 function getGapiAccessToken() {
     // return jwtDecode(localStorage.getItem('token')).gapi_access_token;
     // hard code token for now
-    return 'ya29.GlybBdYVMPvaSWPwnkxjPAz_ya9hUSjsokztNj-u9n78Myat8Pca6Fe0Mrr1Xy78i-k9bWlY-KVVWYrVoOvzNXnsZiRfO_VzT29NZVrFpmWGXKtrFrOacISpeU4stQ'
+    return "ya29.GlybBROmSx4H31n9DFw6w9gT9ngXiy-mhTQiTl3X7P3KTZayEb31oYRicn-MkJai98l911v_HJUTP4S_YoweR97L7FhVTJB3PTdNCh-FitqDlPUZXVy1IFUJfL81tg"
 }
 
 function setPermissionToAllRead(fileId) {
@@ -21,7 +21,7 @@ function setPermissionToAllRead(fileId) {
     }).then(res => res.json());
 }
 
-function getIdFromUrl(url) { 
+function getIdFromUrl(url) {
     return url.match(/[-\w]{25,}/); 
 }
 

@@ -51,7 +51,7 @@ class HomePage extends React.Component<Props>{
         });
     }
     getInfo = (e) => {
-        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => console.log(r));
+        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => console.log(r)).catch(err => console.log(err));
         //copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllRead(r.id)).then(r => console.log(r));
     }
     render() {
