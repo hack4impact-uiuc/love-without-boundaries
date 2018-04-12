@@ -28,23 +28,24 @@ class LessonForm extends React.Component {
     }
 
     submitLesson = (e, students) => {
-        // e.preventDefault();
+        e.preventDefault();
+        console.log(this.state.wksht_link)
         const NotesFileID = getIdFromUrl(this.state.notes_link);
         const WkshtFileID = getIdFromUrl(this.state.wksht_link);
         // TODO: Check whether NotesFileId, WksfhtFileID are NULL
         setPermissionToAllRead(NotesFileID[0]);
         addLesson(environment, this.state.name, this.state.wksht, this.state.wksht_link, this.state.notes, this.state.notes_link)
         students.map((student) => (
-            addStudentWorksheetCopy(evironment, student.id, "hello", this.state.wksht_link)
+            addStudentWorksheetCopy(environment, student.id, "hello", this.state.wksht_link)
         ))
         setPermissionToAllRead(WkshtFileID[0]);
-        this.setState({
-            name: '',
-            notes: '',
-            notes_link: '',
-            wksht: '',
-            wksht_link: '',
-        });
+        // this.setState({
+        //     name: '',
+        //     notes: '',
+        //     notes_link: '',
+        //     wksht: '',
+        //     wksht_link: '',
+        // });
         console.log(WkshtFileID[0])
     }
 
@@ -94,8 +95,8 @@ class LessonForm extends React.Component {
                                     <label htmlFor="lesson_wksht_link_input">Lesson Worksheet Link: </label>
                                     <input id="lesson_wksht_link_input" name="wksht_link" value={this.state.wksht_link} onChange={this.handleChange} />
                                 </div>
-                                
-                                <button onClick={this.submitLesson(props.students)}>Add Lesson</button>
+                    
+                                <button onClick={(e) => this.submitLesson(e, props.students)}>Add Lesson</button>
                             </form>
                         <div>
                             
