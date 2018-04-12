@@ -4,16 +4,16 @@ import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-    mutation addWorksheetStudentMutation(
+    mutation addStudentWorksheetCopyMutation(
         $input: AddStudentWorksheetCopyInput!
     ) {
-        AddStudentWorksheetCopy(input: $input){
+        addStudentWorksheetCopy(input: $input){
             clientMutationId
         }
     }
 `;
 
-function addWorksheetStudent(environment: Environment, studentID: string, lessonID: string, url: string) {
+function addStudentWorksheetCopy(environment: Environment, studentID: string, lessonID: string, url: string) {
 	const variables = {
 		input: {
             studentID,
@@ -35,4 +35,4 @@ function addWorksheetStudent(environment: Environment, studentID: string, lesson
   );
 }
 
-export default addWorksheetStudent;
+export default addStudentWorksheetCopy;
