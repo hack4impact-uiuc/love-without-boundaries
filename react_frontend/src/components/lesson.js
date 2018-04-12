@@ -90,7 +90,7 @@ class LessonComponent extends React.Component<Props>{
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
                     <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} 
-                        {!this.props.isTeacher && (<Button onClick={this.gotoQuiz} bsStyle="primary">{quiz}</Button>)} 
+                        {this.props.isTeacher == false ? <Button onClick={this.gotoQuiz} bsStyle="primary">{quiz}</Button> : null} 
                         <Button onClick={this.gotoPastQuiz} bsStyle="primary"> Review </Button> 
                     </LessonProps>
                 </LessonBox>

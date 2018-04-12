@@ -22,7 +22,7 @@ class AdminPage extends React.Component<Props>{
             <div>I am an admin
                 <LessonForm/>
                 <button onClick = {this.gotoQuiz}>Create Quiz</button>
-                <LessonList isTeacher={false}/>
+                <LessonList/>
                 <AdminList/>
             </div>
         );
