@@ -4,6 +4,8 @@ import { Image } from 'react-bootstrap';
 import './../../assets/Hover.css';
 import lovewithout_white from './../../assets/lovewithout_white.png';
 
+console.log(lovewithout_white)
+
 type Props = {
     /**/
 }
