@@ -38,7 +38,7 @@ class ReviewQuizPage extends Component{
                         }
                         return (
                             <div>
-                                <h1>Quiz 1</h1>
+                                <h1>Quiz Submission</h1>
                                 {
                                     props.students.map(student => {
                                         if(student.pastQuizzes){
