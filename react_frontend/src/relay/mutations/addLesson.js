@@ -9,7 +9,7 @@ const mutation = graphql`
     ) {
         createLesson(input: $input){
             lesson {
-                name
+                id
             }
             clientMutationId
         }
@@ -25,19 +25,22 @@ function addLesson(environment: Environment, name: string, worksheetName: string
             notesName,
             notesURL
         }
-	};
-
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-			console.log('Response received from server.');
-		},
-		onError: err => console.error(err),
-    },
-  );
+    };
+    
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server.');
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default addLesson;
+export {
+    mutation
+}
