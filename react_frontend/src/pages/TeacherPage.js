@@ -83,11 +83,12 @@ class TeacherPage extends React.Component<Props>{
                 }}
                 render={({ props }) => {
                     if (props) {
+                        console.log(props.node)
                         return (
                             <div>
-                                I am a teacher 
+                                I am a teacher
                                 <h3>My Students</h3> 
-                                { props.node && props.node.students.length == 0 ? <p>You have no assigned students.</p> : props.node.students.map((student, idx) => 
+                                { props.node == null || props.node.students == null ? <p>You have no assigned students.</p> : props.node.students.map((student, idx) => 
                                     <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
                                         <button >{student.name}</button>
                                     </Link>
