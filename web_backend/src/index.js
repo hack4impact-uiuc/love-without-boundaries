@@ -75,7 +75,7 @@ const withAuth = next => async (req, res) => {
     //     console.log("yo")
         
     // }
-    console.log(req)
+    // console.log¿(req)
     //TODO: If it a register call, dont auth
     const token = await createToken("aria", "aria@gmail.com", "123", "student");
     if (await verifyToken(token)) {
