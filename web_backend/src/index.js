@@ -18,9 +18,10 @@ import jwt from 'jsonwebtoken';
 import find from 'lodash/find';
 import { isNull } from 'util';
 const expiresIn = '3h'; 
-const secret = 'samplejwtauthgraphql'; 
-const tokenPrefix = 'JWT'; 
-s
+const secret = 'samplejwtauthgraphql'; // secret key
+const tokenPrefix = 'JWT'; // Prefix for HTTP header
+
+
 export const createToken = async (name, email, token, role) => {
     if (!name || !email || !token || !role) { // no credentials = fail
         return false;
@@ -74,6 +75,8 @@ const withAuth = next => async (req, res) => {
     //     console.log("yo")
         
     // }
+    console.log(req)
+    //TODO: If it a register call, dont auth
     const token = await createToken("aria", "aria@gmail.com", "123", "student");
     if (await verifyToken(token)) {
         return next(req, res);
