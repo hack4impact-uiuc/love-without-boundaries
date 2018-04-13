@@ -100,7 +100,6 @@ class LessonComponent extends React.Component<Props>{
                          <Button onClick={this.gotoPastQuiz} bsStyle="primary"> Review </Button> 
                          
                     </LessonProps>
-                    
                 </LessonBox>
             </div>
         );

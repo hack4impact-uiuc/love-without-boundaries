@@ -255,9 +255,9 @@ type Mutation {
   createTeacher(input: CreateTeacherInput!): CreateTeacherPayload
   createAdmin(input: CreateAdminInput!): CreateAdminPayload
   deleteAdmin(input: DeleteAdminInput!): DeleteAdminPayload
+  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   addGrade(input: AddGradeInput!): AddGradePayload
   assignStudentToTeacher(input: AssignStudentToTeacherInput!): AssignStudentToTeacherPayload
-  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   submitQuiz(input: SubmitQuizInput!): SubmitQuizPayload
   addQuestion(input: AddQuestionInput!): AddQuestionPayload
   createLesson(input: CreateLessonInput!): CreateLessonPayload

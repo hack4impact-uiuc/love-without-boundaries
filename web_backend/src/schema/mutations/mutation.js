@@ -165,7 +165,6 @@ const assignStudentToTeacher = mutationWithClientMutationId({
     },
 });
 
-
 const deleteTeacher = mutationWithClientMutationId({
     name: 'DeleteTeacher',
     inputFields: {
@@ -468,9 +467,9 @@ const Mutation = new GraphQLObjectType({
             createTeacher,
             createAdmin,
             deleteAdmin,
+            deleteTeacher,
             addGrade,
             assignStudentToTeacher,
-            deleteTeacher,
             submitQuiz,
             addQuestion,
             createLesson,
