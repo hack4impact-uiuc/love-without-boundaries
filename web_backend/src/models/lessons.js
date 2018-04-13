@@ -20,4 +20,6 @@ const LessonSchema = new Schema({
     notesURL: { type: String },
 });
 
+LessonSchema.methods.canBeAccessedBy = user => Boolean(user);
+
 export default mongoose.model('Lesson', LessonSchema);
