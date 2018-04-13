@@ -67,35 +67,24 @@ class LessonForm extends React.Component {
                     return (
                         <div>
                             <form>
-                                Add Lesson:
-                                <div>
+                                <h2>Add Lesson:</h2>
+                                <div className="form-group">
                                     <label htmlFor="lesson_name_input">Lesson Name: </label>
-                                    <input id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
+                                    <input className="form-control" id="lesson_name_input" name="name" type="text" value={this.state.name} onChange={this.handleChange} placeholder="Enter Lesson Name"/>
                                 </div>
 
-                                <div>
-                                    <label htmlFor="lesson_notes_input">Lesson Notes: </label>
-                                    <input id="lesson_notes_input" name="notes" value={this.state.notes} onChange={this.handleChange} />
-                                </div>
-
-                                Please make sure that Notes File is viewable to everyone with the link and is in the Shared LWB Google Drive Folder
-                                <div>
+                                <div className="form-group">
                                     <label htmlFor="lesson_notes_link_input">Lesson Notes Link: </label>
-                                    <input id="lesson_notes_link_input" name="notes_link" value={this.state.notes_link} onChange={this.handleChange} />
+                                    <input className="form-control" id="lesson_notes_link_input" name="notes_link" value={this.state.notes_link} onChange={this.handleChange} placeholder="Enter Notes File Link"/>
                                 </div>
 
-                                <div>
-                                    <label htmlFor="lesson_wksht_input">Lesson Worksheet: </label>
-                                    <input id="lesson_wksht_input" name="wksht" value={this.state.wksht} onChange={this.handleChange} />
-                                </div>
-
-                                Please make sure that Worksheets File is viewable to everyone with the link and is in the Shared LWB Google Drive Folder
-                                <div>
+                                <div className="form-group">
                                     <label htmlFor="lesson_wksht_link_input">Lesson Worksheet Link: </label>
-                                    <input id="lesson_wksht_link_input" name="wksht_link" value={this.state.wksht_link} onChange={this.handleChange} />
+                                    <input className="form-control" id="lesson_wksht_link_input" name="wksht_link" value={this.state.wksht_link} onChange={this.handleChange} placeholder="Enter Worksheet File Link"/>
                                 </div>
+                                <p style={{color:"#d41137"}}> Please make sure that Notes & Worksheet File is viewable to everyone with the link and is in the Shared LWB Google Drive Folder</p>
                     
-                                <button onClick={(e) => this.submitLesson(e, props.students)}>Add Lesson</button>
+                                <button className="btn btn-primary" onClick={(e) => this.submitLesson(e, props.students)}>Add Lesson</button>
                             </form>
                         <div>
                             
