@@ -88,8 +88,6 @@ class HomePage extends React.Component<Props>{
                                             </div>
                                             : 
                                             <div>
-                                                {/* <button onClick={this.setup}>Initial Student Setup</button>
-                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button> */}
                                                 <Login/>
                                                 <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                             </div>
