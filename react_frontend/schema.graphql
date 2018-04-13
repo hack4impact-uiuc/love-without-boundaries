@@ -45,6 +45,17 @@ type AddStudentWorksheetCopyPayload {
   clientMutationId: String
 }
 
+input AddURLInput {
+  id: ID
+  url: String
+  clientMutationId: String
+}
+
+type AddURLPayload {
+  student: Student
+  clientMutationId: String
+}
+
 input AddWorksheetInput {
   id: ID
   name: String
@@ -233,9 +244,9 @@ type Mutation {
   createTeacher(input: CreateTeacherInput!): CreateTeacherPayload
   createAdmin(input: CreateAdminInput!): CreateAdminPayload
   deleteAdmin(input: DeleteAdminInput!): DeleteAdminPayload
+  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   addGrade(input: AddGradeInput!): AddGradePayload
   assignStudentToTeacher(input: AssignStudentToTeacherInput!): AssignStudentToTeacherPayload
-  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   submitQuiz(input: SubmitQuizInput!): SubmitQuizPayload
   addQuestion(input: AddQuestionInput!): AddQuestionPayload
   createLesson(input: CreateLessonInput!): CreateLessonPayload
@@ -247,6 +258,7 @@ type Mutation {
   addStudentWorksheetCopy(input: AddStudentWorksheetCopyInput!): AddStudentWorksheetCopyPayload
   removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
   deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
+  addURL(input: AddURLInput!): AddURLPayload
 }
 
 # An object with an ID
@@ -257,6 +269,7 @@ interface Node {
 
 # Self Descriptive
 type PastQuiz {
+  lessonID: ID
   quizName: String
   score: Float
   submittedAnswers: [SubmittedAnswer]
@@ -299,6 +312,7 @@ type Student implements Node {
   grades: [Grade]
   pastQuizzes: [PastQuiz]
   worksheets: [Worksheet]
+  URL: String
 }
 
 input SubmitQuizInput {
