@@ -102,10 +102,11 @@ class LessonComponent extends React.Component<Props>{
                         <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
                         </Link>
                     )}
-                        <Link key={this.props.key} style={{ display:'block' }}to={{ pathname: '/reviewquiz', state:{ lessonID: this.props.id } }}>
-                          <<SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Review </SlightlyPaddedButton>
+                        <Link key={this.props.key} to={{ pathname: '/reviewquiz', state:{ lessonID: this.props.id } }}>
+                          <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Review </SlightlyPaddedButton>
                         </Link>  
-                    </LessonProps>
+                    </LessonProps> 
+    
                 </LessonBox>
             </div>
         );
