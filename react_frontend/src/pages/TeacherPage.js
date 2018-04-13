@@ -83,7 +83,6 @@ class TeacherPage extends React.Component<Props>{
                 }}
                 render={({ props }) => {
                     if (props) {
-                        console.log(props.node)
                         return (
                             <div>
                                 I am a teacher
