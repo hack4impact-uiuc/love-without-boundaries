@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
@@ -49,10 +48,6 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
-    getInfo = (e) => {
-        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => console.log(r)).catch(err => console.log(err));
-        //copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllRead(r.id)).then(r => console.log(r));
-    }
     setup = (e) =>{
         // this function is used to easily call the google drive setup function
         // this should be called once auth is setup for a newly registered student
@@ -77,11 +72,11 @@ class HomePage extends React.Component<Props>{
                             <div> 
                             <HomeSection className="container">
                                 <LogoRow className="row">
-                                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
-                                        <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
-                                    </Col>
-                                    <Col xs={1} sm={6}></Col>
-                                    <Col xs={5} sm={2}>
+                                    <div className="col-xs-5 col-sm-4" style={{paddingLeft: 15}}>
+                                        <img className="img-fluid" src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" />
+                                    </div>
+                                    <div className="col-xs-1 col-sm-6"></div>
+                                    <div className="col-xs-5 col-sm-2">
                                         <SignInSection>
                                         { 
                                             this.state.signup ?
@@ -93,14 +88,14 @@ class HomePage extends React.Component<Props>{
                                             </div>
                                             : 
                                             <div>
-                                            <button onClick={this.setup}>Initial Student Setup</button>
-                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button>
+                                                {/* <button onClick={this.setup}>Initial Student Setup</button>
+                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button> */}
                                                 <Login/>
                                                 <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                             </div>
                                         }
                                         </SignInSection>
-                                    </Col>
+                                    </div>
                                 </LogoRow>
                             </HomeSection>
                             </div>
