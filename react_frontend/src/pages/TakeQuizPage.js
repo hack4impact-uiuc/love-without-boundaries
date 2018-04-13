@@ -16,6 +16,7 @@ const CopiedButton = styled.button`
 class TakeQuizPage extends Component{
     constructor(props){
         super(props)
+        this.lessonID = 'TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg=='
         this.state = {qNum: 0, qMap : []}
     }
     finish = () => {this.props.history.push('/student');}
@@ -23,8 +24,19 @@ class TakeQuizPage extends Component{
         return (
             //TODO: replace with some sort of query rendered for lesson-specific quiz?
             <div>
-            <h1>Quiz 1</h1>
-            <Quiz/>
+            <QueryRenderer
+            environment = {environment}
+            query = {graphql`
+                query QuizQuery($lesson_id: ID!){
+                    node(id: $lesson_id) {
+                        ... on Lesson{
+                            quiz{
+                                name
+                                questions{
+
+                                }
+                            }
+                            `}
             <CopiedButton onClick={() => submitQuiz(environment, 'U3R1ZGVudDo1YWNlZTg4OGVhNWM3NDQ2MjEzZDdkYTY=', "TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==",['2+2?'],["4"])}>Submit</CopiedButton>
             
             
