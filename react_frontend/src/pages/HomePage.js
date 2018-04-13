@@ -7,7 +7,7 @@ import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import Login from '../components/login';
-
+import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 type Props = {
     /**/ 
 }
@@ -49,7 +49,15 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
-
+    getInfo = (e) => {
+        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => console.log(r)).catch(err => console.log(err));
+        //copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllRead(r.id)).then(r => console.log(r));
+    }
+    setup = (e) =>{
+        // this function is used to easily call the google drive setup function
+        // this should be called once auth is setup for a newly registered student
+        InitialStudentSetup(environment,'hi');
+    }
     render() {
         return (
             
@@ -85,6 +93,8 @@ class HomePage extends React.Component<Props>{
                                             </div>
                                             : 
                                             <div>
+                                            <button onClick={this.setup}>Initial Student Setup</button>
+                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button>
                                                 <Login/>
                                                 <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                             </div>
