@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import './../../assets/Hover.css';
 import { withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 type Props = {
   /**/
@@ -92,8 +93,13 @@ class LessonComponent extends React.Component<Props>{
                     <LessonTitle >{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz -- {this.props.quizName} Grade: {this.props.quizPercentage} 
-                        {this.props.isTeacher && (<SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoQuiz}>{quiz}</SlightlyPaddedButton>)} 
+                    <LessonProps> Quiz -- {this.props.quizName} Grade: {this.props.quizPercentage}     
+                    `   {this.props.isTeacher &&  (
+                        <Link key={this.props.key} to={{ pathname: '/takequiz', state:{ lessonID: this.props.id } }}>
+                        <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
+                        </Link>
+                    )}
+                         
                         <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton> 
                     </LessonProps>
                 </LessonBox>
