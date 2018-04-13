@@ -1,19 +1,59 @@
-import micro, {send} from 'micro';
+import micro, { send } from 'micro';
 import graphqlHTTP from 'express-graphql';
 import Schema from './schema/schema.js';
 
 // import Teacher from './../../web_backend/src/models/teacher';
 // import Student from './../../web_backend/src/models/student';
 import Admin from './models/admin';
-import Student from './models/student';
+import User from './models/user';
 import Teacher from './models/teacher';
 
-const cors = require('micro-cors')()
+const cors = require('micro-cors')();
 const mongoose = require('mongoose');
 
 
-
 const MONGO_URI = 'mongodb://ariamalkani:malkani@ds147228.mlab.com:47228/lwb';
+
+import jwt from 'jsonwebtoken';
+import find from 'lodash/find';
+import { isNull } from 'util';
+const expiresIn = '3h'; 
+const secret = 'samplejwtauthgraphql'; 
+const tokenPrefix = 'JWT'; 
+s
+export const createToken = async (name, email, token, role) => {
+    if (!name || !email || !token || !role) { // no credentials = fail
+        return false;
+    }
+    const user = await User.find({"name": name, "email": email, "token": token, "role":role })
+    if (user.length === 0) { 
+        return false;
+    }
+    const payload = {
+        name,
+        email,
+        token,
+        role,
+    };
+    const jwtToken = jwt.sign(payload, secret, {
+        expiresIn,
+    });
+    return jwtToken;
+};
+
+
+export const verifyToken = async (payload) => {
+    if (!payload) { 
+        throw new Error('No token provided');
+    }
+    const data = (jwt.verify(payload, 'samplejwtauthgraphql'))
+    const user = await User.find({"name": data.name, "email": data.email, "token": data.token, "role":data.role })
+    if (user.length === 0) { 
+        return false;
+    }
+    return true;
+};
+
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URI);
@@ -21,24 +61,26 @@ mongoose.connection
     .once('open', () => console.log('Connected to MongoLab instance.'))
     .on('error', error => console.log('Error connecting to MongoLab:', error));
 
-const withAuth = next => (req, res) => {
+const withAuth = next => async (req, res) => {
     req.user = null;
-    const header = req.headers.authorization
-    if(header) {
-        const [type, token] = header.split(' ')
-        switch(type) {
-            case 'Bearer':
-                // TODO: Find user in Teacher/Student/Admin model and set r
-                break;
-        }
+    const header = req.headers.authorization;
+    // if (header) {
+    //     const [type, token] = header.split(' ');
+    //     switch (type) {
+    //     case 'Bearer':
+    //         // TODO: Find user in Teacher/Student/Admin model and set r
+    //         break;
+    //     }
+    //     console.log("yo")
+        
+    // }
+    const token = await createToken("aria", "aria@gmail.com", "123", "student");
+    if (await verifyToken(token)) {
+        return next(req, res);
     }
-    return next(req, res);
-}
+    return null;
 
-exports.default = cors(
-    withAuth(
-        graphqlHTTP(
-            { schema: Schema, pretty: true, graphiql: true }
-        )
-    )
-);
+    // return next(req, res);
+};
+
+exports.default = cors(withAuth(graphqlHTTP({ schema: Schema, pretty: true, graphiql: true } ) ) );

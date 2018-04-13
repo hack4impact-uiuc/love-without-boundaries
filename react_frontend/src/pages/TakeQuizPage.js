@@ -37,7 +37,9 @@ class TakeQuizPage extends Component {
       }
     
       toggleCheckbox = (label, i) => {
-        this.selectedCheckboxes[i] = label
+        if (this.selectedCheckboxes[i] != label) {
+            this.selectedCheckboxes[i] = label
+        }
       }
     
       handleFormSubmit = (formSubmitEvent, id) => {
