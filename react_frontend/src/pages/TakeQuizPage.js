@@ -26,18 +26,41 @@ class TakeQuizPage extends Component {
         return (
             <QueryRenderer
                 environment ={environment}
+
+                // query TeacherPage_Query($teacher_id: ID!){
+                //     node(id: $teacher_id) {
+                //         ... on Teacher {
+                //             students {
+                //                 name
+                //             }
+                //         }
+                //     }
+                // }
                 query={graphql`
-                    query StudentPage_Query{
-                        lessons{
-                            name
-                            worksheetName
-                            worksheetURL
-                            notesName
-                            notesURL
+                    query TakeQuizPage_Query($quiz_id: ID!){
+                        node(id:$quiz_id){
+                            id
+                            __typename
+                            
+                            ... on Lesson {
+                                name
+                                quiz {
+                                    questions {
+                                    questionName
+                                    answers{
+                                        answerName
+                                        isCorrect
+                                    }
+                                    }
+                                }
+                            }
+
                         }
-                    }  
+                    }
                 `}
-                variables={{}}
+                variables={{
+                    quiz_id: this.props.location.state.lessonID
+                }}
                 render={({ props }) => {
                     if (!props) {
                         return (
@@ -47,9 +70,7 @@ class TakeQuizPage extends Component {
                     return (
                         <div>
                             <h1>Quiz 1</h1>
-                            <Quiz />
-                            <p> </p>
-
+                            <Quiz quiz={props.node.quiz}/>
                             <CopiedButton onClick={() => submitQuiz(environment, 'U3R1ZGVudDo1YWQwMWM5YWZkODFiNjg3YWYwYmM1NWQ=', 'TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==', ['5aced58421b8333d77e8e339'], ['4'])}>Submit</CopiedButton>
                         </div>
                     );

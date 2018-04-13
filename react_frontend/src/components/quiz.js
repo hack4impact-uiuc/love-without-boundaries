@@ -1,38 +1,39 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import Answer from '../components/answer'
+import Answer from '../components/answer';
 
-class Quiz extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            name : "",
-            //locked : false
-        }
+class Quiz extends React.Component {
+    constructor(props) {
+        super(props);
+        // this.state = {
+        //     name: '',
+        //     // locked : false
+        // };
+        this.state = {isGoing: false};
     }
     render() {
-        return(
+        return (
             <div>
-                <div>
-                    Question 1: He ..... there when he was a child <br/>
-                    <input type="radio" name="q1" /> has lived <br/>
-                    <input type="radio" name="q1" /> lived <br/>
-                    <input type="radio" name="q1" /> does live <br/>
-                    <input type="radio" name="q1" /> lives <br/>
-                </div>
-                <br/>
-                <div>
-                    Question 2: They ......... a few minutes ago <br/>
-                    <input type="radio" name="q2" /> have left <br/>
-                    <input type="radio" name="q2" /> left <br/>
-                    <input type="radio" name="q2" /> did left <br/>
-                    <input type="radio" name="q2" /> does left <br/>
-                    <br/>
-                </div>
+                {(this.props.quiz.questions.map((q, idx) => (
+                    <div>
+                        <h3 key={idx}> Question {idx + 1}: { q.questionName}  </h3>
+                        {q.answers.map(a =>
+                        // <h5 key={idx}> {a.answerName}</h5>
+                        <div> 
+                        {a.answerName} 
+                        <input
+                        type="checkbox"
+                        checked={this.state.isGoing}
+                        onChange={this.handleInputChange} />
+                        </div>
+                    )}
+
+                    </div>
+                )))}
+               
             </div>
         );
     }
-
 }
 
 export default Quiz;

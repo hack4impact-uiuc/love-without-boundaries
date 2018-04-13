@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 335b1181ab11cb5e74bc4acbe18dd4a1
+ * @relayHash 382358ee0b9b6f72ce8489385d9cefb7
  */
 
 /* eslint-disable */
@@ -13,10 +13,12 @@ export type submitQuizMutationVariables = {|
   input: {
     id?: ?string,
     lessonID?: ?string,
-    answeredQuestions?: ?$ReadOnlyArray<?{
-      questionID?: ?string,
-      answerChosen?: ?string,
-    }>,
+    answeredQuestions?: ?{
+      submissions?: ?$ReadOnlyArray<?{
+        questionID?: ?string,
+        answerChosen?: ?string,
+      }>,
+    },
     clientMutationId?: ?string,
   },
 |};

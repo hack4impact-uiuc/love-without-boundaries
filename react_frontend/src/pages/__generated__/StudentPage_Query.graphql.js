@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash dcc4d02dfd0d2d5374c765c2c5c21cf7
+ * @relayHash e5cdce2324d4dd2a29d7eb08ee9e1e25
  */
 
 /* eslint-disable */
@@ -12,6 +12,7 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type StudentPage_QueryVariables = {| |};
 export type StudentPage_QueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
+    +id: string,
     +name: ?string,
     +worksheetName: ?string,
     +worksheetURL: ?string,
@@ -25,58 +26,78 @@ export type StudentPage_QueryResponse = {|
 /*
 query StudentPage_Query {
   lessons {
+    id
     name
     worksheetName
     worksheetURL
     notesName
     notesURL
-    id
   }
 }
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "worksheetName",
-  "args": null,
-  "storageKey": null
-},
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "worksheetURL",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "notesName",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "notesURL",
-  "args": null,
-  "storageKey": null
-};
+var v0 = [
+  {
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "lessons",
+    "storageKey": null,
+    "args": null,
+    "concreteType": "Lesson",
+    "plural": true,
+    "selections": [
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "id",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "name",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "worksheetName",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "worksheetURL",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "notesName",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "notesURL",
+        "args": null,
+        "storageKey": null
+      }
+    ]
+  }
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query {\n  lessons {\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n    id\n  }\n}\n",
+  "text": "query StudentPage_Query {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -84,56 +105,15 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "lessons",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Lesson",
-        "plural": true,
-        "selections": [
-          v0,
-          v1,
-          v2,
-          v3,
-          v4
-        ]
-      }
-    ]
+    "selections": v0
   },
   "operation": {
     "kind": "Operation",
     "name": "StudentPage_Query",
     "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "lessons",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Lesson",
-        "plural": true,
-        "selections": [
-          v0,
-          v1,
-          v2,
-          v3,
-          v4,
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "selections": v0
   }
 };
 })();
-(node/*: any*/).hash = '0857086aa4a409b68bfa2d40d6efd5b7';
+(node/*: any*/).hash = '28df96f3f8dd5dd62bb0409bb0555862';
 module.exports = node;
