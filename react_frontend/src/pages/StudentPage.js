@@ -17,7 +17,7 @@ class StudentPage extends React.Component<Props>{
         super(props);
         this.state = {
             title: "My Lessons",
-            isTeacher: jwt_decode(localStorage.getItem('token')).userType == "teacher"
+            isTeacher: jwt_decode(localStorage.getItem('token')).userType == 'teacher'
         }
 
     }
