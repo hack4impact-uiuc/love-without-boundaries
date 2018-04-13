@@ -226,6 +226,17 @@ input InputQuiz {
   lessonID: String
 }
 
+# Self Descriptive
+input InputSubmittedAnswer {
+  questionID: String
+  answerChosen: String
+}
+
+# Self Descriptive
+input InputSubmittedAnswers {
+  submissions: [InputSubmittedAnswer]
+}
+
 # Schema design for lessons
 type Lesson implements Node {
   # The ID of an object
@@ -244,9 +255,9 @@ type Mutation {
   createTeacher(input: CreateTeacherInput!): CreateTeacherPayload
   createAdmin(input: CreateAdminInput!): CreateAdminPayload
   deleteAdmin(input: DeleteAdminInput!): DeleteAdminPayload
+  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   addGrade(input: AddGradeInput!): AddGradePayload
   assignStudentToTeacher(input: AssignStudentToTeacherInput!): AssignStudentToTeacherPayload
-  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
   submitQuiz(input: SubmitQuizInput!): SubmitQuizPayload
   addQuestion(input: AddQuestionInput!): AddQuestionPayload
   createLesson(input: CreateLessonInput!): CreateLessonPayload
@@ -318,8 +329,7 @@ type Student implements Node {
 input SubmitQuizInput {
   id: ID
   lessonID: ID
-  questions: [String]
-  answers: [String]
+  answeredQuestions: InputSubmittedAnswers
   clientMutationId: String
 }
 

@@ -9,6 +9,8 @@ import HomePage from './HomePage';
 import QuizPage from './QuizPage';
 import TakeQuizPage from './TakeQuizPage';
 import ReviewQuizPage from './ReviewQuizPage';
+import './../../assets/style.css';
+import NavBar from '../components/navBar';
 
 type Props = {
     /**/ 
@@ -44,6 +46,7 @@ class App extends React.Component<Props> {
                         </ul>
 
                         <hr />
+                        <NavBar/>
                         <Route exact path="/" component={HomePage} /> 
                         <Route path="/student" component={StudentPage} />
                         <Route path="/teacher" component={TeacherPage} />
