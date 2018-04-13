@@ -26,6 +26,8 @@ class Login extends React.Component {
                 }}
                 clientId='162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com'
                 buttonText='Login'
+                accessType='offline'
+                scope='https://www.googleapis.com/auth/drive.file'
                 onSuccess={this.responseGoogle}
             />
         );

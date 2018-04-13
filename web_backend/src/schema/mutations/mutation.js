@@ -7,6 +7,9 @@ import Teacher from '../../models/teacher';
 import InputQuizType from '../types/InputQuizType';
 import Lesson from '../../models/lessons';
 import { TeacherType, AdminType, StudentType, LessonType } from '../types/Nodes';
+import AnsweredQuestionsType from '../types/AnsweredQuestionsType';
+
+// AnsweredQuestion
 
 
 const createUser = mutationWithClientMutationId({
@@ -209,7 +212,6 @@ const assignStudentToTeacher = mutationWithClientMutationId({
     },
 });
 
-
 const deleteTeacher = mutationWithClientMutationId({
     name: 'DeleteTeacher',
     inputFields: {
@@ -234,8 +236,9 @@ const submitQuiz = mutationWithClientMutationId({
     inputFields: {
         id: { type: GraphQLID },
         lessonID: { type: GraphQLID },
-        questions: { type: new GraphQLList(GraphQLString) },
-        answers: { type: new GraphQLList(GraphQLString) },
+       
+        answeredQuestions: { type: AnsweredQuestionsType },
+        // answers: { type: new GraphQLList(GraphQLString) },
     },
     student: {
         type: StudentType,
@@ -248,34 +251,43 @@ const submitQuiz = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({
-        id, lessonID, questions, answers,
+        id, lessonID, answeredQuestions,
     }) => {
+        // console.log(answeredQuestions);
+        const questions = [];
+        answeredQuestions.submissions.forEach(q => questions.push(q.questionID));
+        // console.log(questions);
+        const answers = [];
+        answeredQuestions.submissions.forEach(q => answers.push(q.answerChosen));
+        // console.log(answers);
+
         const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
         const q1 = await Lesson.findById(lObj.id).exec();
-        const questionNames = q1.quiz.questions.map(q => q.questionName);
+        const questionIDs = q1.quiz.questions.map(q => q.id);
         // const answerNames = q1.quiz.questions.map(q => q.answers.map(a => [a.answerName, a.isCorrect]));
         let numCorrect = 0;
         questions.forEach((q, i) => {
             let isCorrect = true;
-            const indexOfQuestion = questionNames.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
+            const indexOfQuestion = questionIDs.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
+            // console.log(indexOfQuestion)
             q1.quiz.questions[indexOfQuestion[0]].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
             numCorrect += isCorrect;
         });
         const submittedAnswers = [];
         q1.quiz.questions.forEach((q, i) => {
-            const indexOfAnswer = (questions.findIndex(element => element === q.questionName));
+            const indexOfAnswer = (questions.findIndex(element => element === q._id));
             if (indexOfAnswer != -1) {
-                submittedAnswers.push({ questionID: i, answerChosen: answers[indexOfAnswer] });
+                submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             } else {
-                submittedAnswers.push({ questionID: i, answerChosen: 'No answer selected' });
+                submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             }
         });
         const lid = lessonID;
         const pastQuiz = {
             lessonID: lid,
             quizName: q1.name,
-            score: (numCorrect / questionNames.length),
+            score: (numCorrect / questionIDs.length),
             submittedAnswers,
         };
         return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } }, { new: true });
@@ -504,9 +516,9 @@ const Mutation = new GraphQLObjectType({
             createAdmin,
             createUser,
             deleteAdmin,
+            deleteTeacher,
             addGrade,
             assignStudentToTeacher,
-            deleteTeacher,
             submitQuiz,
             addQuestion,
             createLesson,
