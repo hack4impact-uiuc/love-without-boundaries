@@ -206,12 +206,13 @@ const submitQuiz = mutationWithClientMutationId({
     mutateAndGetPayload: async ({
         id, lessonID, answeredQuestions,
     }) => {
-        console.log(answeredQuestions);
+        // console.log(answeredQuestions);
         const questions = [];
         answeredQuestions.submissions.forEach(q => questions.push(q.questionID));
-        console.log(questions)
+        // console.log(questions);
         const answers = [];
         answeredQuestions.submissions.forEach(q => answers.push(q.answerChosen));
+        // console.log(answers);
 
         const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
@@ -222,17 +223,17 @@ const submitQuiz = mutationWithClientMutationId({
         questions.forEach((q, i) => {
             let isCorrect = true;
             const indexOfQuestion = questionIDs.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
-            console.log(indexOfQuestion)
+            // console.log(indexOfQuestion)
             q1.quiz.questions[indexOfQuestion[0]].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
             numCorrect += isCorrect;
         });
         const submittedAnswers = [];
         q1.quiz.questions.forEach((q, i) => {
-            const indexOfAnswer = (questions.findIndex(element => element === q.questionName));
+            const indexOfAnswer = (questions.findIndex(element => element === q._id));
             if (indexOfAnswer != -1) {
-                submittedAnswers.push({ questionID: i, answerChosen: answers[indexOfAnswer] });
+                submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             } else {
-                submittedAnswers.push({ questionID: i, answerChosen: 'No answer selected' });
+                submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             }
         });
         const lid = lessonID;
@@ -242,6 +243,7 @@ const submitQuiz = mutationWithClientMutationId({
             score: (numCorrect / questionIDs.length),
             submittedAnswers,
         };
+        // console.log(pastQuiz)
         return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
     },
 });

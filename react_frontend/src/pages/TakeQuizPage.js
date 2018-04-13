@@ -42,7 +42,9 @@ class TakeQuizPage extends Component {
     
       handleFormSubmit = (formSubmitEvent, id) => {
         formSubmitEvent.preventDefault();
-        submitQuiz(environment, "U3R1ZGVudDo1YWQwMWM5YWZkODFiNjg3YWYwYmM1NWQ=", "TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==", Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes))
+        console.log(Object.keys(this.selectedCheckboxes))
+        console.log(Object.values(this.selectedCheckboxes))
+        submitQuiz(environment, "U3R1ZGVudDo1YWQwNmZmYzk2NDg0ZGFhMTc3MWJmYTc=", "TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==", Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes))
         
       }
     

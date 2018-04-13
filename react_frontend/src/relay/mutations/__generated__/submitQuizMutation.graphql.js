@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 382358ee0b9b6f72ce8489385d9cefb7
+ * @relayHash 2f9a39a8dbe0c2959475424fb346ddcf
  */
 
 /* eslint-disable */
@@ -26,6 +26,13 @@ export type submitQuizMutationResponse = {|
   +submitQuiz: ?{|
     +student: ?{|
       +name: ?string,
+      +pastQuizzes: ?$ReadOnlyArray<?{|
+        +quizName: ?string,
+        +submittedAnswers: ?$ReadOnlyArray<?{|
+          +questionID: ?string,
+          +answerChosen: ?string,
+        |}>,
+      |}>,
     |},
   |},
 |};
@@ -39,6 +46,13 @@ mutation submitQuizMutation(
   submitQuiz(input: $input) {
     student {
       name
+      pastQuizzes {
+        quizName
+        submittedAnswers {
+          questionID
+          answerChosen
+        }
+      }
       id
     }
   }
@@ -68,13 +82,56 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "pastQuizzes",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "PastQuiz",
+  "plural": true,
+  "selections": [
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "quizName",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "submittedAnswers",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "SubmittedAnswer",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "questionID",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "answerChosen",
+          "args": null,
+          "storageKey": null
+        }
+      ]
+    }
+  ]
 };
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "submitQuizMutation",
   "id": null,
-  "text": "mutation submitQuizMutation(\n  $input: SubmitQuizInput!\n) {\n  submitQuiz(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
+  "text": "mutation submitQuizMutation(\n  $input: SubmitQuizInput!\n) {\n  submitQuiz(input: $input) {\n    student {\n      name\n      pastQuizzes {\n        quizName\n        submittedAnswers {\n          questionID\n          answerChosen\n        }\n      }\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -101,7 +158,8 @@ return {
             "concreteType": "Student",
             "plural": false,
             "selections": [
-              v2
+              v2,
+              v3
             ]
           }
         ]
@@ -132,6 +190,7 @@ return {
             "plural": false,
             "selections": [
               v2,
+              v3,
               {
                 "kind": "ScalarField",
                 "alias": null,
@@ -147,5 +206,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '0f57ef2ea14ec0d89596a4f9a807fb62';
+(node/*: any*/).hash = '0eabb8adf1d0d6b12bdc1deded919982';
 module.exports = node;
