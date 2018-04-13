@@ -25,7 +25,7 @@ class TakeQuizPage extends Component{
             <div>
             <h1>Quiz 1</h1>
             <Quiz/>
-            <CopiedButton onClick={() => submitQuiz(environment, 'U3R1ZGVudDo1YWNlZTg4OGVhNWM3NDQ2MjEzZDdkYTY=', 'TGVzc29uOjVhY2E2OWQ0OWE2NDY5NjY4MTIzZDkyOA==',['Who is Tim?'],['Yes.'])}onClick={this.finish}>Submit</CopiedButton>
+            <CopiedButton onClick={() => submitQuiz(environment, 'U3R1ZGVudDo1YWNlZTg4OGVhNWM3NDQ2MjEzZDdkYTY=', "TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==",['2+2?'],["4"])}>Submit</CopiedButton>
             
             
             </div>

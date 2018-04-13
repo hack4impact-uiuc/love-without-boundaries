@@ -31,8 +31,9 @@ function submitQuiz(environment: Environment, id: string, lessonID: string, ques
         {
             mutation,
             variables,
-            onCompleted: (response) => {
+            onCompleted: (response,errors) => {
                 console.log('Response received from server.');
+                console.log(errors)
                 console.log(response)
                 finalRes.res = response;
             },
