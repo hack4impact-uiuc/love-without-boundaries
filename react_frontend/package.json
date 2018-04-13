@@ -45,7 +45,13 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+<<<<<<< HEAD
     "isomorphic-unfetch": "^2.0.0",
+=======
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
+    "google-login": "^1.0.3",
+>>>>>>> d10e329... in progress:
     "jwt-decode": "^2.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

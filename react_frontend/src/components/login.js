@@ -5,7 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 
 class Login extends React.Component {
     responseGoogle = (response) => {
-        console.log(response); // temp
+        console.log(response);
         this.props.history.push('/student');
     }
     render() {

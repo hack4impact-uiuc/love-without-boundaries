@@ -11,6 +11,53 @@ import AnsweredQuestionsType from '../types/AnsweredQuestionsType';
 
 // AnsweredQuestion
 
+
+const createUser = mutationWithClientMutationId({
+    name: 'CreateUser',
+    inputFields: {
+        name: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        email: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        role: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        googleAuthId: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+    },
+    outputFields: {
+        student: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+        teacher: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+        admin: {
+            type: StudentType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: async ({ name, email, role, googleAuthId }) => {
+        let s;
+        switch(role) {
+            case 'student':
+                s = new Student({ name, email });
+            case 'teacher':
+                s = new Teacher({ name, email });
+            case 'admin':
+                s = new Admin({ name, email });
+        }
+        await s.save();
+        const u = new User({ name, email, role: s, googleAuthId });
+        return u.save()
+    },
+});
+
 const createStudent = mutationWithClientMutationId({
     name: 'CreateStudent',
     inputFields: {
@@ -28,7 +75,7 @@ const createStudent = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: ({ name, email }) => {
-        const s = new Student({ name, email });
+        const s = new Student({ name, email }, { new: true });
         return s.save();
     },
 });
@@ -50,7 +97,7 @@ const createTeacher = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: ({ name, email }) => {
-        const t = new Teacher({ name, email });
+        const t = new Teacher({ name, email }, { new: true });
         return t.save();
     },
 });
@@ -72,7 +119,7 @@ const createAdmin = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: ({ name, email }) => {
-        const a = new Admin({ name, email });
+        const a = new Admin({ name, email }, { new: true });
         return a.save();
     },
 });
@@ -98,7 +145,7 @@ const createLesson = mutationWithClientMutationId({
     }) => {
         const l = new Lesson({
             name, quiz, worksheetName, worksheetURL, notesName, notesURL,
-        });
+        }, { new: true });
         return l.save();
     },
 });
@@ -138,7 +185,7 @@ const addGrade = mutationWithClientMutationId({
     mutateAndGetPayload: ({ id, lesson, score }) => {
         const obj = fromGlobalId(id);
         const grade = { lesson, score };
-        return Student.findOneAndUpdate({ _id: obj.id }, { $push: { grades: grade } });
+        return Student.findOneAndUpdate({ _id: obj.id }, { $push: { grades: grade } }, { new: true });
     },
 });
 
@@ -158,7 +205,7 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null;
         const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null;
         if (realStudentId && realTeacherId) {
-            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } });
+            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } }, { new: true });
             await Teacher.findByIdAndUpdate(fromGlobalId(teacherID).id, { $push: { listOfStudentIDs: fromGlobalId(studentID).id } });
         }
         return Student.findById(fromGlobalId(studentID).id) && Teacher.findById(fromGlobalId(teacherID).id);
@@ -243,8 +290,8 @@ const submitQuiz = mutationWithClientMutationId({
             score: (numCorrect / questionIDs.length),
             submittedAnswers,
         };
-        // console.log(pastQuiz)
-        return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } });
+
+        return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } }, { new: true });
     },
 });
 const addQuestion = mutationWithClientMutationId({
@@ -456,7 +503,7 @@ const addURL = mutationWithClientMutationId({
     },
     mutateAndGetPayload: ({ id, url }) => {
         const obj = fromGlobalId(id);
-        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } });
+        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } }, { new: true });
     },
 });
 
@@ -490,6 +537,7 @@ const Mutation = new GraphQLObjectType({
             createStudent,
             createTeacher,
             createAdmin,
+            createUser,
             deleteAdmin,
             deleteTeacher,
             addGrade,
