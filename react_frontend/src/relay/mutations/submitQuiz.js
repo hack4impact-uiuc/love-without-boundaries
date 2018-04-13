@@ -9,6 +9,13 @@ mutation submitQuizMutation(
     submitQuiz(input: $input){
         student {
             name
+            pastQuizzes {
+                quizName
+                submittedAnswers {
+                    questionID
+                    answerChosen
+                }
+            }
         }
     }
 }
@@ -34,6 +41,7 @@ function submitQuiz(environment: Environment, id: string, lessonID: string, ques
             variables,
             onCompleted: (response,errors) => {
                 console.log('Response received from server.');
+                console.log(response)
                 finalRes.res = response;
             },
             onError: err => console.error(err),
