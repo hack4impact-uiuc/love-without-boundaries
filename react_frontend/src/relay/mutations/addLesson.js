@@ -27,22 +27,20 @@ function addLesson(environment: Environment, name: string, worksheetName: string
         }
     };
     
-    let finalResponse = {}
-
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-            console.log('Response received from server.');
-            finalResponse.res = response
-            
-		},
-		onError: err => console.error(err),
-    },
-  );
-  return finalResponse
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server.');
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default addLesson;
+export {
+    mutation
+}
