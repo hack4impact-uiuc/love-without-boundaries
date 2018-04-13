@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Button} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 type Props = {
   /**/
@@ -90,8 +91,14 @@ class LessonComponent extends React.Component<Props>{
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet: {this.props.worksheetName}</a></LessonProps>
                     <LessonProps> Quiz: {this.props.quizName} Grade: {this.props.quizPercentage} 
-                        {this.props.isTeacher && (<Button onClick={this.gotoQuiz} bsStyle="primary">{quiz}</Button>)} 
-                        <Button onClick={this.gotoPastQuiz} bsStyle="primary"> Review </Button> 
+                    `   {this.props.isTeacher &&  (
+
+                        <Link key={this.props.key} to={{ pathname: '/takequiz', state:{ lessonID: this.props.id } }}>
+                        <Button onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </Button>
+                        </Link>
+                    )}
+                         <Button onClick={this.gotoPastQuiz} bsStyle="primary"> Review </Button> 
+                         
                     </LessonProps>
                 </LessonBox>
             </div>

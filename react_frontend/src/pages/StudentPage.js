@@ -37,6 +37,7 @@ class StudentPage extends React.Component<Props>{
                 query={graphql`
                     query StudentPage_Query{
                         lessons{
+                            id
                             name
                             worksheetName
                             worksheetURL
