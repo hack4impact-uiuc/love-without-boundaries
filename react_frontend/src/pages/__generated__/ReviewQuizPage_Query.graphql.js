@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 128d34b62fcf8b98510ae18db8e84ffd
+ * @relayHash bc3bce31b979da6b6f4ae99523647537
  */
 
 /* eslint-disable */
@@ -9,31 +9,38 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type ReviewQuizPage_QueryVariables = {| |};
+export type ReviewQuizPage_QueryVariables = {|
+  student_id: string,
+|};
 export type ReviewQuizPage_QueryResponse = {|
-  +students: ?$ReadOnlyArray<?{|
-    +pastQuizzes: ?$ReadOnlyArray<?{|
+  +node: ?{|
+    +pastQuizzes?: ?$ReadOnlyArray<?{|
+      +lessonID: ?string,
       +quizName: ?string,
       +score: ?number,
       +submittedAnswers: ?$ReadOnlyArray<?{|
         +answerChosen: ?string,
-        +questionID: ?string,
       |}>,
     |}>,
-  |}>,
+  |},
 |};
 */
 
 
 /*
-query ReviewQuizPage_Query {
-  students {
-    pastQuizzes {
-      quizName
-      score
-      submittedAnswers {
-        answerChosen
-        questionID
+query ReviewQuizPage_Query(
+  $student_id: ID!
+) {
+  node(id: $student_id) {
+    __typename
+    ... on Student {
+      pastQuizzes {
+        lessonID
+        quizName
+        score
+        submittedAnswers {
+          answerChosen
+        }
       }
     }
     id
@@ -42,51 +49,73 @@ query ReviewQuizPage_Query {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "pastQuizzes",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "PastQuiz",
-  "plural": true,
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "student_id",
+    "type": "ID!",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "student_id",
+    "type": "ID!"
+  }
+],
+v2 = {
+  "kind": "InlineFragment",
+  "type": "Student",
   "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "quizName",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "score",
-      "args": null,
-      "storageKey": null
-    },
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "submittedAnswers",
+      "name": "pastQuizzes",
       "storageKey": null,
       "args": null,
-      "concreteType": "SubmittedAnswer",
+      "concreteType": "PastQuiz",
       "plural": true,
       "selections": [
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "answerChosen",
+          "name": "lessonID",
           "args": null,
           "storageKey": null
         },
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "questionID",
+          "name": "quizName",
           "args": null,
           "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "score",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "submittedAnswers",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "SubmittedAnswer",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "answerChosen",
+              "args": null,
+              "storageKey": null
+            }
+          ]
         }
       ]
     }
@@ -97,25 +126,25 @@ return {
   "operationKind": "query",
   "name": "ReviewQuizPage_Query",
   "id": null,
-  "text": "query ReviewQuizPage_Query {\n  students {\n    pastQuizzes {\n      quizName\n      score\n      submittedAnswers {\n        answerChosen\n        questionID\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query ReviewQuizPage_Query(\n  $student_id: ID!\n) {\n  node(id: $student_id) {\n    __typename\n    ... on Student {\n      pastQuizzes {\n        lessonID\n        quizName\n        score\n        submittedAnswers {\n          answerChosen\n        }\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "ReviewQuizPage_Query",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "students",
+        "name": "node",
         "storageKey": null,
-        "args": null,
-        "concreteType": "Student",
-        "plural": true,
+        "args": v1,
+        "concreteType": null,
+        "plural": false,
         "selections": [
-          v0
+          v2
         ]
       }
     ]
@@ -123,30 +152,37 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "ReviewQuizPage_Query",
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "students",
+        "name": "node",
         "storageKey": null,
-        "args": null,
-        "concreteType": "Student",
-        "plural": true,
+        "args": v1,
+        "concreteType": null,
+        "plural": false,
         "selections": [
-          v0,
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "__typename",
+            "args": null,
+            "storageKey": null
+          },
           {
             "kind": "ScalarField",
             "alias": null,
             "name": "id",
             "args": null,
             "storageKey": null
-          }
+          },
+          v2
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '0f0d7824f95c916e54b1babf9d6461fb';
+(node/*: any*/).hash = '96843679741598ce80efa0c2cc7a141a';
 module.exports = node;

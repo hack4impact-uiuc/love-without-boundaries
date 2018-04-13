@@ -45,6 +45,17 @@ type AddStudentWorksheetCopyPayload {
   clientMutationId: String
 }
 
+input AddURLInput {
+  id: ID
+  url: String
+  clientMutationId: String
+}
+
+type AddURLPayload {
+  student: Student
+  clientMutationId: String
+}
+
 input AddWorksheetInput {
   id: ID
   name: String
@@ -247,6 +258,7 @@ type Mutation {
   addStudentWorksheetCopy(input: AddStudentWorksheetCopyInput!): AddStudentWorksheetCopyPayload
   removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
   deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
+  addURL(input: AddURLInput!): AddURLPayload
 }
 
 # An object with an ID
@@ -257,6 +269,7 @@ interface Node {
 
 # Self Descriptive
 type PastQuiz {
+  lessonID: ID
   quizName: String
   score: Float
   submittedAnswers: [SubmittedAnswer]
@@ -299,6 +312,7 @@ type Student implements Node {
   grades: [Grade]
   pastQuizzes: [PastQuiz]
   worksheets: [Worksheet]
+  URL: String
 }
 
 input SubmitQuizInput {

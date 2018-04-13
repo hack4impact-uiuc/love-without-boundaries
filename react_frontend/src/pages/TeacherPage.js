@@ -64,7 +64,6 @@ class TeacherPage extends React.Component<Props>{
     // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
-            
             <QueryRenderer
                 environment={environment}
                 query={graphql`
