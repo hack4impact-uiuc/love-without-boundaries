@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e92ff9b6edd52b3385b1efc928405d01
+ * @relayHash 335b1181ab11cb5e74bc4acbe18dd4a1
  */
 
 /* eslint-disable */
@@ -13,8 +13,10 @@ export type submitQuizMutationVariables = {|
   input: {
     id?: ?string,
     lessonID?: ?string,
-    questions?: ?$ReadOnlyArray<?string>,
-    answers?: ?$ReadOnlyArray<?string>,
+    answeredQuestions?: ?$ReadOnlyArray<?{
+      questionID?: ?string,
+      answerChosen?: ?string,
+    }>,
     clientMutationId?: ?string,
   },
 |};
@@ -23,7 +25,6 @@ export type submitQuizMutationResponse = {|
     +student: ?{|
       +name: ?string,
     |},
-    +clientMutationId: ?string,
   |},
 |};
 */
@@ -38,7 +39,6 @@ mutation submitQuizMutation(
       name
       id
     }
-    clientMutationId
   }
 }
 */
@@ -66,20 +66,13 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "clientMutationId",
-  "args": null,
-  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "submitQuizMutation",
   "id": null,
-  "text": "mutation submitQuizMutation(\n  $input: SubmitQuizInput!\n) {\n  submitQuiz(input: $input) {\n    student {\n      name\n      id\n    }\n    clientMutationId\n  }\n}\n",
+  "text": "mutation submitQuizMutation(\n  $input: SubmitQuizInput!\n) {\n  submitQuiz(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -108,8 +101,7 @@ return {
             "selections": [
               v2
             ]
-          },
-          v3
+          }
         ]
       }
     ]
@@ -146,13 +138,12 @@ return {
                 "storageKey": null
               }
             ]
-          },
-          v3
+          }
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '0ced0c9b9fe712e266599252d8134d41';
+(node/*: any*/).hash = '0f57ef2ea14ec0d89596a4f9a807fb62';
 module.exports = node;
