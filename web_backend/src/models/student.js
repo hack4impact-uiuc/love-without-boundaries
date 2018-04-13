@@ -11,17 +11,18 @@ const StudentSchema = new Schema({
         score: { type: Number },
     }],
     pastQuizzes: [{
+        lessonID: { type: String },
         quizName: { type: String },
         score: { type: Number },
         submittedAnswers: [{
             questionID: { type: String },
-            answerChosen: { type: String },
-            correctAnswer: { type: String },
+            answerChosen: { type: String }
         }],
     }],
     worksheets: [{
         lessonID: { type: String },
         url: { type: String },
     }],
+    URL: { type: String },
 });
 export default mongoose.model('Student', StudentSchema);

@@ -1,4 +1,4 @@
-import { GraphQLInputObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
+import { GraphQLInputObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLID } from 'graphql';
 import InputSubmittedAnswer from './InputSubmittedAnswerType';
 
 const InputPastQuiz = new GraphQLInputObjectType({
@@ -6,9 +6,10 @@ const InputPastQuiz = new GraphQLInputObjectType({
     description: 'Self Descriptive',
     fields() {
         return {
+            lessonID: { type: GraphQLID },
             quizName: { type: GraphQLString },
             score: { type: GraphQLInt },
-            questions: {
+            submittedAnswers: {
                 type: new GraphQLList(InputSubmittedAnswer),
             },
         };
