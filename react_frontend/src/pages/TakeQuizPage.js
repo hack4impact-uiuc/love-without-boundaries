@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import Quiz from '../components/quiz';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
+import { graphql, QueryRenderer } from 'react-relay';
+
 const CopiedButton = styled.button`
     background-color: #4CAF50;
     border: 1px solid #ddd;
@@ -13,36 +15,49 @@ const CopiedButton = styled.button`
     margin: 5px;
 `;
 
-class TakeQuizPage extends Component{
-    constructor(props){
-        super(props)
-        this.lessonID = 'TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg=='
-        this.state = {qNum: 0, qMap : []}
+class TakeQuizPage extends Component {
+    constructor(props) {
+        super(props);
+        this.lessonID = 'TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==';
+        this.state = { qNum: 0, qMap: [] };
     }
-    finish = () => {this.props.history.push('/student');}
+    // finish = () => {this.props.history.push('/student');}
     render() {
         return (
-            //TODO: replace with some sort of query rendered for lesson-specific quiz?
-            <div>
             <QueryRenderer
-            environment = {environment}
-            query = {graphql`
-                query QuizQuery($lesson_id: ID!){
-                    node(id: $lesson_id) {
-                        ... on Lesson{
-                            quiz{
-                                name
-                                questions{
+                environment ={environment}
+                query={graphql`
+                    query StudentPage_Query{
+                        lessons{
+                            name
+                            worksheetName
+                            worksheetURL
+                            notesName
+                            notesURL
+                        }
+                    }  
+                `}
+                variables={{}}
+                render={({ props }) => {
+                    if (!props) {
+                        return (
+                            <div>Loading...</div>
+                        );
+                    }
+                    return (
+                        <div>
+                            <h1>Quiz 1</h1>
+                            <Quiz />
+                            <p> </p>
 
-                                }
-                            }
-                            `}
-            <CopiedButton onClick={() => submitQuiz(environment, 'U3R1ZGVudDo1YWNlZTg4OGVhNWM3NDQ2MjEzZDdkYTY=', "TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==",['2+2?'],["4"])}>Submit</CopiedButton>
-            
-            
-            </div>
+                            <CopiedButton onClick={() => submitQuiz(environment, 'U3R1ZGVudDo1YWQwMWM5YWZkODFiNjg3YWYwYmM1NWQ=', 'TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==', ['5aced58421b8333d77e8e339'], ['4'])}>Submit</CopiedButton>
+                        </div>
+                    );
+                }}
+            />
         );
     }
 }
+
 
 export default withRouter(TakeQuizPage);
