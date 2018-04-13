@@ -4,59 +4,12 @@ import InputQuestionType from '../types/InputQuestionType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
+import User from '../../models/user';
 import InputQuizType from '../types/InputQuizType';
 import Lesson from '../../models/lessons';
 import { TeacherType, AdminType, StudentType, LessonType } from '../types/Nodes';
 import AnsweredQuestionsType from '../types/AnsweredQuestionsType';
 
-// AnsweredQuestion
-
-
-const createUser = mutationWithClientMutationId({
-    name: 'CreateUser',
-    inputFields: {
-        name: {
-            type: new GraphQLNonNull(GraphQLString),
-        },
-        email: {
-            type: new GraphQLNonNull(GraphQLString),
-        },
-        role: {
-            type: new GraphQLNonNull(GraphQLString),
-        },
-        googleAuthId: {
-            type: new GraphQLNonNull(GraphQLString),
-        },
-    },
-    outputFields: {
-        student: {
-            type: StudentType,
-            resolve: payload => payload,
-        },
-        teacher: {
-            type: StudentType,
-            resolve: payload => payload,
-        },
-        admin: {
-            type: StudentType,
-            resolve: payload => payload,
-        },
-    },
-    mutateAndGetPayload: async ({ name, email, role, googleAuthId }) => {
-        let s;
-        switch(role) {
-            case 'student':
-                s = new Student({ name, email });
-            case 'teacher':
-                s = new Teacher({ name, email });
-            case 'admin':
-                s = new Admin({ name, email });
-        }
-        await s.save();
-        const u = new User({ name, email, role: s, googleAuthId });
-        return u.save()
-    },
-});
 
 const createStudent = mutationWithClientMutationId({
     name: 'CreateStudent',
@@ -67,6 +20,9 @@ const createStudent = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         student: {
@@ -74,8 +30,10 @@ const createStudent = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
-        const s = new Student({ name, email }, { new: true });
+    mutateAndGetPayload: async ({ name, email, token }) => {
+        const u = new User({ name, email, token, role: 'student'});
+        await u.save();
+        const s = new Student({ name, email });
         return s.save();
     },
 });
@@ -89,6 +47,9 @@ const createTeacher = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         teacher: {
@@ -96,8 +57,10 @@ const createTeacher = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
-        const t = new Teacher({ name, email }, { new: true });
+    mutateAndGetPayload: async ({ name, email, token }) => {
+        const u = new User({ name, email, token, role: 'teacher'});
+        await u.save();
+        const t = new Teacher({ name, email });
         return t.save();
     },
 });
@@ -111,6 +74,9 @@ const createAdmin = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         admin: {
@@ -118,8 +84,10 @@ const createAdmin = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
-        const a = new Admin({ name, email }, { new: true });
+    mutateAndGetPayload: async ({ name, email, token }) => {
+        const u = new User({ name, email, token, role: 'admin'});
+        await u.save();
+        const a = new Admin({ name, email });
         return a.save();
     },
 });
@@ -537,7 +505,6 @@ const Mutation = new GraphQLObjectType({
             createStudent,
             createTeacher,
             createAdmin,
-            createUser,
             deleteAdmin,
             deleteTeacher,
             addGrade,

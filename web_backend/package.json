@@ -16,6 +16,7 @@
     "express-graphql": "^0.6.1",
     "graphql": "^0.8.2",
     "graphql-relay": "^0.5.4",
+    "jsonwebtoken": "^8.2.1",
     "micro": "^6.2.0",
     "micro-compress": "^1.0.0",
     "micro-cors": "^0.1.0",

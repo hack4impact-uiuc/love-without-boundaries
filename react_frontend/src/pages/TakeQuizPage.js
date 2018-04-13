@@ -14,6 +14,7 @@ class TakeQuizPage extends Component {
 
     componentWillMount = () => {
         this.selectedCheckboxes = {};
+<<<<<<< HEAD
     }
 
     toggleCheckbox = (label, i) => {
@@ -21,6 +22,17 @@ class TakeQuizPage extends Component {
     }
 
     handleFormSubmit = (formSubmitEvent, id) => {
+=======
+      }
+    
+      toggleCheckbox = (label, i) => {
+        if (this.selectedCheckboxes[i] != label) {
+            this.selectedCheckboxes[i] = label
+        }
+      }
+    
+      handleFormSubmit = (formSubmitEvent, id) => {
+>>>>>>> 6065b96... backend auth in progress
         formSubmitEvent.preventDefault();
         console.log(Object.keys(this.selectedCheckboxes));
         console.log(Object.values(this.selectedCheckboxes));
