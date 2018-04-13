@@ -8,10 +8,11 @@ import GoogleDocButton from '../components/googleDocButton'
 import jwt_decode from 'jwt-decode';
 
 type Props = {
-    /**/ 
+    /**/
   }
 
 class StudentPage extends React.Component<Props>{
+
     constructor(props){
         super(props);
         this.state = {
@@ -42,7 +43,7 @@ class StudentPage extends React.Component<Props>{
                             notesName
                             notesURL
                         }
-                    }  
+                    }
                 `}
                 variables={{}}
                 render={({ props }) => {
@@ -52,13 +53,13 @@ class StudentPage extends React.Component<Props>{
                         );
                     }
                     return (
-                        
+
                             <div>
                                 <GoogleDocButton url = "https://www.docs.google.com"/>
                                 <NavBar />
                                 <h2>
                                     {
-                                        this.props.location.state != undefined ? this.props.location.state.student.name + "'s Lessons" : "My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes" 
+                                        this.props.location.state != undefined ? this.props.location.state.student.name + "'s Lessons" : "My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes"
                                     }
                                 </h2>
                                 {
@@ -73,7 +74,6 @@ class StudentPage extends React.Component<Props>{
         )
     }
 }
-    
 
 
 export default withRouter(StudentPage);
