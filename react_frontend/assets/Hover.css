@@ -20,3 +20,91 @@
 .quizButton {
 	border-radius: 30px 30px;
 }
+
+.logoHome{
+	height: 70px;
+	width: 100%;
+}
+
+.homePic{
+	position: relative;
+	z-index: -1;
+}
+
+.navBar {
+	position: absolute;
+    right: 0px;
+	width: 700px;
+	height: 100px;
+	/* background-color: #B33C42; */
+	z-index: 4;
+}
+
+.homeButton{
+	display: inline-block;
+}
+
+.rowRed{
+	background-color: #B33C42;
+}
+
+.circle
+{
+    margin: auto;
+	margin-top:10%;
+	width:60%; height:700px;
+	border: solid 15px #9D8CA1;
+	background-color: white;
+	box-shadow: -10px -10px 20px rgba(0,0,0,0.6);
+	border-radius:100%;
+	position: relative;
+	z-index: 10;
+
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+
+	background: url("https://file-pcldyrnnpe.now.sh/");
+    background-size: cover;
+}
+.linkText{
+	font-size: 20px;
+}
+
+.textCircle
+{
+    margin: auto;
+	margin-top:5%;
+	width:20%; height:290px;
+	position: absolute;
+	left: 5%;
+	border: solid 15px #9D8CA1;
+	background-color: white;
+	box-shadow: -10px -10px 20px rgba(0,0,0,0.6);
+	border-radius:100%;
+	z-index: 10;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+}
+
+.bubbleCircle
+{
+    margin: auto;
+	margin-top:5%;
+	width:20%; height:290px;
+	position: absolute;
+	left: 5%;
+	border: solid 15px #9D8CA1;
+	background-color: white;
+	box-shadow: -10px -10px 20px rgba(0,0,0,0.6);
+	border-radius:100%;
+	z-index: 10;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+}
+
+.glyphicon {
+    font-size: 150px;
+}
