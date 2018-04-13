@@ -119,44 +119,6 @@ const deleteAdmin = mutationWithClientMutationId({
     },
 });
 
-const deleteStudent = mutationWithClientMutationId({
-    name: 'DeleteStudent',
-    inputFields: {
-        id: {
-            type: new GraphQLNonNull(GraphQLID),
-        },
-    },
-    outputFields: {
-        student: {
-            type: StudentType,
-            resolve: payload => payload,
-        },
-    },
-    mutateAndGetPayload: ({ id }) => {
-        const obj = fromGlobalId(id);
-        return Student.findByIdAndRemove(obj.id);
-    },
-});
-
-const deleteTeacher = mutationWithClientMutationId({
-    name: 'DeleteTeacher',
-    inputFields: {
-        id: {
-            type: new GraphQLNonNull(GraphQLID),
-        },
-    },
-    outputFields: {
-        teacher: {
-            type: TeacherType,
-            resolve: payload => payload,
-        },
-    },
-    mutateAndGetPayload: ({ id }) => {
-        const obj = fromGlobalId(id);
-        return Teacher.findByIdAndRemove(obj.id);
-    },
-});
-
 const addGrade = mutationWithClientMutationId({
     name: 'AddGrade',
     inputFields: {
