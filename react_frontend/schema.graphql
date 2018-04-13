@@ -226,17 +226,6 @@ input InputQuiz {
   lessonID: String
 }
 
-# Self Descriptive
-input InputSubmittedAnswer {
-  questionID: String
-  answerChosen: String
-}
-
-# Self Descriptive
-input InputSubmittedAnswers {
-  submissions: [InputSubmittedAnswer]
-}
-
 # Schema design for lessons
 type Lesson implements Node {
   # The ID of an object
@@ -329,7 +318,8 @@ type Student implements Node {
 input SubmitQuizInput {
   id: ID
   lessonID: ID
-  answeredQuestions: InputSubmittedAnswers
+  questions: [String]
+  answers: [String]
   clientMutationId: String
 }
 
