@@ -48,7 +48,7 @@ class TakeQuizPage extends Component {
     
       createCheckbox = (label, id, i) => (
         <Checkbox
-                key = {id}
+                key = {i}
                 label={label}
                 handleCheckboxChange={(e) => this.toggleCheckbox(e, id)}
             />
