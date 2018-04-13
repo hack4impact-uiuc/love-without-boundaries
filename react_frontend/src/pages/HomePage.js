@@ -54,6 +54,8 @@ class HomePage extends React.Component<Props>{
         //copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllRead(r.id)).then(r => console.log(r));
     }
     setup = (e) =>{
+        // this function is used to easily call the google drive setup function
+        // this should be called once auth is setup for a newly registered student
         InitialStudentSetup(environment,'hi');
     }
     render() {

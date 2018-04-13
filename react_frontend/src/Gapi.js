@@ -69,27 +69,28 @@ function InitialStudentSetup(environment, id) {
             alert('Failed to setup Student. Try again');
         }
         // loop through each lesson and copy each worksheet
-        lessons.each((lesson) => {
+        lessons.forEach((lesson) => {
             if (lesson.worksheetURL === undefined || !lesson.worksheetURL) {
                 console.log(`Error: lesson ${id} doesnt have worksheetURL...`);
+            } else {
+                copyFile(lesson.worksheetURL).then((res2) => {
+                    if (res2 === undefined || res2.error) {
+                        console.err('Copy File failed. Contact Admin')
+                    } else {
+                        const newFileID = res2.id;
+                        addStudentWorksheetCopy(environment, id, lesson.id, `https://docs.google.com/document/d/${newFileID}`);
+                        setPermissionToAllEdit(newFileID).then((res3) => {
+                            if (res3.error) {
+                                alert('Failed to set Permission To all Edit. Please contact Admin to manually do so.');
+                            } else {
+                                console.log('permission set to all edit');
+                                // TODO: write succeed message using state
+                                return true;
+                            }
+                        });
+                    }
+                }).catch(err => console.log(err));
             }
-            copyFile(lesson.worksheetURL).then((res2) => {
-                if (res2.error) {
-                    alert('Please check whether your Worksheet file can be viewed to anyone with the link, or check if the file is in the shared LWB google drive folder.');
-                } else {
-                    const newFileID = res2.id;
-                    setPermissionToAllEdit(newFileID).then((res3) => {
-                        if (res3.error) {
-                            alert('Failed to set Permission To all Edit. Please manuall');
-                        } else {
-                            console.log('permission set to all edit');
-                            // TODO: write succeed message using state
-                            return true;
-                        }
-                    });
-                }
-            });
-            addStudentWorksheetCopy(environment, id, lesson.id, this.state.wksht_link);
         });
     });
 }
