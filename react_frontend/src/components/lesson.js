@@ -87,7 +87,6 @@ class LessonComponent extends React.Component<Props>{
         }
         return(
             <div>
-                {console.log(this.props.id + this.props.lessonName)}
                 <LessonBox>
                     <LessonTitle>{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes: {this.props.lessonNotes}</a></LessonProps>
