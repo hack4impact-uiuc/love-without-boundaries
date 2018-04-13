@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
-import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
+import StudentPage from './StudentPage';
+import jwt_decode from 'jwt-decode';
+
 
 type Props = {
     /**/ 
 }
+
 
 const TeacherAddLessonBox = styled.div`
     color: white;
@@ -51,38 +54,57 @@ const TeacherButton = styled.div`
     font-family: "Arial";
 `;
 class TeacherPage extends React.Component<Props>{
-
+    constructor(props){
+        super(props)
+        this.state = {
+            teacherID: "VGVhY2hlcjo1YWM3OWYzYTBiYTFjMWIxODQxNGRmZWQ="
+            // teacherID: jwt_decode(localStorage.getItem('token')).userID
+        }
+    }
+    // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
             
             <QueryRenderer
-                    environment={environment}
-                    query={graphql`
-                        query TeacherPage_Query{
-                            students {
-                                id
-                                ...studentListItem_student
+                environment={environment}
+                query={graphql`
+                    query TeacherPage_Query($teacher_id: ID!){
+                        node(id: $teacher_id) {
+                            ... on Teacher {
+                                students {
+                                    name
+                                }
                             }
-                        }   
-                    `}
-                    variables={{}}
-                    render={({ props }) => {
-                        if (!props) {
-                            return (
-                                <div>Loading...</div>
-                            );
                         }
+                    }
+                `}
+                variables={{
+                    teacher_id: this.state.teacherID
+                }}
+                render={({ props }) => {
+                    if (props) {
                         return (
                             <div>
                                 I am a teacher 
                                 <h3>My Students</h3> 
-                                {props.students.map(student => <StudentListItem key={student.id} student={student} />)}
+                                { props.node && props.node.students.length == 0 ? <p>You have no assigned students.</p> : props.node.students.map((student, idx) => 
+                                    <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
+                                        <button >{student.name}</button>
+                                    </Link>
+                                )}
+                                
                             </div>
                         );
-                    }}
-                />
+                    }
+                    else {
+                        return (
+                            <div>Loading...</div>
+                        );
+                    }
+                }}
+            />
         );
     }
 }
 
-export default TeacherPage;
+export default withRouter(TeacherPage);

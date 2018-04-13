@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8962caf4a3197cf9ff2626873961844a
+ * @relayHash 1f1bf63caad65fc337153ea6517f948e
  */
 
 /* eslint-disable */
@@ -9,31 +9,48 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type deleteStudentMutationVariables = {|
+export type addLessonMutationVariables = {|
   input: {
-    studentID: string,
+    name: string,
+    quiz?: ?{
+      name?: ?string,
+      questions?: ?$ReadOnlyArray<?{
+        questionName?: ?string,
+        answers?: ?$ReadOnlyArray<?{
+          answerName?: ?string,
+          isCorrect?: ?boolean,
+        }>,
+      }>,
+      lessonID?: ?string,
+    },
+    worksheetName?: ?string,
+    worksheetURL?: ?string,
+    notesName?: ?string,
+    notesURL?: ?string,
     clientMutationId?: ?string,
   },
 |};
-export type deleteStudentMutationResponse = {|
-  +deleteStudent: ?{|
-    +student: ?{|
+export type addLessonMutationResponse = {|
+  +createLesson: ?{|
+    +lesson: ?{|
       +name: ?string,
     |},
+    +clientMutationId: ?string,
   |},
 |};
 */
 
 
 /*
-mutation deleteStudentMutation(
-  $input: DeleteStudentInput!
+mutation addLessonMutation(
+  $input: CreateLessonInput!
 ) {
-  deleteStudent(input: $input) {
-    student {
+  createLesson(input: $input) {
+    lesson {
       name
       id
     }
+    clientMutationId
   }
 }
 */
@@ -43,7 +60,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "DeleteStudentInput!",
+    "type": "CreateLessonInput!",
     "defaultValue": null
   }
 ],
@@ -52,7 +69,7 @@ v1 = [
     "kind": "Variable",
     "name": "input",
     "variableName": "input",
-    "type": "DeleteStudentInput!"
+    "type": "CreateLessonInput!"
   }
 ],
 v2 = {
@@ -61,17 +78,24 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "clientMutationId",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "deleteStudentMutation",
+  "name": "addLessonMutation",
   "id": null,
-  "text": "mutation deleteStudentMutation(\n  $input: DeleteStudentInput!\n) {\n  deleteStudent(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
+  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      name\n      id\n    }\n    clientMutationId\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "deleteStudentMutation",
+    "name": "addLessonMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -79,49 +103,50 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "deleteStudent",
+        "name": "createLesson",
         "storageKey": null,
         "args": v1,
-        "concreteType": "DeleteStudentPayload",
+        "concreteType": "CreateLessonPayload",
         "plural": false,
         "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "student",
+            "name": "lesson",
             "storageKey": null,
             "args": null,
-            "concreteType": "Student",
+            "concreteType": "Lesson",
             "plural": false,
             "selections": [
               v2
             ]
-          }
+          },
+          v3
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "deleteStudentMutation",
+    "name": "addLessonMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "deleteStudent",
+        "name": "createLesson",
         "storageKey": null,
         "args": v1,
-        "concreteType": "DeleteStudentPayload",
+        "concreteType": "CreateLessonPayload",
         "plural": false,
         "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "student",
+            "name": "lesson",
             "storageKey": null,
             "args": null,
-            "concreteType": "Student",
+            "concreteType": "Lesson",
             "plural": false,
             "selections": [
               v2,
@@ -133,12 +158,13 @@ return {
                 "storageKey": null
               }
             ]
-          }
+          },
+          v3
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '0408c10dcbf8315820c4476a93ef0330';
+(node/*: any*/).hash = '527c0a3a01ac1eb43c06fc4981fb7dbd';
 module.exports = node;

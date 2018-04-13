@@ -1,5 +1,64 @@
+input AddGradeInput {
+  id: ID!
+  lesson: String
+  score: Int
+  clientMutationId: String
+}
+
+type AddGradePayload {
+  student: Student
+  clientMutationId: String
+}
+
+input AddNoteInput {
+  id: ID
+  name: String
+  url: String
+  clientMutationId: String
+}
+
+type AddNotePayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input AddQuestionInput {
+  question: InputQuestion
+  lessonId: String
+  clientMutationId: String
+}
+
+type AddQuestionPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input AddStudentWorksheetCopyInput {
+  studentID: ID
+  lessonID: ID
+  url: String
+  clientMutationId: String
+}
+
+type AddStudentWorksheetCopyPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input AddWorksheetInput {
+  id: ID
+  name: String
+  url: String
+  clientMutationId: String
+}
+
+type AddWorksheetPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
 # Administrator
-type Admin {
+type Admin implements Node {
   # The ID of an object
   id: ID!
   name: String
@@ -10,6 +69,125 @@ type Admin {
 type Answer {
   answerName: String
   isCorrect: Boolean
+}
+
+input AssignStudentToTeacherInput {
+  studentID: String
+  teacherID: String
+  clientMutationId: String
+}
+
+type AssignStudentToTeacherPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input CreateAdminInput {
+  name: String!
+  email: String!
+  clientMutationId: String
+}
+
+type CreateAdminPayload {
+  admin: Admin
+  clientMutationId: String
+}
+
+input CreateLessonInput {
+  name: String!
+  quiz: InputQuiz
+  worksheetName: String
+  worksheetURL: String
+  notesName: String
+  notesURL: String
+  clientMutationId: String
+}
+
+type CreateLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input CreateStudentInput {
+  name: String!
+  email: String!
+  clientMutationId: String
+}
+
+type CreateStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input CreateTeacherInput {
+  name: String!
+  email: String!
+  clientMutationId: String
+}
+
+type CreateTeacherPayload {
+  teacher: Teacher
+  clientMutationId: String
+}
+
+input DeleteAdminInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteAdminPayload {
+  admin: Admin
+  clientMutationId: String
+}
+
+input DeleteLessonInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input DeleteNoteInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteNotePayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input DeleteStudentInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input DeleteTeacherInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteTeacherPayload {
+  teacher: Teacher
+  clientMutationId: String
+}
+
+input DeleteWorksheetInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteWorksheetPayload {
+  lesson: Lesson
+  clientMutationId: String
 }
 
 # Grade received on a quiz
@@ -30,12 +208,19 @@ input InputQuestion {
   answers: [InputAnswer]
 }
 
+# Self Descriptive
+input InputQuiz {
+  name: String
+  questions: [InputQuestion]
+  lessonID: String
+}
+
 # Schema design for lessons
-type Lesson {
+type Lesson implements Node {
   # The ID of an object
   id: ID!
   name: String
-  quiz: String
+  quiz: Quiz
   worksheetName: String
   worksheetURL: String
   notesName: String
@@ -44,28 +229,37 @@ type Lesson {
 
 # Your Root Mutation
 type Mutation {
-  createStudent(name: String, email: String): Student
-  createTeacher(name: String, email: String): Teacher
-  createAdmin(name: String, email: String): Admin
-  createQuiz(name: String, questions: [InputQuestion]): Quiz
-  deleteAdmin(id: ID!): Admin
-  deleteQuiz(id: ID!): Quiz
-  addGrade(id: String, lesson: String, score: Int): Student
-  assignStudentToTeacher(studentID: String, teacherID: String): Student
-  addQuestion(id: String, question: InputQuestion): Quiz
-  deleteQuestion(id: String, qName: String): Quiz
-  createLesson(name: String, quiz: String, worksheetName: String, worksheetURL: String, notesName: String, notesURL: String): Lesson
-  deleteLesson(id: ID!): Lesson
-  addNote(id: String, name: String, url: String): Lesson
-  deleteNote(id: String): Lesson
-  addWorksheet(id: String, name: String, url: String): Lesson
-  deleteWorksheet(id: String): Lesson
+  createStudent(input: CreateStudentInput!): CreateStudentPayload
+  createTeacher(input: CreateTeacherInput!): CreateTeacherPayload
+  createAdmin(input: CreateAdminInput!): CreateAdminPayload
+  deleteAdmin(input: DeleteAdminInput!): DeleteAdminPayload
+  addGrade(input: AddGradeInput!): AddGradePayload
+  assignStudentToTeacher(input: AssignStudentToTeacherInput!): AssignStudentToTeacherPayload
+  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
+  submitQuiz(input: SubmitQuizInput!): SubmitQuizPayload
+  addQuestion(input: AddQuestionInput!): AddQuestionPayload
+  createLesson(input: CreateLessonInput!): CreateLessonPayload
+  deleteLesson(input: DeleteLessonInput!): DeleteLessonPayload
+  addNote(input: AddNoteInput!): AddNotePayload
+  deleteNote(input: DeleteNoteInput!): DeleteNotePayload
+  addWorksheet(input: AddWorksheetInput!): AddWorksheetPayload
+  deleteWorksheet(input: DeleteWorksheetInput!): DeleteWorksheetPayload
+  addStudentWorksheetCopy(input: AddStudentWorksheetCopyInput!): AddStudentWorksheetCopyPayload
+  removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
+  deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
 }
 
 # An object with an ID
 interface Node {
   # The id of the object.
   id: ID!
+}
+
+# Self Descriptive
+type PastQuiz {
+  quizName: String
+  score: Float
+  submittedAnswers: [SubmittedAnswer]
 }
 
 # Your Root Query
@@ -79,21 +273,20 @@ type Query {
   teachers: [Teacher]
   admins: [Admin]
   lessons: [Lesson]
-  quiz: [Quiz]
 }
 
 # Self Descriptive
 type Question {
+  id: ID
   questionName: String
   answers: [Answer]
 }
 
 # Self Descriptive
 type Quiz {
-  # The ID of an object
-  id: ID!
   name: String
   questions: [Question]
+  lessonID: String
 }
 
 # Self Descriptive
@@ -104,6 +297,27 @@ type Student implements Node {
   email: String
   teacher: Teacher
   grades: [Grade]
+  pastQuizzes: [PastQuiz]
+  worksheets: [Worksheet]
+}
+
+input SubmitQuizInput {
+  id: ID
+  lessonID: ID
+  questions: [String]
+  answers: [String]
+  clientMutationId: String
+}
+
+type SubmitQuizPayload {
+  student: Student
+  clientMutationId: String
+}
+
+# Self Descriptive
+type SubmittedAnswer {
+  questionID: String
+  answerChosen: String
 }
 
 # Teacher
@@ -115,4 +329,22 @@ type Teacher implements Node {
 
   # Students that the teacher teachers
   students: [Student]
+}
+
+input undefinedInput {
+  studentID: String
+  lessonID: String
+  clientMutationId: String
+}
+
+type undefinedPayload {
+  student: Student
+  clientMutationId: String
+}
+
+# Student worksheet for a specific lesson
+type Worksheet {
+  # The ID of an object
+  lessonID: ID!
+  url: String
 }

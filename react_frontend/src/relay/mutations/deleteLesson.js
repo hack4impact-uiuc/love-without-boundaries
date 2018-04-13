@@ -1,25 +1,24 @@
-
+// @flow
 
 import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-    mutation addStudentMutation($input: CreateStudentInput!) {
-        createStudent(input: $input){
-            student {
-                name
-            }
+    mutation deleteLessonMutation(
+        $input: DeleteLessonInput!
+    ) {
+        deleteLesson(input: $input){
+            clientMutationId
         }
     }
 `;
 
-function addStudent(environment: Environment, name: string, email: string) {
+function deleteLesson(environment: Environment, id: string) {
 	const variables = {
 		input: {
-            name,
-            email
+            id
         }
-	};
+    };
 
   commitMutation(
     environment,
@@ -34,4 +33,4 @@ function addStudent(environment: Environment, name: string, email: string) {
   );
 }
 
-export default addStudent;
+export default deleteLesson;
