@@ -38,7 +38,6 @@ class TakeQuizPage extends Component {
     
       toggleCheckbox = (label, i) => {
         this.selectedCheckboxes[i] = label
-        console.log(this.selectedCheckboxes)
       }
     
       handleFormSubmit = (formSubmitEvent, id) => {
@@ -98,7 +97,7 @@ class TakeQuizPage extends Component {
                     }
                     return (
                         <div>
-                            <h1>Quiz 1</h1>
+                            <h1>Quiz</h1>
                             <div className="container">
                                 <div className="row">
                                 <div className="col-sm-12">
