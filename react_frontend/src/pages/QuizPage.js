@@ -1,3 +1,7 @@
+/* 
+ * This page is shown when an Admin edits a Quiz for a lesson
+ * It accepts a prop through react router with the lessonID
+ */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Question from '../components/question';
@@ -27,24 +31,39 @@ class QuizPage extends Component{
         this.setState({editable : passUp, passed : true})
     }
     render() {
+        if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID){
+            return <h2>Lesson doesn't exist. Try again.</h2>
+        }
+        
+        console.log(this.props.location.state);
         return (
             <QueryRenderer
                     environment={environment}
-                    /* How to get specific quiz?? */
                     query={graphql`
-                        query QuizPage_Query{
-                            lessons{
-                                quiz{
-                                    questions{
-                                        questionName
+                        query QuizPage_Query($lesson_id: ID!){
+                            node(id: $lesson_id) {
+                                id
+                                ... on Lesson {
+                                    name
+                                    quiz {
+                                        questions {
+                                            id
+                                            questionName
+                                            answers{
+                                                answerName
+                                                isCorrect
+                                            }
+                                        }
                                     }
                                 }
                             }
-                        }   
+                        }
                     `}
-                    variables={{}}
+                    variables={{
+                        lesson_id: this.props.location.state.lessonID
+                    }}
                     render={({ props }) => {
-                        if (!props) {
+                        if (!props || !props.node) {
                             return (
                                 <div>Loading...</div>
                             );
@@ -53,18 +72,22 @@ class QuizPage extends Component{
                             <div>
                                 <h1>Quiz Page</h1>
                                 {
-                                    props.lessons.map(lesson => {
-                                        if(lesson.quiz.question){
-                                            lesson.quiz.question.map(q => <div>{q.questionName}</div>)
-                                        }
-                                    }) 
+                                    props.node.quiz.questions.map((q,i) => 
+                                        <Question
+                                            locked={ false }
+                                            passBack={this.passBack}
+                                            num={i}
+                                        />
+                                    )
                                 }
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
-                                    <div key={qNum}><Question 
-                                        locked={qNum != this.state.editable - 1} 
-                                        passBack={this.passBack} 
-                                        num={Number(qNum) + 1}/>
+                                    <div key={qNum}>
+                                        <Question 
+                                            locked={qNum != this.state.editable - 1} 
+                                            passBack={this.passBack} 
+                                            num={Number(qNum) + 1}
+                                        />
                                     <br/></div>
                                 )}
                                 <PaddedButton className="btn btn-info"onClick={this.addQuestion}>Add Question</PaddedButton>

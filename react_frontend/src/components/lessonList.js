@@ -4,7 +4,8 @@ import NavBar from '../components/navBar';
 import deleteLesson from '../relay/mutations/deleteLesson'
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
-import button from '../components/button'
+import button from '../components/button';
+import { Link } from 'react-router-dom';
 
 type Props = {
     /**/ 
@@ -14,6 +15,9 @@ class LessonList extends React.Component<Props>{
     handleClick(id) {
         deleteLesson(environment, id)
         window.location.reload();
+    }
+    editQuiz = e => {
+        this.props.history.push('/quiz')
     }
     render() {
         return (
@@ -42,9 +46,23 @@ class LessonList extends React.Component<Props>{
                             <div>
                                 {
                                 props.lessons.map((lesson, idx) => (
-                                    <div className="row"key={idx}>
-                                        <LessonComponent style={{marginLeft:'15px' , display:'inline-block'}}lessonName={lesson.name} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
-                                        <button className="btn btn-danger" value={lesson.id} onClick={() => this.handleClick(lesson.id)}>Delete Lesson</button> 
+                                    <div className="row" key={idx} >
+                                        <LessonComponent 
+                                            lessonName={lesson.name} 
+                                            lessonNotesLink={lesson.notesURL} 
+                                            lessonWorksheetLink={lesson.worksheetURL} 
+                                            worksheetName={lesson.worksheetName} 
+                                        />
+                                        <button 
+                                            className="btn btn-danger" 
+                                            value={lesson.id} 
+                                            onClick={() => this.handleClick(lesson.id)}
+                                        >
+                                        Delete Lesson
+                                        </button> 
+                                        <Link key={idx} style={{ display:'block' }} to= {{ pathname: '/quiz', state:{ lessonID: lesson.id } }}>
+                                            <button className="btn btn-default">Edit Quiz</button>
+                                        </Link>
                                     </div>
                                 ))
                                 }
