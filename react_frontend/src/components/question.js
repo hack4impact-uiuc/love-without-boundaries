@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Answer from './answer';
 import addQuestion from '../relay/mutations/addQuestion'
 import environment from '../relay/environment';
+
 const CopiedButton = styled.button`
     background-color: #4CAF50;
     border: 1px solid #ddd;
@@ -11,19 +12,18 @@ const CopiedButton = styled.button`
     font-size: 15px;
     margin: 5px;
 `;
+
 class Question extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             name : this.props.name,
             locked : this.props.locked,
-            A: this.props.A,
-            B: this.props.B,
-            C: this.props.C,
-            D: this.props.D,
-            correct: this.props.correct, // correct Letter i.e. "A", "B", etc.
+            answers: this.props.answers ? this.props.answers : [{},{},{},{}],
+            correct: this.props.correct, // correct index i.e. 1,2,3,4
             submitted: this.props.submitted ? this.props.submitted : false // false or true
         }
+        
     }
     componentWillReceiveProps(newProps) {
         if(newProps.locked != this.state.locked){
@@ -39,39 +39,53 @@ class Question extends React.Component{
         this.props.passBack(this.props.num);
     }
 
-    passAns = (passUp, letter) => {
-        this.setState({[letter] : passUp})
-    }
-    passCorrect = passUp => {
-        this.setState({correct : passUp})
-    }
+    passAns = (answerVal, idx) => {
+        this.setState((prevState, props) => ({
+            answers: prevState.answers.map((ans,i) => {
+                if (i === idx ){
+                    return {
+                        ...ans,
+                        answerName: answerVal
+                    };
+                }
+                
+            })
+        }));
+    };
 
+    passCorrect = idx => {
+        this.setState((prevState, props) => ({
+            answers: prevState.answers.map((ans,i) => (
+                i === idx ? 
+                {...ans,isCorrect: true} 
+                : {...ans, isCorrect: false}
+            ))
+        }));
+    }
+    createAnswers = answers => {
+        console.log(this.state.locked)
+        let answersElm = [];
+        for ( var i = 0; i < 4; i++ ){
+            answersElm.push(
+                <Answer 
+                    index={i}
+                    key={i}
+                    opt = { answers[i] ? answers[i].answerName : '' }
+                    locked={this.state.locked} 
+                    passAns={this.passAns}
+                    passCorrect={this.passCorrect}
+                    radio={ this.state.answers[i] ? this.state.answers[i].isCorrect : false}
+                />);
+        }
+        return answersElm;
+    }
     render() {
         return(
             <div>
                 {this.props.num}. 
-                <input type="text" onChange={this.updateQuestion} readOnly={this.state.locked}/>
+                <input type="text" value={this.state.name} onChange={this.updateQuestion} readOnly={this.state.locked}/>
                 <CopiedButton onClick={this.unlock}>Edit</CopiedButton>
-                <Answer letter="A" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="A"}
-                />
-                <Answer letter="B" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="B"}
-                />
-                <Answer letter="C" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="C"}
-                />
-                <Answer letter="D" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="D"}
-                />
+                { this.createAnswers(this.state.answers) }
             </div>
         );
     }

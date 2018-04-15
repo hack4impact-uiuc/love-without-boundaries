@@ -4,20 +4,20 @@ import styled from 'styled-components';
 
 class Answer extends Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
-            opt: "",
+            opt: this.props.opt ? this.props.opt : '',
             correct: this.props.radio,
-            locked: this.props.locked
+            locked: this.props.locked,
         }
     }
     updateAns = event => {
         this.setState({opt : event.target.value})
-        this.props.passAns(event.target.value, this.props.letter)
+        this.props.passAns(event.target.value, this.props.index)
     }
     correct = event => {
         this.setState({correct : event.target.value})
-        this.props.passCorrect(this.props.letter)
+        this.props.passCorrect(this.props.index)
     }
     componentWillReceiveProps(newProps) {
         this.setState({locked : newProps.locked, correct : newProps.radio})
@@ -25,10 +25,10 @@ class Answer extends Component{
     render() {
         return(
             <div>
-                <input type="radio" name={this.props.letter} value={true} onChange={this.correct} 
-                    disabled = {this.state.locked} checked={this.state.correct}/> {this.props.letter}
+                <input type="radio" name={this.props.index} value={this.state.radio} onChange={this.correct} 
+                    disabled={this.state.locked} checked={this.state.correct}/>
                 <label>
-                    <input type="text" onChange={this.updateAns} readOnly = {this.state.locked} />
+                    <input type="text" value={this.state.opt} onChange={this.updateAns} readOnly = {this.state.locked} />
                 </label>
             </div>
         );

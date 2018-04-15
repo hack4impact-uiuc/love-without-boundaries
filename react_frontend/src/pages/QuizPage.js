@@ -25,7 +25,7 @@ class QuizPage extends Component{
         })
     }
     lock = () => {
-        this.setState({editable : "meme"})
+        this.setState({editable : 0})
     }
     passBack = passUp => {
         this.setState({editable : passUp, passed : true})
@@ -35,7 +35,6 @@ class QuizPage extends Component{
             return <h2>Lesson doesn't exist. Try again.</h2>
         }
         
-        console.log(this.props.location.state);
         return (
             <QueryRenderer
                     environment={environment}
@@ -72,22 +71,26 @@ class QuizPage extends Component{
                             <div>
                                 <h1>Quiz Page</h1>
                                 {
-                                    props.node.quiz.questions.map((q,i) => 
-                                        <Question
-                                            A={ q.answers}
-                                            locked={ false }
-                                            passBack={this.passBack}
-                                            num={i}
-                                        />
-                                    )
+                                    props.node.quiz.questions.map((q,i) => {
+                                        return(
+                                            <Question
+                                                key= { i + 1 }
+                                                name= {q.questionName}
+                                                answers={ q.answers }
+                                                locked={ i != this.state.editable - 1}
+                                                passBack={this.passBack}
+                                                num={ i + 1 }
+                                            />
+                                        )
+                                    })
                                 }
                                 <br/>
                                 {Object.keys(this.state.qMap).map( qNum => 
-                                    <div key={qNum}>
+                                    <div key={qNum + props.node.quiz.questions.length}>
                                         <Question 
-                                            locked={qNum != this.state.editable - 1} 
+                                            locked={qNum + props.node.quiz.questions.length != this.state.editable - 1} 
                                             passBack={this.passBack} 
-                                            num={Number(qNum) + 1}
+                                            num={Number(qNum) + 1 + props.node.quiz.questions.length}
                                         />
                                     <br/></div>
                                 )}
