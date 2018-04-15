@@ -12,8 +12,8 @@ import PaddedButton from '../components/button';
 class QuizPage extends Component{
 
     constructor(props){
-        super(props)
-        this.state = {qNum : 0, qMap : [], editable : 0}
+        super(props);
+        this.state = {qNum : 0, qMap : [], editable : 0};
     }
     
     finish = () => {this.props.history.push('/admin')}
@@ -22,19 +22,23 @@ class QuizPage extends Component{
             qNum : this.state.qNum + 1,
             qMap : [...this.state.qMap, this.state.qNum + 1],
             editable : this.state.qNum + 1
-        })
+        });
     }
+
+    // lock all questions
     lock = () => {
-        this.setState({editable : 0})
+        this.setState({editable : 0});
     }
+
+    // toggles a question "editable", passUp is the index of the question
     passBack = passUp => {
-        this.setState({editable : passUp, passed : true})
+        this.setState({editable : passUp, passed : true});
     }
+
     render() {
         if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID){
             return <h2>Lesson doesn't exist. Try again.</h2>
         }
-        
         return (
             <QueryRenderer
                     environment={environment}
