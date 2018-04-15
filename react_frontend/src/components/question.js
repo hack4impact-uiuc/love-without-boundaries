@@ -15,12 +15,12 @@ class Question extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            name : "",
+            name : this.props.name,
             locked : this.props.locked,
-            A: "",
-            B: "",
-            C: "",
-            D: "",
+            A: this.props.A,
+            B: this.props.B,
+            C: this.props.C,
+            D: this.props.D,
             correct: "",
             submitted: false
         }
