@@ -9,8 +9,9 @@ class Question extends React.Component{
     constructor(props){
         super(props)
         // this.state.answers = [{answerName, isCorrect}]
+        console.log(this.props.name)
         this.state = {
-            name : this.props.name ? this.props.name : '',
+            name : this.props.name !== undefined ? this.props.name : '',
             locked : this.props.locked,
             answers: this.props.answers,
             submitted: this.props.submitted ? this.props.submitted : false // false or true
@@ -20,7 +21,8 @@ class Question extends React.Component{
         if(newProps.locked != this.state.locked){
             this.setState({locked : newProps.locked});
             if(newProps.locked == true)
-                addQuestion(environment, this.state.name, this.state.A, this.state.B, this.state.C, this.state.D, this.state.correct);
+                console.log(this.state.answers)
+                addQuestion(environment, this.state.name, this.state.answers);
         }
     }
     
@@ -37,13 +39,16 @@ class Question extends React.Component{
     // answer changes, function is called in Answer Component
     // answerVal is the answer text and idx is the index of the answer
     updateAns = e => {
+        e.persist();
+        const name = e.target.name;
+        const val = e.target.value;
         this.setState((prevState, props) => ({
             answers: prevState.answers.map((ans,i) => {
                 // if it equal to the index
-                if (i === e.target.name){
+                if (i == name){
                     return {
                         ...ans,
-                        answerName: answerVal
+                        answerName: val
                     };
                 }
                 return ans;
@@ -52,10 +57,9 @@ class Question extends React.Component{
     };
 
     // radio is clicked for a specific answer, index of the answer is passed in
-    passCorrect = e => {
-        e.preventDefault();
-        e.persist();
+    updateCorrect = e => {
         const name = e.target.name;
+        console.log(this.state.answers);
         this.setState((prevState, props) => ({
             answers: prevState.answers.map((ans,i) => {
                 // if its the correct index, we change isCorrect to true
@@ -73,19 +77,17 @@ class Question extends React.Component{
         for ( var i = 0; i < 4; i++ ){
             answersElm.push(
                 <div key={i} className="form-group">
-                    <input type="radio" 
+                    <input type="checkbox" 
                         name={i} 
-                        disabled={this.state.locked} 
-                        onChange={this.passCorrect}
-                        checked={answers[i] && answers[i].isCorrect}
+                        onChange={this.updateCorrect}
+                        checked={ answers[i] !== undefined ? answers[i].isCorrect : false}
                         className="form-check-input"
                     />
                     <label className="form-check-label" htmlFor={i}>
                         <input type="text" 
                             name={i} 
-                            value={answers[i] && answers[i].answerName !== null ? answers[i].answerName : ''} 
+                            value={answers != undefined && answers[i] !== undefined ? answers[i].answerName : ''} 
                             onChange={this.updateAns} 
-                            readOnly={this.state.locked} 
                             className="form-control"
                         />
                     </label>

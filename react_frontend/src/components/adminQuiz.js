@@ -1,0 +1,77 @@
+import React from 'react';
+import environment from '../relay/environment';
+import Question from '../components/question';
+import PaddedButton from '../components/button';
+
+class AdminQuiz extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            questions: this.props.questions || {},
+            qNum: this.props.question !== undefined ? this.props.question.length : 0
+        };
+    }
+
+    addQuestion = e => {
+        this.setState((prevState, props) => {
+            return {
+                qNum: prevState.qNum + 1,
+                questions: [...prevState.questions, 
+                    { 
+                        questionName: '',
+                        answers: [
+                            {answerName:'', isCorrect:false},
+                            {answerName:'', isCorrect:false},
+                            {answerName:'', isCorrect:false},
+                            {answerName:'', isCorrect:false}
+                        ]
+                    }
+                ],
+            };
+        });
+    }
+
+    displayNewQuestions = () => {
+        let questionArr = [];
+        for (var i = this.state.questions.length; i < this.state.qNum; i++){
+            
+            questionArr.push(
+                <Question 
+                    key={i}
+                    name={this.state.question.questionName}
+                    answers={this.state.question.answers}
+                    passBack={this.passBack} 
+                    num={i}
+                />
+            );
+        }
+        return questionArr;
+    }
+    render() {
+        return (
+            <div>
+                {
+                    this.state.questions.map((q, i) => (
+                        <Question
+                            num={i}
+                            key={i}
+                            name={q.questionName}
+                            answers={q.answers}
+                            passBack={this.passBack}
+                        />
+                    ))
+                }
+                {
+                    this.displayNewQuestions()
+                }
+                <br />
+                <PaddedButton className="btn btn-info" onClick={this.addQuestion}>Add Question</PaddedButton>
+                <br />
+                <PaddedButton className="btn btn-success" onClick={this.lock}>Submit Questions</PaddedButton>
+                <br />
+                <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
+            </div>
+        );
+    }
+}
+export default AdminQuiz;
