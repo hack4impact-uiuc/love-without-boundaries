@@ -88,7 +88,7 @@ class LessonComponent extends React.Component<Props>{
         return(
             <div className="row">
                 <div className="col-md-3 col-sm-2"></div>
-                <div className="col-md-7 lessonBox">
+                <div className="col-sm-7 lessonBox">
                     <LessonTitle >{this.props.lessonName}</LessonTitle>
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes </a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet </a></LessonProps>

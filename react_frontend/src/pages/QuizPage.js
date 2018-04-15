@@ -74,6 +74,7 @@ class QuizPage extends Component{
                                 {
                                     props.node.quiz.questions.map((q,i) => 
                                         <Question
+                                            A={ q.answers}
                                             locked={ false }
                                             passBack={this.passBack}
                                             num={i}
