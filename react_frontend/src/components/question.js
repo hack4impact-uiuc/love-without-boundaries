@@ -21,8 +21,8 @@ class Question extends React.Component{
             B: this.props.B,
             C: this.props.C,
             D: this.props.D,
-            correct: "",
-            submitted: false
+            correct: this.props.correct, // correct Letter i.e. "A", "B", etc.
+            submitted: this.props.submitted ? this.props.submitted : false // false or true
         }
     }
     componentWillReceiveProps(newProps) {

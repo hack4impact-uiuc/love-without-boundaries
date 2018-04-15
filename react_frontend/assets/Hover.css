@@ -20,7 +20,9 @@
 	color: white;
     background-color: #a6acb5;
     height: 30%;
-    margin: auto;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
     border-radius: 0px 40px;
     text-align: center;
 }
