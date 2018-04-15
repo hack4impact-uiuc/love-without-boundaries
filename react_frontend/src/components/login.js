@@ -5,6 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 
 class Login extends React.Component {
     responseGoogle = (response) => {
+        console.log(response);
         this.props.history.push('/student');
     }
     render(){
@@ -26,7 +27,7 @@ class Login extends React.Component {
                 clientId='162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com'
                 buttonText='Login'
                 accessType='offline'
-                scope='https://www.googleapis.com/auth/drive.file'
+                scope='https://www.googleapis.com/auth/drive'
                 onSuccess={this.responseGoogle}
             />
         );
