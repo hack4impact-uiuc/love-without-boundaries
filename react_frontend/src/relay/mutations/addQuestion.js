@@ -15,15 +15,12 @@ const mutation = graphql`
     }
 `;
 
-function addQuestion(environment: Environment, questionName: string, a: string, b: string, c: string, d: string, correct: string) {
+function addQuestion(environment: Environment, questionName: string, answers: [{string: string}]) {
     const variables = {
 		input: {
             lessonId: "TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==",
             question: {questionName: questionName,
-                        answers : [ {answerName: a, isCorrect: "A" == correct},
-                                    {answerName: b, isCorrect: "B" == correct},
-                                    {answerName: c, isCorrect: "C" == correct},
-                                    {answerName: d, isCorrect: "D" == correct} ]  
+                        answers : answers 
         }}
 	};
 

@@ -3,11 +3,11 @@
  * It accepts a prop through react router with the lessonID
  */
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import Question from '../components/question';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import PaddedButton from '../components/button';
+import AdminQuiz from '../components/adminQuiz';
 
 class QuizPage extends Component{
 
@@ -21,7 +21,6 @@ class QuizPage extends Component{
         this.setState({
             qNum : this.state.qNum + 1,
             qMap : [...this.state.qMap, this.state.qNum + 1],
-            editable : this.state.qNum + 1
         });
     }
 
@@ -74,35 +73,7 @@ class QuizPage extends Component{
                         return (
                             <div>
                                 <h1>Quiz Page</h1>
-                                {
-                                    props.node.quiz.questions.map((q,i) => {
-                                        return(
-                                            <Question
-                                                key= { i + 1 }
-                                                name= {q.questionName}
-                                                answers={ q.answers }
-                                                locked={ i != this.state.editable - 1}
-                                                passBack={this.passBack}
-                                                num={ i + 1 }
-                                            />
-                                        )
-                                    })
-                                }
-                                <br/>
-                                {Object.keys(this.state.qMap).map( qNum => 
-                                    <div key={qNum + props.node.quiz.questions.length}>
-                                        <Question 
-                                            locked={qNum + props.node.quiz.questions.length != this.state.editable - 1} 
-                                            passBack={this.passBack} 
-                                            num={Number(qNum) + 1 + props.node.quiz.questions.length}
-                                        />
-                                    <br/></div>
-                                )}
-                                <PaddedButton className="btn btn-info"onClick={this.addQuestion}>Add Question</PaddedButton>
-                                <br/>
-                                <PaddedButton className="btn btn-success" onClick={this.lock}>Submit Questions</PaddedButton>
-                                <br/>
-                                <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
+                                <AdminQuiz questions={props.node.quiz.questions}/>
                             </div>
                         );
                     }}
