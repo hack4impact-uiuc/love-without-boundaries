@@ -32,10 +32,11 @@ class LessonForm extends React.Component {
         if (!NotesFileID || !WkshtFileID) {
             alert("Please Insert Notes Link and Worksheet Link");
         }
-        addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link);
+        addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link)
         // set permissions for the file
         setPermissionToAllRead(NotesFileID[0]);
         setPermissionToAllRead(WkshtFileID[0]);
+        //students.map(student => addStudentWorksheetCopy(environment, student.id))
         this.setState({
             name: '',
             notes: '',
