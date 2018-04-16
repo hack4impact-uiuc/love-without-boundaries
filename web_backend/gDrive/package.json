@@ -1,0 +1,13 @@
+{
+  "name": "gDrive",
+  "version": "1.0.0",
+  "description": "Google Drive Microservice",
+  "main": "index.js",
+  "author": "Timothy Ko",
+  "license": "MIT",
+  "dependencies": {
+    "micro": "^9.1.4",
+    "micro-cors": "^0.1.0",
+    "node-fetch": "^2.1.2"
+  }
+}
