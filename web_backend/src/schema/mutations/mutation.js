@@ -447,6 +447,31 @@ const addURL = mutationWithClientMutationId({
     },
 });
 
+const deleteQuestion = mutationWithClientMutationId({
+    name: 'deleteQuestion',
+    inputFields: {
+        questionId: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+        lessonId: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+    },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ questionId, lessonId }) => {
+        const qObj = fromGlobalId(questionId);
+        const lObj = fromGlobalId(lessonId);
+        console.log(Lesson.findById(lObj.id));
+        console.log(qObj.id);
+        return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.questions': { id: questionId } } });
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -471,6 +496,7 @@ const Mutation = new GraphQLObjectType({
             removeStudentWorksheetCopy,
             deleteStudent,
             addURL,
+            deleteQuestion,
         };
     },
 });
