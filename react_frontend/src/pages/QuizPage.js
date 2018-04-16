@@ -3,16 +3,10 @@ import styled from 'styled-components';
 import Question from '../components/question';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
-const CopiedButton = styled.button`
-    background-color: #4CAF50;
-    border: 1px solid #ddd;
-    padding: 10px;
-    color: white;
-    font-size: 15px;
-    margin: 5px;
-`;
+import PaddedButton from '../components/button';
+
 class QuizPage extends Component{
-    
+
     constructor(props){
         super(props)
         this.state = {qNum : 0, qMap : [], editable : 0}
@@ -73,11 +67,11 @@ class QuizPage extends Component{
                                         num={Number(qNum) + 1}/>
                                     <br/></div>
                                 )}
-                                <CopiedButton onClick={this.addQuestion}>Add Question</CopiedButton>
+                                <PaddedButton className="btn btn-info"onClick={this.addQuestion}>Add Question</PaddedButton>
                                 <br/>
-                                <CopiedButton onClick={this.lock}>Submit Questions</CopiedButton>
+                                <PaddedButton className="btn btn-success" onClick={this.lock}>Submit Questions</PaddedButton>
                                 <br/>
-                                <CopiedButton onClick={this.finish}>Finish Quiz</CopiedButton>
+                                <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
                             </div>
                         );
                     }}

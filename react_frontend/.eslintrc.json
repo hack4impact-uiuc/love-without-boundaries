@@ -10,11 +10,15 @@
         "sourceType": "module"
     },
     "extends": "airbnb",
+    "parser": "babel-eslint",
     "rules": {
         "react/jsx-filename-extension": "off",
         "react/prop-types": "off",
         "indent": ["error", 4],
         "react/jsx-indent": 4,
-        "react/jsx-indent-props":4
+        "react/jsx-indent-props":4,
+        "eqeqeq": "off",
+        "linebreak-style": "off",
+        "arrow-parens": "off"
     }
 }

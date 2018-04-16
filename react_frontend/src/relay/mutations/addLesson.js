@@ -9,35 +9,36 @@ const mutation = graphql`
     ) {
         createLesson(input: $input){
             lesson {
-                name
+                id
             }
             clientMutationId
         }
     }
 `;
 
-function addLesson(environment: Environment, name: string, worksheetName: string, worksheetURL: string, notesName: string, notesURL: string) {
+function addLesson(environment: Environment, name: string, worksheetURL: string, notesURL: string) {
 	const variables = {
 		input: {
             name,
-            worksheetName,
             worksheetURL,
-            notesName,
             notesURL
         }
-	};
-
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-			console.log('Response received from server.');
-		},
-		onError: err => console.error(err),
-    },
-  );
+    };
+    
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server.');
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default addLesson;
+export {
+    mutation
+}

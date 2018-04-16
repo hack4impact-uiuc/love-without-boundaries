@@ -34,7 +34,7 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     (obj) => {
         if (obj.grades) return StudentType;
         if (obj.listOfStudentIDs) return TeacherType;
-        if (obj.worksheetName) return LessonType;
+        if (obj.worksheetURL) return LessonType;
         return AdminType;
     },
 );

@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import Login from '../components/login';
-
+import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 type Props = {
     /**/ 
 }
@@ -49,7 +48,11 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
-
+    setup = (e) =>{
+        // this function is used to easily call the google drive setup function
+        // this should be called once auth is setup for a newly registered student
+        InitialStudentSetup(environment,'hi');
+    }
     render() {
         return (
             
@@ -69,11 +72,11 @@ class HomePage extends React.Component<Props>{
                             <div> 
                             <HomeSection className="container">
                                 <LogoRow className="row">
-                                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
-                                        <Image src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
-                                    </Col>
-                                    <Col xs={1} sm={6}></Col>
-                                    <Col xs={5} sm={2}>
+                                    <div className="col-xs-5 col-sm-4" style={{paddingLeft: 15}}>
+                                        <img className="img-fluid" src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" />
+                                    </div>
+                                    <div className="col-xs-1 col-sm-6"></div>
+                                    <div className="col-xs-5 col-sm-2">
                                         <SignInSection>
                                         { 
                                             this.state.signup ?
@@ -90,7 +93,7 @@ class HomePage extends React.Component<Props>{
                                             </div>
                                         }
                                         </SignInSection>
-                                    </Col>
+                                    </div>
                                 </LogoRow>
                             </HomeSection>
                             </div>
