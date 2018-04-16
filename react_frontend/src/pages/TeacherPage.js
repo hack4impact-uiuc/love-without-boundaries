@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import PaddedButton from '../components/button';
