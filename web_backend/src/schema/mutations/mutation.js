@@ -477,11 +477,11 @@ const deleteQuestion = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: ({ questionId, lessonId }) => {
-        const qObj = fromGlobalId(questionId);
+        // const qObj = fromGlobalId(questionId);
         const lObj = fromGlobalId(lessonId);
-        console.log(Lesson.findById(lObj.id));
-        console.log(qObj.id);
-        return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.questions': { id: questionId } } });
+        // return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.$.questions': { id: questionId } } });
+        Lesson.findOneAndUpdate({ 'quiz.questions.id': questionId }, { $pull: { 'quiz.$.questions': { id: questionId } } });
+        return Lesson.findById(lObj.id);
     },
 });
 
