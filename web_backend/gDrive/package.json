@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Timothy Ko",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "micro": "^9.1.4",
     "micro-cors": "^0.1.0",
