@@ -5,7 +5,7 @@ import addStudentWorksheetCopy from './relay/mutations/addStudentWorksheetCopy';
 function getGapiAccessToken() {
     // return jwtDecode(localStorage.getItem('token')).gapi_access_token;
     // hard code token for now
-    return "ya29.GlueBZUlo_StQPKa3VVwfN8Shy-4SLCix_DfZSxlVEVou54TzufFtT636CCMTwrG7RxixAV-PipjggDoe1PqdoIKp3OY-1E3Fv_KikWufjugi6EKe_8-NByE00NA";
+    return 'ya29.GlueBZUlo_StQPKa3VVwfN8Shy-4SLCix_DfZSxlVEVou54TzufFtT636CCMTwrG7RxixAV-PipjggDoe1PqdoIKp3OY-1E3Fv_KikWufjugi6EKe_8-NByE00NA';
 }
 
 function setPermissionToAllRead(fileId) {
@@ -54,9 +54,9 @@ function getFileInfo(fileId) {
 function InitialStudentSetup(environment, id) {
     fetch('http://localhost:8080?', {
         body: JSON.stringify({
-            query: '{\n\tlessons{\n    id\n    name\n    notesURL\n    worksheetURL\n  }\n}\n\n', 
+            query: '{\n\tlessons{\n    id\n    name\n    notesURL\n    worksheetURL\n  }\n}\n\n',
             variables: null,
-            'operationName': null,
+            operationName: null,
         }),
         headers: {
             'content-type': 'application/json',
@@ -75,7 +75,7 @@ function InitialStudentSetup(environment, id) {
             } else {
                 copyFile(lesson.worksheetURL).then((res2) => {
                     if (res2 === undefined || res2.error) {
-                        console.err('Copy File failed. Contact Admin')
+                        console.err('Copy File failed. Contact Admin');
                     } else {
                         const newFileID = res2.id;
                         addStudentWorksheetCopy(environment, id, lesson.id, `https://docs.google.com/document/d/${newFileID}`);
