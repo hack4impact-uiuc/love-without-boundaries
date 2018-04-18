@@ -108,3 +108,47 @@
 .glyphicon {
     font-size: 150px;
 }
+.layer {
+    background-color: #828282;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lower{
+	text-transform: none;
+	font-weight: 200;
+	font-size: 15px;
+	padding-top: 3%;
+
+}
+
+
+
+.caption{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+	position: relative;
+	text-align: center;
+}
+.subCaption{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	position: relative;
+	text-align: center;
+}
+
+
+
+.blueCircle
+{
+	background-color: #54C0EB;
+	color: #54C0EB;
+	position: relative;
+	border-radius:100%;
+	z-index: -10;
+	height: 300px;
+}

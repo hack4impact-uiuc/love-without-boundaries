@@ -13,15 +13,37 @@ import NavBarHome from '../components/navBarHome';
 
 
 
+import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 type Props = {
     /**/ 
 }
 const HomeSection = styled.div`
-    background: url("https://file-vyzcmyyyky.now.sh/");
     background-size: cover;  
     width: 100%;
     display: block;
     height: 1000px;
+`
+
+const DarkBox = styled.div`
+    background: url("https://file-utocriqbzb.now.sh/");
+    background-size: cover;  
+    width: 100%;
+    height: 300px;
+    display: block;
+
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0.5rem 2rem ;
+	text-align: center;
+    position: relative;
+    padding-top: 8%;
+    margin-top: 0%;
+    right:0%;
+    margin-left: 0%;
+    left:0%;
 `
 
 const SignInSection = styled.div`
@@ -73,6 +95,42 @@ const DoubleOverBox = styled.div`
     z-index: 10;
 `;
 
+const SignUpIcon = styled.div`
+    background: url("https://file-zhzvumzlvc.now.sh/");
+    width: 185px;
+    height: 185px;
+    position: relative;
+    background-size: cover;  
+    margin: 0 auto;
+    margin-top: 18%;
+    margin-bottom: 7%;
+`
+
+const LearningIcon = styled.div`
+    background: url("https://file-emcfzpkgbu.now.sh/");
+    width: 170px;
+    height: 170px;
+    position: relative;
+    background-size: cover;  
+    margin: 0 auto;
+    margin-top: 20%;
+    margin-bottom: 10%;
+
+`
+
+const AcheiveIcon = styled.div`
+    background: url("https://file-hkbcghevuc.now.sh/");
+    width: 185px;
+    height: 185px;
+    position: relative;
+    display: block;
+    background-size: cover;  
+    margin: 0 auto;
+    margin-top: 15%;
+    margin-bottom: 7%;
+
+`
+
 class HomePage extends React.Component<Props>{
     constructor(props){
         super(props);
@@ -85,7 +143,15 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
-
+    getInfo = (e) => {
+        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => console.log(r)).catch(err => console.log(err));
+        //copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllRead(r.id)).then(r => console.log(r));
+    }
+    setup = (e) =>{
+        // this function is used to easily call the google drive setup function
+        // this should be called once auth is setup for a newly registered student
+        InitialStudentSetup(environment,'hi');
+    }
     render() {
         return (
             <QueryRenderer
@@ -101,18 +167,14 @@ class HomePage extends React.Component<Props>{
                     variables={{}}
                     render={({ props }) => {
                         return (
-                            <div> 
+                            <div > 
                             <head>
                                  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"></link>
                             </head>
                             <HomeSection className="container" className="homePic">
-                                <LogoRow className="row">
-                                    <Col xs={5} sm={4} style={{paddingLeft: 15}}>
-                                        <Image className="logoHome" src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" responsive />
-                                    </Col>
-                                    <Col xs={1} sm={6}></Col>
-                                    <Col xs={5} sm={2}>
-                                        <SignInSection>
+                                <Grid fluid>
+                                    <Row>
+                                       <SignInSection>
                                         { 
                                             this.state.signup ?
                                             <div>
@@ -122,25 +184,52 @@ class HomePage extends React.Component<Props>{
                                                 <SignInButton className="btn">Admin</SignInButton>
                                             </div>
                                             : 
-                                            <div className = "navBar">
-                                                <Login className="homeButton" />
-                                                <SignInButton className="homeButton" className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
-                                            </div>
+                                            <DarkBox>The Learning Tool Mission 
+                                            <br></br>______
+                                             <div className ="lower"> Our goal is to prepare students for their future </div>
+                                            <button onClick={this.setup}>Initial Student Setup</button>
+                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button>
+                                                <Login/>
+                                                <SignInButton className="lower" className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
+                                            </DarkBox>
                                         }
                                         </SignInSection>
+
+                                    </Row>
+                                    <Row>
+                                    <Col xs={12} sm={4}>
+                                        <SignUpIcon></SignUpIcon>
+                                        <div className="caption">
+                                            Sign up for an account
+                                        </div>
+                                        <br></br>
+                                        <div className="subCaption">
+                                            Students can sign up for an account and will be paired with a tutor
+                                        </div>
                                     </Col>
-                                </LogoRow>
-                                <div className="circle"> 
-                                <br></br>
-                                <br></br>
-                                Welcome to our <br></br>Learning Tool
-                                <br></br>
-                                <a class="linkText" href="https://www.lovewithoutboundaries.com/"> Click here to learn more about Love Without Boundaries</a>
-                                </div>
-                                <OverBox></OverBox>
-                                <DoubleOverBox>
-                                <p>Book icon: <Glyphicon glyph="book"></Glyphicon> </p>   
-                                </DoubleOverBox>
+                                    <Col xs={12} sm={4}>
+                                        <LearningIcon></LearningIcon>
+                                        <div className="caption">
+                                            Start learning
+                                        </div>
+                                        <br></br>
+                                        <div className="subCaption">
+                                            Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
+                                        </div>
+                                    </Col>
+                                    <Col xs={12} sm={4}>
+                                    <AcheiveIcon></AcheiveIcon>
+                                    <div className="caption">
+                                        Get the results
+                                    </div>
+                                    <br></br>
+                                        <div className="subCaption">
+                                            These lessons are to prepare students for high acheivement in national exams
+                                        </div>
+                                    </Col>
+                                    </Row>
+
+                                </Grid>
                             </HomeSection>
                             </div>
                         );

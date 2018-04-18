@@ -12,7 +12,7 @@ const CopiedButton = styled.button`
     margin: 5px;
 `;
 class QuizPage extends Component{
-    
+
     constructor(props){
         super(props)
         this.state = {qNum : 0, qMap : [], editable : 0}

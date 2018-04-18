@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1f1bf63caad65fc337153ea6517f948e
+ * @relayHash ad7e59a07355a117ca8a2dba5753fb23
  */
 
 /* eslint-disable */
@@ -33,7 +33,7 @@ export type addLessonMutationVariables = {|
 export type addLessonMutationResponse = {|
   +createLesson: ?{|
     +lesson: ?{|
-      +name: ?string,
+      +id: string,
     |},
     +clientMutationId: ?string,
   |},
@@ -47,7 +47,6 @@ mutation addLessonMutation(
 ) {
   createLesson(input: $input) {
     lesson {
-      name
       id
     }
     clientMutationId
@@ -66,32 +65,55 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "input",
-    "variableName": "input",
-    "type": "CreateLessonInput!"
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "createLesson",
+    "storageKey": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "input",
+        "variableName": "input",
+        "type": "CreateLessonInput!"
+      }
+    ],
+    "concreteType": "CreateLessonPayload",
+    "plural": false,
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "lesson",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Lesson",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          }
+        ]
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "clientMutationId",
+        "args": null,
+        "storageKey": null
+      }
+    ]
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "clientMutationId",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "addLessonMutation",
   "id": null,
-  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      name\n      id\n    }\n    clientMutationId\n  }\n}\n",
+  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      id\n    }\n    clientMutationId\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -99,72 +121,15 @@ return {
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "createLesson",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "CreateLessonPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "lesson",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Lesson",
-            "plural": false,
-            "selections": [
-              v2
-            ]
-          },
-          v3
-        ]
-      }
-    ]
+    "selections": v1
   },
   "operation": {
     "kind": "Operation",
     "name": "addLessonMutation",
     "argumentDefinitions": v0,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "createLesson",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "CreateLessonPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "lesson",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Lesson",
-            "plural": false,
-            "selections": [
-              v2,
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "id",
-                "args": null,
-                "storageKey": null
-              }
-            ]
-          },
-          v3
-        ]
-      }
-    ]
+    "selections": v1
   }
 };
 })();
-(node/*: any*/).hash = '527c0a3a01ac1eb43c06fc4981fb7dbd';
+(node/*: any*/).hash = '71ccb63a40e84eda3102756358045596';
 module.exports = node;
