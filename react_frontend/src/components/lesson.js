@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Button} from 'react-bootstrap';
 import './../../assets/Hover.css';
 import { withRouter } from 'react-router-dom'
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
@@ -79,7 +80,9 @@ const SlightlyPaddedButton = styled.button`
 class LessonComponent extends React.Component<Props>{
 
     gotoQuiz = () => {this.props.history.push('/takequiz')}
-    gotoPastQuiz = () => {this.props.history.push('/reviewquiz')}
+    gotoPastQuiz = () => {
+        this.props.history.push('/reviewquiz')
+    }
     render() {
         let quiz = "Take Quiz"
         let box = <CheckedBoxInComplete/>
@@ -99,9 +102,11 @@ class LessonComponent extends React.Component<Props>{
                         <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
                         </Link>
                     )}
-                         
-                        <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton> 
-                    </LessonProps>
+                        <Link key={this.props.key} to={{ pathname: '/reviewquiz', state:{ lessonID: this.props.id } }}>
+                          <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Review </SlightlyPaddedButton>
+                        </Link>  
+                    </LessonProps> 
+    
                 </LessonBox>
             </div>
         );
