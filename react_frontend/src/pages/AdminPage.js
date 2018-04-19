@@ -13,7 +13,44 @@ import TeacherListItem from './../components/teacherListItem';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
 import { withRouter } from 'react-router-dom';
-import PaddedButton from './../components/button';
+
+import './../../assets/Hover.css';
+
+
+const ToolBar = styled.div`
+
+background: rgba(30,209,179,1);
+background: -moz-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(30,209,179,1)), color-stop(100%, rgba(3,114,145,1)));
+background: -webkit-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+background: -o-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+background: -ms-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+background: linear-gradient(to right, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', endColorstr='#037291', GradientType=1 );
+
+    width: 70%;
+    height: auto;
+    position: relative;
+    background-size: cover;  
+    margin: auto;
+
+    display: block;
+    overflow: auto;
+
+    padding-bottom: 10px;
+
+    margin-bottom: 5%;
+`;
+
+const PaddedButton = styled.button`
+    padding: 10px;
+    margin-top: 10px;
+    display: inline;
+    background-color: transparent;
+    border-color: white;
+    margin-right: 10px;
+    margin-left: 10px;
+`;
 
 type Props = {
     /**/
@@ -31,13 +68,30 @@ class AdminPage extends React.Component<Props>{
     goToList = () => {this.setState({showLesson: false})}
     render() {
         return (
-            <div className="container-fluid">
-                
-                <div className="row">
+            <div>
+            <Grid fluid>
+
+             <Row>
+                 <div className="TopTextHeader"> Administrator Tool Page </div>
+                    <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
+                    <ToolBar>
+                    <div className="adminTool">
+                        <PaddedButton className="btn btn-primary" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
+                        </div>
+                        <div className="adminTool">
+                        <PaddedButton className="btn btn-primary" onClick = {this.goToQuiz}>Create Quiz</PaddedButton>
+                        </div>
+                        <div className="adminTool">
+                        <PaddedButton className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
+                        </div>
+                    </ToolBar>
+            </Row>
+                <br></br>
+                <Row>
                     <div className="col-sm-8">
                     {
                         this.state.showLesson ? 
-                        <div>
+                        <div className="centered">
                             <LessonForm/> 
                             <LessonList/>
                         </div>
@@ -45,12 +99,8 @@ class AdminPage extends React.Component<Props>{
                         <AdminListComponent/>
                     }
                     </div>
-                    <div className="col-sm-4">
-                        <PaddedButton style={{display:'block'}} className="btn btn-primary" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
-                        <PaddedButton style={{display:'block'}} className="btn btn-primary" onClick = {this.goToQuiz}>Create Quiz</PaddedButton>
-                        <PaddedButton style={{display:'block'}} className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
-                    </div>
-                </div>
+                </Row>
+            </Grid>
             </div>
         );
     }

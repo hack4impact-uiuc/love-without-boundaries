@@ -40,6 +40,8 @@ export const DeleteButton = styled.button`
     font-size: 12px;
     margin-left: 50%;
     margin-bottom:10px;
+    margin-top: 2%;
+    display: inline;
 `;
 
 export const AssignButton = styled.button`
@@ -47,6 +49,7 @@ export const AssignButton = styled.button`
     color: white;
     font-size: 12px;
     margin-left: 5px;
+    display: inline;
 `;
 
 export const AssignTeacherButton = styled.button`
@@ -203,7 +206,7 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
                       const teacherList = props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)
 
                       return (
-                          <div>
+                          <div className="rightMargin" >
                                 <div>
                                     <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of tutors'}</h2>
                                     <PaddedButton className="btn btn-primary" name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
