@@ -478,8 +478,7 @@ const deleteQuestion = mutationWithClientMutationId({
     },
     mutateAndGetPayload: async ({ questionId, lessonId }) => {
         const lObj = fromGlobalId(lessonId);
-        const lesson = await Lesson.findById(lObj.id);
-        return Lesson.findByIdAndUpdate(lObj.id, {questions: lesson.quiz.questions.filter(x => x._id != questionId) });
+        return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.questions': { _id: questionId } } });
     },
 });
 
