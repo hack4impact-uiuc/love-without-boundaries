@@ -94,7 +94,7 @@ class LessonComponent extends React.Component<Props>{
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes {this.props.lessonNotes}</a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet {this.props.worksheetName}</a></LessonProps>
                     <LessonProps> Quiz -- {this.props.quizName} Grade: {this.props.quizPercentage}     
-                    `   {this.props.isTeacher &&  (
+                       {this.props.isTeacher &&  (
                         <Link key={this.props.key} to={{ pathname: '/takequiz', state:{ lessonID: this.props.id } }}>
                         <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
                         </Link>
