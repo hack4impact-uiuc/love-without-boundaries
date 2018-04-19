@@ -35,7 +35,7 @@ const DarkBox = styled.div`
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 600;
-    font-size: 20px;
+    font-size: 26px;
     margin: 0.5rem 2rem ;
 	text-align: center;
     position: relative;
@@ -63,36 +63,6 @@ const SignInButton = styled.div`
 `;
 const LogoRow = styled.div`
     padding-top: 20px;
-`;
-
-const GrayBox = styled.div`
-    background-color: #777DA7;
-    width: 100%;
-    height: 5%;
-    left: 0px;
-    top: 50%;
-    position: absolute;
-    z-index: -1;
-`;
-
-const OverBox = styled.div`
-    background-color: #721121;
-    width: 100%;
-    height: 10%;
-    left: 0px;
-    top: 60%;
-    position: absolute;
-    z-index: 10;
-`;
-
-const DoubleOverBox = styled.div`
-    background-color: white;
-    width: 100%;
-    height: 60%;
-    left: 0px;
-    top: 70%;
-    position: absolute;
-    z-index: 10;
 `;
 
 const SignUpIcon = styled.div`
@@ -126,9 +96,77 @@ const AcheiveIcon = styled.div`
     display: block;
     background-size: cover;  
     margin: 0 auto;
-    margin-top: 15%;
+    margin-top: 17%;
     margin-bottom: 7%;
+`
 
+const TopBox = styled.div`
+    background: url("https://file-unocxsjgra.now.sh");
+    background-size: cover;  
+    width: 100%;
+    height: 300px;
+`
+
+const BottomBox = styled.div`
+    background: url("https://file-rfipjzwojd.now.sh/");
+    background-size: cover;  
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-right: 0%;
+`
+
+const RightBox = styled.div`
+    background-color: purple;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-right: 0%;
+`
+
+const LeftBox = styled.div`
+    background-color: purple;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-right: 0%;
+`
+
+const BoxText = styled.div`
+    font-weight: 200;
+    font-size: 26px;
+	text-align: center;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+`
+const BoxRightText = styled.div`
+    font-weight: 200;
+    font-size: 26px;
+	text-align: left;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+    left: 10%;
+`
+const BoxRightSubText = styled.div`
+    font-weight: 100;
+    font-size: 16px;
+    text-align: left;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+    left: 10%;
+    margin-right: 20%;
+`
+
+const BoxSubText = styled.div`
+    font-weight: 100;
+    font-size: 16px;
+	text-align: center;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
 `
 
 class HomePage extends React.Component<Props>{
@@ -187,8 +225,6 @@ class HomePage extends React.Component<Props>{
                                             <DarkBox>The Learning Tool Mission 
                                             <br></br>______
                                              <div className ="lower"> Our goal is to prepare students for their future </div>
-                                            <button onClick={this.setup}>Initial Student Setup</button>
-                                                <button className='btn btn-primary' onClick={this.getInfo}>Temp Button</button>
                                                 <Login/>
                                                 <SignInButton className="lower" className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                             </DarkBox>
@@ -227,6 +263,52 @@ class HomePage extends React.Component<Props>{
                                             These lessons are to prepare students for high acheivement in national exams
                                         </div>
                                     </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <br></br>
+                                        <br></br>
+                                        <Col xs={12} sm={6} className="no-gutter">
+                                            <TopBox>
+                                            </TopBox>
+                                        </Col>
+                                        <Col xs={12} sm={6} className="no-gutter">
+                                            <RightBox>
+                                            <br></br>
+                                            <br></br>
+                                                <BoxText> 
+                                                    Learn From Anywhere
+                                                </BoxText>
+                                                <br></br>
+                                                <BoxText> ________</BoxText>
+                                                <br></br>
+                                                <br></br>
+                                                <BoxSubText> 
+                                                    Lessons are accessible from many different devices
+                                                </BoxSubText>
+                                            </RightBox>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={12} sm={6} className="no-gutter">
+                                            <LeftBox>
+                                            <br></br>
+                                            <br></br>
+                                            <BoxRightText> 
+                                                    Our Product is Dope as Hell
+                                                </BoxRightText>
+                                                <br></br>
+                                                <BoxRightText> ________</BoxRightText>
+                                                <br></br>
+                                                <br></br>
+                                                <BoxRightSubText> 
+                                                    Use our product because we are dope as hell and this product will improve ur life by like 300%
+                                                </BoxRightSubText>
+                                            </LeftBox>
+                                        </Col>
+                                        <Col xs={12} sm={6} className="no-gutter">
+                                            <BottomBox></BottomBox>
+                                        </Col>
                                     </Row>
 
                                 </Grid>
