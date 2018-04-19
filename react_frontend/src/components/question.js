@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import addQuestion from '../relay/mutations/addQuestion'
+import deleteQuestion from '../relay/mutations/deleteQuestion'
 import environment from '../relay/environment';
 import PaddedButton from './button';
 
@@ -15,12 +16,12 @@ class Question extends React.Component{
     componentWillReceiveProps(newProps) {
         if(newProps.locked !== this.props.locked){
             this.setState({locked : newProps.locked});
-            if(newProps.locked == true)
-                addQuestion(environment, this.state.name, this.state.answers);
-            if(this.props.overriden == true){
-                deleteQuestion(environment);
+            if(this.props.overriden == true && newProps.locked == true){
+                deleteQuestion(environment, this.props.id);
                 addQuestion(environment, this.state.name, this.state.answers);
             }
+            else if(newProps.locked == true)
+                addQuestion(environment, this.state.name, this.state.answers);
         }
     }
     
@@ -80,7 +81,7 @@ class Question extends React.Component{
                             onChange={this.updateAns} 
                             className="form-control"
                             readOnly={this.props.locked}
-                            onClick={this.unlock}
+                            onClick={this.props.locked == true ? this.unlock : null}
                         />
                     </label>
                 </div>
@@ -96,7 +97,7 @@ class Question extends React.Component{
                     value={this.state.name} 
                     onChange={this.updateQuestion} 
                     readOnly={this.props.locked}
-                    onClick={this.unlock}
+                    onClick={this.props.locked == true ? this.unlock : null}
                 />
                 <br/>
                 { this.createAnswers(this.state.answers) }

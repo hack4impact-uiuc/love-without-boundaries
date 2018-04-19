@@ -56,6 +56,7 @@ class AdminQuiz extends React.Component {
                             passBack={this.passBack}
                             locked={this.state.editable != i}
                             overriden={this.state.overriden}
+                            id={q.id}
                         />
                     ))
                 }

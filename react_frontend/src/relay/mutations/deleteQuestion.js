@@ -4,7 +4,7 @@ import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-    mutation deleteQuestionMutation($input: DeleteQuestionInput!){
+    mutation deleteQuestionMutation($input: deleteQuestionInput!){
         deleteQuestion(input: $input){
             lesson{
                 name
@@ -13,7 +13,7 @@ const mutation = graphql`
     }
 `;
 
-function deleteQuestion(environment: Environment, qID: string) {
+function deleteQuestion(environment: Environment, qID: ID) {
 	const variables = {
 		input: {
             questionId: qID,
@@ -27,7 +27,8 @@ function deleteQuestion(environment: Environment, qID: string) {
 		mutation,
 		variables,
 		onCompleted: (response) => {
-			console.log('Response received from server.');
+            console.log('Response received from server. Question removed.');
+            console.log(response);
 		},
 		onError: err => console.error(err),
     },

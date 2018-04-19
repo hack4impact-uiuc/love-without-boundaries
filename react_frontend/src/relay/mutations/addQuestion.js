@@ -34,7 +34,7 @@ function addQuestion(environment: Environment, questionName: string, answers: [{
 		mutation,
 		variables,
 		onCompleted: (response) => {
-            console.log('Response received from server.');
+            console.log('Response received from server. Question added.');
             console.log(response);
 		},
 		onError: err => console.error(err),
