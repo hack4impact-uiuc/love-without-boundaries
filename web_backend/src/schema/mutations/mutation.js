@@ -155,8 +155,8 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ studentID, teacherID }) => {
-        const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null
-        const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null
+        const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null;
+        const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null;
         if (realStudentId && realTeacherId) {
             await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } });
             await Teacher.findByIdAndUpdate(fromGlobalId(teacherID).id, { $push: { listOfStudentIDs: fromGlobalId(studentID).id } });
@@ -189,7 +189,7 @@ const submitQuiz = mutationWithClientMutationId({
     inputFields: {
         id: { type: GraphQLID },
         lessonID: { type: GraphQLID },
-       
+
         answeredQuestions: { type: AnsweredQuestionsType },
         // answers: { type: new GraphQLList(GraphQLString) },
     },
@@ -467,7 +467,7 @@ const deleteQuestion = mutationWithClientMutationId({
             type: new GraphQLNonNull(GraphQLID),
         },
         lessonId: {
-            type: new GraphQLNonNull(GraphQLID),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
     outputFields: {
@@ -476,12 +476,10 @@ const deleteQuestion = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ questionId, lessonId }) => {
-        // const qObj = fromGlobalId(questionId);
+    mutateAndGetPayload: async ({ questionId, lessonId }) => {
         const lObj = fromGlobalId(lessonId);
-        // return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.$.questions': { id: questionId } } });
-        Lesson.findOneAndUpdate({ 'quiz.questions.id': questionId }, { $pull: { 'quiz.$.questions': { id: questionId } } });
-        return Lesson.findById(lObj.id);
+        const lesson = await Lesson.findById(lObj.id);
+        return Lesson.findByIdAndUpdate(lObj.id, {questions: lesson.quiz.questions.filter(x => x._id != questionId) });
     },
 });
 
