@@ -3,6 +3,8 @@ import GoogleDocButton from './googleDocButton';
 import LessonComponent from './lesson';
 import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy';
 import { copyFile } from '../Gapi';
+import environment from '../relay/environment';
+
 
 
 class StudentLesson extends React.Component {
@@ -14,29 +16,44 @@ class StudentLesson extends React.Component {
             lessonIDs: []
         }
     }
+
+    componentDidMount() {
+        const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => {
+            return element.lessonID
+        })
+        let i;
+        let count = 0;
+        for (i = 0; i < this.props.lessons.length; i++) {
+
+            if ((studentWorksheetLessonIDs.indexOf(this.props.lessons[i].id) == -1)) {
+                count++;
+                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, this.props.lessons[i].worksheetURL)
+            }
+        }
+        console.log(count)
+        console.log(this.props.lessons.map(element => {
+            return element.id
+        }))
+        console.log(studentWorksheetLessonIDs)
+    }
     
     updateLessons = (studentWorksheetLessonIDs, lessonIDs, url) => {
         let i;
-        for (i = 0; i < lessons.length; i++) {
-            if (!studentWorksheetLessonIDs.includes(lessonIDs[i])) {
-                addStudentWorksheetCopy(this.props.location.student.id, lessonIDs[i], url)
-                //TODO: Clean URL
-                copyFile(url);
-            }
-        }
     }
-    cleanData = () => {
-        const temp1 = this.props.lessons.map(element => {
-            return element.id
-        })
-        const temp2 = this.props.studentWorksheets.map(element => {
-            return element.lessonID
-        })
-        this.setState({
-            worksheetIDs: temp2,
-            lessonIDs: temp1
-        })
-    }
+    // cleanData = () => {
+    //     const temp1 = this.props.lessons.map(element => {
+    //         return element.id
+    //     })
+    //     const temp2 = this.props.studentWorksheets.worksheets.map(element => {
+    //         return element.lessonID
+    //     })
+    //     console.log(temp1)
+    //     console.log(temp2)
+    //     this.setState({
+    //         worksheetIDs: temp2,
+    //         lessonIDs: temp1
+    //     })
+    // }
     render() {
         return (
             //TODO: Call Functions

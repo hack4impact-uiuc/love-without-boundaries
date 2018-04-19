@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a5ac03c3ac81b2b363866228515003e9
+ * @relayHash 661f5b5a3776fc3033a44da3ba943868
  */
 
 /* eslint-disable */
@@ -16,6 +16,7 @@ export type TeacherPage_QueryResponse = {|
   +node: ?{|
     +students?: ?$ReadOnlyArray<?{|
       +name: ?string,
+      +id: string,
     |}>,
   |},
 |};
@@ -59,16 +60,34 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "name",
+  "name": "id",
   "args": null,
   "storageKey": null
 },
 v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
+  "kind": "InlineFragment",
+  "type": "Teacher",
+  "selections": [
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "students",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "Student",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "name",
+          "args": null,
+          "storageKey": null
+        },
+        v2
+      ]
+    }
+  ]
 };
 return {
   "kind": "Request",
@@ -93,24 +112,7 @@ return {
         "concreteType": null,
         "plural": false,
         "selections": [
-          {
-            "kind": "InlineFragment",
-            "type": "Teacher",
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "students",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Student",
-                "plural": true,
-                "selections": [
-                  v2
-                ]
-              }
-            ]
-          }
+          v3
         ]
       }
     ]
@@ -136,31 +138,13 @@ return {
             "args": null,
             "storageKey": null
           },
-          v3,
-          {
-            "kind": "InlineFragment",
-            "type": "Teacher",
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "students",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Student",
-                "plural": true,
-                "selections": [
-                  v2,
-                  v3
-                ]
-              }
-            ]
-          }
+          v2,
+          v3
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '0cdb0e31d685fabdbdd700bd3b347694';
+(node/*: any*/).hash = 'c3a36ca445f119331826f8ca97d94627';
 module.exports = node;
