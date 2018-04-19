@@ -11,7 +11,7 @@ function fetchQuery(
     operation,
     variables,
 ) {
-    return fetch('https://micro-graphql-ipgdxiypve.now.sh/', {
+    return fetch('https://micro-graphql-jycadeeqsm.now.sh/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

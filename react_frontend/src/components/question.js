@@ -17,6 +17,10 @@ class Question extends React.Component{
             this.setState({locked : newProps.locked});
             if(newProps.locked == true)
                 addQuestion(environment, this.state.name, this.state.answers);
+            if(this.props.overriden == true){
+                deleteQuestion(environment);
+                addQuestion(environment, this.state.name, this.state.answers);
+            }
         }
     }
     
