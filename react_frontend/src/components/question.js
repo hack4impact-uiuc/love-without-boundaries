@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Answer from './answer';
 import addQuestion from '../relay/mutations/addQuestion'
 import environment from '../relay/environment';
 import PaddedButton from './button';
@@ -8,43 +7,33 @@ import PaddedButton from './button';
 class Question extends React.Component{
     constructor(props){
         super(props)
-        // this.state.answers = [{answerName, isCorrect}]
-        console.log(this.props.name)
         this.state = {
             name : this.props.name !== undefined ? this.props.name : '',
-            locked : this.props.locked,
-            answers: this.props.answers,
-            submitted: this.props.submitted ? this.props.submitted : false // false or true
+            answers: this.props.answers
         };
     }
     componentWillReceiveProps(newProps) {
         if(newProps.locked != this.state.locked){
             this.setState({locked : newProps.locked});
             if(newProps.locked == true)
-                console.log(this.state.answers)
                 addQuestion(environment, this.state.name, this.state.answers);
         }
     }
     
-    // update Question name
     updateQuestion = event => {
         this.setState({name : event.target.value});
     }
     
-    // "Edit" button pressed => unlock question
     unlock = () => {
         this.props.passBack(this.props.num);
     }
 
-    // answer changes, function is called in Answer Component
-    // answerVal is the answer text and idx is the index of the answer
     updateAns = e => {
         e.persist();
         const name = e.target.name;
         const val = e.target.value;
         this.setState((prevState, props) => ({
             answers: prevState.answers.map((ans,i) => {
-                // if it equal to the index
                 if (i == name){
                     return {
                         ...ans,
@@ -56,14 +45,10 @@ class Question extends React.Component{
         }));
     };
 
-    // radio is clicked for a specific answer, index of the answer is passed in
     updateCorrect = e => {
         const name = e.target.name;
-        console.log(this.state.answers);
         this.setState((prevState, props) => ({
             answers: prevState.answers.map((ans,i) => {
-                // if its the correct index, we change isCorrect to true
-                // else we make it false
                 if (i == name){
                     return ({...ans, isCorrect: true})
                 } 
@@ -71,7 +56,7 @@ class Question extends React.Component{
             })
         }));
     }
-    // this returns an array of answers, which always is length 4
+
     createAnswers = answers => {
         let answersElm = [];
         for ( var i = 0; i < 4; i++ ){
@@ -82,6 +67,7 @@ class Question extends React.Component{
                         onChange={this.updateCorrect}
                         checked={ answers[i] !== undefined ? answers[i].isCorrect : false}
                         className="form-check-input"
+                        disabled={this.props.locked}
                     />
                     <label className="form-check-label" htmlFor={i}>
                         <input type="text" 
@@ -89,6 +75,8 @@ class Question extends React.Component{
                             value={answers != undefined && answers[i] !== undefined ? answers[i].answerName : ''} 
                             onChange={this.updateAns} 
                             className="form-control"
+                            readOnly={this.props.locked}
+                            onClick={this.unlock}
                         />
                     </label>
                 </div>
@@ -99,9 +87,14 @@ class Question extends React.Component{
     render() {
         return(
             <div>
-                {this.props.num}. 
-                <input type="text" value={this.state.name} onChange={this.updateQuestion} readOnly={this.state.locked}/>
-                <PaddedButton className="btn btn-info" onClick={this.unlock}>Edit</PaddedButton>
+                {this.props.num + 1}. 
+                <input type="text" 
+                    value={this.state.name} 
+                    onChange={this.updateQuestion} 
+                    readOnly={this.props.locked}
+                    onClick={this.unlock}
+                />
+                <br/>
                 { this.createAnswers(this.state.answers) }
             </div>
         );

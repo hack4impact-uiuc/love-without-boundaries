@@ -8,6 +8,10 @@ const mutation = graphql`
                 quiz {
                     questions{
                         questionName
+                        answers{
+                            answerName
+                            isCorrect
+                        }
                     }
                 }
             }

@@ -1,39 +1,17 @@
-/* 
- * This page is shown when an Admin edits a Quiz for a lesson
- * It accepts a prop through react router with the lessonID
- */
 import React, { Component } from 'react';
-import Question from '../components/question';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
-import PaddedButton from '../components/button';
 import AdminQuiz from '../components/adminQuiz';
+import PaddedButton from '../components/button';
 
 class QuizPage extends Component{
-
     constructor(props){
         super(props);
-        this.state = {qNum : 0, qMap : [], editable : 0};
+        this.state = {};
     }
     
     finish = () => {this.props.history.push('/admin')}
-    addQuestion = () => {
-        this.setState({
-            qNum : this.state.qNum + 1,
-            qMap : [...this.state.qMap, this.state.qNum + 1],
-        });
-    }
-
-    // lock all questions
-    lock = () => {
-        this.setState({editable : 0});
-    }
-
-    // toggles a question "editable", passUp is the index of the question
-    passBack = passUp => {
-        this.setState({editable : passUp, passed : true});
-    }
-
+    
     render() {
         if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID){
             return <h2>Lesson doesn't exist. Try again.</h2>
@@ -74,6 +52,8 @@ class QuizPage extends Component{
                             <div>
                                 <h1>Quiz Page</h1>
                                 <AdminQuiz questions={props.node.quiz.questions}/>
+                                <br />
+                                <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
                             </div>
                         );
                     }}

@@ -14,7 +14,7 @@ class ReviewQuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
-                    /* IDK HOW TO ONLY GET A SPECIFIC STUDENT */
+                    
                     query={graphql`
                         query ReviewQuizPage_Query{
                             students{
@@ -42,20 +42,19 @@ class ReviewQuizPage extends Component{
                                 {
                                     props.students.map(student => {
                                         if(student.pastQuizzes){
-                                            student.pastQuizzes.map(pastQuiz => {
+                                            student.pastQuizzes.map(pastQuiz => {if(pastQuiz.questions){
                                                 <div>
                                                     <b>{pastQuiz.quizName} - Score: {pastQuiz.score}</b>
                                                     <br/>
-                                                    {pastQuiz.questions.map(q => 
+                                                    pastQuiz.questions.map(q => 
                                                         <div>
                                                             Your Answer: {q.answerChosen}<br/>
                                                             Correct Answer: {q.correctAnswer}<br/><br/>
                                                         </div>
                                                     )}
                                                 </div>
-                                            })
-                                        }
-                                    }) 
+                                    }})}})
+                                        
                                 }
                                 <button onClick={this.finish}>Finish</button>
                             </div>
