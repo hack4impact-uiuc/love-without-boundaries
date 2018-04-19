@@ -8,7 +8,7 @@ class AdminQuiz extends React.Component {
         super(props);
         this.state = {
             questions: this.props.questions || {},
-            qNum: this.props.question !== undefined ? this.props.question.length : 0,
+            qNum: this.props.questions !== undefined ? this.props.questions.length : 0,
             editable: "omgwow"
         };
     }
@@ -40,7 +40,7 @@ class AdminQuiz extends React.Component {
             };
         });
     }
-    
+
     render() {
         return (
             <div>

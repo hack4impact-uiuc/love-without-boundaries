@@ -13,7 +13,7 @@ class Question extends React.Component{
         };
     }
     componentWillReceiveProps(newProps) {
-        if(newProps.locked != this.state.locked){
+        if(newProps.locked !== this.props.locked){
             this.setState({locked : newProps.locked});
             if(newProps.locked == true)
                 addQuestion(environment, this.state.name, this.state.answers);
