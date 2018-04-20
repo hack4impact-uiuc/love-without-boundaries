@@ -84,7 +84,7 @@ let tutor = "TUTOR"
 class AdminListComponent extends React.Component<Props>{    constructor(props){
         super(props)
         this.state = {
-          studentOrTutor: tutor,
+          studentOrTutor: "STUDENT",
           showAssignList: false,
           selectedTeacherId: ''
         }
@@ -157,23 +157,57 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
       return <OddElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton> </OddElem>
     }
 
-    getList(props, showStudentorTutor) {
-        if (showStudentorTutor === student){
-            return(
-               <div>{props.students.map( (student, index) =>  this.EvenOddElem(<StudentListItem key={student.id} student={student} />, index, false, student) )} </div>
-            )
-        }
-        else{
-            return(
-              <div>{props.teachers.map( (teacher, index) => this.EvenOddElem(<TeacherListItem key={teacher.id} teacher={teacher} />, index, true, teacher)  )} </div>
-            )
-        }
+    getList(props) {
+        return(
+            <div>
+                <div className="container-fluid">
+                    <div className="col-sm-5">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Student</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { this.state.studentOrTutor === "TEACHER" ? 
+                                    props.teachers.map( (teacher, idx) => {
+                                        return(
+                                            <tr>
+                                                <th scrope="row">{idx}</th>
+                                                <th>
+                                                    <Link key={idx} style={{ display:'block' }}to={{ pathname: '/teacher', state:{ teacher: teacher } }}>
+                                                        <button className="btn btn-default">{teacher.name}</button>
+                                                        <DeleteButton className="btn btn-danger" name={teacher.id} onClick = {this.onClickDeleteTeacher} > Delete </DeleteButton>
+                                                    </Link>
+                                                </th>
+                                            </tr>
+                                        )})
+                                    : props.students.map((student, idx) => (
+                                        <tr>
+                                            <th scrope="row">{idx}</th>
+                                            <th>
+                                                <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
+                                                    <button className="btn btn-default">{student.name}</button>
+                                                </Link>
+                                                <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton>
+                                                <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton>
+                                            </th>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     getPopList(props, showList) {
         if (showList === true){
             return(
-              <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
+              <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input name='teacher' type="radio" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
                <AssignTeacherButton className="btn btn-info" onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton></PopUpList>
           )
         }
@@ -213,7 +247,7 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
                                     <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of tutors'}</h2>
                                     <PaddedButton className="btn btn-primary" name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
                                     <PaddedButton className="btn btn-primary" name="TEACHER" onClick={this.onClickMake}> Tutors </PaddedButton>
-                                    <div> {this.getList(props, this.state.studentOrTutor)} </div>
+                                    <div> {this.getList(props)} </div>
                                     <div> {this.getPopList(props, this.state.showAssignList)}</div>
                                 </div>
                           </div>

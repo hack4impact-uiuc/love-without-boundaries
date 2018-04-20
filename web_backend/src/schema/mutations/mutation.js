@@ -238,7 +238,7 @@ const submitQuiz = mutationWithClientMutationId({
         });
         const lid = lessonID;
         const pastQuiz = {
-            lessonID: lid,
+            lessonID,
             quizName: q1.name,
             score: (numCorrect / questionIDs.length),
             submittedAnswers,
@@ -382,7 +382,7 @@ const addStudentWorksheetCopy = mutationWithClientMutationId({
     name: 'AddStudentWorksheetCopy',
     inputFields: {
         studentID: { type: GraphQLID },
-        lessonID: { type: GraphQLID },
+        lessonID: { type: GraphQLString },
         url: { type: GraphQLString },
     },
     outputFields: {

@@ -55,7 +55,7 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
         this.state = {
-            teacherID: "VGVhY2hlcjo1YWNlZTg1N2VhNWM3NDQ2MjEzZDdkOWM="
+            teacherID: "VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA="
             // teacherID: jwt_decode(localStorage.getItem('token')).userID
         }
     }
@@ -71,6 +71,7 @@ class TeacherPage extends React.Component<Props>{
                             ... on Teacher {
                                 students {
                                     name
+                                    id
                                 }
                             }
                         }
@@ -85,7 +86,7 @@ class TeacherPage extends React.Component<Props>{
                             <div className="container-fluid">
                                 <h3>My Students</h3> 
                                 <div className="col-sm-5">
-                                    <table class="table">
+                                    <table className="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -99,7 +100,7 @@ class TeacherPage extends React.Component<Props>{
                                                     <tr>
                                                     <th scrope="row">{idx}</th>
                                                     <th>
-                                                        <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
+                                                        <Link key={idx} style={{ display:'block' }}to= {{ pathname: '/student', state:{ student: student } }}>
                                                             <button className="btn btn-default">{student.name}</button>
                                                         </Link>
                                                     </th>

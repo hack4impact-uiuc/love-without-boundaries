@@ -56,36 +56,31 @@ type Props = {
     /**/
   }
 
-class AdminPage extends React.Component<Props>{
+class AdminPage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            showLesson: false
-        }
+            showLesson: false,
+        };
     }
-    goToQuiz = () => {this.props.history.push('/quiz')}
-    goToLessonForm = () => {this.setState({showLesson: true})}
-    goToList = () => {this.setState({showLesson: false})}
+    goToQuiz = () => { this.props.history.push('/quiz'); }
+    goToLessonForm = () => { this.setState({ showLesson: true }); }
+    goToList = () => { this.setState({ showLesson: false }); }
     render() {
         return (
-            <div>
             <div className="container-fluid">
-
-             <div className="row">
-                 <div className="TopTextHeader"> Administrator Tool Page </div>
-                    <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
-                    <ToolBar>
-                    <div className="adminTool">
-                                <PaddedButton className="btn btn-primary" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
+                <div className="row">
+                    <div className="TopTextHeader"> Administrator Tool Page </div>
+                        <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
+                        <ToolBar>
+                            <div className="adminTool">
+                                <PaddedButton className="btn btn-default" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
                             </div>
                             <div className="adminTool">
-                                <PaddedButton className="btn btn-primary" onClick = {this.goToQuiz}>Create Quiz</PaddedButton>
+                                <PaddedButton className="btn btn-default" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
                             </div>
-                            <div className="adminTool">
-                                <PaddedButton className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
-                        </div>
-                    </ToolBar>
-            </div>
+                        </ToolBar>
+                </div>
                 <br></br>
                 <div className="row" className="rightMargin">
                     <div className="col-sm-8">
@@ -100,7 +95,6 @@ class AdminPage extends React.Component<Props>{
                     }
                     </div>
                 </div>
-            </div>
             </div>
         );
     }
