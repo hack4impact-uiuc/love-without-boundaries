@@ -113,7 +113,7 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
             showAssignList: false
         }, function () {
         });
-      }else{
+      } else{
         this.setState({
           showAssignList:true,
           selectedStudentId: e.target.name
@@ -144,24 +144,11 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
         window.location.reload();
     }
 
-    EvenOddElem(elem, index, isTeacher, student) {
-      if(isTeacher === true){
-        if(index % 2 === 0){
-          return <EvenElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteTeacher}> Delete </DeleteButton>  </EvenElem>
-        }
-        return <OddElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteTeacher}> Delete </DeleteButton>  </OddElem>
-      }
-      if(index % 2 === 0){
-        return <EvenElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton>  </EvenElem>
-      }
-      return <OddElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton> </OddElem>
-    }
-
     getList(props) {
         return(
             <div>
                 <div className="container-fluid">
-                    <div className="col-sm-5">
+                    <div className="col-md-10">
                         <table className="table">
                             <thead>
                                 <tr>
@@ -178,8 +165,10 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
                                                 <th>
                                                     <Link key={idx} style={{ display:'block' }}to={{ pathname: '/teacher', state:{ teacher: teacher } }}>
                                                         <button className="btn btn-default">{teacher.name}</button>
-                                                        <DeleteButton className="btn btn-danger" name={teacher.id} onClick = {this.onClickDeleteTeacher} > Delete </DeleteButton>
                                                     </Link>
+                                                </th>
+                                                <th>
+                                                    <DeleteButton className="btn btn-danger" name={teacher.id} onClick = {this.onClickDeleteTeacher} > Delete </DeleteButton>
                                                 </th>
                                             </tr>
                                         )})
@@ -190,7 +179,11 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
                                                 <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
                                                     <button className="btn btn-default">{student.name}</button>
                                                 </Link>
+                                            </th>
+                                            <th>
                                                 <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton>
+                                            </th>
+                                            <th>
                                                 <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton>
                                             </th>
                                         </tr>

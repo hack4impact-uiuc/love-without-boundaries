@@ -70,8 +70,8 @@ class AdminPage extends React.Component<Props> {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="TopTextHeader"> Administrator Tool Page </div>
-                        <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
+                    <h2 className="TopTextHeader"> Administrator Tool Page </h2>
+                        <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
                         <ToolBar>
                             <div className="adminTool">
                                 <PaddedButton className="btn btn-default" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
