@@ -188,7 +188,7 @@ const submitQuiz = mutationWithClientMutationId({
     name: 'SubmitQuiz',
     inputFields: {
         id: { type: GraphQLID },
-        lessonID: { type: GraphQLID },
+        lessonID: { type: GraphQLString },
 
         answeredQuestions: { type: AnsweredQuestionsType },
         // answers: { type: new GraphQLList(GraphQLString) },
@@ -238,7 +238,7 @@ const submitQuiz = mutationWithClientMutationId({
         });
         const lid = lessonID;
         const pastQuiz = {
-            lessonID: lid,
+            lessonID,
             quizName: q1.name,
             score: (numCorrect / questionIDs.length),
             submittedAnswers,
