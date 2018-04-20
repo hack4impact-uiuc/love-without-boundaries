@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { Link } from "react-router-dom";
-import { graphql, QueryRenderer, commitMutation } from 'react-relay';
+import { withRouter, Link } from 'react-router-dom';
 import type { Environment } from 'relay-runtime';
+
 
 import LessonForm from './../components/lessonform';
 import LessonList from './../components/lessonList';
-import StudentListItem from './../components/studentListItem';
-import TeacherListItem from './../components/teacherListItem';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
-import { withRouter } from 'react-router-dom';
 
 import './../../assets/Hover.css';
 
@@ -70,29 +66,29 @@ class AdminPage extends React.Component<Props> {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="TopTextHeader"> Administrator Tool Page </div>
-                        <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
-                        <ToolBar>
-                            <div className="adminTool">
-                                <PaddedButton className="btn btn-default" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
-                            </div>
-                            <div className="adminTool">
-                                <PaddedButton className="btn btn-default" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
-                            </div>
-                        </ToolBar>
-                </div>
-                <br></br>
-                <div className="row" className="rightMargin">
-                    <div className="col-sm-8">
-                    {
-                        this.state.showLesson ? 
-                        <div className="centered">
-                            <LessonForm/> 
-                            <LessonList/>
+                    <h2 className="TopTextHeader"> Administrator Tool Page </h2>
+                    <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
+                    <ToolBar>
+                        <div className="adminTool">
+                            <PaddedButton className="btn btn-default" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
                         </div>
-                        :
-                        <AdminListComponent/>
-                    }
+                        <div className="adminTool">
+                            <PaddedButton className="btn btn-default" onClick={this.goToList}>View Tutors and Students</PaddedButton>
+                        </div>
+                    </ToolBar>
+                </div>
+                <br />
+                <div className="row rightMargin">
+                    <div className="col-sm-8">
+                        {
+                            this.state.showLesson ?
+                                <div className="centered">
+                                    <LessonForm />
+                                    <LessonList />
+                                </div>
+                                :
+                                <AdminListComponent />
+                        }
                     </div>
                 </div>
             </div>

@@ -3,3 +3,6 @@ node_modules
 /dist
 dist
 flow-typed
+yarn.lock
+package-lock.json
+yarn-error.lock

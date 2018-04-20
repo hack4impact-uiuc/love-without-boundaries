@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import addQuestion from '../relay/mutations/addQuestion';
 import deleteQuestion from '../relay/mutations/deleteQuestion';
 import environment from '../relay/environment';
