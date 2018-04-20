@@ -33,7 +33,6 @@ class StudentPage extends React.Component<Props>{
     render() {
         return (
             <div>
-            {console.log(this.props.location.state)}
             <QueryRenderer
                 environment={environment}
                 query={graphql`

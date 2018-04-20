@@ -17,29 +17,26 @@ class StudentLesson extends React.Component {
 
     componentDidMount() {
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
+        if (studentWorksheetLessonIDs == undefined) {
+            alert('No lessons exist, please contact admin');
+        }
         let i;
-        const error = 0;
         for (i = 0; i < this.props.lessons.length; i++) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
                 addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, this.props.lessons[i].worksheetURL);
                 const url = this.props.lessons[i].worksheetURL;
                 const fileId = url.match(/[-\w]{25,}/)[0];
-                console.log(fileId);
                 copyFile(fileId).then((res) => {
                     if (res == undefined || res.error) {
                         throw Error('Insufficient Priviledges, please contact Admin');
                     }
-                    console.log(res.id);
                     setPermissionToAllEdit(res.id);
                 }).catch(err => alert(err.message));
             }
         }
-        console.log(this.props.lessons.map(element => element.id));
-        console.log(studentWorksheetLessonIDs);
     }
     render() {
         return (
-            // TODO: Call Functions
             <div className="container-fluid">
                 <h2>
                     {
