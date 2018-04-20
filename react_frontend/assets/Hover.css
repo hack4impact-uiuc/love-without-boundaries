@@ -241,3 +241,7 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.inlineDis{
+	display: inline;
+}

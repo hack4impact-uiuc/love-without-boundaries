@@ -40,6 +40,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', end
     padding-bottom: 10px;
 
     margin-bottom: 5%;
+    text-align: center;
 `;
 
 const PaddedButton = styled.button`
@@ -76,13 +77,13 @@ class AdminPage extends React.Component<Props>{
                     <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
                     <ToolBar>
                     <div className="adminTool">
-                        <PaddedButton className="btn btn-primary" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
-                        </div>
-                        <div className="adminTool">
-                        <PaddedButton className="btn btn-primary" onClick = {this.goToQuiz}>Create Quiz</PaddedButton>
-                        </div>
-                        <div className="adminTool">
-                        <PaddedButton className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
+                                <PaddedButton className="btn btn-primary" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
+                            </div>
+                            <div className="adminTool">
+                                <PaddedButton className="btn btn-primary" onClick = {this.goToQuiz}>Create Quiz</PaddedButton>
+                            </div>
+                            <div className="adminTool">
+                                <PaddedButton className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
                         </div>
                     </ToolBar>
             </Row>
