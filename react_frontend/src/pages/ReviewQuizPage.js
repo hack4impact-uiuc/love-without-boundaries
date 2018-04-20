@@ -9,8 +9,8 @@ class ReviewQuizPage extends Component{
     constructor(props){
         super(props)
         this.state = {
-            studentID: "U3R1ZGVudDo1YWQwMWM5YWZkODFiNjg3YWYwYmM1NWQ=",
-            lessonID: (this.props.location.state != undefined ? this.props.location.state.lessonID : null)
+            studentID: "U3R1ZGVudDo1YWQwNmZmYzk2NDg0ZGFhMTc3MWJmYTc=",
+            lessonID: "TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg=="
         }
     }
     
@@ -43,6 +43,7 @@ class ReviewQuizPage extends Component{
                                 <div>Loading...</div>
                             );
                         }
+                        
                         if(this.state.lessonID){
                             return (
                                 <div>
