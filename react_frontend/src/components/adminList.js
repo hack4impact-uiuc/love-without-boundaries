@@ -78,7 +78,7 @@ let tutor = "TUTOR"
 class AdminListComponent extends React.Component<Props>{    constructor(props){
         super(props)
         this.state = {
-          studentOrTutor: tutor,
+          studentOrTutor: "STUDENT",
           showAssignList: false,
           selectedTeacherId: ''
         }
