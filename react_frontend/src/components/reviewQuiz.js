@@ -8,7 +8,9 @@ class ReviewQuiz extends React.Component{
 
     constructor(props){
         super(props)
-        this.state = {lessonID: this.props.lessonID}
+        this.state = {
+            lessonID: this.props.lessonID
+        }
     }
 
     componentWillReceiveProps(newProps) {
@@ -44,6 +46,7 @@ class ReviewQuiz extends React.Component{
                             <div>Loading...</div>
                         );
                     }
+                    console.log(this.props)
                     return (
                         <div>
                             Correct Answers:

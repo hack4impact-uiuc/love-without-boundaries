@@ -8,9 +8,9 @@ import ReviewQuiz from '../components/reviewQuiz';
 class ReviewQuizPage extends Component{
     constructor(props){
         super(props)
+        console.log(this.props.location);
         this.state = {
             studentID: "U3R1ZGVudDo1YWQwNmZmYzk2NDg0ZGFhMTc3MWJmYTc=",
-            lessonID: "TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg=="
         }
     }
     
@@ -20,28 +20,45 @@ class ReviewQuizPage extends Component{
             <QueryRenderer
                     environment={environment}
                     query={graphql`
-                        \   
+                    query ReviewQuizPage_Query($student_id: ID!){
+                        node(id: $student_id){
+                            ... on Student{
+                                pastQuizzes{
+                                    lessonID
+                                    quizName
+                                    score
+                                    submittedAnswers{
+                                        answerChosen
+                                    }
+                                }
+                            }
+                        }
+                    } 
                     `}
-                    variables={{student_id: this.state.studentID, lesson_id: this.state.lessonID}}
+                    variables={{student_id: this.state.studentID }}
                     render={({ props }) => {
                         if (!props) {
                             return (
                                 <div>Loading...</div>
                             );
                         }
+                        const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined
                         
-                        if(this.state.lessonID){
+                        if (lessonID === undefined){
+                            return <div>Incorrect Lesson</div>
+                        }
+                        if(lessonID){
                             return (
                                 <div>
                                     <h1>Quiz Submissions</h1>
-                                    {
-                                        <ReviewQuiz lessonID={this.state.lessonID}/>
-                                    }
+                                    {/* {
+                                        <ReviewQuiz lessonID={lessonID}/>
+                                    } */}
                                     {
                                         props.node.pastQuizzes.map((pastQuiz, idx) => 
                                             <div key={idx}>
                                                 {
-                                                    pastQuiz.lessonID === this.state.lessonID ? 
+                                                    pastQuiz.lessonID === lessonID ? 
                                                     <div>
                                                         <b>{pastQuiz.quizName} - Score: {pastQuiz.score}</b>
                                                         <br/>

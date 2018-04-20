@@ -56,7 +56,7 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
         this.state = {
-            teacherID: "VGVhY2hlcjo1YWNlZTg1N2VhNWM3NDQ2MjEzZDdkOWM="
+            teacherID: "VGVhY2hlcjo1YWNlZTg2M2VhNWM3NDQ2MjEzZDdkYTA="
             // teacherID: jwt_decode(localStorage.getItem('token')).userID
         }
     }
