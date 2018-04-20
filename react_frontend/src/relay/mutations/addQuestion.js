@@ -21,25 +21,27 @@ const mutation = graphql`
 
 function addQuestion(environment: Environment, questionName: string, answers: [{string: string}]) {
     const variables = {
-		input: {
-            lessonId: "TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==",
-            question: {questionName: questionName,
-                        answers : answers 
-        }}
-	};
+        input: {
+            lessonId: 'TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==',
+            question: {
+                questionName,
+                answers,
+            },
+        },
+    };
 
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-            console.log('Response received from server. Question added.');
-            console.log(response);
-		},
-		onError: err => console.error(err),
-    },
-  );
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server. Question added.');
+                console.log(response);
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default addQuestion;

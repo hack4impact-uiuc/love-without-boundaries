@@ -14,25 +14,25 @@ const mutation = graphql`
 `;
 
 function deleteQuestion(environment: Environment, qID: ID) {
-	const variables = {
-		input: {
+    const variables = {
+        input: {
             questionId: qID,
-            lessonId: "TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==",
-        }
+            lessonId: 'TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==',
+        },
     };
 
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-            console.log('Response received from server. Question removed.');
-            console.log(response);
-		},
-		onError: err => console.error(err),
-    },
-  );
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server. Question removed.');
+                console.log(response);
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default deleteQuestion;

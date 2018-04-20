@@ -1,5 +1,4 @@
 import React from 'react';
-import environment from '../relay/environment';
 import Question from '../components/question';
 import PaddedButton from '../components/button';
 
@@ -9,38 +8,36 @@ class AdminQuiz extends React.Component {
         this.state = {
             questions: this.props.questions || {},
             qNum: this.props.questions !== undefined ? this.props.questions.length : 0,
-            editable: "omgwow",
-            overriden: false
+            editable: 'omgwow',
+            overriden: false,
         };
     }
 
     lock = () => {
-        this.setState({editable : "omgwow"});
+        this.setState({ editable: 'omgwow' });
     }
 
     passBack = passUp => {
-        this.setState({editable : passUp, overriden: true});
+        this.setState({ editable: passUp, overriden: true });
     }
 
-    addQuestion = e => {
-        this.setState((prevState, props) => {
-            return {
-                qNum: prevState.qNum + 1,
-                questions: [...prevState.questions, 
-                    { 
-                        questionName: '',
-                        answers: [
-                            {answerName:'', isCorrect:false},
-                            {answerName:'', isCorrect:false},
-                            {answerName:'', isCorrect:false},
-                            {answerName:'', isCorrect:false}
-                        ]
-                    }
-                ],
-                editable: prevState.qNum,
-                overriden: false
-            };
-        });
+    addQuestion = () => {
+        this.setState((prevState) => ({
+            qNum: prevState.qNum + 1,
+            questions: [...prevState.questions,
+                {
+                    questionName: '',
+                    answers: [
+                        { answerName: '', isCorrect: false },
+                        { answerName: '', isCorrect: false },
+                        { answerName: '', isCorrect: false },
+                        { answerName: '', isCorrect: false },
+                    ],
+                },
+            ],
+            editable: this.state.qNum,
+            overriden: false,
+        }));
     }
 
     render() {
@@ -57,6 +54,7 @@ class AdminQuiz extends React.Component {
                             locked={this.state.editable != i}
                             overriden={this.state.overriden}
                             id={q.id}
+                            location={this.props.location}
                         />
                     ))
                 }
