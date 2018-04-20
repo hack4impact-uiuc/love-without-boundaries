@@ -5,7 +5,7 @@ import addStudentWorksheetCopy from './relay/mutations/addStudentWorksheetCopy';
 function getGapiAccessToken() {
     // return jwtDecode(localStorage.getItem('token')).gapi_access_token;
     // hard code token for now
-    return 'ya29.GlueBZUlo_StQPKa3VVwfN8Shy-4SLCix_DfZSxlVEVou54TzufFtT636CCMTwrG7RxixAV-PipjggDoe1PqdoIKp3OY-1E3Fv_KikWufjugi6EKe_8-NByE00NA';
+    return 'ya29.GlyjBSEBfHjE8o20CGMqbWB-2XQ8hsgmFbkUN2WxegX2rLMQh2xcwXQQGuQ4Gs9HzpXgG6GLhpeQJwqWBNgLRx3FeHZDLLvCvfIPI8uq1ZfeVrt0AnxCv3CsjFCrDw';
 }
 
 function setPermissionToAllRead(fileId) {
