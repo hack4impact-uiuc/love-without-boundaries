@@ -54,7 +54,7 @@ class AdminQuiz extends React.Component {
                             locked={this.state.editable != i}
                             editPastQuestion={this.state.editPastQuestion}
                             id={q.id}
-                            quizID={this.props.id}
+                            quizID={this.props.quizID}
                         />
                     ))
                 }
