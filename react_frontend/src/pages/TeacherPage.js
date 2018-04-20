@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
-import StyledButton from '../components/button';
+import PaddedButton from '../components/button';
 import environment from '../relay/environment';
 import StudentPage from './StudentPage';
 import jwt_decode from 'jwt-decode';
@@ -56,7 +55,7 @@ class TeacherPage extends React.Component<Props>{
     constructor(props){
         super(props)
         this.state = {
-            teacherID: "VGVhY2hlcjo1YWNlZTg1N2VhNWM3NDQ2MjEzZDdkOWM="
+            teacherID: "VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA="
             // teacherID: jwt_decode(localStorage.getItem('token')).userID
         }
     }
@@ -72,6 +71,7 @@ class TeacherPage extends React.Component<Props>{
                             ... on Teacher {
                                 students {
                                     name
+                                    id
                                 }
                             }
                         }
@@ -83,14 +83,32 @@ class TeacherPage extends React.Component<Props>{
                 render={({ props }) => {
                     if (props) {
                         return (
-                            <div>
+                            <div className="container-fluid">
                                 <h3>My Students</h3> 
-                                { props.node == null || props.node.students == null ? <p>You have no assigned students.</p> : props.node.students.map((student, idx) => 
-                                    <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
-                                        <button >{student.name}</button>
-                                    </Link>
-                                )}
-                                
+                                <div className="col-sm-5">
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Student</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            { props.node == null || props.node.students == null ? 
+                                                <p>You have no assigned students.</p> 
+                                                : props.node.students.map((student, idx) => (
+                                                    <tr>
+                                                    <th scrope="row">{idx}</th>
+                                                    <th>
+                                                        <Link key={idx} style={{ display:'block' }}to= {{ pathname: '/student', state:{ student: student } }}>
+                                                            <button className="btn btn-default">{student.name}</button>
+                                                        </Link>
+                                                    </th>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         );
                     }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-// import Quiz from '../components/quiz';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
 import { graphql, QueryRenderer } from 'react-relay';
-
+import { Link } from 'react-router-dom';
 import Checkbox from './../components/Checkbox';
 
 const items = [
@@ -34,33 +33,30 @@ class TakeQuizPage extends Component {
 
     componentWillMount = () => {
         this.selectedCheckboxes = {};
-      }
+    }
     
-      toggleCheckbox = (label, i) => {
-        if (this.selectedCheckboxes[i] != label) {
-            this.selectedCheckboxes[i] = label
-        }
-      }
+    toggleCheckbox = (label, i) => {
+        this.selectedCheckboxes[i] = label;
+    }
     
-      handleFormSubmit = (formSubmitEvent, id) => {
+    handleFormSubmit = (formSubmitEvent, id) => {
         formSubmitEvent.preventDefault();
         console.log(Object.keys(this.selectedCheckboxes))
         console.log(Object.values(this.selectedCheckboxes))
-        submitQuiz(environment, "U3R1ZGVudDo1YWQwNmZmYzk2NDg0ZGFhMTc3MWJmYTc=", "TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==", Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes))
-        
-      }
+        submitQuiz(environment, "U3R1ZGVudDo1YWQwODg1YjliNjFhZjcxOWIxZWYzMTg=", "TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==", Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes))
+    }
     
-      createCheckbox = (label, id, i) => (
+    createCheckbox = (label, id, i) => (
         <Checkbox
-                key = {i}
-                label={label}
-                handleCheckboxChange={(e) => this.toggleCheckbox(e, id)}
-            />
-      )
+            key = {i}
+            label={label}
+            handleCheckboxChange={(e) => this.toggleCheckbox(e, id)}
+        />
+    )
     
-      createCheckboxes = (answerNames, questionId) => (
+    createCheckboxes = (answerNames, questionId) => (
         answerNames.map((e) => this.createCheckbox(e, questionId))
-      )
+    )
     
 
     render() {
@@ -78,11 +74,11 @@ class TakeQuizPage extends Component {
                                 quiz {
                                     questions {
                                         id
-                                    questionName
-                                    answers{
-                                        answerName
-                                        isCorrect
-                                    }
+                                        questionName
+                                        answers{
+                                            answerName
+                                            isCorrect
+                                        }
                                     }
                                 }
                             }
@@ -101,7 +97,7 @@ class TakeQuizPage extends Component {
                     }
                     return (
                         <div>
-                            <h1>Quiz</h1>
+                            <h1>{props.node.name} Quiz</h1>
                             <div className="container">
                                 <div className="row">
                                 <div className="col-sm-12">
@@ -115,6 +111,7 @@ class TakeQuizPage extends Component {
                                     )}
                                    
                                 </div>
+                                <Link to="/student"><button className="btn btn-default">Go back</button></Link>
                                 </div>
                             </div>
                         </div>

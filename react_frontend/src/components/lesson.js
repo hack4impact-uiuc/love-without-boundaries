@@ -13,8 +13,6 @@ const LessonBox = styled.div`
     color: white;
     background-color: #a6acb5;
     height: 30%;
-    width: 50%;
-    z-index: -1;
     margin: auto;
     border-radius: 0px 40px;
     align: center;
@@ -88,13 +86,14 @@ class LessonComponent extends React.Component<Props>{
             box = <CheckedBoxComplete/>
         }
         return(
-            <div>
-                <LessonBox className="lessonBox">
+            <div className="row">
+                <div className="col-md-3 col-sm-2"></div>
+                <div className="col-sm-7 lessonBox">
                     <LessonTitle >{this.props.lessonName}</LessonTitle>
-                    <LessonProps> <a href={this.props.lessonNotesLink}>Notes {this.props.lessonNotes}</a></LessonProps>
-                    <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz -- {this.props.quizName} Grade: {this.props.quizPercentage}     
-                    `   {this.props.isTeacher &&  (
+                    <LessonProps> <a href={this.props.lessonNotesLink}>Notes </a></LessonProps>
+                    <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet </a></LessonProps>
+                    <LessonProps> Quiz -- Grade: {this.props.quizPercentage}     
+                       {this.props.isTeacher &&  (
                         <Link key={this.props.key} to={{ pathname: '/takequiz', state:{ lessonID: this.props.id } }}>
                         <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
                         </Link>
@@ -102,7 +101,8 @@ class LessonComponent extends React.Component<Props>{
                          
                         <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton> 
                     </LessonProps>
-                </LessonBox>
+                </div>
+                <div className="col-md-3 col-sm-2"></div>
             </div>
         );
     }

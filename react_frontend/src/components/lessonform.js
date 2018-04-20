@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
-import {Button} from 'react-bootstrap';
 import { graphql, QueryRenderer } from 'react-relay';
 import addLesson, { mutation as addLessonMutation } from '../relay/mutations/addLesson';
 import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
@@ -9,14 +8,15 @@ import environment from '../relay/environment';
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, getIdFromUrl } from '../Gapi';
 import { commitMutation } from 'react-relay';
 
+import './../../assets/Hover.css';
+
+
 class LessonForm extends React.Component {
     constructor() {
         super();
         this.state = {
             name: '',
-            notes: '',
             notes_link: '',
-            wksht: '',
             wksht_link: '',
         };
     }
@@ -34,9 +34,9 @@ class LessonForm extends React.Component {
         if (!NotesFileID || !WkshtFileID) {
             alert("Please Insert Notes Link and Worksheet Link");
         }
-        // set permissions for the file
-        setPermissionToAllRead(NotesFileID[0]);
-        setPermissionToAllRead(WkshtFileID[0]);
+        setPermissionToAllRead(NotesFileID)
+        setPermissionToAllEdit(WkshtFileID)
+       
         this.setState({
             name: '',
             notes: '',
@@ -44,6 +44,7 @@ class LessonForm extends React.Component {
             wksht: '',
             wksht_link: '',
         });
+        window.location.reload();
     }
 
     render() {
@@ -66,7 +67,7 @@ class LessonForm extends React.Component {
                     }
                     return (
                         <div>
-                            <form>
+                            <form className="gradColor">
                                 <h2>Add Lesson:</h2>
                                 <div className="form-group">
                                     <label htmlFor="lesson_name_input">Lesson Name: </label>

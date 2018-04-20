@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Image } from 'react-bootstrap';
 import './../../assets/Hover.css';
 import lovewithout_white from './../../assets/lovewithout_white.png';
 
@@ -14,10 +15,6 @@ const Block = styled.div`
     color: rgb(255, 255, 255);
     height: 80px;
     position sticky;
-
-    right:0%;
-    margin-left: 0%;
-    left:0%;
 `;
 
 // const ImageStyle= styled.div`
@@ -90,8 +87,11 @@ class NavBar extends React.Component<Props> {
     render(){
         return(
             <div>
+                <head>
+                    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine"></link>
+                </head>
                 <Block>
-                    <img className="img-fluid"  src = {lovewithout_white} height="100%" />
+                    <Image className="img-fluid"  src = {lovewithout_white} height="100%" />
                     <HomeText className="navbar" >Home</HomeText>
                     <LessonText className="navbar">Lessons</LessonText>
                     <LogText className="navbar">Logout</LogText>

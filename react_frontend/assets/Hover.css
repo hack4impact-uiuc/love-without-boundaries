@@ -16,7 +16,245 @@
 .lessonBox:hover {
 	background-color:#8f949b;
 }
+.lessonBox {
+	color: white;
+    background-color: #a6acb5;
+    height: 30%;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+    border-radius: 0px 40px;
+    text-align: center;
+}
 
 .quizButton {
 	border-radius: 30px 30px;
+}
+
+.logoHome{
+	height: 70px;
+	width: 100%;
+}
+
+.homePic{
+	position: relative;
+	z-index: -1;
+}
+
+.navBar {
+	position: absolute;
+    right: 0px;
+	width: 700px;
+	height: 100px;
+	/* background-color: #B33C42; */
+	z-index: 4;
+}
+
+.homeButton{
+	display: inline-block;
+}
+
+.rowRed{
+	background-color: #B33C42;
+}
+
+.circle
+{
+    margin: auto;
+	margin-top:10%;
+	width:30%; height:210px;
+	border: solid 15px #9D8CA1;
+	background-color: white;
+	box-shadow: -10px -10px 20px rgba(0,0,0,0.6);
+	border-radius:100%;
+	position: relative;
+	z-index: 10;
+
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	background: url("https://file-pcldyrnnpe.now.sh/");
+    background-size: cover;
+}
+.linkText{
+	font-size: 20px;
+}
+
+.textCircle
+{
+    margin: auto;
+	margin-top:5%;
+	width:20%; height:290px;
+	position: absolute;
+	left: 5%;
+	border: solid 15px #9D8CA1;
+	background-color: white;
+	box-shadow: -10px -10px 20px rgba(0,0,0,0.6);
+	border-radius:100%;
+	z-index: 10;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+}
+
+.bubbleCircle
+{
+    margin: auto;
+	margin-top:5%;
+	width:20%; height:290px;
+	position: absolute;
+	left: 5%;
+	border: solid 15px #9D8CA1;
+	background-color: white;
+	box-shadow: -10px -10px 20px rgba(0,0,0,0.6);
+	border-radius:100%;
+	z-index: 10;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+}
+
+.glyphicon {
+    font-size: 150px;
+}
+.layer {
+    background-color: #828282;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lower{
+	text-transform: none;
+	font-weight: 200;
+	font-size: 15px;
+	padding-top: 3%;
+}
+
+.lowerBox{
+	font-weight: 50;
+	font-size: 8px;
+}
+
+
+
+.caption{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+	position: relative;
+	text-align: center;
+}
+.subCaption{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	position: relative;
+	text-align: center;
+}
+
+
+
+.blueCircle
+{
+	background-color: #54C0EB;
+	color: #54C0EB;
+	position: relative;
+	border-radius:100%;
+	z-index: -10;
+	height: 300px;
+}
+
+.no-gutter {
+    padding-right:0;
+	padding-left:0;
+	margin-right:0;
+    margin-left:0;
+}
+
+.teacherHeading {
+	position: relative;
+	margin-right: 10%;
+	font-size: 40px;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+	margin-left: 3%;
+}
+
+.whiteBack{
+    border-style: solid;
+    border-color: white;
+    color: #337ab7;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    font-size: 20px;
+	margin-left: 3%;
+	margin-right: 3%;
+    background-color: white;
+    height: 50px;
+	z-index: -1;
+
+	padding-left: 5%;
+}
+
+.rightText{
+	margin-right: 50%;
+}
+
+.TopTextHeader{
+	position: relative;
+	margin-top: 5%;
+	font-size: 40px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+	text-align: center;
+}
+.TopText{
+	position: relative;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	font-size: 20px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+	text-align: center;
+}
+.adminTool{
+	margin:10px;
+	display: inline;
+}
+
+.rightMargin{
+	position: relative;	
+	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.gradColor{
+
+	border: 5px solid black;
+	border-radius: 5px;
+	padding: 10px;
+
+	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5%;
+
+	position: relative;
+	left: 25%;
+
+}
+
+.centered{
+	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.inlineDis{
+	display: inline;
 }
