@@ -217,7 +217,10 @@
 }
 
 .rightMargin{
-	margin-right: 5%;
+	position: relative;	
+	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .gradColor{

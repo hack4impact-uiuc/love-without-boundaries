@@ -120,7 +120,6 @@ const RightBox = styled.div`
     width: 100%;
     height: 300px;
     position: relative;
-    margin-right: 0%;
 `
 
 const LeftBox = styled.div`
@@ -128,7 +127,6 @@ const LeftBox = styled.div`
     width: 100%;
     height: 300px;
     position: relative;
-    margin-right: 0%;
 `
 
 const BoxText = styled.div`
@@ -228,7 +226,7 @@ class HomePage extends React.Component<Props>{
 
                                     </div>
                                     <div className="row">
-                                    <div className="col-xs-12 col-sm-4">
+                                    <div className="col-12 col-sm-4">
                                         <SignUpIcon></SignUpIcon>
                                         <div className="caption">
                                             Sign up for an account
@@ -238,7 +236,7 @@ class HomePage extends React.Component<Props>{
                                             Students can sign up for an account and will be paired with a tutor
                                         </div>
                                     </div>
-                                    <div className="col-xs-12 col-sm-4">
+                                    <div className="col-12 col-sm-4">
                                         <LearningIcon></LearningIcon>
                                         <div className="caption">
                                             Start learning
@@ -248,7 +246,7 @@ class HomePage extends React.Component<Props>{
                                             Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
                                         </div>
                                     </div>
-                                    <div className="col-xs-12 col-sm-4">
+                                    <div className="col-12 col-sm-4">
                                     <AcheiveIcon></AcheiveIcon>
                                     <div className="caption">
                                         Get the results
@@ -259,15 +257,17 @@ class HomePage extends React.Component<Props>{
                                         </div>
                                     </div>
                                     </div>
-
                                     <div className="row">
                                         <br></br>
                                         <br></br>
-                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
+                                        <div className="col-12 col-sm-6">
+                                        <div className="no-gutter">
                                             <TopBox>
                                             </TopBox>
+                                            </div>
                                         </div>
-                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
+                                        <div className="col-12 col-sm-6">
+                                        <div className="no-gutter">
                                             <RightBox>
                                             <br></br>
                                             <br></br>
@@ -282,10 +282,11 @@ class HomePage extends React.Component<Props>{
                                                     Lessons are accessible from many different devices
                                                 </BoxSubText>
                                             </RightBox>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
+                                        <div className="col-12 col-sm-6">
                                             <LeftBox>
                                             <br></br>
                                             <br></br>
@@ -301,7 +302,7 @@ class HomePage extends React.Component<Props>{
                                                 </BoxRightSubText>
                                             </LeftBox>
                                         </div>
-                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
+                                        <div className="col-12 col-sm-6">
                                             <BottomBox></BottomBox>
                                         </div>
                                     </div>

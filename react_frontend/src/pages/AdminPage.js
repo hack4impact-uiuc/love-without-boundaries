@@ -87,7 +87,7 @@ class AdminPage extends React.Component<Props>{
                     </ToolBar>
             </div>
                 <br></br>
-                <div className="row">
+                <div className="row" className="rightMargin">
                     <div className="col-sm-8">
                     {
                         this.state.showLesson ? 
