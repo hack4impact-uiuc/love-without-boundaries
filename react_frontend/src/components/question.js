@@ -14,10 +14,10 @@ class Question extends React.Component {
     componentWillReceiveProps(newProps) {
         if (newProps.locked !== this.props.locked) {
             if (this.props.editPastQuestion == true && newProps.locked == true) {
-                deleteQuestion(environment, this.props.id);
-                addQuestion(environment, this.state.name, this.state.answers);
+                deleteQuestion(environment, this.props.quizID, this.props.id);
+                addQuestion(environment, this.props.quizID, this.state.name, this.state.answers);
             } else if (newProps.locked == true) {
-                addQuestion(environment, this.state.name, this.state.answers);
+                addQuestion(environment, this.props.quizID, this.state.name, this.state.answers);
                 window.location.reload();
             }
         }
@@ -46,6 +46,7 @@ class Question extends React.Component {
     };
 
     updateCorrect = e => {
+        e.persist();
         this.setState((prevState) => ({
             answers: prevState.answers.map((ans, i) => {
                 if (i == e.target.name) {

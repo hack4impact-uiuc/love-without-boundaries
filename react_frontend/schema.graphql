@@ -292,7 +292,7 @@ interface Node {
 
 # Self Descriptive
 type PastQuiz {
-  lessonID: ID
+  lessonID: String
   quizName: String
   score: Float
   submittedAnswers: [SubmittedAnswer]
