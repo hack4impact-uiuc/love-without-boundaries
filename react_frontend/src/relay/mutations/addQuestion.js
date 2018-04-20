@@ -8,6 +8,10 @@ const mutation = graphql`
                 quiz {
                     questions{
                         questionName
+                        answers{
+                            answerName
+                            isCorrect
+                        }
                     }
                 }
             }
@@ -15,30 +19,29 @@ const mutation = graphql`
     }
 `;
 
-function addQuestion(environment: Environment, questionName: string, a: string, b: string, c: string, d: string, correct: string) {
+function addQuestion(environment: Environment, questionName: string, answers: [{string: string}]) {
     const variables = {
-		input: {
-            lessonId: "TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==",
-            question: {questionName: questionName,
-                        answers : [ {answerName: a, isCorrect: "A" == correct},
-                                    {answerName: b, isCorrect: "B" == correct},
-                                    {answerName: c, isCorrect: "C" == correct},
-                                    {answerName: d, isCorrect: "D" == correct} ]  
-        }}
-	};
+        input: {
+            lessonId: 'TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==',
+            question: {
+                questionName,
+                answers,
+            },
+        },
+    };
 
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-            console.log('Response received from server.');
-            console.log(response);
-		},
-		onError: err => console.error(err),
-    },
-  );
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server. Question added.');
+                console.log(response);
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default addQuestion;

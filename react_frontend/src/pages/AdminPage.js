@@ -33,7 +33,7 @@ class AdminPage extends React.Component<Props>{
             <div className="container-fluid">
                 
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-sm-9">
                     {
                         this.state.showLesson ? 
                         <div>
@@ -44,7 +44,7 @@ class AdminPage extends React.Component<Props>{
                         <AdminListComponent/>
                     }
                     </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <PaddedButton style={{display:'block'}} className="btn btn-primary" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
                         <PaddedButton style={{display:'block'}} className="btn btn-primary" onClick = {this.goToQuiz}>Create Quiz</PaddedButton>
                         <PaddedButton style={{display:'block'}} className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
