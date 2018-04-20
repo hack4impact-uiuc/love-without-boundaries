@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 75323b9c7f195252c2f79001a1b6ef40
+ * @relayHash 55dd333cc4b422ed7b5c4093cfe7f0c5
  */
 
 /* eslint-disable */
@@ -23,7 +23,7 @@ export type StudentPage_QueryResponse = {|
   |}>,
   +node: ?{|
     +worksheets?: ?$ReadOnlyArray<?{|
-      +lessonID: string,
+      +lessonID: ?string,
     |}>,
   |},
 |};
