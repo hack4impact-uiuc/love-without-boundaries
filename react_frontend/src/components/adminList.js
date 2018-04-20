@@ -167,7 +167,7 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
     getPopList(props, showList) {
         if (showList === true){
             return(
-              <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
+              <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input name='teacher' type="radio" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
                <AssignTeacherButton className="btn btn-info" onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton></PopUpList>
           )
         }
