@@ -52,48 +52,35 @@ type Props = {
     /**/
   }
 
-class AdminPage extends React.Component<Props> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showLesson: false,
-        };
-    }
-    goToQuiz = () => { this.props.history.push('/quiz'); }
-    goToLessonForm = () => { this.setState({ showLesson: true }); }
-    goToList = () => { this.setState({ showLesson: false }); }
-    render() {
-        return (
-            <div className="container-fluid">
-                <div className="row">
-                    <h2 className="TopTextHeader"> Administrator Tool Page </h2>
-                    <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
-                    <ToolBar>
-                        <div className="adminTool">
-                            <PaddedButton className="btn btn-default" onClick={this.goToLessonForm}>Edit Lessons</PaddedButton>
-                        </div>
-                        <div className="adminTool">
-                            <PaddedButton className="btn btn-default" onClick={this.goToList}>View Tutors and Students</PaddedButton>
-                        </div>
-                    </ToolBar>
+const AdminPage = ({ match }) => (
+    <div className="container-fluid">
+        <div className="row">
+            <h2 className="TopTextHeader"> Administrator Tool Page </h2>
+            <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
+            <ToolBar>
+                <div className="adminTool">
+                    <Link to="/admin/lesson"><PaddedButton className="btn btn-default">Edit Lessons</PaddedButton></Link>
                 </div>
-                <br />
-                <div className="row rightMargin">
-                    <div className="col-sm-8">
-                        {
-                            this.state.showLesson ?
-                                <div className="centered">
-                                    <LessonForm />
-                                    <LessonList />
-                                </div>
-                                :
-                                <AdminListComponent />
-                        }
-                    </div>
+                <div className="adminTool">
+                    <Link to="/admin/list"><PaddedButton className="btn btn-default">View Tutors and Students</PaddedButton></Link>
                 </div>
+            </ToolBar>
+        </div>
+        <br />
+        <div className="row rightMargin">
+            <div className="col-sm-8">
+                {
+                    match.params.showLesson === 'lesson' ?
+                        <div className="centered">
+                            <LessonForm />
+                            <LessonList />
+                        </div>
+                        :
+                        <AdminListComponent />
+                }
             </div>
-        );
-    }
-}
+        </div>
+    </div>
+);
 
-export default AdminPage;
+export default withRouter(AdminPage);
