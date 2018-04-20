@@ -6,7 +6,7 @@ const PastQuiz = new GraphQLObjectType({
     description: 'Self Descriptive',
     fields() {
         return {
-            lessonID: { type: GraphQLID },
+            lessonID: { type: GraphQLString },
             quizName: { type: GraphQLString },
             score: { type: GraphQLFloat },
             submittedAnswers: {
