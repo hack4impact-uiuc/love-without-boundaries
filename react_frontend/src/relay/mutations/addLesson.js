@@ -16,13 +16,11 @@ const mutation = graphql`
     }
 `;
 
-function addLesson(environment: Environment, name: string, worksheetName: string, worksheetURL: string, notesName: string, notesURL: string) {
+function addLesson(environment: Environment, name: string, worksheetURL: string, notesURL: string) {
 	const variables = {
 		input: {
             name,
-            worksheetName,
             worksheetURL,
-            notesName,
             notesURL
         }
     };

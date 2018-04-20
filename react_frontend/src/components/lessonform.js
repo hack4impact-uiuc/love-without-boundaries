@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
-import {Button} from 'react-bootstrap';
 import { graphql, QueryRenderer } from 'react-relay';
 import addLesson, { mutation as addLessonMutation } from '../relay/mutations/addLesson';
 import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
@@ -17,9 +16,7 @@ class LessonForm extends React.Component {
         super();
         this.state = {
             name: '',
-            notes: '',
             notes_link: '',
-            wksht: '',
             wksht_link: '',
         };
     }
@@ -37,6 +34,7 @@ class LessonForm extends React.Component {
         if (!NotesFileID || !WkshtFileID) {
             alert("Please Insert Notes Link and Worksheet Link");
         }
+        addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link);
         // set permissions for the file
         setPermissionToAllRead(NotesFileID[0]);
         setPermissionToAllRead(WkshtFileID[0]);
@@ -47,6 +45,7 @@ class LessonForm extends React.Component {
             wksht: '',
             wksht_link: '',
         });
+        window.location.reload();
     }
 
     render() {

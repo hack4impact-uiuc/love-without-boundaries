@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { graphql, QueryRenderer, commitMutation } from 'react-relay';
 import type { Environment } from 'relay-runtime';

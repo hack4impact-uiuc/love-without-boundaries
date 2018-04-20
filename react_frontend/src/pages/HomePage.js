@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
@@ -181,10 +180,6 @@ class HomePage extends React.Component<Props>{
             signup: true
         });
     }
-    getInfo = (e) => {
-        setPermissionToAllRead("1CpYPiB35VMYhei0ary4X9ccq9GwyJJiG6XuV41YTOtQ").then(r => console.log(r)).catch(err => console.log(err));
-        //copyFile('1pUaxSXVHrgRkhs6HNqMIbwFFP7hRTaNedg_GKlFjbtQ').then(r => setPermissionToAllRead(r.id)).then(r => console.log(r));
-    }
     setup = (e) =>{
         // this function is used to easily call the google drive setup function
         // this should be called once auth is setup for a newly registered student
@@ -210,8 +205,8 @@ class HomePage extends React.Component<Props>{
                                  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"></link>
                             </head>
                             <HomeSection className="container" className="homePic">
-                                <Grid fluid>
-                                    <Row>
+                                <div className="container-fluid">
+                                    <div className="row">
                                        <SignInSection>
                                         { 
                                             this.state.signup ?
@@ -231,9 +226,9 @@ class HomePage extends React.Component<Props>{
                                         }
                                         </SignInSection>
 
-                                    </Row>
-                                    <Row>
-                                    <Col xs={12} sm={4}>
+                                    </div>
+                                    <div className="row">
+                                    <div className="col-xs-12 col-sm-4">
                                         <SignUpIcon></SignUpIcon>
                                         <div className="caption">
                                             Sign up for an account
@@ -242,8 +237,8 @@ class HomePage extends React.Component<Props>{
                                         <div className="subCaption">
                                             Students can sign up for an account and will be paired with a tutor
                                         </div>
-                                    </Col>
-                                    <Col xs={12} sm={4}>
+                                    </div>
+                                    <div className="col-xs-12 col-sm-4">
                                         <LearningIcon></LearningIcon>
                                         <div className="caption">
                                             Start learning
@@ -252,8 +247,8 @@ class HomePage extends React.Component<Props>{
                                         <div className="subCaption">
                                             Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
                                         </div>
-                                    </Col>
-                                    <Col xs={12} sm={4}>
+                                    </div>
+                                    <div className="col-xs-12 col-sm-4">
                                     <AcheiveIcon></AcheiveIcon>
                                     <div className="caption">
                                         Get the results
@@ -262,17 +257,17 @@ class HomePage extends React.Component<Props>{
                                         <div className="subCaption">
                                             These lessons are to prepare students for high acheivement in national exams
                                         </div>
-                                    </Col>
-                                    </Row>
+                                    </div>
+                                    </div>
 
-                                    <Row>
+                                    <div className="row">
                                         <br></br>
                                         <br></br>
-                                        <Col xs={12} sm={6} className="no-gutter">
+                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
                                             <TopBox>
                                             </TopBox>
-                                        </Col>
-                                        <Col xs={12} sm={6} className="no-gutter">
+                                        </div>
+                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
                                             <RightBox>
                                             <br></br>
                                             <br></br>
@@ -287,10 +282,10 @@ class HomePage extends React.Component<Props>{
                                                     Lessons are accessible from many different devices
                                                 </BoxSubText>
                                             </RightBox>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xs={12} sm={6} className="no-gutter">
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
                                             <LeftBox>
                                             <br></br>
                                             <br></br>
@@ -305,13 +300,12 @@ class HomePage extends React.Component<Props>{
                                                     Use our product because we are dope as hell and this product will improve ur life by like 300%
                                                 </BoxRightSubText>
                                             </LeftBox>
-                                        </Col>
-                                        <Col xs={12} sm={6} className="no-gutter">
+                                        </div>
+                                        <div className="col-xs-12 col-sm-6" className="no-gutter">
                                             <BottomBox></BottomBox>
-                                        </Col>
-                                    </Row>
-
-                                </Grid>
+                                        </div>
+                                    </div>
+                                </div>
                             </HomeSection>
                             </div>
                         );

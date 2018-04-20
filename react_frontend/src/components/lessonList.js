@@ -42,8 +42,8 @@ class LessonList extends React.Component<Props>{
                             <div>
                                 {
                                 props.lessons.map((lesson, idx) => (
-                                    <div className="row"  key={idx}>
-                                        <LessonComponent style={{marginLeft:'15px' , display:'inline-block'}}lessonName={lesson.name} lessonNotes={lesson.notesName} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
+                                    <div className="row"key={idx}>
+                                        <LessonComponent style={{marginLeft:'15px' , display:'inline-block'}}lessonName={lesson.name} lessonNotesLink={lesson.notesURL} lessonWorksheetLink={lesson.worksheetURL} worksheetName={lesson.worksheetName} />
                                         <button className="btn btn-danger" value={lesson.id} onClick={() => this.handleClick(lesson.id)}>Delete Lesson</button> 
                                     </div>
                                 ))

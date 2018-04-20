@@ -155,8 +155,8 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ studentID, teacherID }) => {
-        const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null
-        const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null
+        const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null;
+        const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null;
         if (realStudentId && realTeacherId) {
             await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } });
             await Teacher.findByIdAndUpdate(fromGlobalId(teacherID).id, { $push: { listOfStudentIDs: fromGlobalId(studentID).id } });
@@ -189,7 +189,7 @@ const submitQuiz = mutationWithClientMutationId({
     inputFields: {
         id: { type: GraphQLID },
         lessonID: { type: GraphQLID },
-       
+
         answeredQuestions: { type: AnsweredQuestionsType },
         // answers: { type: new GraphQLList(GraphQLString) },
     },
@@ -460,6 +460,28 @@ const addURL = mutationWithClientMutationId({
     },
 });
 
+const deleteQuestion = mutationWithClientMutationId({
+    name: 'deleteQuestion',
+    inputFields: {
+        questionId: {
+            type: new GraphQLNonNull(GraphQLID),
+        },
+        lessonId: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+    },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: async ({ questionId, lessonId }) => {
+        const lObj = fromGlobalId(lessonId);
+        return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.questions': { _id: questionId } } });
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -484,6 +506,7 @@ const Mutation = new GraphQLObjectType({
             removeStudentWorksheetCopy,
             deleteStudent,
             addURL,
+            deleteQuestion,
         };
     },
 });

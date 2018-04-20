@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { graphql, QueryRenderer, commitMutation } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 import LessonForm from './../components/lessonform';
-import LessonList from './../components/LessonList';
+import LessonList from './../components/lessonList';
 import StudentListItem from './../components/studentListItem';
 import TeacherListItem from './../components/teacherListItem';
 import AdminListComponent from './../components/adminList';
@@ -70,9 +69,9 @@ class AdminPage extends React.Component<Props>{
     render() {
         return (
             <div>
-            <Grid fluid>
+            <div className="container-fluid">
 
-             <Row>
+             <div className="row">
                  <div className="TopTextHeader"> Administrator Tool Page </div>
                     <div className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </div>
                     <ToolBar>
@@ -86,9 +85,9 @@ class AdminPage extends React.Component<Props>{
                                 <PaddedButton className="btn btn-primary" onClick = {this.goToList}>View Tutors and Students</PaddedButton>
                         </div>
                     </ToolBar>
-            </Row>
+            </div>
                 <br></br>
-                <Row>
+                <div className="row">
                     <div className="col-sm-8">
                     {
                         this.state.showLesson ? 
@@ -100,8 +99,8 @@ class AdminPage extends React.Component<Props>{
                         <AdminListComponent/>
                     }
                     </div>
-                </Row>
-            </Grid>
+                </div>
+            </div>
             </div>
         );
     }

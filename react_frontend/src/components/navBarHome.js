@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Image } from 'react-bootstrap';
 import './../../assets/Hover.css';
 import lovewithout_white from './../../assets/lovewithout_white.png';
 
@@ -91,7 +90,7 @@ class NavBar extends React.Component<Props> {
                     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine"></link>
                 </head>
                 <Block>
-                    <Image className="img-fluid"  src = {lovewithout_white} height="100%" />
+                    <div className="img-fluid"  src = {lovewithout_white} height="100%"></div>
                     <HomeText className="navbar" >Home</HomeText>
                     <LessonText className="navbar">Lessons</LessonText>
                     <LogText className="navbar">Logout</LogText>

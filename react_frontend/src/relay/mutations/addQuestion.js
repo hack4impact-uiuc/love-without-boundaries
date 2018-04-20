@@ -18,7 +18,7 @@ const mutation = graphql`
 function addQuestion(environment: Environment, questionName: string, a: string, b: string, c: string, d: string, correct: string) {
     const variables = {
 		input: {
-            lessonId: "TGVzc29uOjVhY2E2YWNlOWE2NDY5NjY4MTIzZDkyOQ==",
+            lessonId: "TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==",
             question: {questionName: questionName,
                         answers : [ {answerName: a, isCorrect: "A" == correct},
                                     {answerName: b, isCorrect: "B" == correct},
