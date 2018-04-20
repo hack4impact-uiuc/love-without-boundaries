@@ -171,6 +171,17 @@ type DeleteNotePayload {
   clientMutationId: String
 }
 
+input deleteQuestionInput {
+  questionId: ID!
+  lessonId: String!
+  clientMutationId: String
+}
+
+type deleteQuestionPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
 input DeleteStudentInput {
   id: ID!
   clientMutationId: String
@@ -270,6 +281,7 @@ type Mutation {
   removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
   deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
   addURL(input: AddURLInput!): AddURLPayload
+  deleteQuestion(input: deleteQuestionInput!): deleteQuestionPayload
 }
 
 # An object with an ID
@@ -280,7 +292,7 @@ interface Node {
 
 # Self Descriptive
 type PastQuiz {
-  lessonID: ID
+  lessonID: String
   quizName: String
   score: Float
   submittedAnswers: [SubmittedAnswer]

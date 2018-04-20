@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import LessonComponent from './../components/lesson';
-import {Button} from 'react-bootstrap';
 import { graphql, QueryRenderer } from 'react-relay';
 import addLesson, { mutation as addLessonMutation } from '../relay/mutations/addLesson';
 import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
