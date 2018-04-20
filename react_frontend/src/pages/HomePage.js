@@ -209,8 +209,8 @@ class HomePage extends React.Component<Props> {
                                         :
                                         <div>
                                             <DarkBox>The Learning Tool Mission
-                                            <br />______
-                                            <div className="lower"> Our goal is to prepare students for their future </div>
+                                                <br />______
+                                                <div className="lower"> Our goal is to prepare students for their future </div>
                                             </DarkBox>
                                             <Login />
                                             <SignInButton className="lower btn" onClick={this.onSignUp}>Sign Up</SignInButton>

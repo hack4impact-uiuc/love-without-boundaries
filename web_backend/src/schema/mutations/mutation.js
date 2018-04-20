@@ -31,7 +31,9 @@ const createStudent = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
-        const u = new User({ name, email, token, role: 'student'});
+        const u = new User({
+ name, email, token, role: 'student'
+ });
         await u.save();
         const s = new Student({ name, email });
         return s.save();
@@ -58,7 +60,9 @@ const createTeacher = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
-        const u = new User({ name, email, token, role: 'teacher'});
+        const u = new User({
+ name, email, token, role: 'teacher'
+ });
         await u.save();
         const t = new Teacher({ name, email });
         return t.save();
@@ -85,7 +89,9 @@ const createAdmin = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
-        const u = new User({ name, email, token, role: 'admin'});
+        const u = new User({
+ name, email, token, role: 'admin'
+ });
         await u.save();
         const a = new Admin({ name, email });
         return a.save();
@@ -258,10 +264,6 @@ const submitQuiz = mutationWithClientMutationId({
             score: (numCorrect / questionIDs.length),
             submittedAnswers,
         };
-<<<<<<< HEAD
-
-=======
->>>>>>> 93941392be15d659150179ec96662eec5d55ccea
         return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } }, { new: true });
     },
 });

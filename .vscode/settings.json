@@ -1,7 +1,4 @@
 {
-    "eslint.autoFixOnSave": true
-<<<<<<< HEAD
-=======
+    "eslint.autoFixOnSave": true,
     "eslint.enable": true
->>>>>>> 93941392be15d659150179ec96662eec5d55ccea
 }

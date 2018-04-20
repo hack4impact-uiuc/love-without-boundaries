@@ -11,13 +11,13 @@ function fetchQuery(
     operation,
     variables,
 ) {
-    return fetch('https://micro-graphql-ujbyvmocpj.now.sh', {
+    return fetch('http://localhost:8080/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             // RequiredAuthorization: 'false',
             // Authorization: 'Login',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYXJpYSIsImVtYWlsIjoiYXJpYUBnbWFpbC5jb20iLCJ0b2tlbiI6IjEyMyIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNTI0MTkzMjIwLCJleHAiOjE1MjQyMDQwMjB9.RSK5zzwBzhnyqx8eAUtqg131xSMNJb5eGdLaUdHjJdI',
+            Authorization: `Bearer ${sessionStorage.getItem('jwt')}`,
         },
         body: JSON.stringify({
             query: operation.text,

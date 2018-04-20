@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 // import { isNull } from 'util';
 
 // const cors = require('micro-cors')();
+var cors = require('cors')
 const mongoose = require('mongoose');
 
 
@@ -120,17 +121,20 @@ const express = require('express');
 const app = express();
 app.use(bodyParser.json());
 
+app.use(cors())
+
 app.use('/graphql', withAuth(graphqlHTTP({
     schema: Schema,
     graphiql: true,
 })));
 
 app.post('/login', async (req, res) => {
+    console.log('jio');
     if (req.body.role === 'student') {
         const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-        res.send(token);
+        res.json(token);
     }
-    res.send('failed');
+    res.json('failed');
 });
 
 app.post('/register', async (req, res) => {
