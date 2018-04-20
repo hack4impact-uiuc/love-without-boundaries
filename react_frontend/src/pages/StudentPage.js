@@ -52,7 +52,6 @@ class StudentPage extends React.Component<Props> {
                                 <div>Loading...</div>
                             );
                         }
-                        console.log(props);
                         return (
                             <div>
                                 <StudentLesson studentWorksheets={props.node} lessons={props.lessons} location={this.props.location} />
