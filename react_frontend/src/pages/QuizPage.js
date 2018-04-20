@@ -14,7 +14,7 @@ class QuizPage extends Component {
 
     render() {
         if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID) {
-            return <h2>Lesson doesn't exist. Try again.</h2>;
+            return <h2>Lesson doesnt exist. Try again.</h2>;
         }
         return (
             <QueryRenderer

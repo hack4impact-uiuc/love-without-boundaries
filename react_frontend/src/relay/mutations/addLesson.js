@@ -1,6 +1,6 @@
 // @flow
 
-import { commitMutation, graphql, getOptimisticResponse } from 'react-relay';
+import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
@@ -17,30 +17,27 @@ const mutation = graphql`
 `;
 
 function addLesson(environment: Environment, name: string, worksheetURL: string, notesURL: string) {
-	const variables = {
-		input: {
+    const variables = {
+        input: {
             name,
             worksheetURL,
-            notesURL
-        }
+            notesURL,
+        },
     };
-    let finalResponse = {}
+    let finalResponse = {};
     commitMutation(
         environment,
         {
             mutation,
             variables,
             onCompleted: (response) => {
-                console.log("Hello")
+                console.log('Hello');
                 finalResponse = response;
             },
             onError: err => console.error(err),
         },
-    )
-    return finalResponse
+    );
+    return finalResponse;
 }
 
 export default addLesson;
-export {
-    mutation
-}

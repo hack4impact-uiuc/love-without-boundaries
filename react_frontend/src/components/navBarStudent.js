@@ -17,10 +17,6 @@ const Block = styled.div`
     position sticky;
 `;
 
-// const ImageStyle= styled.div`
-//     margin-right: 5rem ;
-// `;
-
 const Text = styled.div`
     padding: 8px;
     color: #FFFFFF;
@@ -80,18 +76,15 @@ const LogText = styled.div`
     position: absolute;
 `;
 
-
-
-
 class NavBar extends React.Component<Props> {
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <head>
-                    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine"></link>
+                    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine" />
                 </head>
                 <Block>
-                    <Image className="img-fluid"  src = {lovewithout_white} height="100%" />
+                    <Image className="img-fluid" src={lovewithout_white} height="100%" />
                     <HomeText className="navbar" >Home</HomeText>
                     <LessonText className="navbar">Lessons</LessonText>
                     <LogText className="navbar">Logout</LogText>
@@ -100,4 +93,5 @@ class NavBar extends React.Component<Props> {
         );
     }
 }
+
 export default NavBar;

@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
-import PaddedButton from '../components/button';
 import environment from '../relay/environment';
-import StudentPage from './StudentPage';
 import jwt_decode from 'jwt-decode';
 
 type Props = {
-    /**/ 
+    /**/
 }
-
 
 const TeacherAddLessonBox = styled.div`
     color: white;
@@ -51,18 +48,17 @@ const TeacherButton = styled.div`
     z-index: -1;
     font-family: "Arial";
 `;
-class TeacherPage extends React.Component<Props>{
-    constructor(props){
-        super(props)
+class TeacherPage extends React.Component<Props> {
+    constructor(props) {
+        super(props);
         this.state = {
-            teacherID: "VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA="
+            teacherID: 'VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA=',
             // teacherID: jwt_decode(localStorage.getItem('token')).userID
-        }
+        };
     }
-    // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
-            
+
             <QueryRenderer
                 environment={environment}
                 query={graphql`
@@ -78,13 +74,13 @@ class TeacherPage extends React.Component<Props>{
                     }
                 `}
                 variables={{
-                    teacher_id: this.state.teacherID
+                    teacher_id: this.state.teacherID,
                 }}
                 render={({ props }) => {
                     if (props) {
                         return (
                             <div className="container-fluid">
-                                <h3>My Students</h3> 
+                                <h3>My Students</h3>
                                 <div className="col-sm-5">
                                     <table className="table">
                                         <thead>
@@ -94,29 +90,28 @@ class TeacherPage extends React.Component<Props>{
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            { props.node == null || props.node.students == null ? 
-                                                <p>You have no assigned students.</p> 
+                                            { props.node == null || props.node.students == null ?
+                                                <p>You have no assigned students.</p>
                                                 : props.node.students.map((student, idx) => (
                                                     <tr>
-                                                    <th scrope="row">{idx}</th>
-                                                    <th>
-                                                        <Link key={idx} style={{ display:'block' }}to= {{ pathname: '/student', state:{ student: student } }}>
-                                                            <button className="btn btn-default">{student.name}</button>
-                                                        </Link>
-                                                    </th>
-                                                </tr>
-                                            ))}
+                                                        <th scrope="row">{idx}</th>
+                                                        <th>
+                                                            <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/student', state: { student } }}>
+                                                                <button className="btn btn-default">{student.name}</button>
+                                                            </Link>
+                                                        </th>
+                                                    </tr>
+                                                ))}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         );
                     }
-                    else {
-                        return (
-                            <div>Loading...</div>
-                        );
-                    }
+
+                    return (
+                        <div>Loading...</div>
+                    );
                 }}
             />
         );
