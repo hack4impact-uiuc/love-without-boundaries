@@ -16,16 +16,18 @@ class StudentLesson extends React.Component {
 
     componentDidMount() {
         if (this.props.studentWorksheets === null) {
-            this.setState({
-                error: 'No lessons exist, please contact admin',
-            });
+            // commented out for dev purposes - this allows us to see all the lessons without clicking on student
+            // this.setState({
+            //     error: 'No lessons exist, please contact admin',
+            // });
             return;
         }
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
         if (studentWorksheetLessonIDs == undefined) {
-            this.setState({
-                error: 'No lessons exist, please contact admin',
-            });
+            // same as above - comment out in production!!
+            // this.setState({
+            //     error: 'No lessons exist, please contact admin',
+            // });
             return;
         }
         let i;
