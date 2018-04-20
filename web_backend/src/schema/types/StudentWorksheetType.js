@@ -8,7 +8,7 @@ const StudentWorksheetType = new GraphQLObjectType({
     description: 'Student worksheet for a specific lesson',
     fields() {
         return {
-            lessonID: globalId('Lesson'),
+            lessonID: { type: GraphQLString },
             url: {
                 type: GraphQLString,
             },

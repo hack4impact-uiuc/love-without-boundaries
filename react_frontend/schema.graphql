@@ -35,7 +35,7 @@ type AddQuestionPayload {
 
 input AddStudentWorksheetCopyInput {
   studentID: ID
-  lessonID: ID
+  lessonID: String
   url: String
   clientMutationId: String
 }
@@ -380,7 +380,6 @@ type undefinedPayload {
 
 # Student worksheet for a specific lesson
 type Worksheet {
-  # The ID of an object
-  lessonID: ID!
+  lessonID: String
   url: String
 }
