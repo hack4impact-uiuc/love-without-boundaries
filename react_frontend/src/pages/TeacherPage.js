@@ -71,6 +71,7 @@ class TeacherPage extends React.Component<Props>{
                             ... on Teacher {
                                 students {
                                     name
+                                    id
                                 }
                             }
                         }
