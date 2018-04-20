@@ -8,17 +8,17 @@ class AdminQuiz extends React.Component {
         this.state = {
             questions: this.props.questions || {},
             qNum: this.props.questions !== undefined ? this.props.questions.length : 0,
-            editable: 'omgwow',
-            overriden: false,
+            editable: -1,
+            editPastQuestion: false,
         };
     }
 
     lock = () => {
-        this.setState({ editable: 'omgwow' });
+        this.setState({ editable: -1 });
     }
 
     passBack = passUp => {
-        this.setState({ editable: passUp, overriden: true });
+        this.setState({ editable: passUp, editPastQuestion: true });
     }
 
     addQuestion = () => {
@@ -36,7 +36,7 @@ class AdminQuiz extends React.Component {
                 },
             ],
             editable: this.state.qNum,
-            overriden: false,
+            editPastQuestion: false,
         }));
     }
 
@@ -52,9 +52,8 @@ class AdminQuiz extends React.Component {
                             answers={q.answers}
                             passBack={this.passBack}
                             locked={this.state.editable != i}
-                            overriden={this.state.overriden}
+                            editPastQuestion={this.state.editPastQuestion}
                             id={q.id}
-                            location={this.props.location}
                         />
                     ))
                 }

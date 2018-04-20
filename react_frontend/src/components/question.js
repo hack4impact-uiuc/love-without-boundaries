@@ -13,7 +13,7 @@ class Question extends React.Component {
     }
     componentWillReceiveProps(newProps) {
         if (newProps.locked !== this.props.locked) {
-            if (this.props.overriden == true && newProps.locked == true) {
+            if (this.props.editPastQuestion == true && newProps.locked == true) {
                 deleteQuestion(environment, this.props.id);
                 addQuestion(environment, this.state.name, this.state.answers);
             } else if (newProps.locked == true) {
