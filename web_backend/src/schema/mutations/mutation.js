@@ -188,7 +188,7 @@ const submitQuiz = mutationWithClientMutationId({
     name: 'SubmitQuiz',
     inputFields: {
         id: { type: GraphQLID },
-        lessonID: { type: GraphQLID },
+        lessonID: { type: GraphQLString },
 
         answeredQuestions: { type: AnsweredQuestionsType },
         // answers: { type: new GraphQLList(GraphQLString) },
