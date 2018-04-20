@@ -6,6 +6,7 @@ import environment from '../relay/environment';
 import GoogleDocButton from '../components/googleDocButton'
 import jwt_decode from 'jwt-decode';
 import StudentLesson from '../components/studentLesson'
+import {copyFile} from '../Gapi'
 
 type Props = {
     /**/

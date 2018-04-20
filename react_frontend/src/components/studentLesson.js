@@ -22,19 +22,20 @@ class StudentLesson extends React.Component {
             return element.lessonID
         })
         let i;
-        let count = 0;
         for (i = 0; i < this.props.lessons.length; i++) {
-
-            if ((studentWorksheetLessonIDs.indexOf(this.props.lessons[i].id) == -1)) {
-                count++;
+            if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
                 addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, this.props.lessons[i].worksheetURL)
+                let url = this.props.lessons[i].worksheetURL
+                let fileId = url.match(/[-\w]{25,}/)
+                console.log(fileId)
+                copyFile(fileId)
             }
         }
-        console.log(count)
         console.log(this.props.lessons.map(element => {
             return element.id
         }))
         console.log(studentWorksheetLessonIDs)
+        
     }
     
     updateLessons = (studentWorksheetLessonIDs, lessonIDs, url) => {
