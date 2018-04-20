@@ -26,6 +26,7 @@ class QuizPage extends Component {
                                 ... on Lesson {
                                     name
                                     quiz {
+                                        lessonID
                                         questions {
                                             id
                                             questionName
@@ -51,7 +52,7 @@ class QuizPage extends Component {
                     return (
                         <div>
                             <h1>Quiz Page</h1>
-                            <AdminQuiz questions={props.node.quiz.questions} />
+                            <AdminQuiz questions={props.node.quiz.questions} quizID={props.node.id} />
                             <br />
                             <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
                         </div>

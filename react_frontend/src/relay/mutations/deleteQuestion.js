@@ -13,11 +13,11 @@ const mutation = graphql`
     }
 `;
 
-function deleteQuestion(environment: Environment, qID: ID) {
+function deleteQuestion(environment: Environment, quizID : string, qID: ID) {
     const variables = {
         input: {
             questionId: qID,
-            lessonId: 'TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==',
+            lessonId: quizID,
         },
     };
 

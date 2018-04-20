@@ -19,10 +19,10 @@ const mutation = graphql`
     }
 `;
 
-function addQuestion(environment: Environment, questionName: string, answers: [{string: string}]) {
+function addQuestion(environment: Environment, quizID: string, questionName: string, answers: [{string: string}]) {
     const variables = {
         input: {
-            lessonId: 'TGVzc29uOjVhZDBlOWMwODEwYjg4MDgzMWMxZGEyZA==',
+            lessonId: quizID,
             question: {
                 questionName,
                 answers,
