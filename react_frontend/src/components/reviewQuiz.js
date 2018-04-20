@@ -39,7 +39,7 @@ class ReviewQuiz extends React.Component{
                 `}
                 variables={{lesson_id: this.state.lessonID}}
                 render={({ props }) => {
-                    if (!props) {
+                    if (!props || !props.node) {
                         return (
                             <div>Loading...</div>
                         );

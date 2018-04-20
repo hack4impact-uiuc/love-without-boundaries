@@ -20,21 +20,7 @@ class ReviewQuizPage extends Component{
             <QueryRenderer
                     environment={environment}
                     query={graphql`
-                        query ReviewQuizPage_Query($student_id: ID!){
-                            node(id: $student_id) {
-                                ... on Student {
-                                    pastQuizzes {
-                                        lessonID
-                                        quizName
-                                        score
-                                        submittedAnswers{
-                                            answerChosen
-                                        }
-                                    }
-                                }
-                            }
-
-                        }   
+                        \   
                     `}
                     variables={{student_id: this.state.studentID, lesson_id: this.state.lessonID}}
                     render={({ props }) => {
@@ -75,6 +61,7 @@ class ReviewQuizPage extends Component{
                                 </div>
                             );
                         }
+                    
                         else{
                             return(<div>Something went wrong :(</div>)
                         }
