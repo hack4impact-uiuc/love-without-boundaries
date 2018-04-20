@@ -238,7 +238,7 @@ const submitQuiz = mutationWithClientMutationId({
         });
         const lid = lessonID;
         const pastQuiz = {
-            lessonID: lid,
+            lessonID,
             quizName: q1.name,
             score: (numCorrect / questionIDs.length),
             submittedAnswers,

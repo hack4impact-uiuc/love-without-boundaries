@@ -16,7 +16,7 @@ const StudentSchema = new Schema({
         score: { type: Number },
         submittedAnswers: [{
             questionID: { type: String },
-            answerChosen: { type: String }
+            answerChosen: { type: String },
         }],
     }],
     worksheets: [{
