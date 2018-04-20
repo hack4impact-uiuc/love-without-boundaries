@@ -6,16 +6,43 @@ import StyledButton from '../components/button';
 import StudentListItem from '../components/studentListItem'
 import environment from '../relay/environment';
 import Login from '../components/login';
+
+import './../../assets/Hover.css';
+import NavBarHome from '../components/navBarHome';
+
+
+
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 type Props = {
     /**/ 
 }
 const HomeSection = styled.div`
-    background: url("https://file-xvqjcpzhcj.now.sh");
     background-size: cover;  
     width: 100%;
     display: block;
-    height: 700px;
+    height: 1000px;
+`
+
+const DarkBox = styled.div`
+    background: url("https://file-utocriqbzb.now.sh/");
+    background-size: cover;  
+    width: 100%;
+    height: 300px;
+    display: block;
+
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0.5rem 2rem ;
+	text-align: center;
+    position: relative;
+    padding-top: 8%;
+    margin-top: 0%;
+    right:0%;
+    margin-left: 0%;
+    left:0%;
 `
 
 const SignInSection = styled.div`
@@ -36,6 +63,109 @@ const SignInButton = styled.div`
 const LogoRow = styled.div`
     padding-top: 20px;
 `;
+
+const SignUpIcon = styled.div`
+    background: url("https://file-zhzvumzlvc.now.sh/");
+    width: 185px;
+    height: 185px;
+    position: relative;
+    background-size: cover;  
+    margin: 0 auto;
+    margin-top: 18%;
+    margin-bottom: 7%;
+`
+
+const LearningIcon = styled.div`
+    background: url("https://file-emcfzpkgbu.now.sh/");
+    width: 170px;
+    height: 170px;
+    position: relative;
+    background-size: cover;  
+    margin: 0 auto;
+    margin-top: 20%;
+    margin-bottom: 10%;
+
+`
+
+const AcheiveIcon = styled.div`
+    background: url("https://file-hkbcghevuc.now.sh/");
+    width: 185px;
+    height: 185px;
+    position: relative;
+    display: block;
+    background-size: cover;  
+    margin: 0 auto;
+    margin-top: 17%;
+    margin-bottom: 7%;
+`
+
+const TopBox = styled.div`
+    background: url("https://file-unocxsjgra.now.sh");
+    background-size: cover;  
+    width: 100%;
+    height: 300px;
+`
+
+const BottomBox = styled.div`
+    background: url("https://file-rfipjzwojd.now.sh/");
+    background-size: cover;  
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-right: 0%;
+`
+
+const RightBox = styled.div`
+    background-color: purple;
+    width: 100%;
+    height: 300px;
+    position: relative;
+`
+
+const LeftBox = styled.div`
+    background-color: purple;
+    width: 100%;
+    height: 300px;
+    position: relative;
+`
+
+const BoxText = styled.div`
+    font-weight: 200;
+    font-size: 26px;
+	text-align: center;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+`
+const BoxRightText = styled.div`
+    font-weight: 200;
+    font-size: 26px;
+	text-align: left;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+    left: 10%;
+`
+const BoxRightSubText = styled.div`
+    font-weight: 100;
+    font-size: 16px;
+    text-align: left;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+    left: 10%;
+    margin-right: 20%;
+`
+
+const BoxSubText = styled.div`
+    font-weight: 100;
+    font-size: 16px;
+	text-align: center;
+    position: relative;
+    font-family: 'Montserrat';
+    color: white;
+`
+
 class HomePage extends React.Component<Props>{
     constructor(props){
         super(props);
@@ -55,7 +185,6 @@ class HomePage extends React.Component<Props>{
     }
     render() {
         return (
-            
             <QueryRenderer
                     environment={environment}
                     query={graphql`
@@ -69,15 +198,14 @@ class HomePage extends React.Component<Props>{
                     variables={{}}
                     render={({ props }) => {
                         return (
-                            <div> 
-                            <HomeSection className="container">
-                                <LogoRow className="row">
-                                    <div className="col-xs-5 col-sm-4" style={{paddingLeft: 15}}>
-                                        <img className="img-fluid" src="https://www.lovewithoutboundaries.com/sites/lwb3/templates/default/images/logo.svg" />
-                                    </div>
-                                    <div className="col-xs-1 col-sm-6"></div>
-                                    <div className="col-xs-5 col-sm-2">
-                                        <SignInSection>
+                            <div > 
+                            <head>
+                                 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"></link>
+                            </head>
+                            <HomeSection className="container" className="homePic">
+                                <div className="container-fluid">
+                                    <div className="row">
+                                       <SignInSection>
                                         { 
                                             this.state.signup ?
                                             <div>
@@ -87,14 +215,98 @@ class HomePage extends React.Component<Props>{
                                                 <SignInButton className="btn">Admin</SignInButton>
                                             </div>
                                             : 
-                                            <div>
+                                            <DarkBox>The Learning Tool Mission 
+                                            <br></br>______
+                                             <div className ="lower"> Our goal is to prepare students for their future </div>
                                                 <Login/>
-                                                <SignInButton className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
-                                            </div>
+                                                <SignInButton className="lower" className="btn" onClick={this.onSignUp}>Sign Up</SignInButton>
+                                            </DarkBox>
                                         }
                                         </SignInSection>
+
                                     </div>
-                                </LogoRow>
+                                    <div className="row">
+                                    <div className="col-12 col-sm-4">
+                                        <SignUpIcon></SignUpIcon>
+                                        <div className="caption">
+                                            Sign up for an account
+                                        </div>
+                                        <br></br>
+                                        <div className="subCaption">
+                                            Students can sign up for an account and will be paired with a tutor
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-sm-4">
+                                        <LearningIcon></LearningIcon>
+                                        <div className="caption">
+                                            Start learning
+                                        </div>
+                                        <br></br>
+                                        <div className="subCaption">
+                                            Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-sm-4">
+                                    <AcheiveIcon></AcheiveIcon>
+                                    <div className="caption">
+                                        Get the results
+                                    </div>
+                                    <br></br>
+                                        <div className="subCaption">
+                                            These lessons are to prepare students for high acheivement in national exams
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div className="row">
+                                        <br></br>
+                                        <br></br>
+                                        <div className="col-12 col-sm-6">
+                                        <div className="no-gutter">
+                                            <TopBox>
+                                            </TopBox>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-sm-6">
+                                        <div className="no-gutter">
+                                            <RightBox>
+                                            <br></br>
+                                            <br></br>
+                                                <BoxText> 
+                                                    Learn From Anywhere
+                                                </BoxText>
+                                                <br></br>
+                                                <BoxText> ________</BoxText>
+                                                <br></br>
+                                                <br></br>
+                                                <BoxSubText> 
+                                                    Lessons are accessible from many different devices
+                                                </BoxSubText>
+                                            </RightBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-12 col-sm-6">
+                                            <LeftBox>
+                                            <br></br>
+                                            <br></br>
+                                            <BoxRightText> 
+                                                    Our Product is Dope as Hell
+                                                </BoxRightText>
+                                                <br></br>
+                                                <BoxRightText> ________</BoxRightText>
+                                                <br></br>
+                                                <br></br>
+                                                <BoxRightSubText> 
+                                                    Use our product because we are dope as hell and this product will improve ur life by like 300%
+                                                </BoxRightSubText>
+                                            </LeftBox>
+                                        </div>
+                                        <div className="col-12 col-sm-6">
+                                            <BottomBox></BottomBox>
+                                        </div>
+                                    </div>
+                                </div>
                             </HomeSection>
                             </div>
                         );

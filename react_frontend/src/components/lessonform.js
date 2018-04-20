@@ -8,6 +8,9 @@ import environment from '../relay/environment';
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, getIdFromUrl } from '../Gapi';
 import { commitMutation } from 'react-relay';
 
+import './../../assets/Hover.css';
+
+
 class LessonForm extends React.Component {
     constructor() {
         super();
@@ -64,7 +67,7 @@ class LessonForm extends React.Component {
                     }
                     return (
                         <div>
-                            <form>
+                            <form className="gradColor">
                                 <h2>Add Lesson:</h2>
                                 <div className="form-group">
                                     <label htmlFor="lesson_name_input">Lesson Name: </label>
