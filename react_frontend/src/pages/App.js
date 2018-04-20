@@ -25,41 +25,37 @@ const teacherJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6InRlYWN
 // CHANGE TO STUDENTJWT OR TEACHERJWT DEPENDING ON WHAT YOU ARE WORKING ON
 localStorage.setItem('token', teacherJWT);
 // to decode it, import jwt-decode https://www.npmjs.com/package/jwt-decode
-class App extends React.Component<Props> {
-    render() {
-        return (
+const App = () => (
+    <div>
+        <Router>
             <div>
-                <Router>
-                    <div>
-                        <ul>
-                            <li>
-                                <Link to="/" >Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/student" >Student</Link>
-                            </li>
-                            <li>
-                                <Link to="/teacher" >Teacher</Link>
-                            </li>
-                            <li>
-                                <Link to="/admin" >Admin</Link>
-                            </li>
-                        </ul>
+                <ul>
+                    <li>
+                        <Link to="/" >Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/student" >Student</Link>
+                    </li>
+                    <li>
+                        <Link to="/teacher" >Teacher</Link>
+                    </li>
+                    <li>
+                        <Link to="/admin/list" >Admin</Link>
+                    </li>
+                </ul>
 
-                        <hr />
-                        <NavBar />
-                        <Route exact path="/" component={HomePage} />
-                        <Route path="/student" component={StudentPage} />
-                        <Route path="/teacher" component={TeacherPage} />
-                        <Route path="/admin/:showLesson" component={AdminPage} />
-                        <Route path="/quiz" component={QuizPage} />
-                        <Route path="/takequiz" component={TakeQuizPage} />
-                        <Route path="/reviewquiz" component={ReviewQuizPage} />
-                    </div>
-                </Router>
+                <hr />
+                <NavBar />
+                <Route exact path="/" component={HomePage} />
+                <Route path="/student" component={StudentPage} />
+                <Route path="/teacher" component={TeacherPage} />
+                <Route path="/admin/:showLesson" component={AdminPage} />
+                <Route path="/quiz" component={QuizPage} />
+                <Route path="/takequiz" component={TakeQuizPage} />
+                <Route path="/reviewquiz" component={ReviewQuizPage} />
             </div>
-        );
-    }
-}
+        </Router>
+    </div>
+);
 
 export default App;
