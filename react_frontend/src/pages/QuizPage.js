@@ -53,7 +53,6 @@ class QuizPage extends Component {
                         <div>
                             <h1>Quiz Page</h1>
                             <AdminQuiz questions={props.node.quiz.questions} id={props.node.id} />
-                            {console.log(props.node.id)}
                             <br />
                             <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
                         </div>
