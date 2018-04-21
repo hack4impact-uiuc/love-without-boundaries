@@ -1,81 +1,104 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import Answer from './answer';
-import addQuestion from '../relay/mutations/addQuestion'
+import React from 'react';
+import addQuestion from '../relay/mutations/addQuestion';
+import deleteQuestion from '../relay/mutations/deleteQuestion';
 import environment from '../relay/environment';
-const CopiedButton = styled.button`
-    background-color: #4CAF50;
-    border: 1px solid #ddd;
-    padding: 10px;
-    color: white;
-    font-size: 15px;
-    margin: 5px;
-`;
-class Question extends React.Component{
-    constructor(props){
-        super(props)
+
+class Question extends React.Component {
+    constructor(props) {
+        super(props);
         this.state = {
-            name : "",
-            locked : this.props.locked,
-            A: "",
-            B: "",
-            C: "",
-            D: "",
-            correct: "",
-            submitted: false
-        }
+            name: this.props.name !== undefined ? this.props.name : '',
+            answers: this.props.answers,
+        };
     }
     componentWillReceiveProps(newProps) {
-        if(newProps.locked != this.state.locked){
-            this.setState({locked : newProps.locked})
-            if(newProps.locked == true)
-                addQuestion(environment, this.state.name, this.state.A, this.state.B, this.state.C, this.state.D, this.state.correct)
+        if (newProps.locked !== this.props.locked) {
+            if (this.props.editPastQuestion == true && newProps.locked == true) {
+                deleteQuestion(environment, this.props.quizID, this.props.id);
+                addQuestion(environment, this.props.quizID, this.state.name, this.state.answers);
+            } else if (newProps.locked == true) {
+                addQuestion(environment, this.props.quizID, this.state.name, this.state.answers);
+                window.location.reload();
+            }
         }
     }
     updateQuestion = event => {
-        this.setState({name : event.target.value})
+        this.setState({ name: event.target.value });
     }
+
     unlock = () => {
         this.props.passBack(this.props.num);
     }
 
-    passAns = (passUp, letter) => {
-        this.setState({[letter] : passUp})
-    }
-    passCorrect = passUp => {
-        this.setState({correct : passUp})
+    updateAns = e => {
+        e.persist();
+        this.setState((prevState) => ({
+            answers: prevState.answers.map((ans, i) => {
+                if (i == e.target.name) {
+                    return {
+                        ...ans,
+                        answerName: e.target.value,
+                    };
+                }
+                return ans;
+            }),
+        }));
+    };
+
+    updateCorrect = e => {
+        e.persist();
+        this.setState((prevState) => ({
+            answers: prevState.answers.map((ans, i) => {
+                if (i == e.target.name) {
+                    return ({ ...ans, isCorrect: true });
+                }
+                return ({ ...ans, isCorrect: false });
+            }),
+        }));
     }
 
+    createAnswers = answers => {
+        const answersElm = [];
+        for (let i = 0; i < 4; i += 1) {
+            answersElm.push(<div key={i} className="form-group">
+                <input
+                    type="checkbox"
+                    name={i}
+                    onChange={this.updateCorrect}
+                    checked={answers[i] !== undefined ? answers[i].isCorrect : false}
+                    className="form-check-input"
+                    disabled={this.props.locked}
+                />
+                <label className="form-check-label" htmlFor={i}>
+                    <input
+                        type="text"
+                        name={i}
+                        value={answers != undefined && answers[i] !== undefined ? answers[i].answerName : ''}
+                        onChange={this.updateAns}
+                        className="form-control"
+                        readOnly={this.props.locked}
+                        onClick={this.props.locked == true ? this.unlock : null}
+                    />
+                </label>
+            </div>);
+        }
+        return answersElm;
+    }
     render() {
-        return(
+        return (
             <div>
-                {this.props.num}. 
-                <input type="text" onChange={this.updateQuestion} readOnly={this.state.locked}/>
-                <CopiedButton onClick={this.unlock}>Edit</CopiedButton>
-                <Answer letter="A" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="A"}
+                {this.props.num + 1}.
+                <input
+                    type="text"
+                    value={this.state.name}
+                    onChange={this.updateQuestion}
+                    readOnly={this.props.locked}
+                    onClick={this.props.locked == true ? this.unlock : null}
                 />
-                <Answer letter="B" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="B"}
-                />
-                <Answer letter="C" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="C"}
-                />
-                <Answer letter="D" locked={this.state.locked} 
-                    passAns={this.passAns}
-                    passCorrect={this.passCorrect}
-                    radio={this.state.correct=="D"}
-                />
+                <br />
+                { this.createAnswers(this.state.answers) }
             </div>
         );
     }
-
 }
-
 export default Question;

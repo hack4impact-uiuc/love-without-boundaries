@@ -15,6 +15,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-relay": "^1.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -44,11 +45,9 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
-    "google-login": "^1.0.3",
     "isomorphic-unfetch": "^2.0.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-google-login": "^3.0.10",
     "react-popout": "^1.0.1",

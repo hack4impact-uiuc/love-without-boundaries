@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row, Image, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
-import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import StudentPage from './StudentPage';
 import jwt_decode from 'jwt-decode';
 
 type Props = {
-    /**/ 
+    /**/
 }
-
 
 const TeacherAddLessonBox = styled.div`
     color: white;
@@ -52,17 +48,24 @@ const TeacherButton = styled.div`
     z-index: -1;
     font-family: "Arial";
 `;
-class TeacherPage extends React.Component<Props>{
-    constructor(props){
-        super(props)
+class TeacherPage extends React.Component<Props> {
+    constructor(props) {
+        super(props);
         this.state = {
+<<<<<<< HEAD
             teacherID: "VGVhY2hlcjo1YWNlZTg2M2VhNWM3NDQ2MjEzZDdkYTA="
+=======
+            teacherID: 'VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA=',
+>>>>>>> master
             // teacherID: jwt_decode(localStorage.getItem('token')).userID
-        }
+        };
     }
-    // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
             <QueryRenderer
                 environment={environment}
                 query={graphql`
@@ -71,33 +74,51 @@ class TeacherPage extends React.Component<Props>{
                             ... on Teacher {
                                 students {
                                     name
+                                    id
                                 }
                             }
                         }
                     }
                 `}
                 variables={{
-                    teacher_id: this.state.teacherID
+                    teacher_id: this.state.teacherID,
                 }}
                 render={({ props }) => {
                     if (props) {
                         return (
-                            <div>
-                                <h3>My Students</h3> 
-                                { props.node == null || props.node.students == null ? <p>You have no assigned students.</p> : props.node.students.map((student, idx) => 
-                                    <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
-                                        <button >{student.name}</button>
-                                    </Link>
-                                )}
-                                
+                            <div className="container-fluid">
+                                <h3>My Students</h3>
+                                <div className="col-sm-5">
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Student</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            { props.node == null || props.node.students == null ?
+                                                <p>You have no assigned students.</p>
+                                                : props.node.students.map((student, idx) => (
+                                                    <tr>
+                                                        <th scrope="row">{idx}</th>
+                                                        <th>
+                                                            <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/student', state: { student } }}>
+                                                                <button className="btn btn-default">{student.name}</button>
+                                                            </Link>
+                                                        </th>
+                                                    </tr>
+                                                ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         );
                     }
-                    else {
-                        return (
-                            <div>Loading...</div>
-                        );
-                    }
+
+                    return (
+                        <div>Loading...</div>
+                    );
                 }}
             />
         );

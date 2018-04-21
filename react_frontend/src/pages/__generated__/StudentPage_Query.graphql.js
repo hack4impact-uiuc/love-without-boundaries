@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e5cdce2324d4dd2a29d7eb08ee9e1e25
+ * @relayHash 5d0586805cea3d79beacfd38e7a0f1d3
  */
 
 /* eslint-disable */
@@ -9,7 +9,9 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type StudentPage_QueryVariables = {| |};
+export type StudentPage_QueryVariables = {|
+  studentId: string,
+|};
 export type StudentPage_QueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +id: string,
@@ -19,12 +21,20 @@ export type StudentPage_QueryResponse = {|
     +notesName: ?string,
     +notesURL: ?string,
   |}>,
+  +node: ?{|
+    +worksheets?: ?$ReadOnlyArray<?{|
+      +lessonID: ?string,
+      +url: ?string,
+    |}>,
+  |},
 |};
 */
 
 
 /*
-query StudentPage_Query {
+query StudentPage_Query(
+  $studentId: ID!
+) {
   lessons {
     id
     name
@@ -33,87 +43,179 @@ query StudentPage_Query {
     notesName
     notesURL
   }
+  node(id: $studentId) {
+    __typename
+    ... on Student {
+      worksheets {
+        lessonID
+        url
+      }
+    }
+    id
+  }
 }
 */
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "lessons",
-    "storageKey": null,
-    "args": null,
-    "concreteType": "Lesson",
-    "plural": true,
-    "selections": [
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "id",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "name",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "worksheetName",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "worksheetURL",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "notesName",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "notesURL",
-        "args": null,
-        "storageKey": null
-      }
-    ]
+    "kind": "LocalArgument",
+    "name": "studentId",
+    "type": "ID!",
+    "defaultValue": null
   }
-];
+],
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v2 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "lessons",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Lesson",
+  "plural": true,
+  "selections": [
+    v1,
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "name",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "worksheetName",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "worksheetURL",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "notesName",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "notesURL",
+      "args": null,
+      "storageKey": null
+    }
+  ]
+},
+v3 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "studentId",
+    "type": "ID!"
+  }
+],
+v4 = {
+  "kind": "InlineFragment",
+  "type": "Student",
+  "selections": [
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "worksheets",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "Worksheet",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "lessonID",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "url",
+          "args": null,
+          "storageKey": null
+        }
+      ]
+    }
+  ]
+};
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n}\n",
+  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n        url\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "StudentPage_Query",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
-    "selections": v0
+    "argumentDefinitions": v0,
+    "selections": [
+      v2,
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "node",
+        "storageKey": null,
+        "args": v3,
+        "concreteType": null,
+        "plural": false,
+        "selections": [
+          v4
+        ]
+      }
+    ]
   },
   "operation": {
     "kind": "Operation",
     "name": "StudentPage_Query",
-    "argumentDefinitions": [],
-    "selections": v0
+    "argumentDefinitions": v0,
+    "selections": [
+      v2,
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "node",
+        "storageKey": null,
+        "args": v3,
+        "concreteType": null,
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "__typename",
+            "args": null,
+            "storageKey": null
+          },
+          v1,
+          v4
+        ]
+      }
+    ]
   }
 };
 })();
-(node/*: any*/).hash = '28df96f3f8dd5dd62bb0409bb0555862';
+(node/*: any*/).hash = '454a82a5c8514c825a0098505b805e72';
 module.exports = node;

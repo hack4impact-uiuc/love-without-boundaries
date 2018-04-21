@@ -14,10 +14,6 @@ const Block = styled.div`
     color: rgb(255, 255, 255);
     height: 80px;
     position sticky;
-
-    right:0%;
-    margin-left: 0%;
-    left:0%;
 `;
 
 // const ImageStyle= styled.div`
@@ -84,14 +80,15 @@ const LogText = styled.div`
 `;
 
 
-
-
 class NavBar extends React.Component<Props> {
-    render(){
-        return(
+    render() {
+        return (
             <div>
+                <head>
+                    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine" />
+                </head>
                 <Block>
-                    <img className="img-fluid"  src = {lovewithout_white} height="100%" />
+                    <div className="img-fluid" src={lovewithout_white} height="100%" />
                     <HomeText className="navbar" >Home</HomeText>
                     <LessonText className="navbar">Lessons</LessonText>
                     <LogText className="navbar">Logout</LogText>

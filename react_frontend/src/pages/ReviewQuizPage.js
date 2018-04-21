@@ -19,6 +19,10 @@ class ReviewQuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> master
                     query={graphql`
                     query ReviewQuizPage_Query($student_id: ID!){
                         node(id: $student_id){
@@ -42,6 +46,7 @@ class ReviewQuizPage extends Component{
                                 <div>Loading...</div>
                             );
                         }
+<<<<<<< HEAD
                         const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined
                         
                         if (lessonID === undefined){
@@ -82,6 +87,31 @@ class ReviewQuizPage extends Component{
                         else{
                             return(<div>Something went wrong :(</div>)
                         }
+=======
+                        return (
+                            <div>
+                                <h1>Quiz Submission</h1>
+                                {
+                                    props.students.map(student => {
+                                        if(student.pastQuizzes){
+                                            student.pastQuizzes.map(pastQuiz => {if(pastQuiz.questions){
+                                                <div>
+                                                    <b>{pastQuiz.quizName} - Score: {pastQuiz.score}</b>
+                                                    <br/>
+                                                    pastQuiz.questions.map(q => 
+                                                        <div>
+                                                            Your Answer: {q.answerChosen}<br/>
+                                                            Correct Answer: {q.correctAnswer}<br/><br/>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                    }})}})
+                                        
+                                }
+                                <button onClick={this.finish}>Finish</button>
+                            </div>
+                        );
+>>>>>>> master
                     }}
             />
         );
