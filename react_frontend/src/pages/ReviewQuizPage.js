@@ -19,10 +19,7 @@ class ReviewQuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
-<<<<<<< HEAD
-=======
                     
->>>>>>> master
                     query={graphql`
                     query ReviewQuizPage_Query($student_id: ID!){
                         node(id: $student_id){
@@ -46,48 +43,6 @@ class ReviewQuizPage extends Component{
                                 <div>Loading...</div>
                             );
                         }
-<<<<<<< HEAD
-                        const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined
-                        
-                        if (lessonID === undefined){
-                            return <div>Incorrect Lesson</div>
-                        }
-                        if(lessonID){
-                            return (
-                                <div>
-                                    <h1>Quiz Submissions</h1>
-                                    {/* {
-                                        <ReviewQuiz lessonID={lessonID}/>
-                                    } */}
-                                    {
-                                        props.node.pastQuizzes.map((pastQuiz, idx) => 
-                                            <div key={idx}>
-                                                {
-                                                    pastQuiz.lessonID === lessonID ? 
-                                                    <div>
-                                                        <b>{pastQuiz.quizName} - Score: {pastQuiz.score}</b>
-                                                        <br/>
-                                                        Your Answers:
-                                                        {pastQuiz.submittedAnswers.map((q, idx) => 
-                                                            <p key={idx}>
-                                                                {q.answerChosen}<br/>
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                    : null
-                                                }
-                                            </div>
-                                        )
-                                    }
-                                    <button onClick={this.finish}>Finish</button>
-                                </div>
-                            );
-                        }
-                    
-                        else{
-                            return(<div>Something went wrong :(</div>)
-                        }
-=======
                         return (
                             <div>
                                 <h1>Quiz Submission</h1>
@@ -111,7 +66,6 @@ class ReviewQuizPage extends Component{
                                 <button onClick={this.finish}>Finish</button>
                             </div>
                         );
->>>>>>> master
                     }}
             />
         );

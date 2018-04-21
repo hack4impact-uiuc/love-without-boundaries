@@ -52,20 +52,12 @@ class TeacherPage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-<<<<<<< HEAD
-            teacherID: "VGVhY2hlcjo1YWNlZTg2M2VhNWM3NDQ2MjEzZDdkYTA="
-=======
             teacherID: 'VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA=',
->>>>>>> master
             // teacherID: jwt_decode(localStorage.getItem('token')).userID
         };
     }
     render() {
         return (
-<<<<<<< HEAD
-=======
-
->>>>>>> master
             <QueryRenderer
                 environment={environment}
                 query={graphql`
