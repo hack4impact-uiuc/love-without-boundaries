@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken';
 // import { isNull } from 'util';
 
 // const cors = require('micro-cors')();
-var cors = require('cors')
+let cors = require('cors');
 const mongoose = require('mongoose');
 
 
@@ -121,7 +121,7 @@ const express = require('express');
 const app = express();
 app.use(bodyParser.json());
 
-app.use(cors())
+app.use(cors());
 
 app.use('/graphql', withAuth(graphqlHTTP({
     schema: Schema,
@@ -144,7 +144,7 @@ app.post('/register', async (req, res) => {
         addTeacher(req.body.name, req.body.email, req.body.googleAuthToken);
     }
     const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-    res.send(token);
+    res.json(token);
 });
 
 

@@ -10,7 +10,7 @@ class Login extends React.Component {
         console.log(response.profileObj.givenName + response.profileObj.familyName);
         // console.log(respose)
 
-        return fetch('http://localhost:8080/login', {
+        return fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -30,6 +30,7 @@ class Login extends React.Component {
                 // request: 'login',
                 // name: 'aria',
             }),
+        // }).then(resp => resp.json().then(r => console.log(r)));
         }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r)));
     }
     // console.log(response.googleId);
