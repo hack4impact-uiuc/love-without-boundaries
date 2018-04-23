@@ -13,25 +13,25 @@ const mutation = graphql`
 `;
 
 function assignStudentToTeacher(environment: Environment, studentID: string, teacherID: string) {
-const variables = {
-  input: {
-    studentID,
-    teacherID,
-  },
-};
-console.log(variables)
-commitMutation(
-  environment,
-  {
-    mutation,
-    variables,
-    onCompleted: (response) => {
-      console.log('Response received from server.')
-      console.log(response)
-    },
-    onError: err => console.error(err),
-  },
-);
+    const variables = {
+        input: {
+            studentID,
+            teacherID,
+        },
+    };
+    console.log(variables);
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server.');
+                console.log(response);
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default assignStudentToTeacher;

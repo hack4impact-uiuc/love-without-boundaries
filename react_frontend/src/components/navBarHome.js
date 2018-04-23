@@ -84,9 +84,6 @@ class NavBar extends React.Component<Props> {
     render() {
         return (
             <div>
-                <head>
-                    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine" />
-                </head>
                 <Block>
                     <div className="img-fluid" src={lovewithout_white} height="100%" />
                     <HomeText className="navbar" >Home</HomeText>
