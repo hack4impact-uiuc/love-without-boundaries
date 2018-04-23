@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat } from 'graphql';
 import SubmittedAnswer from './SubmittedAnswerType';
 
 const PastQuiz = new GraphQLObjectType({
