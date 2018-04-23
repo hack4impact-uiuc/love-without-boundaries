@@ -5,10 +5,13 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import ReviewQuiz from '../components/reviewQuiz';
 
+const SlightlyPaddedButton = styled.button`
+    margin: 0px 5px;
+`;
+
 class ReviewQuizPage extends Component{
     constructor(props){
         super(props)
-        console.log(this.props.location);
         this.state = {
             studentID: "U3R1ZGVudDo1YWQwNmZmYzk2NDg0ZGFhMTc3MWJmYTc=",
         }
@@ -19,7 +22,6 @@ class ReviewQuizPage extends Component{
         return (
             <QueryRenderer
                     environment={environment}
-                    
                     query={graphql`
                     query ReviewQuizPage_Query($student_id: ID!){
                         node(id: $student_id){
@@ -43,29 +45,55 @@ class ReviewQuizPage extends Component{
                                 <div>Loading...</div>
                             );
                         }
-                        return (
-                            <div>
-                                <h1>Quiz Submission</h1>
-                                {
-                                    props.students.map(student => {
-                                        if(student.pastQuizzes){
-                                            student.pastQuizzes.map(pastQuiz => {if(pastQuiz.questions){
+                        const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined
+                        
+                        if (lessonID === undefined){
+                            return <div>Incorrect Lesson</div>
+                        }
+                        if(lessonID){
+                            return (
+                                <div>
+                                    <h1>Quiz Submissions</h1>
+                                    
+                                    {
+                                        props.node.pastQuizzes.map((pastQuiz, idx) => 
+                                        <div key={idx}>
+                                            {
+                                                pastQuiz.lessonID === lessonID ? 
                                                 <div>
-                                                    <b>{pastQuiz.quizName} - Score: {pastQuiz.score}</b>
-                                                    <br/>
-                                                    pastQuiz.questions.map(q => 
-                                                        <div>
-                                                            Your Answer: {q.answerChosen}<br/>
-                                                            Correct Answer: {q.correctAnswer}<br/><br/>
-                                                        </div>
+    
+                                                    <b>{pastQuiz.quizName}</b>
+                                                    <p><b>Score: {pastQuiz.score}</b></p>
+                                                    Your Answers:
+                                                    {pastQuiz.submittedAnswers.map((q, idx) => 
+                                                    <div>
+                                                    {q.answerChosen && 
+                                    
+                                                        <p key={idx}>
+                                                            {q.answerChosen}<br/>
+                                                        </p>
+                                                    }
+                                                    </div>
                                                     )}
                                                 </div>
-                                    }})}})
-                                        
-                                }
-                                <button onClick={this.finish}>Finish</button>
-                            </div>
-                        );
+                                                : null
+                                            }
+                                        </div>
+                                        )
+                                    }
+                                    {
+                                        <div>
+                                        <ReviewQuiz lessonID={lessonID}/>
+                                        </div>
+                                    }
+                                    <SlightlyPaddedButton className="btn btn-primary" onClick={this.finish} bsStyle="primary"> Finish </SlightlyPaddedButton>
+                                </div>
+                            );
+                        }
+                    
+                        else{
+                            return(<div>Something went wrong :(</div>)
+                        }
                     }}
             />
         );

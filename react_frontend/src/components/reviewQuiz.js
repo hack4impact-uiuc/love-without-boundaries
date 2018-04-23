@@ -46,17 +46,16 @@ class ReviewQuiz extends React.Component{
                             <div>Loading...</div>
                         );
                     }
-                    console.log(this.props)
                     return (
                         <div>
-                            Correct Answers:
+                            <b>Correct Answers:</b>
                             {props.node.quiz != undefined ? 
-                                props.node.quiz.questions.map(q =>
-                                    q.answers.map(a => 
-                                        <p>
-                                            {a.isCorrect ? a.answerName : null}
-                                            <br/>
+                                props.node.quiz.questions.map((q,idx) =>
+                                    q.answers.map((a,i) => (
+                                        a.isCorrect && <p>
+                                            {idx}. {a.answerName}  
                                         </p>
+                                        )
                                     )
                                 )
                                 : null

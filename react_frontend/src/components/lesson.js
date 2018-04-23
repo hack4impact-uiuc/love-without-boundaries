@@ -75,7 +75,7 @@ const CheckedBoxInComplete = styled.div`
 
 const SlightlyPaddedButton = styled.button`
     margin: 0px 5px;
-`
+`;
 
 class LessonComponent extends React.Component<Props>{
 
