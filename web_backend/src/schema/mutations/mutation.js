@@ -477,6 +477,28 @@ const deleteQuestion = mutationWithClientMutationId({
     },
 });
 
+const editLesson = mutationWithClientMutationId({
+    name: 'EditLesson',
+    inputFields: {
+        id: { type: GraphQLString },
+        newName: { type: GraphQLString },
+    },
+    lesson: {
+        type: LessonType,
+        resolve: payload => payload,
+    },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id, newName }) => {
+        const obj = fromGlobalId(id);
+        return Lesson.findByIdAndUpdate(obj.id, { $set: { name: newName } });
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     description: 'Your Root Mutation',
@@ -502,6 +524,7 @@ const Mutation = new GraphQLObjectType({
             deleteStudent,
             addURL,
             deleteQuestion,
+            editLesson,
         };
     },
 });
