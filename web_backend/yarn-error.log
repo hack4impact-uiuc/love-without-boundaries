@@ -1,0 +1,66 @@
+Arguments: 
+  /usr/local/bin/node /Users/tkotha/.yarn/bin/yarn.js
+
+PATH: 
+  /Users/tkotha/.yarn/bin:/Users/tkotha/.config/yarn/global/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  8.9.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/babel-cli: ETIMEDOUT
+      at Timeout._onTimeout (/Users/tkotha/.yarn/lib/cli.js:133819:19)
+      at ontimeout (timers.js:475:11)
+      at tryOnTimeout (timers.js:310:5)
+      at Timer.listOnTimeout (timers.js:270:5)
+
+npm manifest: 
+  {
+    "name": "micro-graphql",
+    "version": "0.0.0",
+    "description": "micro-graphql",
+    "main": "dist/bundle.js",
+    "scripts": {
+      "start": "micro dist/ -p 8080",
+      "build": "babel src/ -d dist/",
+      "exportSchema": "node ./dist/scripts/exportSchema.js"
+    },
+    "repository": "https://github.com/hyperfuse/micro-graphql.git",
+    "author": "Aria Malkani",
+    "license": "MIT",
+    "dependencies": {
+      "babel-cli": "^6.26.0",
+      "express-graphql": "^0.6.1",
+      "graphql": "^0.8.2",
+      "graphql-relay": "^0.5.4",
+      "micro": "^6.2.0",
+      "micro-compress": "^1.0.0",
+      "micro-cors": "^0.1.0",
+      "mongoose": "^5.0.3"
+    },
+    "devDependencies": {
+      "babel-core": "^6.21.0",
+      "babel-loader": "^6.2.10",
+      "babel-plugin-transform-flow-strip-types": "^6.21.0",
+      "babel-preset-env": "^1.6.1",
+      "eslint": "^4.18.2",
+      "eslint-config-airbnb": "^16.1.0",
+      "eslint-plugin-import": "^2.9.0",
+      "eslint-plugin-jsx-a11y": "^6.0.3",
+      "eslint-plugin-react": "^7.7.0",
+      "flow-bin": "^0.37.4",
+      "webpack": "2.2.0-rc.7"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
