@@ -9,8 +9,6 @@ import LessonList from './../components/lessonList';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
 
-import './../../assets/Hover.css';
-
 
 const ToolBar = styled.div`
 
@@ -68,17 +66,15 @@ const AdminPage = ({ match }) => (
         </div>
         <br />
         <div className="row rightMargin">
-            <div className="col-sm-8">
-                {
-                    match.params.showLesson === 'lesson' ?
-                        <div className="centered">
-                            <LessonForm />
-                            <LessonList />
-                        </div>
-                        :
-                        <AdminListComponent />
-                }
-            </div>
+            {
+                match.params.showLesson === 'lesson' ?
+                    <div className="centered">
+                        <LessonForm />
+                        <LessonList />
+                    </div>
+                    :
+                    <AdminListComponent />
+            }
         </div>
     </div>
 );
