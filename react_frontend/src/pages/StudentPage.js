@@ -16,7 +16,7 @@ class StudentPage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            isTeacher: jwt_decode(localStorage.getItem('token')).userType == 'teacher',
+            isStudent: jwt_decode(localStorage.getItem('token')).userType == 'student',
         };
     }
     render() {
@@ -25,26 +25,25 @@ class StudentPage extends React.Component<Props> {
                 <QueryRenderer
                     environment={environment}
                     query={graphql`
-                    query StudentPage_Query($studentId: ID!){
-                        lessons{
-                            id
-                            name
-                            worksheetName
-                            worksheetURL
-                            notesName
-                            notesURL
-                        }
-                        node(id: $studentId) {
-                            ... on Student {
-                                worksheets {
-                                    lessonID
-                                    url
+                        query StudentPage_Query($studentId: ID!){
+                            lessons{
+                                id
+                                name
+                                worksheetName
+                                worksheetURL
+                                notesName
+                                notesURL
+                            }
+                            node(id: $studentId) {
+                                ... on Student {
+                                    worksheets {
+                                        lessonID
+                                        url
+                                    }
                                 }
                             }
                         }
-                    }
-                `}
-
+                    `}
                     variables={{ studentId: this.props.location.state != undefined ? this.props.location.state.student.id : '' }}
                     render={({ props }) => {
                         if (!props) {
@@ -54,7 +53,12 @@ class StudentPage extends React.Component<Props> {
                         }
                         return (
                             <div>
-                                <StudentLesson studentWorksheets={props.node} lessons={props.lessons} location={this.props.location} />
+                                <StudentLesson
+                                    isStudent={this.state.isStudent}
+                                    studentWorksheets={props.node}
+                                    lessons={props.lessons}
+                                    location={this.props.location}
+                                />
                             </div>
                         );
                     }}

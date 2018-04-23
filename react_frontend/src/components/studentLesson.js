@@ -15,6 +15,10 @@ class StudentLesson extends React.Component {
     }
 
     componentDidMount() {
+        if (this.props.isStudent !== undefined) {
+            // teacher or admin
+            return;
+        }
         if (this.props.studentWorksheets === null) {
             // commented out for dev purposes - this allows us to see all the lessons without clicking on student
             // this.setState({
@@ -77,7 +81,7 @@ class StudentLesson extends React.Component {
                             quizName={lesson.quiz}
                             quizPercentage="50%"
                             quizIsChecked={false}
-                            isTeacher={this.state.isTeacher}
+                            isStudent={this.props.isStudent}
                         />
                     ))
                 }

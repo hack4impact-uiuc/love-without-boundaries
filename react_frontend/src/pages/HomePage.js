@@ -6,9 +6,6 @@ import StyledButton from '../components/button';
 import environment from '../relay/environment';
 import Login from '../components/login';
 
-import NavBarHome from '../components/navBarHome';
-
-
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 
 type Props = {
@@ -176,11 +173,6 @@ class HomePage extends React.Component<Props> {
             signup: true,
         });
     }
-    setup = (e) => {
-        // this function is used to easily call the google drive setup function
-        // this should be called once auth is setup for a newly registered student
-        InitialStudentSetup(environment, 'hi');
-    }
     render() {
         return (
             <QueryRenderer
@@ -209,8 +201,8 @@ class HomePage extends React.Component<Props> {
                                         :
                                         <div>
                                             <DarkBox>The Learning Tool Mission
-                                            <br />______
-                                            <div className="lower"> Our goal is to prepare students for their future </div>
+                                                <br />______
+                                                <div className="lower"> Our goal is to prepare students for their future </div>
                                             </DarkBox>
                                             <Login />
                                             <SignInButton className="lower btn" onClick={this.onSignUp}>Sign Up</SignInButton>

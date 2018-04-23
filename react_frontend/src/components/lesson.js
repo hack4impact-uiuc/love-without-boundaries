@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Button} from 'react-bootstrap';
 import './../../assets/Hover.css';
-import { withRouter } from 'react-router-dom'
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 type Props = {
   /**/
@@ -77,41 +76,42 @@ const SlightlyPaddedButton = styled.button`
     margin: 0px 5px;
 `;
 
-class LessonComponent extends React.Component<Props>{
-
-    gotoQuiz = () => {this.props.history.push('/takequiz')}
+class LessonComponent extends React.Component<Props> {
+    gotoQuiz = () => { this.props.history.push('/takequiz'); }
     gotoPastQuiz = () => {
-        this.props.history.push('/reviewquiz')
+        this.props.history.push('/reviewquiz');
     }
     render() {
-        let quiz = "Take Quiz"
-        let box = <CheckedBoxInComplete/>
+        let quiz = 'Take Quiz';
+        let box = <CheckedBoxInComplete />;
         if (this.props.quizIsChecked) {
-            quiz = "Review Quiz"
-            box = <CheckedBoxComplete/>
+            quiz = 'Review Quiz';
+            box = <CheckedBoxComplete />;
         }
-        return(
-            <div>
-                <LessonBox className="lessonBox">
+        return (
+
+            <div className="row">
+                <div className="col-md-3 col-sm-2" />
+                <div className="col-sm-7 lessonBox">
                     <LessonTitle >{this.props.lessonName}</LessonTitle>
-                    <LessonProps> <a href={this.props.lessonNotesLink}>Notes {this.props.lessonNotes}</a></LessonProps>
-                    <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet {this.props.worksheetName}</a></LessonProps>
-                    <LessonProps> Quiz -- {this.props.quizName} Grade: {this.props.quizPercentage}     
-                    `   {this.props.isTeacher &&  (
-                        <Link key={this.props.key} to={{ pathname: '/takequiz', state:{ lessonID: this.props.id } }}>
-                        <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
+                    <LessonProps> <a href={this.props.lessonNotesLink}>Notes </a></LessonProps>
+                    <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet </a></LessonProps>
+                    <LessonProps> Quiz -- Grade: {this.props.quizPercentage}
+                        {this.props.isStudent && (
+                            <Link key={this.props.key} to={{ pathname: '/takequiz', state: { lessonID: this.props.id } }}>
+                                <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Take Quiz </SlightlyPaddedButton>
+                            </Link>
+                        )}
+
+                        <Link to={{ pathname: '/reviewquiz', state: { lessonID: this.props.id } }}>
+                            <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton>
                         </Link>
-                    )}
-                        <Link key={this.props.key} to={{ pathname: '/reviewquiz', state:{ lessonID: this.props.id } }}>
-                          <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Review </SlightlyPaddedButton>
-                        </Link>  
-                    </LessonProps> 
-    
-                </LessonBox>
+                    </LessonProps>
+                </div>
+                <div className="col-md-3 col-sm-2" />
             </div>
         );
     }
-
 }
 
 export default withRouter(LessonComponent);

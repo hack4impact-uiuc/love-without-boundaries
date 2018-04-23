@@ -1,26 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom'
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 
-class ReviewQuiz extends React.Component{
-
-    constructor(props){
-        super(props)
+class ReviewQuiz extends React.Component {
+    constructor(props) {
+        super(props);
         this.state = {
-            lessonID: this.props.lessonID
-        }
+            lessonID: this.props.lessonID,
+        };
     }
 
     componentWillReceiveProps(newProps) {
-        this.setState({lessonID: newProps.lessonID})
+        this.setState({ lessonID: newProps.lessonID });
     }
-    
-    test = () => {}
-    
+
+    displayAnswer = (answers, idx) => {
+        let ret = null;
+        for (let i = 0; i < answers.length; i += 1) {
+            if (answers[i].isCorrect) {
+                ret = (
+                    <p key={idx} style={{ color: '#22a531' }}>
+                        {idx + 1}. {answers[i].answerName}
+                    </p>
+                );
+            }
+        }
+        if (ret === null) {
+            ret = (
+                <p key={idx} style={{ color: '#22a531' }}>{idx + 1}. There isnt a correct answer for this question. </p>
+            );
+        }
+        return ret;
+    }
+
     render() {
-        return(
+        return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
@@ -39,7 +54,7 @@ class ReviewQuiz extends React.Component{
                         }
                     }
                 `}
-                variables={{lesson_id: this.state.lessonID}}
+                variables={{ lesson_id: this.state.lessonID }}
                 render={({ props }) => {
                     if (!props || !props.node) {
                         return (
@@ -48,17 +63,12 @@ class ReviewQuiz extends React.Component{
                     }
                     return (
                         <div>
-                            <b>Correct Answers:</b>
-                            {props.node.quiz != undefined ? 
-                                props.node.quiz.questions.map((q,idx) =>
-                                    q.answers.map((a,i) => (
-                                        a.isCorrect && <p>
-                                            {idx}. {a.answerName}  
-                                        </p>
-                                        )
-                                    )
-                                )
-                                : null
+                            <h2>Correct Answers:</h2>
+                            {
+                                props.node.quiz != undefined ?
+                                    props.node.quiz.questions.map((q, idx) =>
+                                        this.displayAnswer(q.answers, idx))
+                                    : null
                             }
                         </div>
                     );
@@ -66,7 +76,6 @@ class ReviewQuiz extends React.Component{
             />
         );
     }
-
 }
 
 export default ReviewQuiz;
