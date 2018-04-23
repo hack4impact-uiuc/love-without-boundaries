@@ -53,7 +53,7 @@ class TeacherPage extends React.Component<Props> {
         super(props);
         this.state = {
             teacherID: 'VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA=',
-            // teacherID: jwt_decode(localStorage.getItem('token')).userID
+            // teacherID: this.props.location.state != undefined ? this.props.location.state : jwt_decode(localStorage.getItem('token')).userID
         };
     }
     render() {
@@ -65,6 +65,7 @@ class TeacherPage extends React.Component<Props> {
                     query TeacherPage_Query($teacher_id: ID!){
                         node(id: $teacher_id) {
                             ... on Teacher {
+                                name
                                 students {
                                     name
                                     id
@@ -74,14 +75,17 @@ class TeacherPage extends React.Component<Props> {
                     }
                 `}
                 variables={{
-                    teacher_id: this.state.teacherID,
+                    teacher_id: this.props.location.state != undefined ? this.props.location.state.teacher.id : jwt_decode(localStorage.getItem('token')).userID,
                 }}
                 render={({ props }) => {
                     if (props) {
+                        if (props.node == null) {
+                            return <h5>Error Fetching, You must be a teacher/admin to see this.</h5>;
+                        }
                         return (
                             <div className="container-fluid">
-                                <h3>My Students</h3>
-                                <div className="col-sm-5">
+                                <h3>{props.node.name} Students</h3>
+                                <div className="col-sm-6">
                                     <table className="table">
                                         <thead>
                                             <tr>
@@ -104,6 +108,15 @@ class TeacherPage extends React.Component<Props> {
                                                 ))}
                                         </tbody>
                                     </table>
+                                </div>
+                                <div className="col-sm-2" />
+                                <div className="col-sm-4">
+                                    <p>Welcome {props.node.name}!</p>
+                                    <p>As a teacher, you are assigned students, which are shown in this page.
+                                        Once you click on their name, you would see their profile, where you will
+                                        see their lessons. Each lesson has a link to lesson notes (same for everyone) and a link to a
+                                        specific worksheet document for that student.
+                                    </p>
                                 </div>
                             </div>
                         );
