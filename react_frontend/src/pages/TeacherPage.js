@@ -58,7 +58,6 @@ class TeacherPage extends React.Component<Props> {
     }
     render() {
         return (
-
             <QueryRenderer
                 environment={environment}
                 query={graphql`

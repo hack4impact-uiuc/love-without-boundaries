@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import './../../assets/Hover.css';
 import lovewithout_white from './../../assets/lovewithout_white.png';
 
 type Props = {
@@ -84,14 +83,12 @@ const LogText = styled.div`
 `;
 
 
-
-
 class NavBar extends React.Component<Props> {
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <Block>
-                    <img className="img-fluid"  src = {lovewithout_white} height="100%" />
+                    <img className="img-fluid" src ={lovewithout_white} height="100%" />
                     <HomeText className="navbar" >Home</HomeText>
                     <LessonText className="navbar">Lessons</LessonText>
                     <LogText className="navbar">Logout</LogText>
