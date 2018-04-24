@@ -20,8 +20,8 @@ class ReviewQuiz extends React.Component {
         for (let i = 0; i < answers.length; i += 1) {
             if (answers[i].isCorrect) {
                 ret = (
-                    <p key={idx} style={{ color: '#22a531' }}>
-                        {idx + 1}. {answers[i].answerName}
+                    <p key={idx} style={{ color: '#22a531', paddingLeft: '20px' }}>
+                        Correct Answer: {answers[i].answerName}
                     </p>
                 );
             }
@@ -44,6 +44,7 @@ class ReviewQuiz extends React.Component {
                             ... on Lesson{
                                 quiz{
                                     questions{
+                                        questionName
                                         answers{
                                             answerName
                                             isCorrect
@@ -66,8 +67,11 @@ class ReviewQuiz extends React.Component {
                             <h2>Correct Answers:</h2>
                             {
                                 props.node.quiz != undefined ?
-                                    props.node.quiz.questions.map((q, idx) =>
-                                        this.displayAnswer(q.answers, idx))
+                                    props.node.quiz.questions.map((q, idx) => (
+                                        <div key={idx} style={{ paddingBottom: '20px' }}>
+                                            <p>{q.questionName}</p>
+                                            { this.displayAnswer(q.answers, idx) }
+                                        </div>))
                                     : null
                             }
                         </div>

@@ -4,7 +4,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import LessonComponent from './../components/lesson';
 import deleteLesson from '../relay/mutations/deleteLesson';
 import environment from '../relay/environment';
-import button from '../components/button';
+import PaddedButton from '../components/button';
 
 type Props = {
     /**/
@@ -47,20 +47,21 @@ class LessonList extends React.Component<Props> {
                                 props.lessons.map((lesson, idx) => (
                                     <div className="row" key={idx} >
                                         <LessonComponent
+                                            id={lesson.id}
                                             lessonName={lesson.name}
                                             lessonNotesLink={lesson.notesURL}
                                             lessonWorksheetLink={lesson.worksheetURL}
                                             worksheetName={lesson.worksheetName}
                                         />
-                                        <button
+                                        <PaddedButton
                                             className="btn btn-danger"
                                             value={lesson.id}
                                             onClick={() => this.handleClick(lesson.id)}
                                         >
                                         Delete Lesson
-                                        </button>
+                                        </PaddedButton>
                                         <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/quiz', state: { lessonID: lesson.id } }}>
-                                            <button className="btn btn-default">Edit Quiz</button>
+                                            <PaddedButton className="btn btn-default">Edit Quiz</PaddedButton>
                                         </Link>
                                     </div>
                                 ))

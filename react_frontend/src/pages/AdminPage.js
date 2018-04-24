@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import type { Environment } from 'relay-runtime';
 
 
-import LessonForm from './../components/lessonform';
+import LessonForm from './../components/lessonForm';
 import LessonList from './../components/lessonList';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';

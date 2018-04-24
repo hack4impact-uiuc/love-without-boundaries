@@ -240,8 +240,8 @@ class AdminListComponent extends React.Component<Props> {
                         <div className="rightMargin" >
                             <div>
                                 <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of tutors'}</h2>
-                                <PaddedButton className="btn btn-primary" name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
-                                <PaddedButton className="btn btn-primary" name="TEACHER" onClick={this.onClickMake}> Tutors </PaddedButton>
+                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-primary' : 'btn btn-default'} name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
+                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-default' : 'btn btn-primary'} name="TEACHER" onClick={this.onClickMake}> Tutors </PaddedButton>
                                 <div> {this.getList(props)} </div>
                                 <div> {this.getPopList(props, this.state.showAssignList)}</div>
                             </div>
