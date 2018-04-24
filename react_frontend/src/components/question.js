@@ -2,6 +2,7 @@ import React from 'react';
 import addQuestion from '../relay/mutations/addQuestion';
 import deleteQuestion from '../relay/mutations/deleteQuestion';
 import environment from '../relay/environment';
+import PaddedButton from '../components/button';
 
 class Question extends React.Component {
     constructor(props) {
@@ -28,6 +29,10 @@ class Question extends React.Component {
 
     unlock = () => {
         this.props.passBack(this.props.num);
+    }
+    remove = () => {
+        deleteQuestion(environment, this.props.quizID, this.props.id);
+        window.location.reload();
     }
 
     updateAns = e => {
@@ -94,7 +99,10 @@ class Question extends React.Component {
                     onChange={this.updateQuestion}
                     readOnly={this.props.locked}
                     onClick={this.props.locked == true ? this.unlock : null}
-                />
+                /> 
+                <PaddedButton className="btn btn-danger" onClick={this.remove}>
+                    Remove
+                </PaddedButton>
                 <br />
                 { this.createAnswers(this.state.answers) }
             </div>
