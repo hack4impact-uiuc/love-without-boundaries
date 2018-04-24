@@ -99,9 +99,9 @@ class Question extends React.Component {
                     onChange={this.updateQuestion}
                     readOnly={this.props.locked}
                     onClick={this.props.locked == true ? this.unlock : null}
-                /> 
-                <PaddedButton className="btn btn-danger" onClick={this.remove}>
-                    Remove
+                />
+                <PaddedButton className="btn btn-link" onClick={this.remove}>
+                    <span className="glyphicon glyphicon-trash" aria-hidden="true" />
                 </PaddedButton>
                 <br />
                 { this.createAnswers(this.state.answers) }
