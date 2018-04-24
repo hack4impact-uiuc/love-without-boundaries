@@ -3,7 +3,7 @@ import SubmittedAnswer from './SubmittedAnswerType';
 
 const PastQuiz = new GraphQLObjectType({
     name: 'PastQuiz',
-    description: 'Self Descriptive',
+    description: 'Previously submitted quizzes',
     fields() {
         return {
             lessonID: { type: GraphQLString },

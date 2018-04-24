@@ -3,7 +3,7 @@ import QuestionType from './QuestionType';
 
 const QuizType = new GraphQLObjectType({
     name: 'Quiz',
-    description: 'Self Descriptive',
+    description: 'Quiz with multiple questions',
     fields() {
         return {
             name: {
