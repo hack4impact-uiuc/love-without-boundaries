@@ -47,6 +47,17 @@ function copyFile(fileId) {
     }).then(res => res.json()).catch(err => console.log(err));
 }
 
+function addFile(userId) {
+    return fetch(`https://www.googleapis.com/drive/v3/files/${fileId}/copy?access_token=${getGapiAccessToken()}`, {
+        body: JSON.stringify({
+            action: 'create',
+            userId,
+        }),
+        method: 'POST',
+        mode: 'cors',
+    }).then(res => res.json()).catch(err => console.log(err));
+}
+
 function getFileInfo(fileId) {
     return fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?access_token=${getGapiAccessToken()}`).then(res => res.json());
 }
@@ -102,4 +113,5 @@ export {
     setPermissionToAllEdit,
     getIdFromUrl,
     InitialStudentSetup,
+    addFile,
 };

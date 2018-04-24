@@ -34,11 +34,11 @@ class StudentLesson extends React.Component {
             // });
             return;
         }
+        console.log('hi');
         let i;
         const error = false;
         for (i = 0; i < this.props.lessons.length; i++) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
-                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, this.props.lessons[i].worksheetURL);
                 const url = this.props.lessons[i].worksheetURL;
                 console.log('url', url);
                 const fileMatch = url.match(/[-\w]{25,}/);
@@ -48,10 +48,11 @@ class StudentLesson extends React.Component {
                 const fileId = fileMatch[0];
                 copyFile(fileId).then((res) => {
                     if (res == undefined || res.error) {
-                        return;
-                        // throw Error('Insufficient Priviledges, please contact Admin');
+                        // return;
+                        throw Error('Insufficient Priviledges, please contact Admin');
                     }
                     setPermissionToAllEdit(res.id);
+                    addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, res.url);
                 }).catch(err => console.err(err.message));
             }
         }
@@ -67,7 +68,7 @@ class StudentLesson extends React.Component {
                         this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
                     }
                 </h2>
-                <GoogleDocButton url="https://docs.google.com/document/d/1EGbrZFxY33xyEZdLyXmKGdWi5NR4CL7nS4C_7HzhSgE/edit" />
+                <GoogleDocButton url={this.props.location.state.student.url} />
                 {
                     this.props.lessons.map((lesson, idx) => (
                         <LessonComponent
