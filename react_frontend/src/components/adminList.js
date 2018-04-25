@@ -144,7 +144,7 @@ class AdminListComponent extends React.Component<Props> {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Student</th>
+                                    <th scope="col">{ this.state.studentOrTutor === 'TEACHER' ? 'Teacher' : 'Student' }</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -239,9 +239,9 @@ class AdminListComponent extends React.Component<Props> {
                     return (
                         <div className="rightMargin" >
                             <div>
-                                <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of tutors'}</h2>
+                                <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of teachers'}</h2>
                                 <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-primary' : 'btn btn-default'} name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
-                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-default' : 'btn btn-primary'} name="TEACHER" onClick={this.onClickMake}> Tutors </PaddedButton>
+                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-default' : 'btn btn-primary'} name="TEACHER" onClick={this.onClickMake}> Teachers </PaddedButton>
                                 <div> {this.getList(props)} </div>
                                 <div> {this.getPopList(props, this.state.showAssignList)}</div>
                             </div>
