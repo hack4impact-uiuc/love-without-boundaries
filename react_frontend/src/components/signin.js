@@ -3,14 +3,18 @@ import { withRouter } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 // import cookie from 'react-cookie';
 
-class Login extends React.Component {
+class SignIn extends React.Component {
     responseGoogle = (response) => {
+        console.log(this.props.role);
         console.log(response.profileObj.googleId);
         console.log(response.profileObj.email);
         console.log(response.profileObj.givenName + response.profileObj.familyName);
         // console.log(respose)
 
-        return fetch('http://localhost:8080/register', {
+        console.log(this.props.requestType);
+        console.log(this.props.role);
+
+        return fetch(`http://localhost:8080/${this.props.requestType}`, {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -26,10 +30,9 @@ class Login extends React.Component {
                 name: response.profileObj.googleId,
                 email: response.profileObj.email,
                 googleAuthToken: response.profileObj.googleId,
-                role: 'student',
+                role: this.props.role,
             }),
-        // }).then(resp => resp.json().then(r => console.log(r)));
-        }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r.token)));
+        }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r)));
     }
 
     render() {
@@ -49,7 +52,7 @@ class Login extends React.Component {
                     verticalAlign: 'middle',
                 }}
                 clientId="162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText={this.props.role}
                 accessType="offline"
                 scope="https://www.googleapis.com/auth/drive.file"
                 onSuccess={this.responseGoogle}
@@ -57,4 +60,4 @@ class Login extends React.Component {
         );
     }
 }
-export default withRouter(Login);
+export default withRouter(SignIn);
