@@ -22,16 +22,16 @@ mutation submitQuizMutation(
 `;
 
 function submitQuiz(environment: Environment, id: string, lessonID: string, questionIds: [string], chosenAnswers: [string]) {
-    const submissions = []
-    var i;
-    for (var i = 0; i < questionIds.length; i++) { 
-        submissions.push({questionID: questionIds[i], answerChosen: chosenAnswers[i]})
+    const submissions = [];
+    let i;
+    for (let i = 0; i < questionIds.length; i += 1) {
+        submissions.push({ questionID: questionIds[i], answerChosen: chosenAnswers[i] });
     }
-	const variables = { input: {
-            id,
+    const variables = {
+        input: {
             lessonID,
-            answeredQuestions: {submissions}
-        }
+            answeredQuestions: { submissions },
+        },
     };
     let finalRes = {};
     commitMutation(
@@ -41,7 +41,7 @@ function submitQuiz(environment: Environment, id: string, lessonID: string, ques
             variables,
             onCompleted: (response,errors) => {
                 console.log('Response received from server.');
-                console.log(response)
+                console.log(response);
                 finalRes.res = response;
             },
             onError: err => console.error(err),
