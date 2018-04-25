@@ -4,12 +4,10 @@ import { withRouter, Link } from 'react-router-dom';
 import type { Environment } from 'relay-runtime';
 
 
-import LessonForm from './../components/lessonform';
+import LessonForm from './../components/lessonForm';
 import LessonList from './../components/lessonList';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
-
-import './../../assets/Hover.css';
 
 
 const ToolBar = styled.div`
@@ -62,23 +60,21 @@ const AdminPage = ({ match }) => (
                     <Link to="/admin/lesson"><PaddedButton className="btn btn-default">Edit Lessons</PaddedButton></Link>
                 </div>
                 <div className="adminTool">
-                    <Link to="/admin/list"><PaddedButton className="btn btn-default">View Tutors and Students</PaddedButton></Link>
+                    <Link to="/admin/list"><PaddedButton className="btn btn-default">View Teachers and Students</PaddedButton></Link>
                 </div>
             </ToolBar>
         </div>
         <br />
         <div className="row rightMargin">
-            <div className="col-sm-8">
-                {
-                    match.params.showLesson === 'lesson' ?
-                        <div className="centered">
-                            <LessonForm />
-                            <LessonList />
-                        </div>
-                        :
-                        <AdminListComponent />
-                }
-            </div>
+            {
+                match.params.showLesson === 'lesson' ?
+                    <div className="centered">
+                        <LessonForm />
+                        <LessonList />
+                    </div>
+                    :
+                    <AdminListComponent />
+            }
         </div>
     </div>
 );
