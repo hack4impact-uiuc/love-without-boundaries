@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import Login from '../components/login';
+import Login from '../components/login'
 import SignIn from '../components/signin';
 import NavBarHome from '../components/navBarHome';
 
@@ -182,6 +182,7 @@ class HomePage extends React.Component<Props> {
             loginOrSignup: 'login',
         });
     }
+<<<<<<< HEAD
     setup = (e) => {
         // this function is used to easily call the google drive setup function
         // this should be called once auth is setup for a newly registered student
@@ -210,6 +211,8 @@ class HomePage extends React.Component<Props> {
     // }
 
 
+=======
+>>>>>>> fe5c0c6a2ae6b0d21f3fee355fdc3aca2b1d630d
     render() {
         return (
             <QueryRenderer

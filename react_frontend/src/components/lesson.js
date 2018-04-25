@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './../../assets/Hover.css';
-import { withRouter } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 type Props = {
   /**/
@@ -13,6 +11,8 @@ const LessonBox = styled.div`
     color: white;
     background-color: #a6acb5;
     height: 30%;
+    width: 50%;
+    z-index: -1;
     margin: auto;
     border-radius: 0px 40px;
     align: center;
@@ -76,9 +76,18 @@ const SlightlyPaddedButton = styled.button`
 
 class LessonComponent extends React.Component<Props> {
     gotoQuiz = () => { this.props.history.push('/takequiz'); }
-    gotoPastQuiz = () => { this.props.history.push('/reviewquiz'); }
+    gotoPastQuiz = () => {
+        this.props.history.push('/reviewquiz');
+    }
     render() {
+        let quiz = 'Take Quiz';
+        let box = <CheckedBoxInComplete />;
+        if (this.props.quizIsChecked) {
+            quiz = 'Review Quiz';
+            box = <CheckedBoxComplete />;
+        }
         return (
+
             <div className="row">
                 <div className="col-md-3 col-sm-2" />
                 <div className="col-sm-7 lessonBox">
@@ -86,13 +95,15 @@ class LessonComponent extends React.Component<Props> {
                     <LessonProps> <a href={this.props.lessonNotesLink}>Notes </a></LessonProps>
                     <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet </a></LessonProps>
                     <LessonProps> Quiz -- Grade: {this.props.quizPercentage}
-                        {this.props.isTeacher && (
+                        {this.props.isStudent && (
                             <Link key={this.props.key} to={{ pathname: '/takequiz', state: { lessonID: this.props.id } }}>
-                                <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz} bsStyle="primary"> Take Quiz </SlightlyPaddedButton>
+                                <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Take Quiz </SlightlyPaddedButton>
                             </Link>
                         )}
 
-                        <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton>
+                        <Link to={{ pathname: '/reviewquiz', state: { lessonID: this.props.id } }}>
+                            <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton>
+                        </Link>
                     </LessonProps>
                 </div>
                 <div className="col-md-3 col-sm-2" />

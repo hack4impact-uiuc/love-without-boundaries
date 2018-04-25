@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './../../assets/Hover.css';
-import lovewithout_white from './../../assets/lovewithout_white.png';
+import { Link } from 'react-router-dom';
 
 type Props = {
     /**/
@@ -84,20 +83,14 @@ const LogText = styled.div`
 `;
 
 
-
-
-class NavBar extends React.Component<Props> {
-    render(){
-        return(
-            <div>
-                <Block>
-                    <img className="img-fluid"  src = {lovewithout_white} height="100%" />
-                    <HomeText className="navbar" >Home</HomeText>
-                    <LessonText className="navbar">Lessons</LessonText>
-                    <LogText className="navbar">Logout</LogText>
-                </Block>
-            </div>
-        );
-    }
-}
+export const NavBar = () => (
+    <div>
+        <Block>
+            <img className="img-fluid" src="https://lwb-logo.now.sh" alt="logo" height="100%" />
+            <Link to="/"><HomeText className="navbar" >Home</HomeText></Link>
+            <Link to="/student"><LessonText className="navbar">Lessons</LessonText></Link>
+            <LogText className="navbar">Logout</LogText>
+        </Block>
+    </div>
+);
 export default NavBar;

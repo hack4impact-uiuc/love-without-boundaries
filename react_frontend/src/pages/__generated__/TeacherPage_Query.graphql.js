@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 661f5b5a3776fc3033a44da3ba943868
+ * @relayHash 08e7ebb30bdc87f0e4c4edd30aac30d2
  */
 
 /* eslint-disable */
@@ -14,6 +14,7 @@ export type TeacherPage_QueryVariables = {|
 |};
 export type TeacherPage_QueryResponse = {|
   +node: ?{|
+    +name?: ?string,
     +students?: ?$ReadOnlyArray<?{|
       +name: ?string,
       +id: string,
@@ -30,6 +31,7 @@ query TeacherPage_Query(
   node(id: $teacher_id) {
     __typename
     ... on Teacher {
+      name
       students {
         name
         id
@@ -60,14 +62,22 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "id",
+  "name": "name",
   "args": null,
   "storageKey": null
 },
 v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v4 = {
   "kind": "InlineFragment",
   "type": "Teacher",
   "selections": [
+    v2,
     {
       "kind": "LinkedField",
       "alias": null,
@@ -77,14 +87,8 @@ v3 = {
       "concreteType": "Student",
       "plural": true,
       "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "name",
-          "args": null,
-          "storageKey": null
-        },
-        v2
+        v2,
+        v3
       ]
     }
   ]
@@ -94,7 +98,7 @@ return {
   "operationKind": "query",
   "name": "TeacherPage_Query",
   "id": null,
-  "text": "query TeacherPage_Query(\n  $teacher_id: ID!\n) {\n  node(id: $teacher_id) {\n    __typename\n    ... on Teacher {\n      students {\n        name\n        id\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query TeacherPage_Query(\n  $teacher_id: ID!\n) {\n  node(id: $teacher_id) {\n    __typename\n    ... on Teacher {\n      name\n      students {\n        name\n        id\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -112,7 +116,7 @@ return {
         "concreteType": null,
         "plural": false,
         "selections": [
-          v3
+          v4
         ]
       }
     ]
@@ -138,13 +142,13 @@ return {
             "args": null,
             "storageKey": null
           },
-          v2,
-          v3
+          v3,
+          v4
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = 'c3a36ca445f119331826f8ca97d94627';
+(node/*: any*/).hash = '9c32930c8328dcdce6df7693fa9ce918';
 module.exports = node;
