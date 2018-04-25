@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Button } from 'react';
 import { withRouter } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 // import cookie from 'react-cookie';
 
 class SignIn extends React.Component {
+    state = {
+        token: '',
+    }
     responseGoogle = (response) => fetch(`http://localhost:8080/${this.props.requestType}`, {
         method: 'POST',
         headers: {
@@ -16,10 +19,12 @@ class SignIn extends React.Component {
             googleAuthToken: response.profileObj.googleId,
             role: this.props.role,
         }),
-    }).then(resp => resp.json().then(r => console.log(r + this.props.requestType) && sessionStorage.setItem('jwt', r)))
+    }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r)))
+
 
     render() {
         return (
+
             <GoogleLogin
                 className="btn"
                 style={{
@@ -40,6 +45,7 @@ class SignIn extends React.Component {
                 scope="https://www.googleapis.com/auth/drive.file"
                 onSuccess={this.responseGoogle}
             />
+
         );
     }
 }

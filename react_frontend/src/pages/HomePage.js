@@ -46,17 +46,8 @@ const SignInSection = styled.div`
     text-align: center;
 `;
 const SignInButton = styled.div`
-    backgroundColor: '#C04448',
-    color: '#ffffff',
-    height: '50px',
-    width: '100px',
-    padding: '12px 20px',
-    margin: '10px 10px',
-    textAlign: 'center',
-    borderRadius: '6px',
-    fontSize: '16px',
-    verticalAlign: 'middle',
-                    
+
+
 `;
 const LogoRow = styled.div`
     padding-top: 20px;
@@ -188,6 +179,10 @@ class HomePage extends React.Component<Props> {
         InitialStudentSetup(environment, 'hi');
     }
 
+    enter = () => {
+        console.log(sessionStorage.getItem('jwt'));
+    }
+
     // setStudent = () => {
     //     this.setState({
     //         role: 'student',
@@ -241,6 +236,8 @@ class HomePage extends React.Component<Props> {
                                             <SignIn role="teacher" requestType={this.state.loginOrSignup} />
 
                                             <SignIn role="admin" requestType={this.state.loginOrSignup} />
+
+                                            <StyledButton onClick={this.enter}> Enter </StyledButton>
                                         </div>
                                         :
                                         <div>
