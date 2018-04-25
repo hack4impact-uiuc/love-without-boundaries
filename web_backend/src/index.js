@@ -64,9 +64,10 @@ export const createToken = async (name, email, token, role) => {
         token,
         role,
     };
-    const jwtToken = jwt.sign(payload, secret, {
+    const jwtToken = await jwt.sign(payload, secret, {
         expiresIn,
     });
+    console.log(jwtToken);
     return jwtToken;
 };
 
