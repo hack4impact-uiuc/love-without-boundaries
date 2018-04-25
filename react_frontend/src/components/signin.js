@@ -4,36 +4,19 @@ import { GoogleLogin } from 'react-google-login';
 // import cookie from 'react-cookie';
 
 class SignIn extends React.Component {
-    responseGoogle = (response) => {
-        console.log(this.props.role);
-        console.log(response.profileObj.googleId);
-        console.log(response.profileObj.email);
-        console.log(response.profileObj.givenName + response.profileObj.familyName);
-        // console.log(respose)
-
-        console.log(this.props.requestType);
-        console.log(this.props.role);
-
-        return fetch(`http://localhost:8080/${this.props.requestType}`, {
-            method: 'POST',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Methods': 'GET, POST',
-                // RequiredAuthorization: 'false',
-                // Authorization: 'Login',
-                // Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYXJpYSIsImVtYWlsIjoiYXJpYUBnbWFpbC5jb20iLCJ0b2tlbiI6IjEyMyIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNTI0MTkzMjIwLCJleHAiOjE1MjQyMDQwMjB9.RSK5zzwBzhnyqx8eAUtqg131xSMNJb5eGdLaUdHjJdI',
-            },
-            body: JSON.stringify({
-                // query: operation.text,
-                // variables,
-                name: response.profileObj.googleId,
-                email: response.profileObj.email,
-                googleAuthToken: response.profileObj.googleId,
-                role: this.props.role,
-            }),
-        }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r)));
-    }
+    responseGoogle = (response) => fetch(`http://localhost:8080/${this.props.requestType}`, {
+        method: 'POST',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name: response.profileObj.googleId,
+            email: response.profileObj.email,
+            googleAuthToken: response.profileObj.googleId,
+            role: this.props.role,
+        }),
+    }).then(resp => resp.json().then(r => console.log(r + this.props.requestType) && sessionStorage.setItem('jwt', r)))
 
     render() {
         return (

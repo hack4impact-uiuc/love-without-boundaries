@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import Login from '../components/login'
 import SignIn from '../components/signin';
 import NavBarHome from '../components/navBarHome';
 
@@ -47,16 +46,17 @@ const SignInSection = styled.div`
     text-align: center;
 `;
 const SignInButton = styled.div`
-    background-color: #C04448;
-    color: #ffffff;
-    height: 50px;
-    width: 100px;
-    padding: 12px 20px;
-    margin: 10px 10px;
-    text-align: center;
-    border-radius: 6px;
-    font-size: 16px;
-    vertical-align: middle;
+    backgroundColor: '#C04448',
+    color: '#ffffff',
+    height: '50px',
+    width: '100px',
+    padding: '12px 20px',
+    margin: '10px 10px',
+    textAlign: 'center',
+    borderRadius: '6px',
+    fontSize: '16px',
+    verticalAlign: 'middle',
+                    
 `;
 const LogoRow = styled.div`
     padding-top: 20px;
@@ -182,7 +182,6 @@ class HomePage extends React.Component<Props> {
             loginOrSignup: 'login',
         });
     }
-<<<<<<< HEAD
     setup = (e) => {
         // this function is used to easily call the google drive setup function
         // this should be called once auth is setup for a newly registered student
@@ -211,8 +210,6 @@ class HomePage extends React.Component<Props> {
     // }
 
 
-=======
->>>>>>> fe5c0c6a2ae6b0d21f3fee355fdc3aca2b1d630d
     render() {
         return (
             <QueryRenderer
@@ -238,18 +235,16 @@ class HomePage extends React.Component<Props> {
                                     (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login') ?
                                         <div>
                                             <p>Are you a...</p>
-                                            {/* <SignInButton className="btn" value="student" onClick={this.setStudent}>Student</SignInButton>
-                                            <SignInButton className="btn" value="teacher" onClick={this.setTeacher}>Teacher</SignInButton>
-                                            <SignInButton className="btn" value="admin" onClick={this.setAdmin} >Admin</SignInButton> */}
 
                                             <SignIn role="student" requestType={this.state.loginOrSignup} />
+
                                             <SignIn role="teacher" requestType={this.state.loginOrSignup} />
+
                                             <SignIn role="admin" requestType={this.state.loginOrSignup} />
                                         </div>
                                         :
                                         <div>
 
-                                            {/* <Login /> */}
                                             <SignInButton className="lower btn" onClick={this.onLogin}>Log In</SignInButton>
                                             <SignInButton className="lower btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                         </div>

@@ -116,15 +116,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/graphql', withAuth(graphqlHTTP({
+// app.use('/graphql', (graphqlHTTP({
     schema: Schema,
     graphiql: true,
 })));
 
 app.post('/login', async (req, res) => {
-    if (req.body.role === 'student') {
-        const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-        res.json(token);
-    } else if (req.body.role === 'teacher') {
+    if (req.body.role) {
         const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
         res.json(token);
     }
@@ -132,18 +130,18 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-    // console.log('Hi');
-    // console.log(req.body.role);
-    // console.log(req.body.name);
-
     if (req.body.role === 'student') {
         addStudent(req.body.name, req.body.email, req.body.googleAuthToken);
+        const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
+        console.log(token);
+        res.json(token);
     } else if (req.body.role === 'teacher') {
         addTeacher(req.body.name, req.body.email, req.body.googleAuthToken);
+        const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
+        console.log(token);
+        res.json(token);
     }
-    const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-    console.log(token);
-    res.json(token);
+    res.json('failed');
 });
 
 
