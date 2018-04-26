@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import Login from '../components/login';
+import SignIn from '../components/signin';
+import NavBarHome from '../components/navBarHome';
+
 
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 
@@ -44,16 +46,8 @@ const SignInSection = styled.div`
     text-align: center;
 `;
 const SignInButton = styled.div`
-    background-color: #C04448;
-    color: #ffffff;
-    height: 50px;
-    width: 100px;
-    padding: 12px 20px;
-    margin: 10px 10px;
-    text-align: center;
-    border-radius: 6px;
-    font-size: 16px;
-    vertical-align: middle;
+
+
 `;
 const LogoRow = styled.div`
     padding-top: 20px;
@@ -165,14 +159,52 @@ class HomePage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            signup: false,
+            loginOrSignup: false,
+            role: '',
         };
     }
     onSignUp = (e) => {
         this.setState({
-            signup: true,
+            loginOrSignup: 'register',
         });
     }
+    onLogin = (e) => {
+        this.setState({
+            loginOrSignup: 'login',
+        });
+    }
+    setup = (e) => {
+        // this function is used to easily call the google drive setup function
+        // this should be called once auth is setup for a newly registered student
+        InitialStudentSetup(environment, 'hi');
+    }
+
+    enter = () => {
+        console.log(sessionStorage.getItem('jwt'));
+    }
+
+    // setStudent = () => {
+    //     this.setState({
+    //         role: 'student',
+    //     });
+    //     console.log(this.state.role);
+    // }
+
+    // setTeacher = () => {
+    //     this.setState({
+    //         role: 'teacher',
+    //     });
+    //     console.log(this.state.role);
+    // }
+
+    // setAdmin = () => {
+    //     this.setState({
+    //         role: 'admin',
+    //     });
+    //     console.log(this.state.role);
+    // }
+
+
     render() {
         return (
             <QueryRenderer
@@ -190,21 +222,27 @@ class HomePage extends React.Component<Props> {
                     <HomeSection className="container-fluid">
                         <div className="row">
                             <SignInSection>
+                                <DarkBox>The Learning Tool Mission
+                                    <br />______
+                                    <div className="lower"> Our goal is to prepare students for their future </div>
+                                </DarkBox>
                                 {
-                                    this.state.signup ?
+                                    (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login') ?
                                         <div>
                                             <p>Are you a...</p>
-                                            <SignInButton className="btn">Student</SignInButton>
-                                            <SignInButton className="btn">Teacher</SignInButton>
-                                            <SignInButton className="btn">Admin</SignInButton>
+
+                                            <SignIn role="student" requestType={this.state.loginOrSignup} />
+
+                                            <SignIn role="teacher" requestType={this.state.loginOrSignup} />
+
+                                            <SignIn role="admin" requestType={this.state.loginOrSignup} />
+
+                                            <StyledButton onClick={this.enter}> Enter </StyledButton>
                                         </div>
                                         :
                                         <div>
-                                            <DarkBox>The Learning Tool Mission
-                                                <br />______
-                                                <div className="lower"> Our goal is to prepare students for their future </div>
-                                            </DarkBox>
-                                            <Login />
+
+                                            <SignInButton className="lower btn" onClick={this.onLogin}>Log In</SignInButton>
                                             <SignInButton className="lower btn" onClick={this.onSignUp}>Sign Up</SignInButton>
                                         </div>
                                 }

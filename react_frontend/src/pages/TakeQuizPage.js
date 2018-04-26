@@ -16,16 +16,18 @@ class TakeQuizPage extends Component {
         this.selectedCheckboxes = {};
     }
 
-    toggleCheckbox = (label, i) => {
-        this.selectedCheckboxes[i] = label;
-    }
+      toggleCheckbox = (label, i) => {
+          if (this.selectedCheckboxes[i] != label) {
+              this.selectedCheckboxes[i] = label;
+          }
+      }
 
-    handleFormSubmit = (formSubmitEvent, id) => {
-        formSubmitEvent.preventDefault();
-        console.log(Object.keys(this.selectedCheckboxes));
-        console.log(Object.values(this.selectedCheckboxes));
-        submitQuiz(environment, 'U3R1ZGVudDo1YWQwODg1YjliNjFhZjcxOWIxZWYzMTg=', 'TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==', Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
-    }
+      handleFormSubmit = (formSubmitEvent, id) => {
+          formSubmitEvent.preventDefault();
+          console.log(Object.keys(this.selectedCheckboxes));
+          console.log(Object.values(this.selectedCheckboxes));
+          submitQuiz(environment, 'U3R1ZGVudDo1YWQwODg1YjliNjFhZjcxOWIxZWYzMTg=', 'TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==', Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
+      }
 
     createCheckbox = (label, id, i) => (
         <Checkbox
