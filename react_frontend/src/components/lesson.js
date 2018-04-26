@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './../../assets/Hover.css';
-import { withRouter } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 type Props = {
   /**/

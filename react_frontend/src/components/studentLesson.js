@@ -4,7 +4,7 @@ import LessonComponent from './lesson';
 import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy';
 import { copyFile, setPermissionToAllEdit } from '../Gapi';
 import environment from '../relay/environment';
-
+import PaddedButton from './button';
 
 class StudentLesson extends React.Component {
     constructor(props) {
@@ -68,22 +68,26 @@ class StudentLesson extends React.Component {
                     }
                 </h2>
                 <GoogleDocButton url="https://docs.google.com/document/d/1EGbrZFxY33xyEZdLyXmKGdWi5NR4CL7nS4C_7HzhSgE/edit" />
+                <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
                 {
-                    this.props.lessons.map((lesson, idx) => (
-                        <LessonComponent
-                            key={idx}
-                            id={lesson.id}
-                            lessonName={lesson.name}
-                            lessonNotes={lesson.notesName}
-                            lessonNotesLink={lesson.notesURL}
-                            lessonWorksheetLink={lesson.worksheetURL}
-                            worksheetName={lesson.worksheetName}
-                            quizName={lesson.quiz}
-                            quizPercentage="50%"
-                            quizIsChecked={false}
-                            isStudent={this.props.isStudent}
-                        />
-                    ))
+                    this.props.lessons !== undefined ?
+                        this.props.lessons.map((lesson, idx) => (
+                            <LessonComponent
+                                key={idx}
+                                id={lesson.id}
+                                lessonName={lesson.name}
+                                lessonNotes={lesson.notesName}
+                                lessonNotesLink={lesson.notesURL}
+                                lessonWorksheetLink={lesson.worksheetURL}
+                                worksheetName={lesson.worksheetName}
+                                quizName={lesson.quiz}
+                                quizPercentage="50%"
+                                quizIsChecked={false}
+                                isStudent={this.props.isStudent}
+                            />
+                        ))
+                        :
+                        <p>There arent any lessons</p>
                 }
             </div>
         );

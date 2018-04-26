@@ -1,9 +1,5 @@
 import React from 'react';
-import { graphql, QueryRenderer } from 'react-relay';
-import environment from '../relay/environment';
-import { setPermissionToAllRead, setPermissionToAllEdit, getIdFromUrl } from '../Gapi';
-
-import './../../assets/Hover.css';
+import { setPermissionToAllRead, getIdFromUrl } from '../Gapi';
 
 
 class LessonForm extends React.Component {
