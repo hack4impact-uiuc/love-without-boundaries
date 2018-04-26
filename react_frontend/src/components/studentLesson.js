@@ -9,12 +9,19 @@ import PaddedButton from './button';
 class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
+        const newWkshtObj = {};
+        for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
+            newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        }
+        // newWkshtObj = this.props.studentWorksheets.worksheets.map(element => {
+        //     console.log('m', element.lessonID);
+        //     return newWkshtObj[element.lessonID] = element.url;
+        // });
         this.state = {
             error: '',
+            worksheetObj: newWkshtObj,
         };
-        this.worksheetObj = {};
     }
-
     componentDidMount() {
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
         let i;
@@ -42,6 +49,12 @@ class StudentLesson extends React.Component {
             }
         }).catch(err => console.error(err.message));
     }
+    componentWillReceiveProps(newProps) {
+        const newObj = newProps.studentWorksheets.worksheets.map(element => newObj[element.lessonID] = element.url);
+        this.setState({
+            worksheetObj: newObj,
+        });
+    }
     render() {
         if (this.state.error !== '') {
             return <p>{this.state.error}</p>;
@@ -63,7 +76,7 @@ class StudentLesson extends React.Component {
                                 id={lesson.id}
                                 lessonName={lesson.name}
                                 lessonNotesLink={lesson.notesURL}
-                                lessonWorksheetLink={this.worksheetObj[lesson.id]}
+                                lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
                                 quizPercentage="50%"
                                 quizIsChecked={false}
                                 isStudent={this.props.isStudent}
