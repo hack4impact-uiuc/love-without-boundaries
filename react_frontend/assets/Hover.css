@@ -33,6 +33,14 @@
 	margin: 10px 0;
 	text-align: left;
 }
+.admin-lesson-box {
+	border: 1px solid #d1d1d7;
+	height: 400px;
+	border-radius: 8px;
+	max-width: 380px;
+	margin: 10px 0;
+	text-align: center;
+}
 .lesson-title {
 	font-size: 25px;
 }

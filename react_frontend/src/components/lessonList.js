@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
+import deleteLesson from '../relay/mutations/deleteLesson';
 import environment from '../relay/environment';
 import AdminLessonComponent from '../components/adminLesson';
 
-class AdminLessonList extends React.Component {
+class LessonList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -54,4 +55,4 @@ class AdminLessonList extends React.Component {
 }
 
 
-export default AdminLessonList;
+export default LessonList;
