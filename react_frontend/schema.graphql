@@ -1,5 +1,5 @@
 input AddGradeInput {
-  id: ID!
+  id: String!
   lesson: String
   score: Int
   clientMutationId: String
@@ -11,7 +11,7 @@ type AddGradePayload {
 }
 
 input AddNoteInput {
-  id: ID
+  id: String
   name: String
   url: String
   clientMutationId: String
@@ -34,7 +34,7 @@ type AddQuestionPayload {
 }
 
 input AddStudentWorksheetCopyInput {
-  studentID: ID
+  studentID: String
   lessonID: String
   url: String
   clientMutationId: String
@@ -46,7 +46,7 @@ type AddStudentWorksheetCopyPayload {
 }
 
 input AddURLInput {
-  id: ID
+  id: String
   url: String
   clientMutationId: String
 }
@@ -57,7 +57,7 @@ type AddURLPayload {
 }
 
 input AddWorksheetInput {
-  id: ID
+  id: String
   name: String
   url: String
   clientMutationId: String
@@ -76,7 +76,7 @@ type Admin implements Node {
   email: String
 }
 
-# Self Descriptive
+# The name of the answer and if its correct or not
 type Answer {
   answerName: String
   isCorrect: Boolean
@@ -142,7 +142,7 @@ type CreateTeacherPayload {
 }
 
 input DeleteAdminInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -152,7 +152,7 @@ type DeleteAdminPayload {
 }
 
 input DeleteLessonInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -162,7 +162,7 @@ type DeleteLessonPayload {
 }
 
 input DeleteNoteInput {
-  id: ID
+  id: String
   clientMutationId: String
 }
 
@@ -172,7 +172,7 @@ type DeleteNotePayload {
 }
 
 input deleteQuestionInput {
-  questionId: ID!
+  questionId: String!
   lessonId: String!
   clientMutationId: String
 }
@@ -183,7 +183,7 @@ type deleteQuestionPayload {
 }
 
 input DeleteStudentInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -193,7 +193,7 @@ type DeleteStudentPayload {
 }
 
 input DeleteTeacherInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -203,11 +203,22 @@ type DeleteTeacherPayload {
 }
 
 input DeleteWorksheetInput {
-  id: ID
+  id: String
   clientMutationId: String
 }
 
 type DeleteWorksheetPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input EditLessonInput {
+  id: String
+  newName: String
+  clientMutationId: String
+}
+
+type EditLessonPayload {
   lesson: Lesson
   clientMutationId: String
 }
@@ -218,32 +229,32 @@ type Grade {
   score: Int
 }
 
-# Self Descriptive
+# Input type of answer
 input InputAnswer {
   answerName: String
   isCorrect: Boolean
 }
 
-# Self Descriptive
+# Input type of question
 input InputQuestion {
   questionName: String
   answers: [InputAnswer]
 }
 
-# Self Descriptive
+# Input type of quiz
 input InputQuiz {
   name: String
   questions: [InputQuestion]
   lessonID: String
 }
 
-# Self Descriptive
+# Input type of answer for a given question
 input InputSubmittedAnswer {
   questionID: String
   answerChosen: String
 }
 
-# Self Descriptive
+# GraphQLList of Answered Questions
 input InputSubmittedAnswers {
   submissions: [InputSubmittedAnswer]
 }
@@ -282,6 +293,7 @@ type Mutation {
   deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
   addURL(input: AddURLInput!): AddURLPayload
   deleteQuestion(input: deleteQuestionInput!): deleteQuestionPayload
+  editLesson(input: EditLessonInput!): EditLessonPayload
 }
 
 # An object with an ID
@@ -290,7 +302,7 @@ interface Node {
   id: ID!
 }
 
-# Self Descriptive
+# Previously submitted quizzes
 type PastQuiz {
   lessonID: String
   quizName: String
@@ -311,14 +323,14 @@ type Query {
   lessons: [Lesson]
 }
 
-# Self Descriptive
+# Question with multiple choice answers
 type Question {
   id: ID
   questionName: String
   answers: [Answer]
 }
 
-# Self Descriptive
+# Quiz with multiple questions
 type Quiz {
   name: String
   questions: [Question]
@@ -336,11 +348,12 @@ type Student implements Node {
   pastQuizzes: [PastQuiz]
   worksheets: [Worksheet]
   URL: String
+  topScore: Float
 }
 
 input SubmitQuizInput {
-  id: ID
-  lessonID: ID
+  id: String
+  lessonID: String
   answeredQuestions: InputSubmittedAnswers
   clientMutationId: String
 }
