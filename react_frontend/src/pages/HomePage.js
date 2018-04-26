@@ -180,18 +180,6 @@ class HomePage extends React.Component<Props> {
         InitialStudentSetup(environment, 'hi');
     }
 
-    enter = () => {
-        console.log(sessionStorage.getItem('jwt'));
-        const decoded = jwt_decode(sessionStorage.getItem('jwt'));
-        if (decoded.role === 'student') {
-            this.props.history.push('/student');
-        } else if (decoded.role === 'teacher') {
-            this.props.history.push('/teacher');
-        } else if (decoded.role === 'admin') {
-            this.props.history.push('/admin');
-        }
-    }
-
     render() {
         return (
             <QueryRenderer
@@ -224,7 +212,6 @@ class HomePage extends React.Component<Props> {
 
                                             <SignIn role="admin" requestType={this.state.loginOrSignup} />
 
-                                            <StyledButton onClick={this.enter}> Enter </StyledButton>
                                         </div>
                                         :
                                         <div>

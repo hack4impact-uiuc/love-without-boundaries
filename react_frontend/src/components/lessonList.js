@@ -9,7 +9,6 @@ type Props = {
   }
 
 class LessonList extends React.Component<Props> {
-
     render() {
         return (
             <QueryRenderer

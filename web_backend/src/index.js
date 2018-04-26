@@ -1,54 +1,33 @@
+import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import bodyParser from 'body-parser';
-import jwt from 'jsonwebtoken';
-import User from './models/user';
 import Teacher from './models/teacher';
 import Student from './models/student';
 import Admin from './models/admin';
 import Schema from './schema/schema';
-import jwt_decode from 'jwt-decode';
-
+import fetch from 'node-fetch';
 
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-
 const MONGO_URI = 'mongodb://ariamalkani:malkani@ds147228.mlab.com:47228/lwb';
+const CLIENT_ID = '162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com';
 
-
-const expiresIn = '3h';
-const secret = 'samplejwtauthgraphql'; // secret key
-
-export const addStudent = async (name, email, token) => {
-    if (!name || !email || !token) { // no credentials = fail
+export const addStudent = async (name, email) => {
+    if (!name || !email) { // no credentials = fail
         return false;
     }
-    const u = new User({
-        name,
-        email,
-        token,
-        role: 'student',
-    });
-    await u.save();
     const s = new Student({ name, email });
     return s.save();
 };
 
-export const addTeacher = async (name, email, token) => {
-    if (!name || !email || !token) { // no credentials = fail
+export const addTeacher = async (name, email) => {
+    if (!name || !email) { // no credentials = fail
         return false;
     }
-    const u = new User({
-        name,
-        email,
-        token,
-        role: 'teacher',
-    });
-    await u.save();
-    const s = new Teacher({ name, email });
-    return s.save();
+    const t = new Teacher({ name, email });
+    return t.save();
 };
-
 
 export const createToken = async (name, email, token, role) => {
     if (!name || !email || !token || !role) {
@@ -70,18 +49,25 @@ export const createToken = async (name, email, token, role) => {
     return jwtToken;
 };
 
+const getaccountFromGoogleToken = async (tokenId) => {
+    const tokenInfoRes = await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${tokenId}`);
+    const payload = await tokenInfoRes.json();
+
+    const [student, teacher] = await Promise.all([Student, Teacher].map(x => x.findOne({ email: payload.email })));
+    return { existing: student || teacher, payload };
+};
+
 const withAuth = next => async (req, res) => {
+    console.log('Here');
     req.user = null;
     const header = req.headers.authorization;
     if (header) {
         const [type, token] = header.split(' ');
-        let tokenData;
+        console.log(token);
+        console.log(await getaccountFromGoogleToken(token));
         switch (type) {
         case 'Bearer':
-            tokenData = jwt.verify(token, 'samplejwtauthgraphql');
-            if (tokenData) {
-                req.user = await User.find({ role: tokenData.role, token: tokenData.token });
-            }
+            req.user = getaccountFromGoogleToken(token) || req.user;
             break;
         default:
             break;
@@ -96,43 +82,31 @@ mongoose.connection
     .once('open', () => console.log('Connected to MongoLab instance.'))
     .on('error', error => console.log('Error connecting to MongoLab:', error));
 
-const express = require('express');
-
 const app = express();
 app.use(bodyParser.json());
 
 app.use(cors());
-
 app.use('/graphql', withAuth(graphqlHTTP({
-// app.use('/graphql', (graphqlHTTP({
     schema: Schema,
     graphiql: true,
 })));
 
-app.post('/login', async (req, res) => {
-    if (req.body.role === 'student') {
-        Student.find({ name: req.body.name, email: req.body.email });
-    } else if (req.body.role === 'teacher') {
-        Teacher.find({ name: req.body.name, email: req.body.email });
-    } else if (req.body.role === 'admin') {
-        Admin.find({ name: req.body.name, email: req.body.email });
-    } else {
-        res.json('failed');
+app.post('/auth/google', async (req, res) => {
+    try {
+        const { tokenId, role } = req.body;
+        const { existing, payload } = await getaccountFromGoogleToken(tokenId);
+        console.log(role);
+        if (existing) {
+            return res.json(existing);
+        }
+        return res.json(({
+            student: addStudent,
+            teacher: addTeacher,
+            admin: async () => ({ error: 'Cannot create Admin acccount' }),
+        })[role](payload.name, payload.email));
+    } catch (e) {
+        console.trace(e);
     }
-    const token = await createToken(req.body.googleAuthToken, req.body.role);
-    res.json(token);
 });
-
-app.post('/register', async (req, res) => {
-    if (req.body.role === 'student') {
-        addStudent(req.body.name, req.body.email, req.body.googleAuthToken);
-    } else if (req.body.role === 'teacher') {
-        addTeacher(req.body.name, req.body.email, req.body.googleAuthToken);
-    }
-    const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-    console.log(token);
-    res.json(token);
-});
-
 
 app.listen(8080);

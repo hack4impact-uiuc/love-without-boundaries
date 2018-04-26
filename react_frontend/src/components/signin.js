@@ -4,24 +4,23 @@ import { GoogleLogin } from 'react-google-login';
 // import cookie from 'react-cookie';
 
 class SignIn extends React.Component {
-    state = {
-        token: '',
-    }
-    responseGoogle = (response) => fetch(`http://localhost:8080/${this.props.requestType}`, {
-        method: 'POST',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: response.profileObj.googleId,
-            email: response.profileObj.email,
-            googleAuthToken: response.profileObj.googleId,
-            role: this.props.role,
-        }),
-    // }).then(resp => resp.json().then(r => console.log(r))).catch(console.error)
-    }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r))).catch(console.error)
+    responseGoogle = (auth) => {
+        fetch('http://localhost:8080/auth/google', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ tokenId: auth.tokenId, role: this.props.role }),
+        }).then(resp => resp.json()).then(console.log).catch(console.error);
 
+        const expiry = new Date(auth.tokenObj.expires_at);
+        console.log(document.cookie);
+        console.log(auth.role);
+        sessionStorage.setItem('token', auth.tokenId);
+        document.cookie = `token=${auth.tokenId}`;
+        console.log(document.cookie);
+        this.props.history.push(`/${this.props.role}`);
+    }
 
     render() {
         return (
@@ -41,8 +40,8 @@ class SignIn extends React.Component {
                     verticalAlign: 'middle',
                 }}
                 clientId="162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com"
+                responseType="id_token"
                 buttonText={this.props.role}
-                accessType="offline"
                 scope="https://www.googleapis.com/auth/drive.file"
                 onSuccess={this.responseGoogle}
             />

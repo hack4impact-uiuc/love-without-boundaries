@@ -17,7 +17,7 @@ function fetchQuery(
             'Content-Type': 'application/json',
             // RequiredAuthorization: 'false',
             // Authorization: 'Login',
-            Authorization: `Bearer ${  sessionStorage.getItem('jwt')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         body: JSON.stringify({
             query: operation.text,
