@@ -16,7 +16,6 @@ class StudentLesson extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         if ( this.props.studentWorksheets !== null && typeof(this.props.studentWorksheets) !== 'undefined')
         {
         
@@ -43,7 +42,6 @@ class StudentLesson extends React.Component {
             }
         }
         this.worksheetObj = this.props.studentWorksheets.worksheets.map(element => this.worksheetObj[element.lessonID] = element.url)
-        console.log(this.worksheetObj)
         }
     }
     render() {
