@@ -63,17 +63,24 @@ const SlightlyPaddedButton = styled.button`
 `;
 
 class LessonComponent extends React.Component<Props> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: '',
+        };
+    }
+    componentWillReceiveProps(newProps) {
+        if (newProps.lessonWorksheetLink == null) {
+            this.state.error = 'invalid link';
+        }
+    }
     gotoQuiz = () => { this.props.history.push('/takequiz'); }
     gotoPastQuiz = () => {
         this.props.history.push('/reviewquiz');
     }
     render() {
-        let quiz = 'Take Quiz';
-        let box = <CheckedBoxInComplete />;
-        if (this.props.quizIsChecked) {
-            quiz = 'Review Quiz';
-            box = <CheckedBoxComplete />;
-        }
+        const quiz = 'Take Quiz';
+        const box = <CheckedBoxInComplete />;
         return (
 
             <div className="row">
@@ -96,6 +103,7 @@ class LessonComponent extends React.Component<Props> {
                             <SlightlyPaddedButton className="btn lesson-btn" onClick={this.gotoPastQuiz}> Review Quiz </SlightlyPaddedButton>
                         </Link>
                     </div>
+                    <p style={{ color: 'red' }}> {this.state.error} </p>
                 </div>
                 <div className="col-md-3 col-sm-2" />
             </div>
