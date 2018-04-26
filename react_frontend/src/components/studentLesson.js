@@ -12,37 +12,35 @@ class StudentLesson extends React.Component {
         this.state = {
             error: '',
         };
-        this.worksheetObj = {}
+        this.worksheetObj = {};
     }
 
     componentDidMount() {
-        if ( this.props.studentWorksheets !== null && typeof(this.props.studentWorksheets) !== 'undefined')
-        {
-        
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
         let i;
-        const error = false;
+        const indices = [];
+        const promises = [];
         for (i = 0; i < this.props.lessons.length; i++) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
-                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, this.props.lessons[i].worksheetURL);
                 const url = this.props.lessons[i].worksheetURL;
-                console.log('url', url);
                 const fileMatch = url.match(/[-\w]{25,}/);
                 if (fileMatch === null || fileMatch === undefined) {
                     return;
                 }
                 const fileId = fileMatch[0];
-                copyFile(fileId).then((res) => {
-                    if (res == undefined || res.error) {
-                        return;
-                        // throw Error('Insufficient Priviledges, please contact Admin');
-                    }
-                    setPermissionToAllEdit(res.id);
-                }).catch(err => console.err(err.message));
+                promises.push(copyFile(fileId));
+                indices.push(i);
             }
         }
-        this.worksheetObj = this.props.studentWorksheets.worksheets.map(element => this.worksheetObj[element.lessonID] = element.url)
-        }
+        Promise.all(promises).then((res) => {
+            for (i = 0; i < res.length; i++) {
+                if (res[i] == undefined || res.error) {
+                    throw Error('Insufficient Privilges, please contact Admin');
+                }
+                setPermissionToAllEdit(res[i].id);
+                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
+            }
+        }).catch(err => console.error(err.message));
     }
     render() {
         if (this.state.error !== '') {
@@ -55,7 +53,7 @@ class StudentLesson extends React.Component {
                         this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
                     }
                 </h2>
-                <GoogleDocButton url="https://docs.google.com/document/d/1EGbrZFxY33xyEZdLyXmKGdWi5NR4CL7nS4C_7HzhSgE/edit" />
+                <GoogleDocButton url={this.props.studentWorksheets.URL} location={this.props.location} />
                 <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
                 {
                     this.props.lessons !== undefined ?
