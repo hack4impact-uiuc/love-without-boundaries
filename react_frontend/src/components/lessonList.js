@@ -2,14 +2,13 @@ import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import deleteLesson from '../relay/mutations/deleteLesson';
 import environment from '../relay/environment';
-import AdminEditLesson from '../components/adminEditLesson';
+import AdminLessonComponent from '../components/adminLesson';
 
-type Props = {
-    /**/
-  }
-
-class LessonList extends React.Component<Props> {
-
+class LessonList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
     render() {
         return (
             <QueryRenderer
@@ -37,7 +36,14 @@ class LessonList extends React.Component<Props> {
                         <div>
                             {
                                 props.lessons.map((lesson, idx) => (
-                                    <AdminEditLesson key={idx} lesson={lesson} />
+                                    <AdminLessonComponent
+                                        key={idx}
+                                        id={lesson.id}
+                                        lessonName={lesson.name}
+                                        lessonNotesLink={lesson.notesURL}
+                                        lessonWorksheetLink={lesson.worksheetURL}
+                                        worksheetName={lesson.worksheetName}
+                                    />
                                 ))
                             }
                         </div>
