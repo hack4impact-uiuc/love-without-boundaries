@@ -8,11 +8,16 @@ const QuizType = new GraphQLObjectType({
         return {
             name: {
                 type: GraphQLString,
+                description: 'The name of the quiz',
             },
             questions: {
                 type: new GraphQLList(QuestionType),
+                description: 'The list of questions for the quiz',
             },
-            lessonID: { type: GraphQLString },
+            lessonID: {
+                type: GraphQLString,
+                description: 'The id of the lesson this quiz is associated with',
+            },
         };
     },
 });

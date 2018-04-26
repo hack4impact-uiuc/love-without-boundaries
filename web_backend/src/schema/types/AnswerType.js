@@ -5,8 +5,14 @@ const Answer = new GraphQLObjectType({
     description: 'The name of the answer and if its correct or not',
     fields() {
         return {
-            answerName: { type: GraphQLString },
-            isCorrect: { type: GraphQLBoolean },
+            answerName: {
+                type: GraphQLString,
+                description: 'The name of the answer',
+            },
+            isCorrect: {
+                type: GraphQLBoolean,
+                description: 'Whether this answer is the correct one or not',
+            },
         };
     },
 });
