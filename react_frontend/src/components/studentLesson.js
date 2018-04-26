@@ -13,10 +13,6 @@ class StudentLesson extends React.Component {
         for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
             newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
         }
-        // newWkshtObj = this.props.studentWorksheets.worksheets.map(element => {
-        //     console.log('m', element.lessonID);
-        //     return newWkshtObj[element.lessonID] = element.url;
-        // });
         this.state = {
             error: '',
             worksheetObj: newWkshtObj,
@@ -66,25 +62,31 @@ class StudentLesson extends React.Component {
                         this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
                     }
                 </h2>
-                <GoogleDocButton url={this.props.studentWorksheets.URL} location={this.props.location} />
-                <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
-                {
-                    this.props.lessons !== undefined ?
-                        this.props.lessons.map((lesson, idx) => (
-                            <LessonComponent
-                                key={idx}
-                                id={lesson.id}
-                                lessonName={lesson.name}
-                                lessonNotesLink={lesson.notesURL}
-                                lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
-                                quizPercentage="50%"
-                                quizIsChecked={false}
-                                isStudent={this.props.isStudent}
-                            />
-                        ))
-                        :
-                        <p>There arent any lessons</p>
-                }
+                <div className="row">
+                    <div className="col-sm-3">
+                        <GoogleDocButton url={this.props.studentWorksheets.URL} location={this.props.location} />
+                        <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
+                    </div>
+                    <div className="col-sm-9">
+                        {
+                            this.props.lessons !== undefined ?
+                                this.props.lessons.map((lesson, idx) => (
+                                    <LessonComponent
+                                        key={idx}
+                                        id={lesson.id}
+                                        lessonName={lesson.name}
+                                        lessonNotesLink={lesson.notesURL}
+                                        lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
+                                        quizPercentage="50%"
+                                        quizIsChecked={false}
+                                        isStudent={this.props.isStudent}
+                                    />
+                                ))
+                                :
+                                <p>There arent any lessons</p>
+                        }
+                    </div>
+                </div>
             </div>
         );
     }
