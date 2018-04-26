@@ -4,6 +4,7 @@ import LessonComponent from './../components/lesson';
 import deleteLesson from '../relay/mutations/deleteLesson';
 import environment from '../relay/environment';
 import PaddedButton from '../components/button';
+import editLesson from '../relay/mutations/editLesson';
 
 class adminEditLesson extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class adminEditLesson extends React.Component {
         };
     }
     handleEditLessonClick = (id) => {
-        // TODO: EditLesson Mutation
+        editLesson(environment, this.props.lesson.id, this.state.lessonName);
     }
     handleClick = (id) => {
         deleteLesson(environment, id);
