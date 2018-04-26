@@ -3,13 +3,13 @@ import { withRouter, Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
-import Checkbox from './../components/Checkbox';
+import Checkbox from './../components/checkbox';
 import PaddedButton from './../components/button';
 
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWRmZjMyNzU0YmMxMDAzNzhkODAyMjM=' };
+        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWUxNWNlM2NkNGI3ODcyNzllYWJmYzM=' };
     }
 
     componentWillMount = () => {
