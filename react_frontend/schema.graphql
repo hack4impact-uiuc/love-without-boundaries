@@ -1,5 +1,5 @@
 input AddGradeInput {
-  id: ID!
+  id: String!
   lesson: String
   score: Int
   clientMutationId: String
@@ -11,7 +11,7 @@ type AddGradePayload {
 }
 
 input AddNoteInput {
-  id: ID
+  id: String
   name: String
   url: String
   clientMutationId: String
@@ -34,7 +34,7 @@ type AddQuestionPayload {
 }
 
 input AddStudentWorksheetCopyInput {
-  studentID: ID
+  studentID: String
   lessonID: String
   url: String
   clientMutationId: String
@@ -46,7 +46,7 @@ type AddStudentWorksheetCopyPayload {
 }
 
 input AddURLInput {
-  id: ID
+  id: String
   url: String
   clientMutationId: String
 }
@@ -57,7 +57,7 @@ type AddURLPayload {
 }
 
 input AddWorksheetInput {
-  id: ID
+  id: String
   name: String
   url: String
   clientMutationId: String
@@ -72,13 +72,20 @@ type AddWorksheetPayload {
 type Admin implements Node {
   # The ID of an object
   id: ID!
+
+  # Admin's name
   name: String
+
+  # Admin's email to login with
   email: String
 }
 
-# Self Descriptive
+# The name of the answer and if its correct or not
 type Answer {
+  # The name of the answer
   answerName: String
+
+  # Whether this answer is the correct one or not
   isCorrect: Boolean
 }
 
@@ -142,7 +149,7 @@ type CreateTeacherPayload {
 }
 
 input DeleteAdminInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -152,7 +159,7 @@ type DeleteAdminPayload {
 }
 
 input DeleteLessonInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -162,7 +169,7 @@ type DeleteLessonPayload {
 }
 
 input DeleteNoteInput {
-  id: ID
+  id: String
   clientMutationId: String
 }
 
@@ -172,7 +179,7 @@ type DeleteNotePayload {
 }
 
 input deleteQuestionInput {
-  questionId: ID!
+  questionId: String!
   lessonId: String!
   clientMutationId: String
 }
@@ -183,7 +190,7 @@ type deleteQuestionPayload {
 }
 
 input DeleteStudentInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -193,7 +200,7 @@ type DeleteStudentPayload {
 }
 
 input DeleteTeacherInput {
-  id: ID!
+  id: String!
   clientMutationId: String
 }
 
@@ -203,7 +210,7 @@ type DeleteTeacherPayload {
 }
 
 input DeleteWorksheetInput {
-  id: ID
+  id: String
   clientMutationId: String
 }
 
@@ -212,38 +219,55 @@ type DeleteWorksheetPayload {
   clientMutationId: String
 }
 
+input EditLessonInput {
+  id: String
+  newName: String
+  clientMutationId: String
+}
+
+type EditLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
 # Grade received on a quiz
 type Grade {
+  # The name of the lesson that the grade is for
   lesson: String
+
+  # The grade in which the student received for this leeson
   score: Int
 }
 
-# Self Descriptive
+# Input type of answer
 input InputAnswer {
   answerName: String
   isCorrect: Boolean
 }
 
-# Self Descriptive
+# Input type of question
 input InputQuestion {
   questionName: String
   answers: [InputAnswer]
 }
 
-# Self Descriptive
+# Input type of quiz
 input InputQuiz {
   name: String
   questions: [InputQuestion]
   lessonID: String
 }
 
-# Self Descriptive
+# Input type of answer for a given question
 input InputSubmittedAnswer {
+  # The id of the question
   questionID: String
+
+  # The answer the student chose for the question
   answerChosen: String
 }
 
-# Self Descriptive
+# GraphQLList of Answered Questions
 input InputSubmittedAnswers {
   submissions: [InputSubmittedAnswer]
 }
@@ -252,11 +276,23 @@ input InputSubmittedAnswers {
 type Lesson implements Node {
   # The ID of an object
   id: ID!
+
+  # Lesson's name
   name: String
+
+  # Lesson's quiz for the material to be tested on
   quiz: Quiz
+
+  # The name of the lesson's worksheet
   worksheetName: String
+
+  # The URL of the lesson's worksheet
   worksheetURL: String
+
+  # The name of the lesson's notes
   notesName: String
+
+  # The URL of the lesson's notes
   notesURL: String
 }
 
@@ -282,6 +318,7 @@ type Mutation {
   deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
   addURL(input: AddURLInput!): AddURLPayload
   deleteQuestion(input: deleteQuestionInput!): deleteQuestionPayload
+  editLesson(input: EditLessonInput!): EditLessonPayload
 }
 
 # An object with an ID
@@ -290,11 +327,18 @@ interface Node {
   id: ID!
 }
 
-# Self Descriptive
+# Previously submitted quizzes
 type PastQuiz {
+  # id of the lesson the quiz was from
   lessonID: String
+
+  # The name of the quiz
   quizName: String
+
+  # The score the student received from submitting the quiz
   score: Float
+
+  # The record of answers the student submitted
   submittedAnswers: [SubmittedAnswer]
 }
 
@@ -311,17 +355,27 @@ type Query {
   lessons: [Lesson]
 }
 
-# Self Descriptive
+# Question with multiple choice answers
 type Question {
+  # id of the question
   id: ID
+
+  # The name of the question
   questionName: String
+
+  # The list of the answers that you can choose from
   answers: [Answer]
 }
 
-# Self Descriptive
+# Quiz with multiple questions
 type Quiz {
+  # The name of the quiz
   name: String
+
+  # The list of questions for the quiz
   questions: [Question]
+
+  # The id of the lesson this quiz is associated with
   lessonID: String
 }
 
@@ -329,18 +383,35 @@ type Quiz {
 type Student implements Node {
   # The ID of an object
   id: ID!
+
+  # Student's name
   name: String
+
+  # Student's email to login with
   email: String
+
+  # Student's teacher that manages them
   teacher: Teacher
+
+  # Student's grades for the past lessons
   grades: [Grade]
+
+  # Student's past quizzes that they have submitted
   pastQuizzes: [PastQuiz]
+
+  # URL for student's copy of the worksheets of lessons
   worksheets: [Worksheet]
+
+  # Student's empty google doc playground
   URL: String
+
+  # The student's highest grade
+  topScore: Float
 }
 
 input SubmitQuizInput {
-  id: ID
-  lessonID: ID
+  id: String
+  lessonID: String
   answeredQuestions: InputSubmittedAnswers
   clientMutationId: String
 }
@@ -352,7 +423,10 @@ type SubmitQuizPayload {
 
 # Self Descriptive
 type SubmittedAnswer {
+  # id of the question the answer was from
   questionID: String
+
+  # The name of the answer that was chosen
   answerChosen: String
 }
 
@@ -360,10 +434,14 @@ type SubmittedAnswer {
 type Teacher implements Node {
   # The ID of an object
   id: ID!
+
+  # Teacher's name
   name: String
+
+  # Teacher's email to login with
   email: String
 
-  # Students that the teacher teachers
+  # List of the teacher's students
   students: [Student]
 }
 
@@ -380,6 +458,9 @@ type undefinedPayload {
 
 # Student worksheet for a specific lesson
 type Worksheet {
+  # id of the lesson this worksheet is associated with
   lessonID: String
+
+  # The URL of the worksheet
   url: String
 }

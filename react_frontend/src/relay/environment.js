@@ -11,7 +11,7 @@ function fetchQuery(
     operation,
     variables,
 ) {
-    return fetch('https://lwb-backend.now.sh', {
+    return fetch('https://micro-graphql-ojiyzcyrzk.now.sh', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
