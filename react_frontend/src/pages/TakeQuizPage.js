@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
-import Checkbox from './../components/checkbox';
+import Checkbox from './../components/Checkbox';
 import PaddedButton from './../components/button';
 
 class TakeQuizPage extends Component {

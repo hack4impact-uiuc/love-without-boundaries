@@ -13,13 +13,11 @@ class AdminLessonList extends React.Component {
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query lessonListQuery{
+                    query adminLessonListQuery{
                         lessons{
                             id
                             name
-                            worksheetName
                             worksheetURL
-                            notesName
                             notesURL
                         }
                     }  

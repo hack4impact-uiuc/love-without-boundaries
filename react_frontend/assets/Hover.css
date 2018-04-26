@@ -35,7 +35,7 @@
 }
 .admin-lesson-box {
 	border: 1px solid #d1d1d7;
-	height: 380px;
+	height: 325px;
 	border-radius: 8px;
 	max-width: 420px;
 	margin: 10px auto;
@@ -48,6 +48,16 @@
 	border: 1px solid #1EAEDB;
 	border-radius: 6px;
 	background-color: #ffffff;
+}
+.lesson-btn2 {
+	border: 1px solid #ff5050;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+.lesson-text {
+	font-size: 14px;
+	display: inline-block;
+	color: #ff5050;
 }
 .lesson-quiz-text {
 	margin-top: 10px;
