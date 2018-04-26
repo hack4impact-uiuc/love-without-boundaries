@@ -42,11 +42,13 @@ class AdminLessonComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lessonName: '',
+            lessonName: this.props.lessonName,
+            showEditLesson: false,
         };
     }
     handleEditLessonClick = () => {
         editLesson(environment, this.props.id, this.state.lessonName);
+        window.location.reload();
     }
     handleClick = (id) => {
         deleteLesson(environment, id);
@@ -57,38 +59,55 @@ class AdminLessonComponent extends React.Component {
             lessonName: e.target.value,
         });
     }
+    showForm = () => {
+        this.setState({ showEditLesson: true });
+    }
     render() {
         return (
 
             <div className="row">
                 <div className="col-md-3 col-sm-2" />
                 <div className="col-sm-6 admin-lesson-box">
-                    <h3 className="lesson-title">{this.props.lessonName}</h3>
-                    <a href={this.props.lessonNotesLink}><button className="btn lesson-btn">Notes</button></a>
-                    <a href={this.props.lessonWorksheetLink}><button style={{ marginLeft: '10px' }}className="btn lesson-btn">Worksheet</button></a>
-                    <br />
-                    <p className="lesson-quiz-text"> Quiz:</p>
-                    <Link style={{ display: 'block' }} to={{ pathname: '/quiz', state: { lessonID: this.props.id } }}>
-                        <PaddedButton className="btn btn-default">Edit Quiz</PaddedButton>
-                    </Link>
-                    <br />
-                    <label htmlFor="edit_lesson_name_input">Edit Lesson Name: </label>
-                    <input className="form-control" id="edit_lesson_name_input" name="name" type="text" value={this.state.lessonName} onChange={this.handleChange} placeholder="Edit Lesson Name" />
-                    <PaddedButton
-                        className="btn btn-info"
-                        value={this.props.id}
-                        onClick={() => this.handleEditLessonClick(this.props.id)}
-                        style={{ display: 'block' }}
-                    >
-                    Edit Lesson
-                    </PaddedButton>
-                    <PaddedButton
-                        className="btn btn-danger"
-                        value={this.props.id}
-                        onClick={() => this.handleClick(this.props.id)}
-                    >
-                    Delete Lesson
-                    </PaddedButton>
+                    <h3 className="lesson-title">
+                        {this.state.showEditLesson ?
+                            <p>
+                                <input className="form-control" id="edit_lesson_name_input" name="name" type="text" value={this.state.lessonName} onChange={this.handleChange} placeholder={this.state.lessonName} />
+                                <PaddedButton
+                                    className="btn btn-info"
+                                    value={this.props.id}
+                                    onClick={() => this.handleEditLessonClick(this.props.id)}
+                                    style={{ display: 'block', marginLeft: '122px' }}
+                                >
+                                    Submit Name
+                                </PaddedButton>
+                            </p>
+                            :
+                            <p>
+                                {this.props.lessonName}
+                                <PaddedButton className="btn btn-link" onClick={this.showForm}>
+                                    <span className="glyphicon glyphicon-pencil" aria-hidden="true" />
+                                </PaddedButton>
+                            </p>
+                        }
+                    </h3>
+                    <p>
+                        <a href={this.props.lessonNotesLink}><button className="btn lesson-btn">Notes</button></a>
+                        <br />
+                        <br />
+                        <a href={this.props.lessonWorksheetLink}><button className="btn lesson-btn">Worksheet</button></a>
+                        <br />
+                        <br />
+                        <Link style={{ display: 'block' }} to={{ pathname: '/quiz', state: { lessonID: this.props.id } }}>
+                            <button className="btn lesson-btn">Edit Quiz</button>
+                        </Link>
+                        <PaddedButton
+                            className="btn btn-danger"
+                            value={this.props.id}
+                            onClick={() => this.handleClick(this.props.id)}
+                        >
+                        Delete Lesson
+                        </PaddedButton>
+                    </p>
                 </div>
             </div>
         );

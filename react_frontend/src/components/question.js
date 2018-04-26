@@ -85,7 +85,7 @@ class Question extends React.Component {
                         onClick={this.props.locked == true ? this.unlock : null}
                     />
                 </label>
-                            </div>);
+            </div>);
         }
         return answersElm;
     }
