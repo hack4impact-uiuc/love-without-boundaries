@@ -73,12 +73,10 @@ class AdminLessonComponent extends React.Component {
                             <p>
                                 <input className="form-control" id="edit_lesson_name_input" name="name" type="text" value={this.state.lessonName} onChange={this.handleChange} placeholder={this.state.lessonName} />
                                 <PaddedButton
-                                    className="btn btn-info"
-                                    value={this.props.id}
+                                    className="btn btn-link"
                                     onClick={() => this.handleEditLessonClick(this.props.id)}
-                                    style={{ display: 'block', marginLeft: '122px' }}
                                 >
-                                    Submit Name
+                                    <span className="glyphicon glyphicon-ok" aria-hidden="true" />
                                 </PaddedButton>
                             </p>
                             :
