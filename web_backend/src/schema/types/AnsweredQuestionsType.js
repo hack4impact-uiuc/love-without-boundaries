@@ -3,7 +3,7 @@ import AnsweredQuestionType from './AnsweredQuestionType';
 
 const AnsweredQuestions = new GraphQLInputObjectType({
     name: 'InputSubmittedAnswers',
-    description: 'Self Descriptive',
+    description: 'GraphQLList of Answered Questions',
     fields() {
         return {
             submissions: { type: new GraphQLList(AnsweredQuestionType) }

@@ -272,7 +272,17 @@ mutation assignStudentToTeacher{
 ```
 Expected Result:
 ```
-BUGGY RIGHT NOW THE IDS ARE BROKEN
+{
+  "data": {
+    "assignStudentToTeacher": {
+      "student": {
+        "id": "U3R1ZGVudDo1YWNlZTg2M2VhNWM3NDQ2MjEzZDdkYTA=",
+        "name": "JUSTINBEIBS",
+        "teacher": null
+      }
+    }
+  }
+}
 ```
 ## Delete Teacher Mutation
 ```
@@ -300,13 +310,6 @@ Expected Result:
         "students": []
       }
     }
-  }
-}
-```
-```
-mutation m {
-  deleteQuiz(id:"5aa227d7a4ba471a30c382c9" ) {
-    name
   }
 }
 ```
@@ -751,6 +754,72 @@ Expected Result:
         "name": "shreyas",
         "id": "U3R1ZGVudDo1YWNhOTU4NDVkNTM3ODc4ZDQ1YjVlNWQ=",
         "URL": "www.meetspin.com"
+      }
+    }
+  }
+}
+```
+## Delete Question Mutation
+```
+mutation deleteQuestion{
+	deleteQuestion(input: {
+    lessonId: "TGVzc29uOjVhZGZiMTA0OGQzNzM3MDNhYjA1MTM2Nw==",
+  	questionId: "5adfb1048d373703ab051366"}){
+    lesson {
+      id
+      name
+      quiz{
+        questions{
+          id
+        }
+      }
+    }
+  }
+}
+```
+Expected Result:
+```
+{
+  "data": {
+    "deleteQuestion": {
+      "lesson": {
+        "id": "TGVzc29uOjVhZGZiMTA0OGQzNzM3MDNhYjA1MTM2Nw==",
+        "name": "Algebra",
+        "quiz": {
+          "questions": [
+            {
+              "id": "5adfb1048d373703ab051366"
+            },
+            {
+              "id": "5adfb1048d373703ab051363"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+## Edit Lesson Mutation
+```
+mutation editLesson{
+  editLesson(input:{
+    id: "TGVzc29uOjVhZGZiMTA0OGQzNzM3MDNhYjA1MTM2Nw==",
+    newName: "Irregular Verbs"
+  }) {
+    lesson {
+      name
+    }
+  }
+}
+```
+Expected Result:
+```
+{
+  "data": {
+    "editLesson": {
+      "lesson": {
+        "name": "Algebra"
       }
     }
   }

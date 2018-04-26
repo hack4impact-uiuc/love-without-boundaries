@@ -3,7 +3,7 @@ import Answer from './AnswerType';
 
 const Question = new GraphQLObjectType({
     name: 'Question',
-    description: 'Self Descriptive',
+    description: 'Question with multiple choice answers',
     fields() {
         return {
             id: {
