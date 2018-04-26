@@ -4,8 +4,8 @@ import { withRouter, Link } from 'react-router-dom';
 import type { Environment } from 'relay-runtime';
 
 
-import LessonForm from './../components/lessonForm';
-import LessonList from './../components/lessonList';
+import AdminLessonForm from './../components/adminLessonForm';
+import AdminLessonList from './../components/adminLessonList';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
 
@@ -69,8 +69,8 @@ const AdminPage = ({ match }) => (
             {
                 match.params.showLesson === 'lesson' ?
                     <div className="centered">
-                        <LessonForm />
-                        <LessonList />
+                        <AdminLessonForm />
+                        <AdminLessonList />
                     </div>
                     :
                     <AdminListComponent />

@@ -27,11 +27,11 @@
 }
 .lesson-box {
 	border: 1px solid #d1d1d7;
-	height: 200px;
+	max-height: 300px;
 	border-radius: 8px;
 	max-width: 380px;
 	margin: 10px 0;
-	text-align: center;
+	text-align: left;
 }
 .admin-lesson-box {
 	border: 1px solid #d1d1d7;
@@ -47,16 +47,19 @@
 .lesson-btn {
 	border: 1px solid #1EAEDB;
 	border-radius: 6px;
+	background-color: #ffffff;
 }
 .lesson-quiz-text {
-	margin-left: 8px;
 	margin-top: 10px;
 	font-size: 17px;
 	display: inline-block;
 	color: #726E78;
 }
+.lesson-btn-box {
+	padding-left: 9px;
+}
 .quiz-btn-box {
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .quizButton {
@@ -285,4 +288,16 @@
 
 .inlineDis{
 	display: inline;
+}
+
+.hello {
+	padding-left: 10px;
+}
+
+.ppp {
+	margin-left: 10px;
+}
+.ppp2 {
+	width: 35%;
+	margin-left: 10px;
 }

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b04b44dcb1c66129be7ed32d49c7102b
+ * @relayHash 832b1e8138b993eebb1a516c36b88153
  */
 
 /* eslint-disable */
@@ -18,6 +18,7 @@ export type TakeQuizPage_QueryResponse = {|
     +__typename: string,
     +name?: ?string,
     +quiz?: ?{|
+      +lessonID: ?string,
       +questions: ?$ReadOnlyArray<?{|
         +id: ?string,
         +questionName: ?string,
@@ -42,6 +43,7 @@ query TakeQuizPage_Query(
     ... on Lesson {
       name
       quiz {
+        lessonID
         questions {
           id
           questionName
@@ -118,6 +120,13 @@ v2 = [
             "plural": false,
             "selections": [
               {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "lessonID",
+                "args": null,
+                "storageKey": null
+              },
+              {
                 "kind": "LinkedField",
                 "alias": null,
                 "name": "questions",
@@ -173,7 +182,7 @@ return {
   "operationKind": "query",
   "name": "TakeQuizPage_Query",
   "id": null,
-  "text": "query TakeQuizPage_Query(\n  $quiz_id: ID!\n) {\n  node(id: $quiz_id) {\n    id\n    __typename\n    ... on Lesson {\n      name\n      quiz {\n        questions {\n          id\n          questionName\n          answers {\n            answerName\n            isCorrect\n          }\n        }\n      }\n    }\n  }\n}\n",
+  "text": "query TakeQuizPage_Query(\n  $quiz_id: ID!\n) {\n  node(id: $quiz_id) {\n    id\n    __typename\n    ... on Lesson {\n      name\n      quiz {\n        lessonID\n        questions {\n          id\n          questionName\n          answers {\n            answerName\n            isCorrect\n          }\n        }\n      }\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -191,5 +200,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = 'e11791c76d3ec0345aeb866a455e4ceb';
+(node/*: any*/).hash = '1fe35e7112e6455eb33b46448d60a9a1';
 module.exports = node;
