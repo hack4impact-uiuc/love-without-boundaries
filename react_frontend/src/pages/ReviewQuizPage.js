@@ -45,9 +45,12 @@ class ReviewQuizPage extends Component {
                             <div>Loading...</div>
                         );
                     }
+                    if (props.node == null) {
+                        return <p>You have no Previous Quizzes for this lesson.</p>;
+                    }
                     const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined;
                     if (lessonID === undefined) {
-                        return <div>Review Lesson not available for this lesson</div>;
+                        return <p>Review Lesson not available for this lesson</p>;
                     }
                     if (props.node.pastQuizzes === undefined) {
                         return <p>You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal.</p>;
