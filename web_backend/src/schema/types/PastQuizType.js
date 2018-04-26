@@ -6,11 +6,21 @@ const PastQuiz = new GraphQLObjectType({
     description: 'Previously submitted quizzes',
     fields() {
         return {
-            lessonID: { type: GraphQLString },
-            quizName: { type: GraphQLString },
-            score: { type: GraphQLFloat },
+            lessonID: {
+                type: GraphQLString,
+                description: 'id of the lesson the quiz was from',
+            },
+            quizName: {
+                type: GraphQLString,
+                description: 'The name of the quiz',
+            },
+            score: {
+                type: GraphQLFloat,
+                description: 'The score the student received from submitting the quiz',
+            },
             submittedAnswers: {
                 type: new GraphQLList(SubmittedAnswer),
+                description: 'The record of answers the student submitted',
             },
         };
     },

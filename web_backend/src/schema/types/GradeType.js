@@ -7,9 +7,11 @@ const Grade = new GraphQLObjectType({
         return {
             lesson: {
                 type: GraphQLString,
+                description: 'The name of the lesson that the grade is for',
             },
             score: {
                 type: GraphQLInt,
+                description: 'The grade in which the student received for this leeson',
             },
         };
     },
