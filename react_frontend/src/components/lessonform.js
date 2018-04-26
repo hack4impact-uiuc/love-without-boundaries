@@ -30,7 +30,7 @@ class LessonForm extends React.Component {
             alert('Please Insert Notes Link and Worksheet Link');
         }
         setPermissionToAllRead(NotesFileID);
-        setPermissionToAllRead(WkshtFileID);
+        setPermissionToAllEdit(WkshtFileID);
         addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link);
         this.setState({
             name: '',
