@@ -14,9 +14,7 @@ const LessonSchema = new Schema({
             }],
         }],
     },
-    worksheetName: { type: String },
     worksheetURL: { type: String },
-    notesName: { type: String },
     notesURL: { type: String },
 });
 

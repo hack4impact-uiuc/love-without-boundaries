@@ -151,7 +151,7 @@ class AdminListComponent extends React.Component<Props> {
                                 { this.state.studentOrTutor === 'TEACHER' ?
                                     props.teachers.map((teacher, idx) => (
                                         <tr key={idx}>
-                                            <th scrope="row">{idx}</th>
+                                            <th scrope="row">{idx + 1}</th>
                                             <th>
                                                 <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/teacher', state: { teacher } }}>
                                                     <button className="btn btn-default">{teacher.name}</button>
@@ -164,7 +164,7 @@ class AdminListComponent extends React.Component<Props> {
                                     ))
                                     : props.students.map((student, idx) => (
                                         <tr key={idx}>
-                                            <th scrope="row">{idx}</th>
+                                            <th scrope="row">{idx + 1}</th>
                                             <th>
                                                 <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/student', state: { student } }}>
                                                     <button className="btn btn-default">{student.name}</button>

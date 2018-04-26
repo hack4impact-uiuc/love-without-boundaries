@@ -68,6 +68,7 @@ class TeacherPage extends React.Component<Props> {
                                 students {
                                     name
                                     id
+                                    URL
                                 }
                             }
                         }

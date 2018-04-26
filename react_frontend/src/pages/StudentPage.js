@@ -38,8 +38,9 @@ class StudentPage extends React.Component<Props> {
                                 ... on Student {
                                     worksheets {
                                         lessonID
-                                        url
                                     }
+                                    id
+                                    URL
                                 }
                             }
                         }

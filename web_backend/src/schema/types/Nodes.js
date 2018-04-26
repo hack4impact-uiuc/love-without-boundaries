@@ -144,17 +144,9 @@ const LessonType = new GraphQLObjectType({
                 type: QuizType,
                 description: 'Lesson\'s quiz for the material to be tested on',
             },
-            worksheetName: {
-                type: GraphQLString,
-                description: 'The name of the lesson\'s worksheet',
-            },
             worksheetURL: {
                 type: GraphQLString,
                 description: 'The URL of the lesson\'s worksheet',
-            },
-            notesName: {
-                type: GraphQLString,
-                description: 'The name of the lesson\'s notes',
             },
             notesURL: {
                 type: GraphQLString,
