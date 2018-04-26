@@ -38,6 +38,7 @@ class StudentPage extends React.Component<Props> {
                                 ... on Student {
                                     worksheets {
                                         lessonID
+                                        url
                                     }
                                     id
                                     URL
@@ -52,7 +53,6 @@ class StudentPage extends React.Component<Props> {
                                 <div>Loading...</div>
                             );
                         }
-                        console.log(props.node);
                         return (
                             <div>
                                 <StudentLesson

@@ -9,9 +9,17 @@ import PaddedButton from './button';
 class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
+        const newWkshtObj = {};
+        for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
+            newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        }
+        // newWkshtObj = this.props.studentWorksheets.worksheets.map(element => {
+        //     console.log('m', element.lessonID);
+        //     return newWkshtObj[element.lessonID] = element.url;
+        // });
         this.state = {
             error: '',
-            worksheetObj: {},
+            worksheetObj: newWkshtObj,
         };
     }
     componentDidMount() {
@@ -42,7 +50,7 @@ class StudentLesson extends React.Component {
         }).catch(err => console.error(err.message));
     }
     componentWillReceiveProps(newProps) {
-        const newObj = newProps.studentWorksheets.worksheets.map(element => this.worksheetObj[element.lessonID] = element.url);
+        const newObj = newProps.studentWorksheets.worksheets.map(element => newObj[element.lessonID] = element.url);
         this.setState({
             worksheetObj: newObj,
         });

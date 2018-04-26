@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7b378d8e859407f72a62f444001828a4
+ * @relayHash fe81abc2391782dd44a3336b17d6f936
  */
 
 /* eslint-disable */
@@ -24,6 +24,7 @@ export type StudentPage_QueryResponse = {|
   +node: ?{|
     +worksheets?: ?$ReadOnlyArray<?{|
       +lessonID: ?string,
+      +url: ?string,
     |}>,
     +id?: string,
     +URL?: ?string,
@@ -49,6 +50,7 @@ query StudentPage_Query(
     ... on Student {
       worksheets {
         lessonID
+        url
       }
       id
       URL
@@ -144,6 +146,13 @@ v4 = {
       "name": "lessonID",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "url",
+      "args": null,
+      "storageKey": null
     }
   ]
 },
@@ -159,7 +168,7 @@ return {
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
+  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n        url\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -228,5 +237,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '037a19356019d7e3087b5c197b75a232';
+(node/*: any*/).hash = 'ea17a49e55cba4c749b03bbf3a757a8b';
 module.exports = node;
