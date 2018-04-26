@@ -8,45 +8,38 @@ type Props = {
     /**/
   }
 
-class LessonList extends React.Component<Props> {
-
-    render() {
-        return (
-            <QueryRenderer
-                environment={environment}
-                query={graphql`
+const LessonList = () => (
+    <QueryRenderer
+        environment={environment}
+        query={graphql`
                     query lessonListQuery{
                         lessons{
                             id
                             name
-                            worksheetName
                             worksheetURL
-                            notesName
                             notesURL
                         }
                     }  
                 `}
-                variables={{}}
-                render={({ props }) => {
-                    if (!props) {
-                        return (
-                            <div>Loading...</div>
-                        );
+        variables={{}}
+        render={({ props }) => {
+            if (!props) {
+                return (
+                    <div>Loading...</div>
+                );
+            }
+            return (
+                <div>
+                    {
+                        props.lessons.map((lesson, idx) => (
+                            <AdminEditLesson key={idx} lesson={lesson} />
+                        ))
                     }
-                    return (
-                        <div>
-                            {
-                                props.lessons.map((lesson, idx) => (
-                                    <AdminEditLesson key={idx} lesson={lesson} />
-                                ))
-                            }
-                        </div>
-                    );
-                }}
-            />
-        );
-    }
-}
+                </div>
+            );
+        }}
+    />
+);
 
 
 export default LessonList;

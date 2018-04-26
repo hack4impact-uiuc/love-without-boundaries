@@ -13,8 +13,9 @@ class adminEditLesson extends React.Component {
             lessonName: '',
         };
     }
-    handleEditLessonClick = (id) => {
+    handleEditLessonClick = () => {
         editLesson(environment, this.props.lesson.id, this.state.lessonName);
+        window.location.reload();
     }
     handleClick = (id) => {
         deleteLesson(environment, id);
@@ -43,7 +44,7 @@ class adminEditLesson extends React.Component {
                     <PaddedButton
                         className="btn btn-info"
                         value={this.props.lesson.id}
-                        onClick={() => this.handleEditLessonClick(this.props.lesson.id)}
+                        onClick={this.handleEditLessonClick}
                         style={{ display: 'block' }}
                     >
                     Edit Lesson

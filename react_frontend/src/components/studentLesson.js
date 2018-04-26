@@ -10,8 +10,10 @@ class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
         const newWkshtObj = {};
-        for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
-            newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        if (this.props.studentWorksheets !== null) {
+            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
+                newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+            }
         }
         this.state = {
             error: '',
@@ -19,6 +21,9 @@ class StudentLesson extends React.Component {
         };
     }
     componentDidMount() {
+        if (this.props.studentWorksheets === null) {
+            return;
+        }
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
         let i;
         const indices = [];
@@ -54,6 +59,9 @@ class StudentLesson extends React.Component {
     render() {
         if (this.state.error !== '') {
             return <p>{this.state.error}</p>;
+        }
+        if (this.props.studentWorksheets === null) {
+            return <p>Student Worksheets prop is null</p>;
         }
         return (
             <div className="container-fluid">

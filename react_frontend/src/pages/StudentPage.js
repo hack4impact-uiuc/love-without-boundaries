@@ -29,9 +29,7 @@ class StudentPage extends React.Component<Props> {
                             lessons{
                                 id
                                 name
-                                worksheetName
                                 worksheetURL
-                                notesName
                                 notesURL
                             }
                             node(id: $studentId) {

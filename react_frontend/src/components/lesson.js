@@ -90,7 +90,9 @@ class LessonComponent extends React.Component<Props> {
                             </Link>
                         </div>
                     </div>
-                    <p className="lesson-quiz-text"> Quiz -- Grade: {this.props.quizPercentage}</p>
+                    {this.props.isStudent && (
+                        <p className="lesson-quiz-text"> Quiz -- Grade: {this.props.quizPercentage}</p>
+                    )}
                     <p style={{ color: 'red' }}> { this.props.lessonWorksheetLink === undefined || this.props.lessonWorksheetLink === null ? 'Worksheet Copy doesnt have link' : ''} </p>
                 </div>
                 <div className="col-md-3 col-sm-2" />

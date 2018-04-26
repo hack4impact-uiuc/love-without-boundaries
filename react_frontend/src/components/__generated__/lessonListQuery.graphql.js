@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0967f643f9bd0ef292eea986a3750184
+ * @relayHash 425c1f95fce320677a1f1a3cefcfd557
  */
 
 /* eslint-disable */
@@ -14,9 +14,7 @@ export type lessonListQueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +id: string,
     +name: ?string,
-    +worksheetName: ?string,
     +worksheetURL: ?string,
-    +notesName: ?string,
     +notesURL: ?string,
   |}>,
 |};
@@ -28,9 +26,7 @@ query lessonListQuery {
   lessons {
     id
     name
-    worksheetName
     worksheetURL
-    notesName
     notesURL
   }
 }
@@ -64,21 +60,7 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "worksheetName",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
         "name": "worksheetURL",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "notesName",
         "args": null,
         "storageKey": null
       },
@@ -97,7 +79,7 @@ return {
   "operationKind": "query",
   "name": "lessonListQuery",
   "id": null,
-  "text": "query lessonListQuery {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n}\n",
+  "text": "query lessonListQuery {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -115,5 +97,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '5ba9020963b00792d9084289bbb341c5';
+(node/*: any*/).hash = '3259e3bf618c212b07c1cbff156e75b4';
 module.exports = node;
