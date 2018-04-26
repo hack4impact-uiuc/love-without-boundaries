@@ -6,18 +6,6 @@ type Props = {
   /**/
 }
 
-
-const LessonBox = styled.div`
-    color: white;
-    background-color: #a6acb5;
-    height: 30%;
-    width: 50%;
-    z-index: -1;
-    margin: auto;
-    border-radius: 0px 40px;
-    align: center;
-`;
-
 const LessonTitle = styled.div`
     border-bottom-style: solid;
     border-color: white;
@@ -90,21 +78,24 @@ class LessonComponent extends React.Component<Props> {
 
             <div className="row">
                 <div className="col-md-3 col-sm-2" />
-                <div className="col-sm-7 lessonBox">
-                    <LessonTitle >{this.props.lessonName}</LessonTitle>
-                    <LessonProps> <a href={this.props.lessonNotesLink}>Notes </a></LessonProps>
-                    <LessonProps> <a href={this.props.lessonWorksheetLink}>Worksheet </a></LessonProps>
-                    <LessonProps> Quiz -- Grade: {this.props.quizPercentage}
+                <div className="col-sm-6 lesson-box">
+                    <h3 className="lesson-title" >{this.props.lessonName}</h3>
+                    <div className="row">
+                        <a href={this.props.lessonNotesLink}><button className="btn lesson-btn">Notes</button></a>
+                        <a href={this.props.lessonWorksheetLink}><button style={{ marginLeft: '10px' }}className="btn lesson-btn">Worksheet</button></a>
+                    </div>
+                    <p className="lesson-quiz-text"> Quiz -- Grade: {this.props.quizPercentage}</p>
+                    <div className="row quiz-btn-box">
                         {this.props.isStudent && (
                             <Link key={this.props.key} to={{ pathname: '/takequiz', state: { lessonID: this.props.id } }}>
-                                <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Take Quiz </SlightlyPaddedButton>
+                                <SlightlyPaddedButton className="btn lesson-btn" onClick={this.gotoPastQuiz}> Take Quiz </SlightlyPaddedButton>
                             </Link>
                         )}
 
                         <Link to={{ pathname: '/reviewquiz', state: { lessonID: this.props.id } }}>
-                            <SlightlyPaddedButton className="btn btn-primary" onClick={this.gotoPastQuiz}> Review </SlightlyPaddedButton>
+                            <SlightlyPaddedButton className="btn lesson-btn" onClick={this.gotoPastQuiz}> Review Quiz </SlightlyPaddedButton>
                         </Link>
-                    </LessonProps>
+                    </div>
                 </div>
                 <div className="col-md-3 col-sm-2" />
             </div>

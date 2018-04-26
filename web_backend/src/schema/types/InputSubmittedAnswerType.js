@@ -2,7 +2,7 @@ import { GraphQLInputObjectType, GraphQLString } from 'graphql';
 
 const InputSubmittedAnswer = new GraphQLInputObjectType({
     name: 'InputSubmittedAnswer',
-    description: 'Self Descriptive',
+    description: 'Input type of submitted answer',
     fields() {
         return {
             questionID: { type: GraphQLString },

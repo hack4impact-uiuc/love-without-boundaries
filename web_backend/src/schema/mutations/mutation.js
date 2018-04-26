@@ -1,5 +1,5 @@
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLList } from 'graphql';
 import InputQuestionType from '../types/InputQuestionType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
@@ -9,7 +9,6 @@ import InputQuizType from '../types/InputQuizType';
 import Lesson from '../../models/lessons';
 import { TeacherType, AdminType, StudentType, LessonType } from '../types/Nodes';
 import AnsweredQuestionsType from '../types/AnsweredQuestionsType';
-
 
 const createStudent = mutationWithClientMutationId({
     name: 'CreateStudent',
@@ -32,8 +31,8 @@ const createStudent = mutationWithClientMutationId({
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
         const u = new User({
- name, email, token, role: 'student'
- });
+            name, email, token, role: 'student',
+        });
         await u.save();
         const s = new Student({ name, email });
         return s.save();
@@ -61,8 +60,8 @@ const createTeacher = mutationWithClientMutationId({
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
         const u = new User({
- name, email, token, role: 'teacher'
- });
+            name, email, token, role: 'teacher',
+        });
         await u.save();
         const t = new Teacher({ name, email });
         return t.save();
@@ -90,8 +89,8 @@ const createAdmin = mutationWithClientMutationId({
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
         const u = new User({
- name, email, token, role: 'admin'
- });
+            name, email, token, role: 'admin',
+        });
         await u.save();
         const a = new Admin({ name, email });
         return a.save();
@@ -128,7 +127,7 @@ const deleteAdmin = mutationWithClientMutationId({
     name: 'DeleteAdmin',
     inputFields: {
         id: {
-            type: new GraphQLNonNull(GraphQLID),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
     outputFields: {
@@ -146,7 +145,7 @@ const deleteAdmin = mutationWithClientMutationId({
 const addGrade = mutationWithClientMutationId({
     name: 'AddGrade',
     inputFields: {
-        id: { type: new GraphQLNonNull(GraphQLID) },
+        id: { type: new GraphQLNonNull(GraphQLString) },
         lesson: { type: GraphQLString },
         score: { type: GraphQLInt },
     },
@@ -190,7 +189,7 @@ const deleteTeacher = mutationWithClientMutationId({
     name: 'DeleteTeacher',
     inputFields: {
         id: {
-            type: new GraphQLNonNull(GraphQLID),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
     outputFields: {
@@ -208,11 +207,9 @@ const deleteTeacher = mutationWithClientMutationId({
 const submitQuiz = mutationWithClientMutationId({
     name: 'SubmitQuiz',
     inputFields: {
-        id: { type: GraphQLID },
-        lessonID: { type: GraphQLID },
-
+        id: { type: GraphQLString },
+        lessonID: { type: GraphQLString },
         answeredQuestions: { type: AnsweredQuestionsType },
-        // answers: { type: new GraphQLList(GraphQLString) },
     },
     student: {
         type: StudentType,
@@ -227,13 +224,10 @@ const submitQuiz = mutationWithClientMutationId({
     mutateAndGetPayload: async ({
         id, lessonID, answeredQuestions,
     }) => {
-        // console.log(answeredQuestions);
         const questions = [];
         answeredQuestions.submissions.forEach(q => questions.push(q.questionID));
-        // console.log(questions);
         const answers = [];
         answeredQuestions.submissions.forEach(q => answers.push(q.answerChosen));
-        // console.log(answers);
 
         const sObj = fromGlobalId(id);
         const lObj = fromGlobalId(lessonID);
@@ -244,7 +238,6 @@ const submitQuiz = mutationWithClientMutationId({
         questions.forEach((q, i) => {
             let isCorrect = true;
             const indexOfQuestion = questionIDs.reduce((a, e, i) => { if (e === q) a.push(i); return a; }, []);
-            // console.log(indexOfQuestion)
             q1.quiz.questions[indexOfQuestion[0]].answers.map(a => ((a.isCorrect) ? isCorrect = isCorrect && (a.answerName == answers[i]) : null));
             numCorrect += isCorrect;
         });
@@ -257,14 +250,18 @@ const submitQuiz = mutationWithClientMutationId({
                 submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             }
         });
-        const lid = lessonID;
+        let newTopScore = (numCorrect / questionIDs.length);
+        const s1 = await Student.findById(sObj.id).exec();
+        if (s1.topScore > newTopScore) {
+            newTopScore = s1.topScore;
+        }
         const pastQuiz = {
             lessonID,
             quizName: q1.name,
             score: (numCorrect / questionIDs.length),
             submittedAnswers,
         };
-        return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz } }, { new: true });
+        return Student.findByIdAndUpdate(sObj.id, { $push: { pastQuizzes: pastQuiz }, $set: { topScore: newTopScore } });
     },
 });
 const addQuestion = mutationWithClientMutationId({
@@ -292,7 +289,7 @@ const addQuestion = mutationWithClientMutationId({
 const deleteLesson = mutationWithClientMutationId({
     name: 'DeleteLesson',
     inputFields: {
-        id: { type: new GraphQLNonNull(GraphQLID) },
+        id: { type: new GraphQLNonNull(GraphQLString) },
     },
     lesson: {
         type: LessonType,
@@ -313,7 +310,7 @@ const deleteLesson = mutationWithClientMutationId({
 const addNote = mutationWithClientMutationId({
     name: 'AddNote',
     inputFields: {
-        id: { type: GraphQLID },
+        id: { type: GraphQLString },
         name: { type: GraphQLString },
         url: { type: GraphQLString },
     },
@@ -336,7 +333,7 @@ const addNote = mutationWithClientMutationId({
 const deleteNote = mutationWithClientMutationId({
     name: 'DeleteNote',
     inputFields: {
-        id: { type: GraphQLID },
+        id: { type: GraphQLString },
     },
     lesson: {
         type: LessonType,
@@ -357,7 +354,7 @@ const deleteNote = mutationWithClientMutationId({
 const addWorksheet = mutationWithClientMutationId({
     name: 'AddWorksheet',
     inputFields: {
-        id: { type: GraphQLID },
+        id: { type: GraphQLString },
         name: { type: GraphQLString },
         url: { type: GraphQLString },
     },
@@ -380,7 +377,7 @@ const addWorksheet = mutationWithClientMutationId({
 const deleteWorksheet = mutationWithClientMutationId({
     name: 'DeleteWorksheet',
     inputFields: {
-        id: { type: GraphQLID },
+        id: { type: GraphQLString },
     },
     lesson: {
         type: LessonType,
@@ -401,7 +398,7 @@ const deleteWorksheet = mutationWithClientMutationId({
 const addStudentWorksheetCopy = mutationWithClientMutationId({
     name: 'AddStudentWorksheetCopy',
     inputFields: {
-        studentID: { type: GraphQLID },
+        studentID: { type: GraphQLString },
         lessonID: { type: GraphQLString },
         url: { type: GraphQLString },
     },
@@ -443,7 +440,7 @@ const deleteStudent = mutationWithClientMutationId({
     name: 'DeleteStudent',
     inputFields: {
         id: {
-            type: new GraphQLNonNull(GraphQLID),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
     outputFields: {
@@ -461,7 +458,7 @@ const deleteStudent = mutationWithClientMutationId({
 const addURL = mutationWithClientMutationId({
     name: 'AddURL',
     inputFields: {
-        id: { type: GraphQLID },
+        id: { type: GraphQLString },
         url: { type: GraphQLString },
     },
     student: {
@@ -484,7 +481,7 @@ const deleteQuestion = mutationWithClientMutationId({
     name: 'deleteQuestion',
     inputFields: {
         questionId: {
-            type: new GraphQLNonNull(GraphQLID),
+            type: new GraphQLNonNull(GraphQLString),
         },
         lessonId: {
             type: new GraphQLNonNull(GraphQLString),
@@ -499,6 +496,28 @@ const deleteQuestion = mutationWithClientMutationId({
     mutateAndGetPayload: async ({ questionId, lessonId }) => {
         const lObj = fromGlobalId(lessonId);
         return Lesson.findByIdAndUpdate(lObj.id, { $pull: { 'quiz.questions': { _id: questionId } } });
+    },
+});
+
+const editLesson = mutationWithClientMutationId({
+    name: 'EditLesson',
+    inputFields: {
+        id: { type: GraphQLString },
+        newName: { type: GraphQLString },
+    },
+    lesson: {
+        type: LessonType,
+        resolve: payload => payload,
+    },
+    outputFields: {
+        lesson: {
+            type: LessonType,
+            resolve: payload => payload,
+        },
+    },
+    mutateAndGetPayload: ({ id, newName }) => {
+        const obj = fromGlobalId(id);
+        return Lesson.findByIdAndUpdate(obj.id, { $set: { name: newName } });
     },
 });
 
@@ -527,6 +546,7 @@ const Mutation = new GraphQLObjectType({
             deleteStudent,
             addURL,
             deleteQuestion,
+            editLesson,
         };
     },
 });

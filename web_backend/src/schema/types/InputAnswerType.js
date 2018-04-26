@@ -2,7 +2,7 @@ import { GraphQLInputObjectType, GraphQLBoolean, GraphQLString } from 'graphql';
 
 const InputAnswer = new GraphQLInputObjectType({
     name: 'InputAnswer',
-    description: 'Self Descriptive',
+    description: 'Input type of answer',
     fields() {
         return {
             answerName: { type: GraphQLString },
