@@ -4,7 +4,9 @@ import jwt from 'jsonwebtoken';
 import User from './models/user';
 import Teacher from './models/teacher';
 import Student from './models/student';
+import Admin from './models/admin';
 import Schema from './schema/schema';
+import jwt_decode from 'jwt-decode';
 
 
 const cors = require('cors');
@@ -49,41 +51,23 @@ export const addTeacher = async (name, email, token) => {
 
 
 export const createToken = async (name, email, token, role) => {
-    if (!name || !email || !token || !role) { // no credentials = fail
-        return false;
+    if (!name || !email || !token || !role) {
+        return '';
     }
     const user = await User.find({
         name, email, token, role,
     });
     if (user.length === 0) {
-        return false;
+        return '';
     }
     const payload = {
-        name,
-        email,
         token,
         role,
     };
     const jwtToken = await jwt.sign(payload, secret, {
         expiresIn,
     });
-    console.log(jwtToken);
     return jwtToken;
-};
-
-
-export const verifyToken = async (payload) => {
-    if (!payload) {
-        throw new Error('No token provided');
-    }
-    const data = (jwt.verify(payload, 'samplejwtauthgraphql'));
-    const user = await User.find({
-        name: data.name, email: data.email, token: data.token, role: data.role,
-    });
-    if (user.length === 0) {
-        return false;
-    }
-    return true;
 };
 
 const withAuth = next => async (req, res) => {
@@ -91,15 +75,19 @@ const withAuth = next => async (req, res) => {
     const header = req.headers.authorization;
     if (header) {
         const [type, token] = header.split(' ');
+        let tokenData;
         switch (type) {
         case 'Bearer':
-            if (await verifyToken(token)) {
-                return next(req, res);
+            tokenData = jwt.verify(token, 'samplejwtauthgraphql');
+            if (tokenData) {
+                req.user = await User.find({ role: tokenData.role, token: tokenData.token });
             }
+            break;
+        default:
             break;
         }
     }
-    return null;
+    return next(req, res);
 };
 
 mongoose.Promise = Promise;
@@ -122,26 +110,28 @@ app.use('/graphql', withAuth(graphqlHTTP({
 })));
 
 app.post('/login', async (req, res) => {
-    if (req.body.role) {
-        const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-        res.json(token);
+    if (req.body.role === 'student') {
+        Student.find({ name: req.body.name, email: req.body.email });
+    } else if (req.body.role === 'teacher') {
+        Teacher.find({ name: req.body.name, email: req.body.email });
+    } else if (req.body.role === 'admin') {
+        Admin.find({ name: req.body.name, email: req.body.email });
+    } else {
+        res.json('failed');
     }
-    res.json('failed');
+    const token = await createToken(req.body.googleAuthToken, req.body.role);
+    res.json(token);
 });
 
 app.post('/register', async (req, res) => {
     if (req.body.role === 'student') {
         addStudent(req.body.name, req.body.email, req.body.googleAuthToken);
-        const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-        console.log(token);
-        res.json(token);
     } else if (req.body.role === 'teacher') {
         addTeacher(req.body.name, req.body.email, req.body.googleAuthToken);
-        const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
-        console.log(token);
-        res.json(token);
     }
-    res.json('failed');
+    const token = await createToken(req.body.name, req.body.email, req.body.googleAuthToken, req.body.role);
+    console.log(token);
+    res.json(token);
 });
 
 

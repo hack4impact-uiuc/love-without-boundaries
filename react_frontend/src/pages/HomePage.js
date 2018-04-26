@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import jwt_decode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
@@ -181,29 +182,15 @@ class HomePage extends React.Component<Props> {
 
     enter = () => {
         console.log(sessionStorage.getItem('jwt'));
+        const decoded = jwt_decode(sessionStorage.getItem('jwt'));
+        if (decoded.role === 'student') {
+            this.props.history.push('/student');
+        } else if (decoded.role === 'teacher') {
+            this.props.history.push('/teacher');
+        } else if (decoded.role === 'admin') {
+            this.props.history.push('/admin');
+        }
     }
-
-    // setStudent = () => {
-    //     this.setState({
-    //         role: 'student',
-    //     });
-    //     console.log(this.state.role);
-    // }
-
-    // setTeacher = () => {
-    //     this.setState({
-    //         role: 'teacher',
-    //     });
-    //     console.log(this.state.role);
-    // }
-
-    // setAdmin = () => {
-    //     this.setState({
-    //         role: 'admin',
-    //     });
-    //     console.log(this.state.role);
-    // }
-
 
     render() {
         return (

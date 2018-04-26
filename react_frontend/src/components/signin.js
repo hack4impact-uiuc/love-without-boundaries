@@ -19,7 +19,8 @@ class SignIn extends React.Component {
             googleAuthToken: response.profileObj.googleId,
             role: this.props.role,
         }),
-    }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r)))
+    // }).then(resp => resp.json().then(r => console.log(r))).catch(console.error)
+    }).then(resp => resp.json().then(r => sessionStorage.setItem('jwt', r))).catch(console.error)
 
 
     render() {
