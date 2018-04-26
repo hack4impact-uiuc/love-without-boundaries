@@ -3,7 +3,7 @@ import InputQuestion from './InputQuestionType';
 
 const InputQuiz = new GraphQLInputObjectType({
     name: 'InputQuiz',
-    description: 'Self Descriptive',
+    description: 'Input type of quiz',
     fields() {
         return {
             name: {

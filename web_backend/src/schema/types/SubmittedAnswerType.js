@@ -5,8 +5,14 @@ const SubmittedAnswer = new GraphQLObjectType({
     description: 'Self Descriptive',
     fields() {
         return {
-            questionID: { type: GraphQLString },
-            answerChosen: { type: GraphQLString }
+            questionID: {
+                type: GraphQLString,
+                description: 'id of the question the answer was from',
+            },
+            answerChosen: {
+                type: GraphQLString,
+                description: 'The name of the answer that was chosen',
+            },
         };
     },
 });

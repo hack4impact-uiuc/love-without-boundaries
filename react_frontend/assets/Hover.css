@@ -15,7 +15,7 @@
 .lessonBox:hover {
 	background-color:#8f949b;
 }
-.lessonBox {
+.lessonBox-old {
 	color: white;
     background-color: #a6acb5;
     height: 30%;
@@ -24,6 +24,31 @@
 	margin-bottom: 15px;
     border-radius: 0px 40px;
     text-align: center;
+}
+.lesson-box {
+	border: 1px solid #d1d1d7;
+	height: 200px;
+	border-radius: 8px;
+	max-width: 380px;
+	margin: 10px 0;
+	text-align: center;
+}
+.lesson-title {
+	font-size: 25px;
+}
+.lesson-btn {
+	border: 1px solid #1EAEDB;
+	border-radius: 6px;
+}
+.lesson-quiz-text {
+	margin-left: 8px;
+	margin-top: 10px;
+	font-size: 17px;
+	display: inline-block;
+	color: #726E78;
+}
+.quiz-btn-box {
+	margin-top: 5px;
 }
 
 .quizButton {
