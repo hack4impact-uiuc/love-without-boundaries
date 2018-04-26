@@ -16,8 +16,13 @@ class StudentPage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            isStudent: jwt_decode(localStorage.getItem('token')).userType == 'student',
+            isStudent: false,
         };
+        console.log(this.props.location.state);
+        // this.props.location.state= 'aria';
+        // console.log('up');
+        console.log(jwt_decode(sessionStorage.getItem('token')).name);
+        // console.log('up');
     }
     render() {
         return (
@@ -40,6 +45,7 @@ class StudentPage extends React.Component<Props> {
                                         lessonID
                                         url
                                     }
+                                    topScore
                                 }
                             }
                         }

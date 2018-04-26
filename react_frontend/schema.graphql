@@ -1,0 +1,469 @@
+input AddGradeInput {
+  id: String!
+  lesson: String
+  score: Int
+  clientMutationId: String
+}
+
+type AddGradePayload {
+  student: Student
+  clientMutationId: String
+}
+
+input AddNoteInput {
+  id: String
+  name: String
+  url: String
+  clientMutationId: String
+}
+
+type AddNotePayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input AddQuestionInput {
+  question: InputQuestion
+  lessonId: String
+  clientMutationId: String
+}
+
+type AddQuestionPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input AddStudentWorksheetCopyInput {
+  studentID: String
+  lessonID: String
+  url: String
+  clientMutationId: String
+}
+
+type AddStudentWorksheetCopyPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input AddURLInput {
+  id: String
+  url: String
+  clientMutationId: String
+}
+
+type AddURLPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input AddWorksheetInput {
+  id: String
+  name: String
+  url: String
+  clientMutationId: String
+}
+
+type AddWorksheetPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+# Administrator
+type Admin implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Admin's name
+  name: String
+
+  # Admin's email to login with
+  email: String
+}
+
+# The name of the answer and if its correct or not
+type Answer {
+  # The name of the answer
+  answerName: String
+
+  # Whether this answer is the correct one or not
+  isCorrect: Boolean
+}
+
+input AssignStudentToTeacherInput {
+  studentID: String
+  teacherID: String
+  clientMutationId: String
+}
+
+type AssignStudentToTeacherPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input CreateAdminInput {
+  name: String!
+  email: String!
+  token: String!
+  clientMutationId: String
+}
+
+type CreateAdminPayload {
+  admin: Admin
+  clientMutationId: String
+}
+
+input CreateLessonInput {
+  name: String!
+  quiz: InputQuiz
+  worksheetName: String
+  worksheetURL: String
+  notesName: String
+  notesURL: String
+  clientMutationId: String
+}
+
+type CreateLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input CreateStudentInput {
+  name: String!
+  email: String!
+  token: String!
+  clientMutationId: String
+}
+
+type CreateStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input CreateTeacherInput {
+  name: String!
+  email: String!
+  token: String!
+  clientMutationId: String
+}
+
+type CreateTeacherPayload {
+  teacher: Teacher
+  clientMutationId: String
+}
+
+input DeleteAdminInput {
+  id: String!
+  clientMutationId: String
+}
+
+type DeleteAdminPayload {
+  admin: Admin
+  clientMutationId: String
+}
+
+input DeleteLessonInput {
+  id: String!
+  clientMutationId: String
+}
+
+type DeleteLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input DeleteNoteInput {
+  id: String
+  clientMutationId: String
+}
+
+type DeleteNotePayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input deleteQuestionInput {
+  questionId: String!
+  lessonId: String!
+  clientMutationId: String
+}
+
+type deleteQuestionPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input DeleteStudentInput {
+  id: String!
+  clientMutationId: String
+}
+
+type DeleteStudentPayload {
+  student: Student
+  clientMutationId: String
+}
+
+input DeleteTeacherInput {
+  id: String!
+  clientMutationId: String
+}
+
+type DeleteTeacherPayload {
+  teacher: Teacher
+  clientMutationId: String
+}
+
+input DeleteWorksheetInput {
+  id: String
+  clientMutationId: String
+}
+
+type DeleteWorksheetPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input EditLessonInput {
+  id: String
+  newName: String
+  clientMutationId: String
+}
+
+type EditLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+# Grade received on a quiz
+type Grade {
+  # The name of the lesson that the grade is for
+  lesson: String
+
+  # The grade in which the student received for this leeson
+  score: Int
+}
+
+# Input type of answer
+input InputAnswer {
+  answerName: String
+  isCorrect: Boolean
+}
+
+# Input type of question
+input InputQuestion {
+  questionName: String
+  answers: [InputAnswer]
+}
+
+# Input type of quiz
+input InputQuiz {
+  name: String
+  questions: [InputQuestion]
+  lessonID: String
+}
+
+# Input type of answer for a given question
+input InputSubmittedAnswer {
+  # The id of the question
+  questionID: String
+
+  # The answer the student chose for the question
+  answerChosen: String
+}
+
+# GraphQLList of Answered Questions
+input InputSubmittedAnswers {
+  submissions: [InputSubmittedAnswer]
+}
+
+# Schema design for lessons
+type Lesson implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Lesson's name
+  name: String
+
+  # Lesson's quiz for the material to be tested on
+  quiz: Quiz
+
+  # The name of the lesson's worksheet
+  worksheetName: String
+
+  # The URL of the lesson's worksheet
+  worksheetURL: String
+
+  # The name of the lesson's notes
+  notesName: String
+
+  # The URL of the lesson's notes
+  notesURL: String
+}
+
+# Your Root Mutation
+type Mutation {
+  createStudent(input: CreateStudentInput!): CreateStudentPayload
+  createTeacher(input: CreateTeacherInput!): CreateTeacherPayload
+  createAdmin(input: CreateAdminInput!): CreateAdminPayload
+  deleteAdmin(input: DeleteAdminInput!): DeleteAdminPayload
+  deleteTeacher(input: DeleteTeacherInput!): DeleteTeacherPayload
+  addGrade(input: AddGradeInput!): AddGradePayload
+  assignStudentToTeacher(input: AssignStudentToTeacherInput!): AssignStudentToTeacherPayload
+  submitQuiz(input: SubmitQuizInput!): SubmitQuizPayload
+  addQuestion(input: AddQuestionInput!): AddQuestionPayload
+  createLesson(input: CreateLessonInput!): CreateLessonPayload
+  deleteLesson(input: DeleteLessonInput!): DeleteLessonPayload
+  addNote(input: AddNoteInput!): AddNotePayload
+  deleteNote(input: DeleteNoteInput!): DeleteNotePayload
+  addWorksheet(input: AddWorksheetInput!): AddWorksheetPayload
+  deleteWorksheet(input: DeleteWorksheetInput!): DeleteWorksheetPayload
+  addStudentWorksheetCopy(input: AddStudentWorksheetCopyInput!): AddStudentWorksheetCopyPayload
+  removeStudentWorksheetCopy(input: undefinedInput!): undefinedPayload
+  deleteStudent(input: DeleteStudentInput!): DeleteStudentPayload
+  addURL(input: AddURLInput!): AddURLPayload
+  deleteQuestion(input: deleteQuestionInput!): deleteQuestionPayload
+  editLesson(input: EditLessonInput!): EditLessonPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Previously submitted quizzes
+type PastQuiz {
+  # id of the lesson the quiz was from
+  lessonID: String
+
+  # The name of the quiz
+  quizName: String
+
+  # The score the student received from submitting the quiz
+  score: Float
+
+  # The record of answers the student submitted
+  submittedAnswers: [SubmittedAnswer]
+}
+
+# Your Root Query
+type Query {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  students: [Student]
+  teachers: [Teacher]
+  admins: [Admin]
+  lessons: [Lesson]
+}
+
+# Question with multiple choice answers
+type Question {
+  # id of the question
+  id: ID
+
+  # The name of the question
+  questionName: String
+
+  # The list of the answers that you can choose from
+  answers: [Answer]
+}
+
+# Quiz with multiple questions
+type Quiz {
+  # The name of the quiz
+  name: String
+
+  # The list of questions for the quiz
+  questions: [Question]
+
+  # The id of the lesson this quiz is associated with
+  lessonID: String
+}
+
+# Self Descriptive
+type Student implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Student's name
+  name: String
+
+  # Student's email to login with
+  email: String
+
+  # Student's teacher that manages them
+  teacher: Teacher
+
+  # Student's grades for the past lessons
+  grades: [Grade]
+
+  # Student's past quizzes that they have submitted
+  pastQuizzes: [PastQuiz]
+
+  # URL for student's copy of the worksheets of lessons
+  worksheets: [Worksheet]
+
+  # Student's empty google doc playground
+  URL: String
+
+  # The student's highest grade
+  topScore: Float
+}
+
+input SubmitQuizInput {
+  id: String
+  lessonID: String
+  answeredQuestions: InputSubmittedAnswers
+  clientMutationId: String
+}
+
+type SubmitQuizPayload {
+  student: Student
+  clientMutationId: String
+}
+
+# Self Descriptive
+type SubmittedAnswer {
+  # id of the question the answer was from
+  questionID: String
+
+  # The name of the answer that was chosen
+  answerChosen: String
+}
+
+# Teacher
+type Teacher implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Teacher's name
+  name: String
+
+  # Teacher's email to login with
+  email: String
+
+  # List of the teacher's students
+  students: [Student]
+}
+
+input undefinedInput {
+  studentID: String
+  lessonID: String
+  clientMutationId: String
+}
+
+type undefinedPayload {
+  student: Student
+  clientMutationId: String
+}
+
+# Student worksheet for a specific lesson
+type Worksheet {
+  # id of the lesson this worksheet is associated with
+  lessonID: String
+
+  # The URL of the worksheet
+  url: String
+}

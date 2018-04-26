@@ -58,13 +58,10 @@ const getaccountFromGoogleToken = async (tokenId) => {
 };
 
 const withAuth = next => async (req, res) => {
-    console.log('Here');
     req.user = null;
     const header = req.headers.authorization;
     if (header) {
         const [type, token] = header.split(' ');
-        console.log(token);
-        console.log(await getaccountFromGoogleToken(token));
         switch (type) {
         case 'Bearer':
             req.user = getaccountFromGoogleToken(token) || req.user;
@@ -95,15 +92,27 @@ app.post('/auth/google', async (req, res) => {
     try {
         const { tokenId, role } = req.body;
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
-        console.log(role);
+        // console.log('yo');
+        // console.log(existing);
+        // console.log({ role });
+        // const combined = await Object.assign(existing, { role });
+        // console.log({ existing, role });
+        // console.log('yo');
         if (existing) {
-            return res.json(existing);
+            return res.json({ existing, role });
+            // response.role = { role };
+            // // console.log(role);
+            // console.log(response);
+            // return response;
         }
         return res.json(({
             student: addStudent,
             teacher: addTeacher,
             admin: async () => ({ error: 'Cannot create Admin acccount' }),
         })[role](payload.name, payload.email));
+        // response.role = role;
+        // // console.log(role);
+        // return response;
     } catch (e) {
         console.trace(e);
     }
