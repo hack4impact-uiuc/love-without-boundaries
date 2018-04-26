@@ -21,16 +21,14 @@ class googleDocButton extends React.Component {
                 // return;
                 throw Error('Insufficient Priviledges, please contact Admin');
             }
-
             if (this.props.location == undefined) {
                 alert('Insufficient priviledges, contact Admin');
             }
             addURL(environment, this.props.location.state.student.id, `https://docs.google.com/document/d/${res.id}/edit`);
-            console.log(res.id);
             this.setState({
                 url: `https://docs.google.com/document/d/${res.id}/edit`,
             });
-        }).catch(err => console.log(err.message));
+        }).catch(err => console.error(err.message));
     }
     render() {
         return (
