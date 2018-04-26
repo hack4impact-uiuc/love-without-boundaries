@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 15f5ce877c0410bebf1cfb41fb704ce1
+ * @relayHash 4b9fd4f922ab4abf4f9118aff7fefafb
  */
 
 /* eslint-disable */
@@ -16,6 +16,7 @@ export type reviewQuiz_QueryResponse = {|
   +node: ?{|
     +quiz?: ?{|
       +questions: ?$ReadOnlyArray<?{|
+        +questionName: ?string,
         +answers: ?$ReadOnlyArray<?{|
           +answerName: ?string,
           +isCorrect: ?boolean,
@@ -36,6 +37,7 @@ query reviewQuiz_Query(
     ... on Lesson {
       quiz {
         questions {
+          questionName
           answers {
             answerName
             isCorrect
@@ -67,6 +69,13 @@ v1 = [
   }
 ],
 v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "questionName",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "answers",
@@ -91,7 +100,7 @@ v2 = {
     }
   ]
 },
-v3 = {
+v4 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
@@ -103,7 +112,7 @@ return {
   "operationKind": "query",
   "name": "reviewQuiz_Query",
   "id": null,
-  "text": "query reviewQuiz_Query(\n  $lesson_id: ID!\n) {\n  node(id: $lesson_id) {\n    __typename\n    ... on Lesson {\n      quiz {\n        questions {\n          answers {\n            answerName\n            isCorrect\n          }\n          id\n        }\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query reviewQuiz_Query(\n  $lesson_id: ID!\n) {\n  node(id: $lesson_id) {\n    __typename\n    ... on Lesson {\n      quiz {\n        questions {\n          questionName\n          answers {\n            answerName\n            isCorrect\n          }\n          id\n        }\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -143,7 +152,8 @@ return {
                     "concreteType": "Question",
                     "plural": true,
                     "selections": [
-                      v2
+                      v2,
+                      v3
                     ]
                   }
                 ]
@@ -175,7 +185,7 @@ return {
             "args": null,
             "storageKey": null
           },
-          v3,
+          v4,
           {
             "kind": "InlineFragment",
             "type": "Lesson",
@@ -199,7 +209,8 @@ return {
                     "plural": true,
                     "selections": [
                       v2,
-                      v3
+                      v3,
+                      v4
                     ]
                   }
                 ]
@@ -212,5 +223,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = 'b432099aa2c0c6930fa944d5d81c2565';
+(node/*: any*/).hash = '11be60fc26c1ba92646f77b6cd720f14';
 module.exports = node;

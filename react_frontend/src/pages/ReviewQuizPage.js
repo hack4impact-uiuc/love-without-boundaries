@@ -45,41 +45,46 @@ class ReviewQuizPage extends Component {
                             <div>Loading...</div>
                         );
                     }
+                    if (props.node == null) {
+                        return <p>You have no Previous Quizzes for this lesson.</p>;
+                    }
                     const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined;
                     if (lessonID === undefined) {
-                        return <div>Incorrect Lesson</div>;
+                        return <p>Review Lesson not available for this lesson</p>;
                     }
                     if (props.node.pastQuizzes === undefined) {
-                        return <p>You have no Previous Quizzes</p>;
+                        return <p>You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal.</p>;
                     }
                     if (lessonID) {
-                        console.log(props.pastQuizzes);
                         return (
                             <div className="container">
                                 <h1>Quiz Submissions</h1>
                                 {
                                     props.node.pastQuizzes ?
                                         props.node.pastQuizzes.map((pq, idx) => (
-                                            <div key={idx}>
+                                            pq.lessonID === lessonID ?
+                                                <div key={idx}>
 
-                                                <h4>Try #{idx + 1}: {pq.quizName}</h4>
-                                                <p><b>Score: {pq.score}</b></p>
+                                                    <h4>Try #{idx + 1}: {pq.quizName}</h4>
+                                                    <p><b>Score: {pq.score}</b></p>
                                                 Your Answers:
-                                                {
-                                                    pq.submittedAnswers.map((q, i) =>
-                                                        (
-                                                            <div key={i}>
-                                                                {
-                                                                    q.answerChosen &&
+                                                    {
+                                                        pq.submittedAnswers.map((q, i) =>
+                                                            (
+                                                                <div key={i}>
+                                                                    {
+                                                                        q.answerChosen &&
                                                                         <p key={i}>
                                                                             {idx + 1}. {q.answerChosen}<br />
                                                                         </p>
-                                                                }
-                                                            </div>
-                                                        ))
-                                                }
+                                                                    }
+                                                                </div>
+                                                            ))
+                                                    }
 
-                                            </div>
+                                                </div>
+                                                :
+                                                null
                                         ))
                                         :
                                         null
