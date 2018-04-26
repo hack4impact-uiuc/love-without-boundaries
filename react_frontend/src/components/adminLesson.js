@@ -100,7 +100,6 @@ class AdminLessonComponent extends React.Component {
                         </Link>
                         <PaddedButton
                             className="btn btn-danger"
-                            value={this.props.id}
                             onClick={() => this.handleClick(this.props.id)}
                         >
                         Delete Lesson
