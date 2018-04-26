@@ -68,12 +68,9 @@ class LessonComponent extends React.Component<Props> {
         this.props.history.push('/reviewquiz');
     }
     render() {
-        let quiz = 'Take Quiz';
-        let box = <CheckedBoxInComplete />;
-        if (this.props.quizIsChecked) {
-            quiz = 'Review Quiz';
-            box = <CheckedBoxComplete />;
-        }
+        const quiz = 'Take Quiz';
+        const box = <CheckedBoxInComplete />;
+        console.log(this.props.lessonWorksheetLink);
         return (
 
             <div className="row">
@@ -96,6 +93,7 @@ class LessonComponent extends React.Component<Props> {
                             <SlightlyPaddedButton className="btn lesson-btn" onClick={this.gotoPastQuiz}> Review Quiz </SlightlyPaddedButton>
                         </Link>
                     </div>
+                    <p style={{ color: 'red' }}> { this.props.lessonWorksheetLink === undefined || this.props.lessonWorksheetLink === null ? 'Worksheet Copy doesnt have link' : ''} </p>
                 </div>
                 <div className="col-md-3 col-sm-2" />
             </div>
