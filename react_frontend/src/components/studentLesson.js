@@ -12,28 +12,14 @@ class StudentLesson extends React.Component {
         this.state = {
             error: '',
         };
+        this.worksheetObj = {}
     }
 
     componentDidMount() {
-        if (this.props.isStudent !== undefined) {
-            // teacher or admin
-            return;
-        }
-        if (this.props.studentWorksheets === null) {
-            // commented out for dev purposes - this allows us to see all the lessons without clicking on student
-            // this.setState({
-            //     error: 'No lessons exist, please contact admin',
-            // });
-            return;
-        }
+        if ( this.props.studentWorksheets !== null && typeof(this.props.studentWorksheets) !== 'undefined')
+        {
+        
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
-        if (studentWorksheetLessonIDs == undefined) {
-            // same as above - comment out in production!!
-            // this.setState({
-            //     error: 'No lessons exist, please contact admin',
-            // });
-            return;
-        }
         let i;
         const error = false;
         for (i = 0; i < this.props.lessons.length; i++) {
@@ -54,6 +40,8 @@ class StudentLesson extends React.Component {
                     setPermissionToAllEdit(res.id);
                 }).catch(err => console.err(err.message));
             }
+        }
+        this.worksheetObj = this.props.studentWorksheets.worksheets.map(element => this.worksheetObj[element.lessonID] = element.url)
         }
     }
     render() {
@@ -76,11 +64,8 @@ class StudentLesson extends React.Component {
                                 key={idx}
                                 id={lesson.id}
                                 lessonName={lesson.name}
-                                lessonNotes={lesson.notesName}
                                 lessonNotesLink={lesson.notesURL}
-                                lessonWorksheetLink={lesson.worksheetURL}
-                                worksheetName={lesson.worksheetName}
-                                quizName={lesson.quiz}
+                                lessonWorksheetLink={this.worksheetObj[lesson.id]}
                                 quizPercentage="50%"
                                 quizIsChecked={false}
                                 isStudent={this.props.isStudent}
