@@ -49,28 +49,36 @@ const StudentType = new GraphQLObjectType({
             id: globalId('Student'),
             name: {
                 type: GraphQLString,
+                description: 'Student\'s name',
             },
             email: {
                 type: GraphQLString,
+                description: 'Student\'s email to login with',
             },
             teacher: {
                 type: TeacherType,
+                description: 'Student\'s teacher that manages them',
                 resolve: student => Teacher.findOne({ '_id': student.teacherID } ),
             },
             grades: {
                 type: new GraphQLList(GradeType),
+                description: 'Student\'s grades for the past lessons',
             },
             pastQuizzes: {
                 type: new GraphQLList(PastQuizType),
+                description: 'Student\'s past quizzes that they have submitted',
             },
             worksheets: {
                 type: new GraphQLList(StudentWorksheetType),
+                description: 'URL for student\'s copy of the worksheets of lessons',
             },
             URL: {
                 type: GraphQLString,
+                description: 'Student\'s empty google doc playground',
             },
             topScore: {
                 type: GraphQLFloat,
+                description: 'The student\'s highest grade',
             },
         };
     },
@@ -85,12 +93,14 @@ const TeacherType = new GraphQLObjectType({
             id: globalId('Teacher'),
             name: {
                 type: GraphQLString,
+                description: 'Teacher\'s name',
             },
             email: {
                 type: GraphQLString,
+                description: 'Teacher\'s email to login with',
             },
             students: {
-                description: 'Students that the teacher teachers',
+                description: 'List of the teacher\'s students',
                 type: new GraphQLList(StudentType),
                 async resolve(teacher) {
                     return Student.find({ _id: { $in: teacher.listOfStudentIDs } });
@@ -109,9 +119,11 @@ const AdminType = new GraphQLObjectType({
             id: globalId('Admin'),
             name: {
                 type: GraphQLString,
+                description: 'Admin\'s name',
             },
             email: {
                 type: GraphQLString,
+                description: 'Admin\'s email to login with',
             },
         };
     },
@@ -126,21 +138,27 @@ const LessonType = new GraphQLObjectType({
             id: globalId('Lesson'),
             name: {
                 type: GraphQLString,
+                description: 'Lesson\'s name',
             },
             quiz: {
                 type: QuizType,
+                description: 'Lesson\'s quiz for the material to be tested on',
             },
             worksheetName: {
                 type: GraphQLString,
+                description: 'The name of the lesson\'s worksheet',
             },
             worksheetURL: {
                 type: GraphQLString,
+                description: 'The URL of the lesson\'s worksheet',
             },
             notesName: {
                 type: GraphQLString,
+                description: 'The name of the lesson\'s notes',
             },
             notesURL: {
                 type: GraphQLString,
+                description: 'The URL of the lesson\'s notes',
             },
         };
     },
