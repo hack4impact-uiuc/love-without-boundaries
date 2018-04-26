@@ -1,42 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import deleteLesson from '../relay/mutations/deleteLesson';
 import environment from '../relay/environment';
 import PaddedButton from '../components/button';
 import editLesson from '../relay/mutations/editLesson';
-
-const LessonTitle = styled.div`
-    border-bottom-style: solid;
-    border-color: white;
-    color: white;
-    padding: 10px;
-    font-size: 35px;
-    text-align: right;
-    z-index = -1;
-    margin: 20px;
-`;
-
-const LessonProps = styled.div`
-    border-style: solid;
-    border-color: white;
-    color: #337ab7;
-    padding: 5px 5px;
-    margin: 5px 5px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 0px;
-    background-color: white;
-    height: 50px;
-    z-index: -1;
-    border-radius: 0px 30px;
-
-`;
-
-
-const SlightlyPaddedButton = styled.button`
-    margin: 0px 5px;
-`;
 
 class AdminLessonComponent extends React.Component {
     constructor(props) {
@@ -88,23 +55,17 @@ class AdminLessonComponent extends React.Component {
                             </p>
                         }
                     </h3>
-                    <p>
-                        <a href={this.props.lessonNotesLink}><button className="btn lesson-btn">Notes</button></a>
-                        <br />
-                        <br />
-                        <a href={this.props.lessonWorksheetLink}><button className="btn lesson-btn">Worksheet</button></a>
-                        <br />
-                        <br />
-                        <Link style={{ display: 'block' }} to={{ pathname: '/quiz', state: { lessonID: this.props.id } }}>
-                            <button className="btn lesson-btn">Edit Quiz</button>
-                        </Link>
-                        <PaddedButton
-                            className="btn btn-danger"
-                            onClick={() => this.handleClick(this.props.id)}
-                        >
-                        Delete Lesson
-                        </PaddedButton>
-                    </p>
+                    <a href={this.props.lessonNotesLink}><button className="btn lesson-btn">Notes</button></a>
+                    <br /><br />
+                    <a href={this.props.lessonWorksheetLink}><button className="btn lesson-btn">Worksheet</button></a>
+                    <br /><br />
+                    <Link style={{ display: 'block' }} to={{ pathname: '/quiz', state: { lessonID: this.props.id } }}>
+                        <button className="btn lesson-btn">Edit Quiz</button>
+                    </Link>
+                    <br />
+                    <button className="btn lesson-btn2" onClick={() => this.handleClick(this.props.id)}>
+                        <style className="lesson-text">Delete Lesson</style>
+                    </button>
                 </div>
             </div>
         );

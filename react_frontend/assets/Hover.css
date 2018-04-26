@@ -49,6 +49,16 @@
 	border-radius: 6px;
 	background-color: #ffffff;
 }
+.lesson-btn2 {
+	border: 1px solid #ff5050;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+.lesson-text {
+	font-size: 14px;
+	display: inline-block;
+	color: #ff5050;
+}
 .lesson-quiz-text {
 	margin-top: 10px;
 	font-size: 17px;
