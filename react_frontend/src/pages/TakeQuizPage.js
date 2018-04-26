@@ -85,7 +85,7 @@ class TakeQuizPage extends Component {
                                         {
                                             props.node.quiz.questions.map((q, i) =>
                                                 (
-                                                    <form onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
+                                                    <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
                                                         {props.node.quiz.questions[i].questionName }
                                                         {this.createCheckboxes(props.node.quiz.questions[i].answers.map((q, i) => q.answerName), props.node.quiz.questions[i].id) }
                                                         {i === props.node.quiz.questions.length - 1 && <PaddedButton className="btn btn-danger" type="submit">Save</PaddedButton>}
@@ -93,7 +93,7 @@ class TakeQuizPage extends Component {
                                                 ))
                                         }
                                     </div>
-                                    <Link to="/student"><PaddedButton className="btn btn-danger">Go Back</PaddedButton></Link>
+                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                                 </div>
                             </div>
                         </div>

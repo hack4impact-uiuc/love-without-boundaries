@@ -35,10 +35,10 @@
 }
 .admin-lesson-box {
 	border: 1px solid #d1d1d7;
-	height: 400px;
+	height: 380px;
 	border-radius: 8px;
-	max-width: 380px;
-	margin: 10px 0;
+	max-width: 420px;
+	margin: 10px auto;
 	text-align: center;
 }
 .lesson-title {
@@ -290,14 +290,28 @@
 	display: inline;
 }
 
-.hello {
-	padding-left: 10px;
-}
-
 .ppp {
 	margin-left: 10px;
 }
 .ppp2 {
 	width: 35%;
 	margin-left: 10px;
+}
+
+.past-quiz-box {
+	max-width: 400px;
+	max-height: 400px;
+	border: 1px solid #3778ba;
+	border-radius: 10px;
+	margin-top: 15px;
+	padding: 10px;
+}
+
+.correct-answer-box {
+	max-width: 400px;
+	max-height: 400px;
+	border: 1px solid #22a531;
+	border-radius: 10px;
+	margin: 15px 15px;;
+	padding: 10px;
 }

@@ -63,7 +63,7 @@ class ReviewQuiz extends React.Component {
                         );
                     }
                     return (
-                        <div>
+                        <div className="row correct-answer-box">
                             <h2>Correct Answers:</h2>
                             {
                                 props.node.quiz != undefined ?
