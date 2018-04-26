@@ -5,7 +5,7 @@ import addStudentWorksheetCopy from './relay/mutations/addStudentWorksheetCopy';
 function getGapiAccessToken() {
     // return jwtDecode(localStorage.getItem('token')).gapi_access_token;
     // hard code token for now
-    return 'ya29.GlyjBSEBfHjE8o20CGMqbWB-2XQ8hsgmFbkUN2WxegX2rLMQh2xcwXQQGuQ4Gs9HzpXgG6GLhpeQJwqWBNgLRx3FeHZDLLvCvfIPI8uq1ZfeVrt0AnxCv3CsjFCrDw';
+    return 'ya29.GlypBR2pnkZwXrNrZIjxG1Mk-ED07nu2yeCLxpgoqe2HEmH0N8ayMgm6E3KkJ2TfxhCIkDc2zUcJyfwZ0pWVMMXdPTQB97SsBJIlYRU-VMzDiEq82CBAk9Ep7AuFfw';
 }
 
 function setPermissionToAllRead(fileId) {
@@ -47,11 +47,10 @@ function copyFile(fileId) {
     }).then(res => res.json()).catch(err => console.log(err));
 }
 
-function addFile(userId) {
-    return fetch(`https://www.googleapis.com/drive/v3/files/${fileId}/copy?access_token=${getGapiAccessToken()}`, {
+function addFile() {
+    return fetch(`https://www.googleapis.com/upload/drive/v3/files/?access_token=${getGapiAccessToken()}`, {
         body: JSON.stringify({
-            action: 'create',
-            userId,
+            name: 'PlayGround',
         }),
         method: 'POST',
         mode: 'cors',

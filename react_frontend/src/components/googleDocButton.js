@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import addURL from '../relay/mutations/addURL';
-import addFile from '../Gapi';
+import { addFile, copyFile } from '../Gapi';
 import environment from '../relay/environment';
 // reactClass --
 class googleDocButton extends React.Component {
@@ -16,18 +16,26 @@ class googleDocButton extends React.Component {
             return;
         }
         // Need to get userId
-        addFile(/*UserId */).then((res) => {
+        copyFile('1CLU5eNONV-KbqEQ8Y2dzlO_T45bLnMOO2-b0MR6nk10').then((res) => {
             if (res == undefined || res.error) {
                 // return;
                 throw Error('Insufficient Priviledges, please contact Admin');
             }
-            addURL(environment, this.location.state.student.id, res.url);
-        }).catch(err => console.err(err.message));
+
+            if (this.props.location == undefined) {
+                alert('Insufficient priviledges, contact Admin');
+            }
+            addURL(environment, this.props.location.state.student.id, `https://docs.google.com/document/d/${res.id}/edit`);
+            console.log(res.id);
+            this.setState({
+                url: `https://docs.google.com/document/d/${res.id}/edit`,
+            });
+        }).catch(err => console.log(err.message));
     }
     render() {
         return (
             <div>
-                <a href={this.props.url}>
+                <a href={this.state.url}>
                     <button type="button" className="btn btn-info">Google Docs Playground</button>
                 </a>
             </div>
