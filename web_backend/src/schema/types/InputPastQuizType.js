@@ -3,7 +3,7 @@ import InputSubmittedAnswer from './InputSubmittedAnswerType';
 
 const InputPastQuiz = new GraphQLInputObjectType({
     name: 'InputPastQuiz',
-    description: 'Self Descriptive',
+    description: 'Input type of past quiz',
     fields() {
         return {
             lessonID: { type: GraphQLString },

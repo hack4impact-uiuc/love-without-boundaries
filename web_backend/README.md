@@ -1,3 +1,14 @@
+# GraphQL Backend 
+This is any implementation of a GraphQL Server using the Express.js framework. 
+
+To start the server:
+```
+yarn
+yarn exportSchema
+yarn build
+yarn start
+```
+
 # Examples
 
 ## Create Student Mutation

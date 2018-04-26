@@ -2,7 +2,7 @@
 **Goal:** To facilitate and improve the learning process of Cambodian Students as they prepare for their College Entrance English Exam by tracking the progress of students and their interactions with tutors.
 
 ## Tech Stack
-We split this application into Frontned and Backend services. The backend is [GraphQL](http://graphql.org/) server using Express and Node.js 8.x.x with [MongoDB](https://docs.mongodb.com/), a NoSQL database, as our choice of data store. The Frontend is built with React 16.2.x and [Relay](https://facebook.github.io/relay/), which is a GraphQL client used to interact with the backend. 
+We split this application into Frontend and Backend services. The backend is [GraphQL](http://graphql.org/) server using Express and Node.js 8.x.x with [MongoDB](https://docs.mongodb.com/), a NoSQL database, as our choice of data store. The Frontend is built with React 16.2.x and [Relay](https://facebook.github.io/relay/), which is a GraphQL client used to interact with the backend. 
 
 ## Application Structure 
 - `react_frontend`: frontend top directory
@@ -28,10 +28,10 @@ We split this application into Frontned and Backend services. The backend is [Gr
             - `types/`: holds GraphQL types, which extend `models/`
         - `scripts`: holds script to export the Schema to `react_frontend/schema.graphql` for the frontend to use 
         - `index.js`: entrance script, sets up MongoDB connection and starts GraphQL server
+        - `package.json`
     - `docs/`: Documentation for backend
     - `eslintrc.json`: eslint configuration file
     - `.babelrc`
-    - `package.json`
 
 Specific Documentation is given inside the `react_frontend` and `web_backend` folders.
 ## Development Setup
