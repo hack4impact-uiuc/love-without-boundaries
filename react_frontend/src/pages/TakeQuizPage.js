@@ -9,7 +9,7 @@ import PaddedButton from './../components/button';
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWQ5NTNlMDUwYTBhMmQyYjBkMDdmZTQ=' };
+        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWRmZjMyNzU0YmMxMDAzNzhkODAyMjM=' };
     }
 
     componentWillMount = () => {
@@ -22,7 +22,7 @@ class TakeQuizPage extends Component {
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
-        submitQuiz(environment, this.state.studentID, 'TGVzc29uOjVhZGY3ZmYxYjkxZDFjYjI5MjBkMzIwYQ==', Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
+        submitQuiz(environment, this.state.studentID, this.state.lessonID, Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
     }
 
     createCheckbox = (label, id, i) => (

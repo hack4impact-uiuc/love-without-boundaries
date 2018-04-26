@@ -21,33 +21,32 @@ mutation submitQuizMutation(
 }
 `;
 
-function submitQuiz(environment: Environment, id: string, lessonID: string, questionIds: [string], chosenAnswers: [string]) {
-    const submissions = [];
-    let i;
+function submitQuiz(environment: Environment, studentID: string, quizID: string, questionIds: [string], chosenAnswers: [string]) {
+    const mysubmissions = [];
     for (let i = 0; i < questionIds.length; i += 1) {
-        submissions.push({ questionID: questionIds[i], answerChosen: chosenAnswers[i] });
+        mysubmissions.push({ questionID: questionIds[i], answerChosen: chosenAnswers[i] });
     }
+    console.log(mysubmissions);
     const variables = {
         input: {
-            lessonID,
-            answeredQuestions: { submissions },
+            id: studentID,
+            lessonID: quizID,
+            answeredQuestions: { submissions: mysubmissions },
         },
     };
-    let finalRes = {};
+
     commitMutation(
         environment,
         {
             mutation,
             variables,
-            onCompleted: (response,errors) => {
-                console.log('Response received from server.');
+            onCompleted: (response) => {
+                console.log('Response received from server. Quiz submitted.');
                 console.log(response);
-                finalRes.res = response;
             },
             onError: err => console.error(err),
         },
     );
-    return finalRes;
 }
 
 export default submitQuiz;
