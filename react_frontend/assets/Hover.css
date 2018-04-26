@@ -278,3 +278,15 @@
 .inlineDis{
 	display: inline;
 }
+
+.hello {
+	padding-left: 10px;
+}
+
+.ppp {
+	margin-left: 10px;
+}
+.ppp2 {
+	width: 35%;
+	margin-left: 10px;
+}
