@@ -40,6 +40,8 @@ class StudentPage extends React.Component<Props> {
                                         lessonID
                                         url
                                     }
+                                    id
+                                    URL
                                 }
                             }
                         }

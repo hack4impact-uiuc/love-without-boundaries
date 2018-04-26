@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 08e7ebb30bdc87f0e4c4edd30aac30d2
+ * @relayHash 2e208f9828e9ef7c7c2393a1e29410a4
  */
 
 /* eslint-disable */
@@ -18,6 +18,7 @@ export type TeacherPage_QueryResponse = {|
     +students?: ?$ReadOnlyArray<?{|
       +name: ?string,
       +id: string,
+      +URL: ?string,
     |}>,
   |},
 |};
@@ -35,6 +36,7 @@ query TeacherPage_Query(
       students {
         name
         id
+        URL
       }
     }
     id
@@ -88,7 +90,14 @@ v4 = {
       "plural": true,
       "selections": [
         v2,
-        v3
+        v3,
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "URL",
+          "args": null,
+          "storageKey": null
+        }
       ]
     }
   ]
@@ -98,7 +107,7 @@ return {
   "operationKind": "query",
   "name": "TeacherPage_Query",
   "id": null,
-  "text": "query TeacherPage_Query(\n  $teacher_id: ID!\n) {\n  node(id: $teacher_id) {\n    __typename\n    ... on Teacher {\n      name\n      students {\n        name\n        id\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query TeacherPage_Query(\n  $teacher_id: ID!\n) {\n  node(id: $teacher_id) {\n    __typename\n    ... on Teacher {\n      name\n      students {\n        name\n        id\n        URL\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -150,5 +159,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '9c32930c8328dcdce6df7693fa9ce918';
+(node/*: any*/).hash = 'a6676ab5e5657928b7482546c8104606';
 module.exports = node;
