@@ -55,6 +55,8 @@ class StudentLesson extends React.Component {
                 }).catch(err => console.err(err.message));
             }
         }
+        console.log('hi');
+        console.log(this.props);
     }
     render() {
         if (this.state.error !== '') {
@@ -72,19 +74,22 @@ class StudentLesson extends React.Component {
                 {
                     this.props.lessons !== undefined ?
                         this.props.lessons.map((lesson, idx) => (
-                            <LessonComponent
-                                key={idx}
-                                id={lesson.id}
-                                lessonName={lesson.name}
-                                lessonNotes={lesson.notesName}
-                                lessonNotesLink={lesson.notesURL}
-                                lessonWorksheetLink={lesson.worksheetURL}
-                                worksheetName={lesson.worksheetName}
-                                quizName={lesson.quiz}
-                                quizPercentage="50%"
-                                quizIsChecked={false}
-                                isStudent={this.props.isStudent}
-                            />
+                            <div>
+                                {console.log(this.props.topScore)}
+                                <LessonComponent
+                                    key={idx}
+                                    id={lesson.id}
+                                    lessonName={lesson.name}
+                                    lessonNotes={lesson.notesName}
+                                    lessonNotesLink={lesson.notesURL}
+                                    lessonWorksheetLink={lesson.worksheetURL}
+                                    worksheetName={lesson.worksheetName}
+                                    quizName={lesson.quiz}
+                                    quizPercentage={this.props.topScore}
+                                    quizIsChecked={false}
+                                    isStudent={this.props.isStudent}
+                                />
+                            </div>
                         ))
                         :
                         <p>There arent any lessons</p>

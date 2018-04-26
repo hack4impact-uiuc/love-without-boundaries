@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5d0586805cea3d79beacfd38e7a0f1d3
+ * @relayHash 2c34968c2c868812c7040c00f7a9921c
  */
 
 /* eslint-disable */
@@ -26,6 +26,7 @@ export type StudentPage_QueryResponse = {|
       +lessonID: ?string,
       +url: ?string,
     |}>,
+    +topScore?: ?number,
   |},
 |};
 */
@@ -50,6 +51,7 @@ query StudentPage_Query(
         lessonID
         url
       }
+      topScore
     }
     id
   }
@@ -155,6 +157,13 @@ v4 = {
           "storageKey": null
         }
       ]
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "topScore",
+      "args": null,
+      "storageKey": null
     }
   ]
 };
@@ -163,7 +172,7 @@ return {
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n        url\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n        url\n      }\n      topScore\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -217,5 +226,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '454a82a5c8514c825a0098505b805e72';
+(node/*: any*/).hash = '19842d8c216789e1e9b8c10b6701b707';
 module.exports = node;

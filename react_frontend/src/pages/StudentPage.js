@@ -33,6 +33,7 @@ class StudentPage extends React.Component<Props> {
                                 worksheetURL
                                 notesName
                                 notesURL
+                            
                             }
                             node(id: $studentId) {
                                 ... on Student {
@@ -40,6 +41,7 @@ class StudentPage extends React.Component<Props> {
                                         lessonID
                                         url
                                     }
+                                    topScore
                                 }
                             }
                         }
@@ -53,11 +55,13 @@ class StudentPage extends React.Component<Props> {
                         }
                         return (
                             <div>
+
                                 <StudentLesson
                                     isStudent={this.state.isStudent}
                                     studentWorksheets={props.node}
                                     lessons={props.lessons}
                                     location={this.props.location}
+
                                 />
                             </div>
                         );
