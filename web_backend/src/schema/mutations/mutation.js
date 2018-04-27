@@ -4,7 +4,6 @@ import InputQuestionType from '../types/InputQuestionType';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';
-import User from '../../models/user';
 import InputQuizType from '../types/InputQuizType';
 import Lesson from '../../models/lessons';
 import { TeacherType, AdminType, StudentType, LessonType } from '../types/Nodes';
@@ -30,10 +29,6 @@ const createStudent = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
-        const u = new User({
-            name, email, token, role: 'student',
-        });
-        await u.save();
         const s = new Student({ name, email });
         return s.save();
     },
@@ -59,10 +54,6 @@ const createTeacher = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
-        const u = new User({
-            name, email, token, role: 'teacher',
-        });
-        await u.save();
         const t = new Teacher({ name, email });
         return t.save();
     },
@@ -88,10 +79,6 @@ const createAdmin = mutationWithClientMutationId({
         },
     },
     mutateAndGetPayload: async ({ name, email, token }) => {
-        const u = new User({
-            name, email, token, role: 'admin',
-        });
-        await u.save();
         const a = new Admin({ name, email });
         return a.save();
     },
