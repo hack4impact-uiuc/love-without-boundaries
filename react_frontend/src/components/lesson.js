@@ -6,58 +6,6 @@ type Props = {
   /**/
 }
 
-const LessonTitle = styled.div`
-    border-bottom-style: solid;
-    border-color: white;
-    color: white;
-    padding: 10px;
-    font-size: 35px;
-    text-align: right;
-    z-index = -1;
-    margin: 20px;
-`;
-
-const LessonProps = styled.div`
-    border-style: solid;
-    border-color: white;
-    color: #337ab7;
-    padding: 5px 5px;
-    margin: 5px 5px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 0px;
-    background-color: white;
-    height: 50px;
-    z-index: -1;
-    border-radius: 0px 30px;
-
-`;
-
-const CheckedBoxComplete = styled.div`
-    display: inline-block;
-    margin-left: 3px;
-    margin-bottom: 1px;
-    border-style: solid;
-    border-color: green;
-    color: white;
-    font-size: 30px;
-    background-color: green;
-    height: 25px;
-    width: 25px;
-    z-index: 100;
-`;
-
-const CheckedBoxInComplete = styled.div`
-    float: right;
-    float:top;
-    border-style: solid;
-    border-color: red;
-    height: 25px;
-    width: 25px;
-    background-color: red;
-    z-index: 100;
-`;
-
 const SlightlyPaddedButton = styled.button`
     margin: 0px 5px;
 `;

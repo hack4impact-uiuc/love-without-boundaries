@@ -6,6 +6,7 @@ import Student from './models/student';
 import Admin from './models/admin';
 import Schema from './schema/schema';
 import fetch from 'node-fetch';
+import { toGlobalId, globalIdField } from 'graphql-relay';
 
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -14,16 +15,14 @@ const MONGO_URI = 'mongodb://ariamalkani:malkani@ds147228.mlab.com:47228/lwb';
 const CLIENT_ID = '162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com';
 
 export const addStudent = async (name, email) => {
-    console.log('hi');
     if (!name || !email) { // no credentials = fail
         return false;
     }
     const student = await Student.findOne({ name, email });
     if (student !== null) {
-        return Student.findOne({ name, email });
+        return student;
     }
     const s = new Student({ name, email });
-    console.log('new');
     return s.save();
 };
 
@@ -94,46 +93,27 @@ app.use('/graphql', withAuth(graphqlHTTP({
 
 app.post('/auth/google', async (req, res) => {
     try {
-        const { tokenId, role } = req.body;
+        const { tokenId, role, accessToken } = req.body;
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
-        console.log(existing);
 
-        // if (existing) {
-        //     return res.json({ existing, role });
-        // //     // response.role = { role };
-        // //     // // console.log(role);
-        // //     // console.log(response);
-        // //     // return response;
-        // }
-        // if (role === 'student') {
-        //     if (Student.find({ name: payload.name, email: payload.email })) {
-        //         console.log((Student.find({ name: payload.name, email: payload.email })));
-        //         console.log('FOUND STUDENT');
-        //         return (Student.find({ name: payload.name, email: payload.email }));
-        //     }
-        // }
-        // if (role === 'teacher') {
-        //     if (Teacher.find({ name: payload.name, email: payload.email })) {
-        //         console.log('FOUND TEACHER');
-        //         return (Teacher.find({ name: payload.name, email: payload.email }));
-        //     }
-        // }
-        // if (role === 'admin') {
-        //     if (Admin.find({ name: payload.name, email: payload.email })) {
-        //         console.log('FOUND ADMIN');
-        //         return (Admin.find({ name: payload.name, email: payload.email }));
-        //     }
-        // }
+        // TODO: Jwt web tokens
+        if (role === 'student') {
+            const student = await addStudent(payload.name, payload.email);
+            const id = toGlobalId('Student', student._id);
+            res.json({ role: 'student', data: { id, name: student.name, email: student.email } });
+        } else if (role === 'teacher') {
+            const teacher = await addTeacher(payload.name, payload.email);
+            const id = toGlobalId('Teacher', teacher._id);
+            res.json({ role: 'teacher', data: { id, name: teacher.name, email: teacher.email } });
+        } else {
+            res.json({ error: 'Cannot create Admin account ' });
+        }
 
-        // Teacher.find({ name: payload.name, email: payload.email });
-
-        //  await res.json(
-
-        return await res.json(({
-            student: addStudent,
-            teacher: addTeacher,
-            admin: async () => ({ error: 'Cannot create Admin acccount' }),
-        })[role](payload.name, payload.email));
+        // res.json(({
+        //     student: await addStudent,
+        //     teacher: await addTeacher,
+        //     admin: async () => ({ error: 'Cannot create Admin acccount' }),
+        // })[role](payload.name, payload.email));
     } catch (e) {
         console.trace(e);
     }
