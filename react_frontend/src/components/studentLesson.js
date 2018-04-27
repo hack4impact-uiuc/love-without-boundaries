@@ -59,7 +59,7 @@ class StudentLesson extends React.Component {
         }
         Promise.all(promises).then((res) => {
             for (i = 0; i < res.length; i += 1) {
-                if (res[i] == undefined || res.error || res[i].id === undefined) {
+                if (res[i] == undefined || res.error || res[i].id === undefined || res[i].id.length === 0) {
                     throw Error('Insufficient Privilges, please contact Admin');
                 }
                 refresh = 1;
