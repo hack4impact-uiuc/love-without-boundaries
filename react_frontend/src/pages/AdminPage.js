@@ -13,12 +13,12 @@ import jwt_decode from 'jwt-decode';
 const ToolBar = styled.div`
 
     background: rgba(30,209,179,1);
-    background: -moz-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(30,209,179,1)), color-stop(100%, rgba(3,114,145,1)));
-    background: -webkit-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-    background: -o-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-    background: -ms-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-    background: linear-gradient(to right, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -moz-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(193, 56, 56,1)), color-stop(100%, rgba(65, 186, 234,1)));
+    background: -webkit-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: -o-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: -ms-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: linear-gradient(to right, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', endColorstr='#037291', GradientType=1 );
 
     width: 70%;
@@ -70,10 +70,10 @@ class AdminPage extends React.Component {
                             <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
                             <ToolBar>
                                 <div className="adminTool">
-                                    <Link to="/admin/lesson"><PaddedButton className="btn btn-default">Edit Lessons</PaddedButton></Link>
+                                    <Link to="/admin/lesson"><PaddedButton className="btn btn-admin">Edit Lessons</PaddedButton></Link>
                                 </div>
                                 <div className="adminTool">
-                                    <Link to="/admin/list"><PaddedButton className="btn btn-default">View Teachers and Students</PaddedButton></Link>
+                                    <Link to="/admin/list"><PaddedButton className="btn btn-admin">View Teachers and Students</PaddedButton></Link>
                                 </div>
                             </ToolBar>
                         </div>

@@ -16,6 +16,10 @@
 	border: 0px;
 }
 
+.btn-admin {
+	background-color:#ededed;
+	color: #000;
+}
 .lesson-box {
 	border: 1px solid #d1d1d7;
 	max-height: 300px;
