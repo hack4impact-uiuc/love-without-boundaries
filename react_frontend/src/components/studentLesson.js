@@ -51,11 +51,8 @@ class StudentLesson extends React.Component {
             <div className="container-fluid">
                 <h2>
                     {
-                        `${jwt_decode(sessionStorage.getItem('token')).name}'s Lessons`
-                    }
-                    {/* {
                         this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
-                    } */}
+                    }
                 </h2>
                 <GoogleDocButton url="https://docs.google.com/document/d/1EGbrZFxY33xyEZdLyXmKGdWi5NR4CL7nS4C_7HzhSgE/edit" />
                 <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>

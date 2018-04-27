@@ -3,9 +3,47 @@ import { withRouter } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 // import cookie from 'react-cookie';
 import jwt_decode from 'jwt-decode';
+import { graphql, QueryRenderer } from 'react-relay';
+import environment from '../relay/environment';
+
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 class SignIn extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            id: '',
+        };
+    }
+
+
+    getId = (props) => {
+        if (this.props.role === 'student') {
+            for (let i = 0; i < props.students.length; i++) {
+                if (props.students[i].email === this.state.email) {
+                    console.log(props.students[i].id);
+                    this.props.history.push('/student', { student: { id: props.students[i].id } });
+                }
+            }
+        } else if (this.props.role === 'teacher') {
+            for (let i = 0; i < props.teachers.length; i++) {
+                if (props.teachers[i].email === this.state.email) {
+                    console.log(props.teachers[i].id);
+                    this.props.history.push('/teacher', { teachers: { id: props.teachers[i].id } });
+                }
+            }
+        } else if (this.props.role === 'admin') {
+            for (let i = 0; i < props.admins.length; i++) {
+                if (props.admins[i].email === this.state.email) {
+                    console.log(props.admins[i].id);
+                    this.props.history.push('/admin', { admin: { id: props.admins[i].id } });
+                }
+            }
+        }
+    }
+
     responseGoogle = (auth) => {
         fetch('http://localhost:8080/auth/google', {
             method: 'POST',
@@ -15,14 +53,17 @@ class SignIn extends React.Component {
             body: JSON.stringify({ tokenId: auth.tokenId, role: this.props.role }),
         }).then(resp => resp.json()).then(r => sessionStorage.setItem('type', r.role)).catch(console.error);
 
-        // const expiry = new Date(auth.tokenObj.expires_at);
-        sessionStorage.setItem('token', auth.tokenId);
-        this.props.history.push(`/${this.props.role}`);
+        this.setState({
+            email: jwt_decode(auth.tokenId).email,
+        });
     }
 
     render() {
         return (
+
             <div>
+                {this.state.id && <p> ENTERRR</p> }
+                {this.state.email === '' &&
                 <GoogleLogin
                     className="btn"
                     style={{
@@ -43,6 +84,45 @@ class SignIn extends React.Component {
                     scope="https://www.googleapis.com/auth/drive.file"
                     onSuccess={this.responseGoogle}
                 />
+                }
+                { this.state.email !== '' &&
+
+                    <QueryRenderer
+                        environment={environment}
+                        query={graphql`
+                            query signinQuery{
+                                students {
+                                    email
+                                    id
+                                }
+                                teachers {
+                                    email
+                                    id
+                                }
+                                admins {
+                                    email
+                                    id
+                                }
+                            }  
+                        `}
+                        variables={{}}
+                        render={({ props }) => {
+                            if (!props) {
+                                return (
+                                    <div>Loading...</div>
+                                );
+                            }
+                            return (
+                                <div>
+
+                                    {this.getId(props)}
+
+                                </div>
+                            );
+                        }}
+                    />
+
+                }
             </div>
 
         );

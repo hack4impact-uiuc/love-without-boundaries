@@ -18,10 +18,12 @@ class StudentPage extends React.Component<Props> {
         this.state = {
             isStudent: false,
         };
-        console.log(this.props.location.state);
+        console.log('hi');
+        console.log(this.props);
+        // console.log(this.props.location.state);
         // this.props.location.state= 'aria';
         // console.log('up');
-        console.log(jwt_decode(sessionStorage.getItem('token')).name);
+        // console.log(jwt_decode(sessionStorage.getItem('token')).name);
         // console.log('up');
     }
     render() {
