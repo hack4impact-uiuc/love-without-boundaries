@@ -11,10 +11,6 @@ const SlightlyPaddedButton = styled.button`
 `;
 
 class LessonComponent extends React.Component<Props> {
-    gotoQuiz = () => { this.props.history.push('/takequiz'); }
-    gotoPastQuiz = () => {
-        this.props.history.push('/reviewquiz');
-    }
     render() {
         return (
             <div className="row">
@@ -27,14 +23,14 @@ class LessonComponent extends React.Component<Props> {
                             <a href={this.props.lessonWorksheetLink}><SlightlyPaddedButton style={{ marginLeft: '10px' }}className="btn lesson-btn">Worksheet</SlightlyPaddedButton></a>
                         </div>
                         <div className="row quiz-btn-box">
-                            {this.props.isStudent && (
-                                <Link key={this.props.key} to={{ pathname: '/takequiz', state: { lessonID: this.props.id } }}>
-                                    <SlightlyPaddedButton className="btn lesson-btn" onClick={this.gotoPastQuiz}> Take Quiz </SlightlyPaddedButton>
-                                </Link>
+                            {/* {this.props.isStudent && */} (
+                            <Link key={this.props.key} to={{ pathname: '/takequiz', state: { lessonID: this.props.id } }}>
+                                <SlightlyPaddedButton className="btn lesson-btn"> Take Quiz </SlightlyPaddedButton>
+                            </Link>
                             )}
 
                             <Link to={{ pathname: '/reviewquiz', state: { lessonID: this.props.id } }}>
-                                <SlightlyPaddedButton className="btn lesson-btn" onClick={this.gotoPastQuiz}> Review Quiz </SlightlyPaddedButton>
+                                <SlightlyPaddedButton className="btn lesson-btn" > Review Quiz </SlightlyPaddedButton>
                             </Link>
                         </div>
                     </div>
