@@ -3,29 +3,30 @@ import { withRouter, Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
-import Checkbox from './../components/Checkbox';
+import Checkbox from './../components/checkbox';
+import PaddedButton from './../components/button';
 
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.lessonID = 'TGVzc29uOjVhY2E5YTJjMGM2Yzc1N2M0OGQ1ZmY1Yg==';
-        this.state = { qNum: 0, qMap: [] };
+        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWUyYzIxZGY0YmYyM2EwZWRkMzIzMzU=' };
     }
 
     componentWillMount = () => {
         this.selectedCheckboxes = {};
     }
 
-    toggleCheckbox = (label, i) => {
-        this.selectedCheckboxes[i] = label;
+      toggleCheckbox = (label, i) => {
+          if (this.selectedCheckboxes[i] != label) {
+              this.selectedCheckboxes[i] = label;
+          }
+      }
+
+    handleFormSubmit = formSubmitEvent => {
+        formSubmitEvent.preventDefault();
+        submitQuiz(environment, this.state.studentID, this.state.lessonID, Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
     }
 
-    handleFormSubmit = (formSubmitEvent, id) => {
-        formSubmitEvent.preventDefault();
-        console.log(Object.keys(this.selectedCheckboxes));
-        console.log(Object.values(this.selectedCheckboxes));
-        submitQuiz(environment, 'U3R1ZGVudDo1YWQwODg1YjliNjFhZjcxOWIxZWYzMTg=', 'TGVzc29uOjVhZDAyODA2MTBmNzBiMDA1ZmZmZTg4Mg==', Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
-    }
 
     createCheckbox = (label, id, i) => (
         <Checkbox
@@ -38,7 +39,6 @@ class TakeQuizPage extends Component {
     createCheckboxes = (answerNames, questionId) => (
         answerNames.map((e) => this.createCheckbox(e, questionId))
     )
-
 
     render() {
         return (
@@ -53,6 +53,7 @@ class TakeQuizPage extends Component {
                             ... on Lesson {
                                 name
                                 quiz {
+                                    lessonID
                                     questions {
                                         id
                                         questionName
@@ -76,6 +77,7 @@ class TakeQuizPage extends Component {
                             <div>Loading...</div>
                         );
                     }
+                    this.state.lessonID = props.node.id;
                     return (
                         <div>
                             <h1>{props.node.name} Quiz</h1>
@@ -86,15 +88,28 @@ class TakeQuizPage extends Component {
                                         {
                                             props.node.quiz.questions.map((q, i) =>
                                                 (
-                                                    <form onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
+                                                    <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
                                                         {props.node.quiz.questions[i].questionName }
-                                                        {this.createCheckboxes(props.node.quiz.questions[i].answers.map((q, i) => q.answerName), props.node.quiz.questions[i].id) }
-                                                        {i === props.node.quiz.questions.length - 1 && <button className="btn btn-default" type="submit">Save</button>}
+                                                        {
+                                                            this.createCheckboxes(
+                                                                props.node.quiz.questions[i].answers.map((q, i) => q.answerName),
+                                                                props.node.quiz.questions[i].id,
+                                                            )
+                                                        }
+                                                        {
+                                                            i === props.node.quiz.questions.length - 1 &&
+                                                            <PaddedButton
+                                                                className="btn btn-primary"
+                                                                onClick={() => alert('Good Job!')}
+                                                                type="submit"
+                                                            >Submit Quiz
+                                                            </PaddedButton>
+                                                        }
                                                     </form>
                                                 ))
                                         }
                                     </div>
-                                    <Link to="/student"><button className="btn btn-default">Go back</button></Link>
+                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                                 </div>
                             </div>
                         </div>

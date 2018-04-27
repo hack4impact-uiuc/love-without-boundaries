@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e64ff48c7772a3aecdb33d6626baf4be
+ * @relayHash 34cab23fd9a881dfbc89496ce7146788
  */
 
 /* eslint-disable */
@@ -9,17 +9,16 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type addStudentMutationVariables = {|
+export type editLessonMutationVariables = {|
   input: {
-    name: string,
-    email: string,
-    token: string,
+    id?: ?string,
+    newName?: ?string,
     clientMutationId?: ?string,
   },
 |};
-export type addStudentMutationResponse = {|
-  +createStudent: ?{|
-    +student: ?{|
+export type editLessonMutationResponse = {|
+  +editLesson: ?{|
+    +lesson: ?{|
       +name: ?string,
     |},
   |},
@@ -28,11 +27,11 @@ export type addStudentMutationResponse = {|
 
 
 /*
-mutation addStudentMutation(
-  $input: CreateStudentInput!
+mutation editLessonMutation(
+  $input: EditLessonInput!
 ) {
-  createStudent(input: $input) {
-    student {
+  editLesson(input: $input) {
+    lesson {
       name
       id
     }
@@ -45,7 +44,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "CreateStudentInput!",
+    "type": "EditLessonInput!",
     "defaultValue": null
   }
 ],
@@ -54,7 +53,7 @@ v1 = [
     "kind": "Variable",
     "name": "input",
     "variableName": "input",
-    "type": "CreateStudentInput!"
+    "type": "EditLessonInput!"
   }
 ],
 v2 = {
@@ -67,13 +66,13 @@ v2 = {
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "addStudentMutation",
+  "name": "editLessonMutation",
   "id": null,
-  "text": "mutation addStudentMutation(\n  $input: CreateStudentInput!\n) {\n  createStudent(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
+  "text": "mutation editLessonMutation(\n  $input: EditLessonInput!\n) {\n  editLesson(input: $input) {\n    lesson {\n      name\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "addStudentMutation",
+    "name": "editLessonMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -81,19 +80,19 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "createStudent",
+        "name": "editLesson",
         "storageKey": null,
         "args": v1,
-        "concreteType": "CreateStudentPayload",
+        "concreteType": "EditLessonPayload",
         "plural": false,
         "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "student",
+            "name": "lesson",
             "storageKey": null,
             "args": null,
-            "concreteType": "Student",
+            "concreteType": "Lesson",
             "plural": false,
             "selections": [
               v2
@@ -105,25 +104,25 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "addStudentMutation",
+    "name": "editLessonMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "createStudent",
+        "name": "editLesson",
         "storageKey": null,
         "args": v1,
-        "concreteType": "CreateStudentPayload",
+        "concreteType": "EditLessonPayload",
         "plural": false,
         "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "student",
+            "name": "lesson",
             "storageKey": null,
             "args": null,
-            "concreteType": "Student",
+            "concreteType": "Lesson",
             "plural": false,
             "selections": [
               v2,
@@ -142,5 +141,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = 'c746901b72605e4ddf14a71878899990';
+(node/*: any*/).hash = 'd25272b898d61d2b70b8ca882430e3a5';
 module.exports = node;

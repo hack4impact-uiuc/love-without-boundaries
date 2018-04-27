@@ -4,22 +4,22 @@ import { withRouter, Link } from 'react-router-dom';
 import type { Environment } from 'relay-runtime';
 
 
-import LessonForm from './../components/lessonForm';
-import LessonList from './../components/lessonList';
+import AdminLessonForm from './../components/adminLessonForm';
+import AdminLessonList from './../components/adminLessonList';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
 
 
 const ToolBar = styled.div`
 
-background: rgba(30,209,179,1);
-background: -moz-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-background: -webkit-gradient(left top, right top, color-stop(0%, rgba(30,209,179,1)), color-stop(100%, rgba(3,114,145,1)));
-background: -webkit-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-background: -o-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-background: -ms-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-background: linear-gradient(to right, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', endColorstr='#037291', GradientType=1 );
+    background: rgba(30,209,179,1);
+    background: -moz-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(30,209,179,1)), color-stop(100%, rgba(3,114,145,1)));
+    background: -webkit-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -o-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -ms-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: linear-gradient(to right, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', endColorstr='#037291', GradientType=1 );
 
     width: 70%;
     height: auto;
@@ -69,8 +69,8 @@ const AdminPage = ({ match }) => (
             {
                 match.params.showLesson === 'lesson' ?
                     <div className="centered">
-                        <LessonForm />
-                        <LessonList />
+                        <AdminLessonForm />
+                        <AdminLessonList />
                     </div>
                     :
                     <AdminListComponent />

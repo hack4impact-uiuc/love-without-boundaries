@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5d0586805cea3d79beacfd38e7a0f1d3
+ * @relayHash 02ce098a21c87b9496a56b3c6cc0da6d
  */
 
 /* eslint-disable */
@@ -16,9 +16,7 @@ export type StudentPage_QueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +id: string,
     +name: ?string,
-    +worksheetName: ?string,
     +worksheetURL: ?string,
-    +notesName: ?string,
     +notesURL: ?string,
   |}>,
   +node: ?{|
@@ -26,6 +24,8 @@ export type StudentPage_QueryResponse = {|
       +lessonID: ?string,
       +url: ?string,
     |}>,
+    +id?: string,
+    +URL?: ?string,
   |},
 |};
 */
@@ -38,9 +38,7 @@ query StudentPage_Query(
   lessons {
     id
     name
-    worksheetName
     worksheetURL
-    notesName
     notesURL
   }
   node(id: $studentId) {
@@ -50,6 +48,8 @@ query StudentPage_Query(
         lessonID
         url
       }
+      id
+      URL
     }
     id
   }
@@ -92,21 +92,7 @@ v2 = {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "worksheetName",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
       "name": "worksheetURL",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "notesName",
       "args": null,
       "storageKey": null
     },
@@ -128,42 +114,43 @@ v3 = [
   }
 ],
 v4 = {
-  "kind": "InlineFragment",
-  "type": "Student",
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "worksheets",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Worksheet",
+  "plural": true,
   "selections": [
     {
-      "kind": "LinkedField",
+      "kind": "ScalarField",
       "alias": null,
-      "name": "worksheets",
-      "storageKey": null,
+      "name": "lessonID",
       "args": null,
-      "concreteType": "Worksheet",
-      "plural": true,
-      "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "lessonID",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "url",
-          "args": null,
-          "storageKey": null
-        }
-      ]
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "url",
+      "args": null,
+      "storageKey": null
     }
   ]
+},
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "URL",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n        url\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      worksheets {\n        lessonID\n        url\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -182,7 +169,15 @@ return {
         "concreteType": null,
         "plural": false,
         "selections": [
-          v4
+          {
+            "kind": "InlineFragment",
+            "type": "Student",
+            "selections": [
+              v4,
+              v1,
+              v5
+            ]
+          }
         ]
       }
     ]
@@ -210,12 +205,19 @@ return {
             "storageKey": null
           },
           v1,
-          v4
+          {
+            "kind": "InlineFragment",
+            "type": "Student",
+            "selections": [
+              v4,
+              v5
+            ]
+          }
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '454a82a5c8514c825a0098505b805e72';
+(node/*: any*/).hash = '19ad6117fa39c9ef1cfc4d36ab0dd345';
 module.exports = node;

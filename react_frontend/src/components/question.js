@@ -65,7 +65,7 @@ class Question extends React.Component {
     createAnswers = answers => {
         const answersElm = [];
         for (let i = 0; i < 4; i += 1) {
-            answersElm.push(<div key={i} className="form-group">
+            answersElm.push(<div key={i} className="form-group ">
                 <input
                     type="checkbox"
                     name={i}
@@ -80,20 +80,21 @@ class Question extends React.Component {
                         name={i}
                         value={answers != undefined && answers[i] !== undefined ? answers[i].answerName : ''}
                         onChange={this.updateAns}
-                        className="form-control"
+                        className="form-control ppp"
                         readOnly={this.props.locked}
                         onClick={this.props.locked == true ? this.unlock : null}
                     />
                 </label>
-            </div>);
+                            </div>);
         }
         return answersElm;
     }
     render() {
         return (
-            <div>
+            <div className="hello">
                 {this.props.num + 1}.
                 <input
+                    className="ppp2 form-control"
                     type="text"
                     value={this.state.name}
                     onChange={this.updateQuestion}

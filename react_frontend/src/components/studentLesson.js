@@ -5,60 +5,75 @@ import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
 import { copyFile, setPermissionToAllEdit } from '../Gapi';
 import environment from '../relay/environment';
 import PaddedButton from './button';
+import jwt_decode from 'jwt-decode';
 
 class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
+        const newWkshtObj = {};
+        if (this.props.studentWorksheets !== null) {
+            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
+                newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+            }
+        }
         this.state = {
             error: '',
+            worksheetObj: newWkshtObj,
         };
     }
-
     componentDidMount() {
-        if (this.props.isStudent !== undefined) {
-            // teacher or admin
-            return;
-        }
+        let refresh = 0;
         if (this.props.studentWorksheets === null) {
-            // commented out for dev purposes - this allows us to see all the lessons without clicking on student
-            // this.setState({
-            //     error: 'No lessons exist, please contact admin',
-            // });
             return;
         }
         const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
-        if (studentWorksheetLessonIDs == undefined) {
-            // same as above - comment out in production!!
-            // this.setState({
-            //     error: 'No lessons exist, please contact admin',
-            // });
-            return;
-        }
         let i;
-        const error = false;
+        const indices = [];
+        const promises = [];
         for (i = 0; i < this.props.lessons.length; i++) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
-                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[i].id, this.props.lessons[i].worksheetURL);
+                refresh = 1;
                 const url = this.props.lessons[i].worksheetURL;
-                console.log('url', url);
                 const fileMatch = url.match(/[-\w]{25,}/);
                 if (fileMatch === null || fileMatch === undefined) {
                     return;
                 }
                 const fileId = fileMatch[0];
-                copyFile(fileId).then((res) => {
-                    if (res == undefined || res.error) {
-                        return;
-                        // throw Error('Insufficient Priviledges, please contact Admin');
-                    }
-                    setPermissionToAllEdit(res.id);
-                }).catch(err => console.err(err.message));
+                promises.push(copyFile(fileId));
+                indices.push(i);
             }
         }
+        Promise.all(promises).then((res) => {
+            for (i = 0; i < res.length; i += 1) {
+                if (res[i] == undefined || res.error || res[i].id === undefined) {
+                    throw Error('Insufficient Privilges, please contact Admin');
+                }
+                refresh = 1;
+                setPermissionToAllEdit(res[i].id);
+                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
+            }
+            if (refresh == 1) {
+                window.location.reload();
+            }
+        }).catch(err => console.error(err.message));
+    }
+    componentWillReceiveProps(newProps) {
+        const newObj = {};
+        if (newProps.studentWorksheets !== null) {
+            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
+                newObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+            }
+        }
+        this.setState({
+            worksheetObj: newObj,
+        });
     }
     render() {
         if (this.state.error !== '') {
             return <p>{this.state.error}</p>;
+        }
+        if (this.props.studentWorksheets === null) {
+            return <p>Student Worksheets prop is null</p>;
         }
         return (
             <div className="container-fluid">
@@ -67,28 +82,31 @@ class StudentLesson extends React.Component {
                         this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
                     }
                 </h2>
-                <GoogleDocButton url="https://docs.google.com/document/d/1EGbrZFxY33xyEZdLyXmKGdWi5NR4CL7nS4C_7HzhSgE/edit" />
-                <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
-                {
-                    this.props.lessons !== undefined ?
-                        this.props.lessons.map((lesson, idx) => (
-                            <LessonComponent
-                                key={idx}
-                                id={lesson.id}
-                                lessonName={lesson.name}
-                                lessonNotes={lesson.notesName}
-                                lessonNotesLink={lesson.notesURL}
-                                lessonWorksheetLink={lesson.worksheetURL}
-                                worksheetName={lesson.worksheetName}
-                                quizName={lesson.quiz}
-                                quizPercentage="50%"
-                                quizIsChecked={false}
-                                isStudent={this.props.isStudent}
-                            />
-                        ))
-                        :
-                        <p>There arent any lessons</p>
-                }
+                <div className="row">
+                    <div className="col-sm-3">
+                        <GoogleDocButton url={this.props.studentWorksheets.URL} location={this.props.location} />
+                        <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
+                    </div>
+                    <div className="col-sm-9">
+                        {
+                            this.props.lessons !== undefined ?
+                                this.props.lessons.map((lesson, idx) => (
+                                    <LessonComponent
+                                        key={idx}
+                                        id={lesson.id}
+                                        lessonName={lesson.name}
+                                        lessonNotesLink={lesson.notesURL}
+                                        lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
+                                        quizPercentage="50%"
+                                        quizIsChecked={false}
+                                        isStudent={this.props.isStudent}
+                                    />
+                                ))
+                                :
+                                <p>There arent any lessons</p>
+                        }
+                    </div>
+                </div>
             </div>
         );
     }

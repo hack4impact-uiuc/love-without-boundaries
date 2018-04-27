@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0967f643f9bd0ef292eea986a3750184
+ * @relayHash 6956449cba8153b044026361e1674a4e
  */
 
 /* eslint-disable */
@@ -9,14 +9,12 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type lessonListQueryVariables = {| |};
-export type lessonListQueryResponse = {|
+export type adminLessonListQueryVariables = {| |};
+export type adminLessonListQueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +id: string,
     +name: ?string,
-    +worksheetName: ?string,
     +worksheetURL: ?string,
-    +notesName: ?string,
     +notesURL: ?string,
   |}>,
 |};
@@ -24,13 +22,11 @@ export type lessonListQueryResponse = {|
 
 
 /*
-query lessonListQuery {
+query adminLessonListQuery {
   lessons {
     id
     name
-    worksheetName
     worksheetURL
-    notesName
     notesURL
   }
 }
@@ -64,21 +60,7 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "worksheetName",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
         "name": "worksheetURL",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "notesName",
         "args": null,
         "storageKey": null
       },
@@ -95,13 +77,13 @@ var v0 = [
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "lessonListQuery",
+  "name": "adminLessonListQuery",
   "id": null,
-  "text": "query lessonListQuery {\n  lessons {\n    id\n    name\n    worksheetName\n    worksheetURL\n    notesName\n    notesURL\n  }\n}\n",
+  "text": "query adminLessonListQuery {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "lessonListQuery",
+    "name": "adminLessonListQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -109,11 +91,11 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "lessonListQuery",
+    "name": "adminLessonListQuery",
     "argumentDefinitions": [],
     "selections": v0
   }
 };
 })();
-(node/*: any*/).hash = '5ba9020963b00792d9084289bbb341c5';
+(node/*: any*/).hash = '69d58ad1f77e8c0c6e4a74543ba9f3e8';
 module.exports = node;
