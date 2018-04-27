@@ -18,6 +18,8 @@ const Block = styled.div`
     right:0%;
     margin-left: 0%;
     left:0%;
+
+
 `;
 
 // const ImageStyle= styled.div`
@@ -40,62 +42,94 @@ const Text = styled.div`
 `;
 
 const HomeText = styled.div`
-    padding: 8px;
     color: #FFFFFF;
+	font-family: 'Lato', sans-serif;
     text-transform: uppercase;
-    font-family: 'Montserrat';
-    font-weight: 800;
-    font-size: 18px;
-    border-bottom: 3px solid white;
-    display: inline-block;
-    padding: .6rem 0;
-    margin: 0.5rem 1rem ;
-    right: 33%;
-    position: absolute;
+    font-weight: 100;
+    font-size: 20px;
+
+    margin: 20px;
+
+    max-width: 100px;
+
+
 `;
 
 const LessonText = styled.div`
-    padding: 8px;
     color: #FFFFFF;
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 800;
     font-size: 18px;
     border-bottom: 3px solid white;
+    
+    margin-right: 5px;
+    margin-left: 5px;
     display: inline-block;
-    padding: .6rem 0;
-    margin: 0.5rem 1rem ;
-    right: 20%;
-    position: absolute;
+    position: relative;
+
+    margin: 20px;
+    margin-left: 3%;
+    bottom: 40px;
+
 `;
 const LogText = styled.div`
-    padding: 8px;
     color: #FFFFFF;
     text-transform: uppercase;
     font-family: 'Montserrat';
     font-weight: 800;
     font-size: 18px;
     border-bottom: 3px solid white;
+    
     display: inline-block;
-    padding: .6rem 0;
-    margin: 0.5rem 1rem ;
-    right: 8%;
-    position: absolute;
+    position: relative;
+
+    margin: 20px;
+    margin-left: 3%;
+    bottom: 40px;
+
 `;
 
+const ImageBox = styled.div`
+    background: url("https://file-gupzgikpce.now.sh/");
+    background-size: cover;  
+    height: 70px;
+    width: 200px;
+    position: relative;
+    margin-left: 0%;
 
+    display: inline-block;
+`;
 
 
 class NavBar extends React.Component<Props> {
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <Block>
-                    <img className="img-fluid"  src = {lovewithout_white} height="100%" />
-                    <HomeText className="navbar" >Home</HomeText>
-                    <LessonText className="navbar">Lessons</LessonText>
-                    <LogText className="navbar">Logout</LogText>
-                </Block>
+            <nav className="navbar navbar-default">
+            <div className="container-fluid">
+                <div className="navbar-header">
+                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                </button>
+                <ImageBox />
+                </div>
+                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul className="nav navbar-nav navbar-right">
+                    <li><HomeText href="#"> Logout </HomeText></li>
+                </ul>
+                <ul className="nav navbar-nav navbar-right">
+                    <li><HomeText href="#"> Profile </HomeText></li>
+                </ul>
+                <ul className="nav navbar-nav navbar-right">
+                    <li><HomeText href="#"> Home </HomeText></li>
+                </ul>
+                </div>
+            </div>
+            </nav>
             </div>
         );
     }

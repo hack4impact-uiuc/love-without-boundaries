@@ -19,6 +19,10 @@
         "react/jsx-indent-props":4,
         "eqeqeq": "off",
         "linebreak-style": "off",
-        "arrow-parens": "off"
+        "arrow-parens": "off",
+        "jsx-a11y/anchor-is-valid": [ "error", {
+            "components": [ "Link" ],
+            "specialLink": [ "to" ]
+        }]
     }
 }

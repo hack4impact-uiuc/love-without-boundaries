@@ -1,13 +1,11 @@
 
-.navbar:hover {
+/* .navbar:hover {
 	background-color:#c13030;
 	color: white;
 	padding: 1.5%;
 	margin:auto;
-	border-radius: 10px;
 	border-bottom: 0px;
-}
-
+} */
 
 /* .lessonProps{
 	color: #a6acb5;
@@ -116,7 +114,7 @@
 }
 
 .glyphicon {
-    font-size: 150px;
+    font-size: 15px;
 }
 .layer {
     background-color: #828282;
@@ -131,6 +129,7 @@
 	font-weight: 200;
 	font-size: 15px;
 	padding-top: 3%;
+	word-spacing: .2em;
 }
 
 .lowerBox{
@@ -240,12 +239,8 @@
 	padding: 10px;
 
 	margin: auto;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 5%;
-
-	position: relative;
-	left: 25%;
+	margin-bottom: 30px;
+	max-width: 700px;
 
 }
 
@@ -258,3 +253,59 @@
 .inlineDis{
 	display: inline;
 }
+
+.hidden{
+	visibility: hidden;
+}
+
+.padded{
+	margin-bottom: 7%;
+}
+
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: -20px; /* the bottom margin is the negative value of the footer's height */
+    background-color: #ccc;
+}
+.spacer.edge { 
+    background-color: white; /* same as body background */
+}
+
+.spacer {
+    height: 20px;
+ }
+
+ .infront{
+	 z-index: 100;
+	 position: relative;
+ }
+
+ .navbar{
+	 background-color:#B33C42;
+	 margin-bottom: 0px;
+
+	 min-height: 75px;
+ }
+
+ .hr{
+	margin-top: 0px;
+	margin-bottom: 0px;
+ }
+
+ .navbar-collapse{
+	 border-top: 0px;
+ }
+
+ .navbar-toggle{
+	 margin-top: 10px;
+ }
+
+ .capit{
+	 text-transform: capitalize;
+	 position: relative;
+ }

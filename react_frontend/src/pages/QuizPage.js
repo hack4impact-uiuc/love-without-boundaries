@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
+import { Link } from 'react-router-dom';
 import environment from '../relay/environment';
 import AdminQuiz from '../components/adminQuiz';
 import PaddedButton from '../components/button';
@@ -14,7 +15,7 @@ class QuizPage extends Component {
 
     render() {
         if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID) {
-            return <h2>Lesson doesn't exist. Try again.</h2>;
+            return <h2>Lesson doesnt exist. Try again.</h2>;
         }
         return (
             <QueryRenderer
@@ -51,10 +52,9 @@ class QuizPage extends Component {
                     }
                     return (
                         <div>
-                            <h1>Quiz Page</h1>
+                            <h1>{props.node.name}</h1>
                             <AdminQuiz questions={props.node.quiz.questions} quizID={props.node.id} />
-                            <br />
-                            <PaddedButton className="btn btn-success" onClick={this.finish}>Finish Quiz</PaddedButton>
+                            <Link to="/admin/lesson"><PaddedButton className="btn btn-success">Finish Quiz</PaddedButton></Link>
                         </div>
                     );
                 }}

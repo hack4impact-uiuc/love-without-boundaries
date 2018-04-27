@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer, commitMutation } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
@@ -79,56 +79,47 @@ export const TeacherElem = styled.div`
     padding-right: 25px;
 `;
 
-let student = "STUDENT"
-let tutor = "TUTOR"
-class AdminListComponent extends React.Component<Props>{    constructor(props){
-        super(props)
+const student = 'STUDENT';
+const tutor = 'TUTOR';
+class AdminListComponent extends React.Component<Props> {
+    constructor(props) {
+        super(props);
         this.state = {
-          studentOrTutor: "STUDENT",
-          showAssignList: false,
-          selectedTeacherId: ''
-        }
+            studentOrTutor: 'STUDENT',
+            showAssignList: false,
+            selectedTeacherId: '',
+        };
     }
 
-    handleInputChange= (event) => {
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
-      const id = target.value;
-      this.setState({
-        selectedTeacherId: id
-      }, function () {
-      });
-    }
 
     onClickMake = (e) => {
-      this.setState({
-        studentOrTutor: e.target.name
-      })
+        this.setState({
+            studentOrTutor: e.target.name,
+        });
     }
 
     onClickShowAssignList = (e) => {
-      if(this.state.showAssignList === true){
-        this.setState({
-            showAssignList: false
-        }, function () {
-        });
-      }else{
-        this.setState({
-          showAssignList:true,
-          selectedStudentId: e.target.name
-        }, function () {
-        });
-      }
+        if (this.state.showAssignList === true) {
+            this.setState({
+                showAssignList: false,
+            }, () => {
+            });
+        } else {
+            this.setState({
+                showAssignList: true,
+                selectedStudentId: e.target.name,
+            }, () => {
+            });
+        }
     }
 
     assignStudentToTeachers = (e) => {
         this.setState({
-            showAssignList: false
+            showAssignList: false,
         }, function () {
-          const studentID = this.state.selectedStudentId;
-          const teacherID = this.state.selectedTeacherId;
-          assignStudentToTeacher(environment, studentID, teacherID);
+            const studentID = this.state.selectedStudentId;
+            const teacherID = this.state.selectedTeacherId;
+            assignStudentToTeacher(environment, studentID, teacherID);
         });
     }
 
@@ -144,54 +135,46 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
         window.location.reload();
     }
 
-    EvenOddElem(elem, index, isTeacher, student) {
-      if(isTeacher === true){
-        if(index % 2 === 0){
-          return <EvenElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteTeacher}> Delete </DeleteButton>  </EvenElem>
-        }
-        return <OddElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteTeacher}> Delete </DeleteButton>  </OddElem>
-      }
-      if(index % 2 === 0){
-        return <EvenElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton>  </EvenElem>
-      }
-      return <OddElem> {elem} <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton> <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton> </OddElem>
-    }
-
     getList(props) {
-        return(
+        return (
             <div>
                 <div className="container-fluid">
-                    <div className="col-sm-5">
+                    <div className="col-md-10">
                         <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Student</th>
+                                    <th scope="col">{ this.state.studentOrTutor === 'TEACHER' ? 'Teacher' : 'Student' }</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                { this.state.studentOrTutor === "TEACHER" ? 
-                                    props.teachers.map( (teacher, idx) => {
-                                        return(
-                                            <tr>
-                                                <th scrope="row">{idx}</th>
-                                                <th>
-                                                    <Link key={idx} style={{ display:'block' }}to={{ pathname: '/teacher', state:{ teacher: teacher } }}>
-                                                        <button className="btn btn-default">{teacher.name}</button>
-                                                        <DeleteButton className="btn btn-danger" name={teacher.id} onClick = {this.onClickDeleteTeacher} > Delete </DeleteButton>
-                                                    </Link>
-                                                </th>
-                                            </tr>
-                                        )})
-                                    : props.students.map((student, idx) => (
-                                        <tr>
+                                { this.state.studentOrTutor === 'TEACHER' ?
+                                    props.teachers.map((teacher, idx) => (
+                                        <tr key={idx}>
                                             <th scrope="row">{idx}</th>
                                             <th>
-                                                <Link key={idx} style={{ display:'block' }}to={{ pathname: '/student', state:{ student: student } }}>
+                                                <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/teacher', state: { teacher } }}>
+                                                    <button className="btn btn-default">{teacher.name}</button>
+                                                </Link>
+                                            </th>
+                                            <th>
+                                                <DeleteButton className="btn btn-danger" name={teacher.id} onClick={this.onClickDeleteTeacher} > Delete </DeleteButton>
+                                            </th>
+                                        </tr>
+                                    ))
+                                    : props.students.map((student, idx) => (
+                                        <tr key={idx}>
+                                            <th scrope="row">{idx}</th>
+                                            <th>
+                                                <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/student', state: { student } }}>
                                                     <button className="btn btn-default">{student.name}</button>
                                                 </Link>
-                                                <DeleteButton className="btn btn-danger" name={student.id} onClick = {this.onClickDeleteStudent} > Delete </DeleteButton>
-                                                <AssignButton className="btn btn-info" name={student.id} onClick = {this.onClickShowAssignList} > Assign </AssignButton>
+                                            </th>
+                                            <th>
+                                                <DeleteButton className="btn btn-danger" name={student.id} onClick={this.onClickDeleteStudent} > Delete </DeleteButton>
+                                            </th>
+                                            <th>
+                                                <AssignButton className="btn btn-info" name={student.id} onClick={this.onClickShowAssignList} > Assign </AssignButton>
                                             </th>
                                         </tr>
                                     ))
@@ -201,23 +184,35 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
                     </div>
                 </div>
             </div>
-        )
+        );
+    }
+
+    handleInputChange = (event) => {
+        const { target } = event;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        const id = target.value;
+        this.setState({
+            selectedTeacherId: id,
+        }, () => {
+        });
     }
 
     getPopList(props, showList) {
-        if (showList === true){
-            return(
-              <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input name='teacher' type="radio" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)}
-               <AssignTeacherButton className="btn btn-info" onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton></PopUpList>
-          )
+        if (showList === true) {
+            return (
+                <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input name="teacher" type="radio" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name} </ul></TeacherElem>)}
+                    <AssignTeacherButton className="btn btn-info" onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton>
+                </PopUpList>
+            );
         }
     }
 
     render() {
         return (
-          <QueryRenderer
-                  environment={environment}
-                  query={graphql`
+            <QueryRenderer
+                environment={environment}
+                query={graphql`
                       query adminList_Query{
                           students {
                               id
@@ -232,32 +227,31 @@ class AdminListComponent extends React.Component<Props>{    constructor(props){
                       }
                   `}
 
-                  variables={{}}
-                  render={({ props }) => {
-                      if (!props) {
-                          return (
-                              <div>Loading...</div>
-                          );
-                      }
-                      const teacherList = props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange}/>  {teacher.name} </ul></TeacherElem>)
+                variables={{}}
+                render={({ props }) => {
+                    if (!props) {
+                        return (
+                            <div>Loading...</div>
+                        );
+                    }
+                    const teacherList = props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name} </ul></TeacherElem>);
 
-                      return (
-                          <div className="rightMargin" >
-                                <div>
-                                    <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of tutors'}</h2>
-                                    <PaddedButton className="btn btn-primary" name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
-                                    <PaddedButton className="btn btn-primary" name="TEACHER" onClick={this.onClickMake}> Tutors </PaddedButton>
-                                    <div> {this.getList(props)} </div>
-                                    <div> {this.getPopList(props, this.state.showAssignList)}</div>
-                                </div>
-                          </div>
-                      );
-                  }}
-              />
+                    return (
+                        <div className="rightMargin" >
+                            <div>
+                                <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of teachers'}</h2>
+                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-primary' : 'btn btn-default'} name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
+                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-default' : 'btn btn-primary'} name="TEACHER" onClick={this.onClickMake}> Teachers </PaddedButton>
+                                <div> {this.getList(props)} </div>
+                                <div> {this.getPopList(props, this.state.showAssignList)}</div>
+                            </div>
+                        </div>
+                    );
+                }}
+            />
         );
     }
 }
-
 
 
 export default AdminListComponent;

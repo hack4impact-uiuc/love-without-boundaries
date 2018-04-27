@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
-import PaddedButton from '../components/button';
 import environment from '../relay/environment';
-import StudentPage from './StudentPage';
 import jwt_decode from 'jwt-decode';
 
 type Props = {
-    /**/ 
+    /**/
 }
-
 
 const TeacherAddLessonBox = styled.div`
     color: white;
@@ -51,24 +48,23 @@ const TeacherButton = styled.div`
     z-index: -1;
     font-family: "Arial";
 `;
-class TeacherPage extends React.Component<Props>{
-    constructor(props){
-        super(props)
+class TeacherPage extends React.Component<Props> {
+    constructor(props) {
+        super(props);
         this.state = {
-            teacherID: "VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA="
-            // teacherID: jwt_decode(localStorage.getItem('token')).userID
-        }
+            teacherID: 'VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA=',
+            // teacherID: this.props.location.state != undefined ? this.props.location.state : jwt_decode(localStorage.getItem('token')).userID
+        };
     }
-    // gotoStudent = () => {this.props.history.push('/student')}
     render() {
         return (
-            
             <QueryRenderer
                 environment={environment}
                 query={graphql`
                     query TeacherPage_Query($teacher_id: ID!){
                         node(id: $teacher_id) {
                             ... on Teacher {
+                                name
                                 students {
                                     name
                                     id
@@ -78,14 +74,17 @@ class TeacherPage extends React.Component<Props>{
                     }
                 `}
                 variables={{
-                    teacher_id: this.state.teacherID
+                    teacher_id: this.props.location.state != undefined ? this.props.location.state.teacher.id : jwt_decode(localStorage.getItem('token')).userID,
                 }}
                 render={({ props }) => {
                     if (props) {
+                        if (props.node == null) {
+                            return <h5>Error Fetching, You must be a teacher/admin to see this.</h5>;
+                        }
                         return (
                             <div className="container-fluid">
-                                <h3>My Students</h3> 
-                                <div className="col-sm-5">
+                                <h3>{props.node.name} Students</h3>
+                                <div className="col-sm-6">
                                     <table className="table">
                                         <thead>
                                             <tr>
@@ -94,29 +93,37 @@ class TeacherPage extends React.Component<Props>{
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            { props.node == null || props.node.students == null ? 
-                                                <p>You have no assigned students.</p> 
+                                            { props.node == null || props.node.students == null ?
+                                                <p>You have no assigned students.</p>
                                                 : props.node.students.map((student, idx) => (
                                                     <tr>
-                                                    <th scrope="row">{idx}</th>
-                                                    <th>
-                                                        <Link key={idx} style={{ display:'block' }}to= {{ pathname: '/student', state:{ student: student } }}>
-                                                            <button className="btn btn-default">{student.name}</button>
-                                                        </Link>
-                                                    </th>
-                                                </tr>
-                                            ))}
+                                                        <th scrope="row">{idx}</th>
+                                                        <th>
+                                                            <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/student', state: { student } }}>
+                                                                <button className="btn btn-default">{student.name}</button>
+                                                            </Link>
+                                                        </th>
+                                                    </tr>
+                                                ))}
                                         </tbody>
                                     </table>
+                                </div>
+                                <div className="col-sm-2" />
+                                <div className="col-sm-4">
+                                    <p>Welcome {props.node.name}!</p>
+                                    <p>As a teacher, you are assigned students, which are shown in this page.
+                                        Once you click on their name, you would see their profile, where you will
+                                        see their lessons. Each lesson has a link to lesson notes (same for everyone) and a link to a
+                                        specific worksheet document for that student.
+                                    </p>
                                 </div>
                             </div>
                         );
                     }
-                    else {
-                        return (
-                            <div>Loading...</div>
-                        );
-                    }
+
+                    return (
+                        <div>Loading...</div>
+                    );
                 }}
             />
         );

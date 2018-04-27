@@ -3,13 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
-import StudentListItem from '../components/studentListItem';
 import environment from '../relay/environment';
 import Login from '../components/login';
-
-import './../../assets/Hover.css';
-import NavBarHome from '../components/navBarHome';
-
 
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
 
@@ -27,15 +22,16 @@ const DarkBox = styled.div`
     background: url("https://file-utocriqbzb.now.sh/");
     background-size: cover;  
     width: 100%;
-    height: 300px;
+    height: 370px;
     display: block;
 
     color: #FFFFFF;
     text-transform: uppercase;
-    font-family: 'Montserrat';
+    font-family: 'Lato', sans-serif;
+	word-spacing: .25em;
+
     font-weight: 600;
     font-size: 26px;
-    margin: 0.5rem 2rem ;
 	text-align: center;
     position: relative;
     padding-top: 8%;
@@ -43,6 +39,7 @@ const DarkBox = styled.div`
     right:0%;
     margin-left: 0%;
     left:0%;
+
 `;
 
 const SignInSection = styled.div`
@@ -65,37 +62,37 @@ const LogoRow = styled.div`
 `;
 
 const SignUpIcon = styled.div`
-    background: url("https://file-zhzvumzlvc.now.sh/");
-    width: 185px;
-    height: 185px;
+    background: url("https://file-qxkdsrlkid.now.sh/");
+    width: 200px;
+    height: 190px;
     position: relative;
     background-size: cover;  
     margin: 0 auto;
-    margin-top: 18%;
+    margin-top: 15%;
     margin-bottom: 7%;
 `;
 
 const LearningIcon = styled.div`
-    background: url("https://file-emcfzpkgbu.now.sh/");
-    width: 170px;
-    height: 170px;
+    background: url("https://file-xpcekvtwpe.now.sh/");
+    width: 200px;
+    height: 190px;
     position: relative;
     background-size: cover;  
     margin: 0 auto;
-    margin-top: 20%;
-    margin-bottom: 10%;
+    margin-top: 15%;
+    margin-bottom: 7%;
 
 `;
 
 const AcheiveIcon = styled.div`
-    background: url("https://file-hkbcghevuc.now.sh/");
-    width: 185px;
-    height: 185px;
+    background: url("https://file-ejpeoycfqy.now.sh/");
+    width: 200px;
+    height: 190px;
     position: relative;
     display: block;
     background-size: cover;  
     margin: 0 auto;
-    margin-top: 17%;
+    margin-top: 15%;
     margin-bottom: 7%;
 `;
 
@@ -104,8 +101,10 @@ const TopBox = styled.div`
     background-size: cover;  
     width: 100%;
     height: 300px;
-`;
 
+    border-right: .5px solid #c4c4c4;
+
+`;
 const BottomBox = styled.div`
     background: url("https://file-rfipjzwojd.now.sh/");
     background-size: cover;  
@@ -113,20 +112,29 @@ const BottomBox = styled.div`
     height: 300px;
     position: relative;
     margin-right: 0%;
+
+    border-left: .5px solid #c4c4c4;
+
 `;
 
 const RightBox = styled.div`
-    background-color: purple;
+    background-color: #9e0c24;
     width: 100%;
     height: 300px;
     position: relative;
+
+    border-bottom: .5px solid #c4c4c4;
+
 `;
 
 const LeftBox = styled.div`
-    background-color: purple;
+    background-color: #9e0c24;
     width: 100%;
     height: 300px;
     position: relative;
+
+    border-top: .5px solid #c4c4c4;
+
 `;
 
 const BoxText = styled.div`
@@ -134,7 +142,7 @@ const BoxText = styled.div`
     font-size: 26px;
 	text-align: center;
     position: relative;
-    font-family: 'Montserrat';
+    font-family: 'Lato', sans-serif;
     color: white;
 `;
 const BoxRightText = styled.div`
@@ -142,7 +150,7 @@ const BoxRightText = styled.div`
     font-size: 26px;
 	text-align: left;
     position: relative;
-    font-family: 'Montserrat';
+    font-family: 'Lato', sans-serif;
     color: white;
     left: 10%;
 `;
@@ -151,7 +159,7 @@ const BoxRightSubText = styled.div`
     font-size: 16px;
     text-align: left;
     position: relative;
-    font-family: 'Montserrat';
+    font-family: 'Lato', sans-serif;
     color: white;
     left: 10%;
     margin-right: 20%;
@@ -162,11 +170,11 @@ const BoxSubText = styled.div`
     font-size: 16px;
 	text-align: center;
     position: relative;
-    font-family: 'Montserrat';
+    font-family: 'Lato', sans-serif;
     color: white;
 `;
 
-const divStyle = {
+const noGutter = {
     padding: 0,
     margin: 0,
 };
@@ -182,11 +190,6 @@ class HomePage extends React.Component<Props> {
         this.setState({
             signup: true,
         });
-    }
-    setup = (e) => {
-        // this function is used to easily call the google drive setup function
-        // this should be called once auth is setup for a newly registered student
-        InitialStudentSetup(environment, 'hi');
     }
     render() {
         return (
@@ -227,52 +230,54 @@ class HomePage extends React.Component<Props> {
                                                 </DarkBox>
                                         }
                                     </SignInSection>
+                                </div>
 
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-sm-4">
-                                        <SignUpIcon />
-                                        <div className="caption">
+
+                                                                <div className="padded">
+                                    <div className="row">
+                                        <div className="col-12 col-sm-4">
+                                            <SignUpIcon />
+                                            <div className="caption">
                                             Sign up for an account
-                                        </div>
-                                        <br />
-                                        <div className="subCaption">
+                                            </div>
+                                            <br />
+                                            <div className="subCaption">
                                             Students can sign up for an account and will be paired with a tutor
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-12 col-sm-4">
-                                        <LearningIcon />
-                                        <div className="caption">
+                                        <div className="col-12 col-sm-4">
+                                            <LearningIcon />
+                                            <div className="caption">
                                             Start learning
-                                        </div>
-                                        <br />
-                                        <div className="subCaption">
+                                            </div>
+                                            <br />
+                                            <div className="subCaption">
                                             Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-12 col-sm-4">
-                                        <AcheiveIcon />
-                                        <div className="caption">
+                                        <div className="col-12 col-sm-4">
+                                            <AcheiveIcon />
+                                            <div className="caption">
                                         Get the results
-                                        </div>
-                                        <br />
-                                        <div className="subCaption">
+                                            </div>
+                                            <br />
+                                            <div className="subCaption">
                                             These lessons are to prepare students for high acheivement in national exams
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="row">
-                                    <br />
-                                    <br />
                                     <div
 className="col-12 col-sm-6"
-                                        style={divStyle}
+                                        style={noGutter}
                                     >
                                         <div className="no-gutter">
                                             <TopBox />
                                         </div>
                                     </div>
-                                    <div className="col-12 col-sm-6" style={divStyle}>
+                                    <div className="col-12 col-sm-6" style={noGutter}>
                                         <div className="no-gutter">
                                             <RightBox>
                                                 <br />
@@ -292,7 +297,7 @@ className="col-12 col-sm-6"
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-12 col-sm-6" style={divStyle}>
+                                    <div className="col-12 col-sm-6" style={noGutter}>
                                         <LeftBox>
                                             <br />
                                             <br />
@@ -308,12 +313,15 @@ className="col-12 col-sm-6"
                                             </BoxRightSubText>
                                         </LeftBox>
                                     </div>
-                                    <div className="col-12 col-sm-6" style={divStyle}>
+                                    <div className="col-12 col-sm-6" style={noGutter}>
                                         <BottomBox />
                                     </div>
                                 </div>
+
+
                             </div>
                         </HomeSection>
+                        <div className="hidden" >Icons made by <a href="https://www.flaticon.com/authors/itim2101" title="itim2101">itim2101</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
                     </div>
                 )}
             />

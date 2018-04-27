@@ -3,3 +3,5 @@ node_modules
 /dist
 dist
 flow-typed
+yarn.lock
+yarn-error.lock
