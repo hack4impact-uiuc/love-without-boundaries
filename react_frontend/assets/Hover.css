@@ -326,3 +326,12 @@
 	margin: 15px 5px;;
 	padding: 10px;
 }
+
+.mystyle{
+	background-color: rgb(177,61,68);
+	color: rgb(255,255,255);
+	position: fixed;
+	text-align: center;
+	bottom: 0px;
+    width: 100%;
+}
