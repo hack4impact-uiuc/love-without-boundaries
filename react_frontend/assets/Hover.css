@@ -36,9 +36,12 @@
 	font-size: 25px;
 }
 .lesson-btn {
-	border: 1px solid #1EAEDB;
+	border: 1px solid #337ab7;
 	border-radius: 6px;
 	background-color: #ffffff;
+}
+.lesson-box a {
+	color:#337ab7;
 }
 .lesson-btn2 {
 	border: 1px solid #ff5050;
@@ -413,6 +416,33 @@
 }
 
 .page-error {
-	margin: 8%;
-	text-align: center; 
+	margin: 20%;
+	text-align: center;
+	height: 40px;
+    flex-direction: row 
+}
+
+.admin-tool-bar {
+	background: rgba(30,209,179,1);
+    background: -moz-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(30,209,179,1)), color-stop(100%, rgba(3,114,145,1)));
+    background: -webkit-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -o-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: -ms-linear-gradient(left, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    background: linear-gradient(to right, rgba(30,209,179,1) 0%, rgba(3,114,145,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', endColorstr='#037291', GradientType=1 );
+
+    width: 70%;
+    height: auto;
+    position: relative;
+    background-size: cover;  
+    margin: auto;
+
+    display: block;
+    overflow: auto;
+
+    padding-bottom: 10px;
+
+    margin-bottom: 5%;
+    text-align: center;
 }

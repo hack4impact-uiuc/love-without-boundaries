@@ -6,6 +6,7 @@ import submitQuiz from '../relay/mutations/submitQuiz';
 import Checkbox from './../components/checkbox';
 import jwtDecode from 'jwt-decode';
 import PaddedButton from './../components/button';
+import ErrorMessage from '../components/errorMessage';
 
 class TakeQuizPage extends Component {
     constructor(props) {
@@ -44,7 +45,10 @@ class TakeQuizPage extends Component {
 
     render() {
         if (this.state.studentID === null) {
-            return <h4 className="page-error">You must be logged in as a Student to take quiz. Try logging in again.</h4>;
+            return <ErrorMessage code="404" message="You must be logged in as a Student to take quiz. Try logging in again."/>
+        }
+        if (this.props.location.state === undefined ){
+            return <ErrorMessage code="404" message="No Lesson"/>
         }
         return (
             <QueryRenderer
@@ -74,7 +78,7 @@ class TakeQuizPage extends Component {
                     }
                 `}
                 variables={{
-                    quiz_id: this.props.location.state.lessonID,
+                    quiz_id: this.props.location.state !== undefined ? this.props.location.state.lessonID : '',
                 }}
                 render={({ props }) => {
                     if (!props) {

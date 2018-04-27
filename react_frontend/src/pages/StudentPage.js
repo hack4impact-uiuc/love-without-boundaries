@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { withRouter } from 'react-router-dom';
 import environment from '../relay/environment';
 import StudentLesson from '../components/studentLesson';
+import ErrorMessage from '../components/errorMessage';
 
 type Props = {
     /**/
@@ -56,11 +57,11 @@ class StudentPage extends React.Component<Props> {
                             );
                         }
                         if (props.node === null || Object.keys(props.node).length === 0) {
-                            return <h4 className="page-error">You must be logged in to see this. Please try again.</h4>;
+                            return <ErrorMessage code="404" message="You must be logged in to see this. Please try again." />;
                         }
                         const token = jwtDecode(sessionStorage.getItem('token'));
                         if (token === null || !token) {
-                            return <h4 className="page-error">You must be logged in to see this. Please try again.</h4>;
+                            return <ErrorMessage code="404" message="You must be logged in to see this. Please try again." />;
                         }
                         const userType = token !== null ? token.userType : 'none';
                         return (

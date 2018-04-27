@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
+import ErrorMessage from './errorMessage';
 
 const SlightlyPaddedButton = styled.button`
     margin: 0px 5px;
@@ -70,7 +71,7 @@ class ReviewQuiz extends React.Component {
                         );
                     }
                     if (this.props.pastQuizzes === null) {
-                        return <p>No Past Quizzes.</p>;
+                        return <ErrorMessage message="No Past Quizzes." />;
                     }
                     return (
                         <div>

@@ -18,16 +18,18 @@ class googleDocButton extends React.Component {
             return;
         }
         const token = jwtDecode(sessionStorage.getItem('token'));
-        if (token === null || !token || token.userType !== 'student') {
+        if (token === null || !token || token.userType !== 'student' || token.gapi_access_token.length === 0) {
+            console.error('Google Docs Playground: User not logged in.');
             return;
         }
         // Need to get userId
         copyFile('1CLU5eNONV-KbqEQ8Y2dzlO_T45bLnMOO2-b0MR6nk10').then((res) => {
-            if (res == undefined || res.error || this.props.location == undefined) {
+            console.log(res);
+            if (res == undefined || res.error || token.userType !== 'student' || res.id.length === 0 || res.id === null) {
                 // return;
                 throw Error('Google Docs Playground: Insufficient Priviledges, please contact Admin');
             }
-            addURL(environment, this.props.location.state.student.id, `https://docs.google.com/document/d/${res.id}/edit`);
+            addURL(environment, token.id, `https://docs.google.com/document/d/${res.id}/edit`);
             this.setState({
                 url: `https://docs.google.com/document/d/${res.id}/edit`,
             });
