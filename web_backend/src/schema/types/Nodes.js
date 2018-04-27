@@ -76,10 +76,6 @@ const StudentType = new GraphQLObjectType({
                 type: GraphQLString,
                 description: 'Student\'s empty google doc playground',
             },
-            topScore: {
-                type: GraphQLFloat,
-                description: 'The student\'s highest grade',
-            },
         };
     },
     interfaces: [nodeInterface],

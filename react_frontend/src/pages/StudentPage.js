@@ -1,12 +1,9 @@
 import React from 'react';
-import LessonComponent from './../components/lesson';
 import { graphql, QueryRenderer } from 'react-relay';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
-import environment from '../relay/environment';
-import GoogleDocButton from '../components/googleDocButton';
 import jwtDecode from 'jwt-decode';
+import { withRouter } from 'react-router-dom';
+import environment from '../relay/environment';
 import StudentLesson from '../components/studentLesson';
-import { copyFile } from '../Gapi';
 
 type Props = {
     /**/
@@ -18,7 +15,7 @@ class StudentPage extends React.Component<Props> {
         if (location.state !== undefined && location.state.student !== undefined) {
             return location.state.student.id;
         }
-        return jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : '';
+        return jwtDecode(sessionStorage.getItem('token')) ? jwtDecode(sessionStorage.getItem('token')).id : '';
     }
     render() {
         return (
@@ -40,6 +37,10 @@ class StudentPage extends React.Component<Props> {
                                     worksheets {
                                         lessonID
                                         url
+                                    }
+                                    grades {
+                                        lessonID
+                                        score
                                     }
                                     id
                                     URL

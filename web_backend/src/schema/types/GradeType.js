@@ -5,7 +5,7 @@ const Grade = new GraphQLObjectType({
     description: 'Grade received on a quiz',
     fields() {
         return {
-            lesson: {
+            lessonID: {
                 type: GraphQLString,
                 description: 'The name of the lesson that the grade is for',
             },

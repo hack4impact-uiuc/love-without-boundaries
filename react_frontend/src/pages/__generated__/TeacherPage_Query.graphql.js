@@ -10,7 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type TeacherPage_QueryVariables = {|
-  teacher_id: string,
+  teacher_id: string
 |};
 export type TeacherPage_QueryResponse = {|
   +node: ?{|
@@ -21,7 +21,7 @@ export type TeacherPage_QueryResponse = {|
       +id: string,
       +URL: ?string,
     |}>,
-  |},
+  |}
 |};
 */
 

@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import { toGlobalId } from 'graphql-relay';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
-
+import jwt_decode from 'jwt-decode';
 import Teacher from './models/teacher';
 import Student from './models/student';
 import Admin from './models/admin';
@@ -39,6 +39,16 @@ export const addTeacher = async (name, email, tokenId) => {
     const t = new Teacher({ name, email, googleID: tokenId });
     return t.save();
 };
+export const addAdmin = async (name, email, tokenId) => {
+    if (!name || !email) { // no credentials = fail
+        return false;
+    }
+    const admin = await Admin.findOne({ name, email });
+    if (admin !== null) {
+        return Admin.findOne({ name, email });
+    }
+    return null;
+};
 
 export const createToken = async (name, email, token, role) => {
     if (!name || !email || !token || !role) {
@@ -67,14 +77,21 @@ const withAuth = next => async (req, res) => {
     const header = req.headers.authorization;
     if (header) {
         const [type, token] = header.split(' ');
+        // console.log('yo');
+        // console.log(jwt_decode(token).tokenId);
+        // console.log('yo');
         switch (type) {
         case 'Bearer':
-            req.user = getaccountFromGoogleToken(token) || req.user;
+            req.user = await getaccountFromGoogleToken(jwt_decode(token).tokenId) || req.user;
+            if (req.user.payload.error_description) {
+                return null;
+            }
             break;
         default:
             break;
         }
     }
+    console.log('sent');
     return next(req, res);
 };
 
@@ -99,10 +116,11 @@ app.post('/auth/google', async (req, res) => {
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
 
         if (role === 'student') {
+            console.log(accessToken);
             const student = await addStudent(payload.name, payload.email, tokenId);
             const id = toGlobalId('Student', student._id);
             const ret = {
-                id, name: student.name, email: student.email, gapi_access_token: accessToken, userType: 'student',
+                id, name: student.name, email: student.email, gapi_access_token: accessToken, userType: 'student', tokenId,
             };
 
             // TODO: store secret key in .env file!!!
@@ -112,14 +130,26 @@ app.post('/auth/google', async (req, res) => {
             const teacher = await addTeacher(payload.name, payload.email, tokenId);
             const id = toGlobalId('Teacher', teacher._id);
             const ret = {
-                id, name: teacher.name, email: teacher.email, gapi_access_token: accessToken, userType: 'teacher',
+                id, name: teacher.name, email: teacher.email, gapi_access_token: accessToken, userType: 'teacher', tokenId,
             };
 
             // TODO: store secret key!!
             const token = jwt.sign(ret, 'secret', { expiresIn: '3 hours' });
             res.json({ role: 'teacher', data: ret, token });
-        } else {
-            res.json({ error: 'Cannot create Admin account ' });
+        } if (role === 'admin') {
+            const admin = await addAdmin(payload.name, payload.email, tokenId);
+            if (admin == null) {
+                res.json({ error: 'Cannot create Admin account ' });
+            } else {
+                const id = toGlobalId('Admin', admin._id);
+                const ret = {
+                    id, name: admin.name, email: admin.email, gapi_access_token: accessToken, userType: 'admin', tokenId,
+                };
+
+                // TODO: store secret key!!
+                const token = jwt.sign(ret, 'secret', { expiresIn: '3 hours' });
+                res.json({ role: 'admin', data: ret, token });
+            }
         }
 
         // res.json(({

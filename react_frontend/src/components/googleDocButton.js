@@ -23,12 +23,9 @@ class googleDocButton extends React.Component {
         }
         // Need to get userId
         copyFile('1CLU5eNONV-KbqEQ8Y2dzlO_T45bLnMOO2-b0MR6nk10').then((res) => {
-            if (res == undefined || res.error) {
+            if (res == undefined || res.error || this.props.location == undefined) {
                 // return;
-                throw Error('Insufficient Priviledges, please contact Admin');
-            }
-            if (this.props.location == undefined) {
-                alert('Insufficient priviledges, contact Admin');
+                throw Error('Google Docs Playground: Insufficient Priviledges, please contact Admin');
             }
             addURL(environment, this.props.location.state.student.id, `https://docs.google.com/document/d/${res.id}/edit`);
             this.setState({
@@ -38,11 +35,9 @@ class googleDocButton extends React.Component {
     }
     render() {
         return (
-            <div>
-                <a href={this.state.url}>
-                    <PaddedButton type="button" className="btn btn-info">Google Docs Playground</PaddedButton>
-                </a>
-            </div>
+            <a href={this.state.url}>
+                <PaddedButton type="button" className="btn btn-lwb">Playground</PaddedButton>
+            </a>
         );
     }
 }
