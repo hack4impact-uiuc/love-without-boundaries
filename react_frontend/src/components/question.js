@@ -94,7 +94,7 @@ class Question extends React.Component {
             <div className="hello">
                 {this.props.num + 1}.
                 <input
-                    className="ppp2"
+                    className="ppp2 form-control"
                     type="text"
                     value={this.state.name}
                     onChange={this.updateQuestion}

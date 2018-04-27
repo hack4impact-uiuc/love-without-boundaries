@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import addURL from '../relay/mutations/addURL';
 import { addFile, copyFile } from '../Gapi';
 import environment from '../relay/environment';
-// reactClass --
+import PaddedButton from './button';
+
 class googleDocButton extends React.Component {
     constructor(props) {
         super(props);
@@ -34,7 +35,7 @@ class googleDocButton extends React.Component {
         return (
             <div>
                 <a href={this.state.url}>
-                    <button type="button" className="btn btn-info">Google Docs Playground</button>
+                    <PaddedButton type="button" className="btn btn-info">Google Docs Playground</PaddedButton>
                 </a>
             </div>
         );

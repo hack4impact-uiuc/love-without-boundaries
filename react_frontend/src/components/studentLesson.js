@@ -57,7 +57,12 @@ class StudentLesson extends React.Component {
         }).catch(err => console.error(err.message));
     }
     componentWillReceiveProps(newProps) {
-        const newObj = newProps.studentWorksheets.worksheets.map(element => newObj[element.lessonID] = element.url);
+        const newObj = {};
+        if (newProps.studentWorksheets !== null) {
+            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
+                newObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+            }
+        }
         this.setState({
             worksheetObj: newObj,
         });

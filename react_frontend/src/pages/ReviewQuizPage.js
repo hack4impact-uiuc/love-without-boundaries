@@ -5,10 +5,6 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import ReviewQuiz from '../components/reviewQuiz';
 
-const SlightlyPaddedButton = styled.button`
-    margin: 0px 5px;
-`;
-
 class ReviewQuizPage extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +27,7 @@ class ReviewQuizPage extends Component {
                                     quizName
                                     score
                                     submittedAnswers{
+                                        questionID
                                         answerChosen
                                     }
                                 }
@@ -58,39 +55,7 @@ class ReviewQuizPage extends Component {
                     if (lessonID) {
                         return (
                             <div className="container">
-                                <h1>Quiz Submissions</h1>
-                                {
-                                    props.node.pastQuizzes ?
-                                        props.node.pastQuizzes.map((pq, idx) => (
-                                            pq.lessonID === lessonID ?
-                                                <div key={idx}>
-
-                                                    <h4>Try #{idx + 1}: {pq.quizName}</h4>
-                                                    <p><b>Score: {pq.score}</b></p>
-                                                Your Answers:
-                                                    {
-                                                        pq.submittedAnswers.map((q, i) =>
-                                                            (
-                                                                <div key={i}>
-                                                                    {
-                                                                        q.answerChosen &&
-                                                                        <p key={i}>
-                                                                            {idx + 1}. {q.answerChosen}<br />
-                                                                        </p>
-                                                                    }
-                                                                </div>
-                                                            ))
-                                                    }
-
-                                                </div>
-                                                :
-                                                null
-                                        ))
-                                        :
-                                        null
-                                }
-                                <ReviewQuiz lessonID={lessonID} />
-                                <SlightlyPaddedButton className="btn btn-primary" onClick={this.finish} bsStyle="primary"> Done </SlightlyPaddedButton>
+                                <ReviewQuiz lessonID={lessonID} pastQuizzes={props.node.pastQuizzes} />
                             </div>
                         );
                     }
