@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import { withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import ReviewQuiz from '../components/reviewQuiz';
 
-const SlightlyPaddedButton = styled.button`
-    margin: 0px 5px;
-`;
-
 class ReviewQuizPage extends Component {
     constructor(props) {
         super(props);
+        const token = jwtDecode(sessionStorage.getItem('token'));
         this.state = {
-            studentID: 'U3R1ZGVudDo1YWUxNWNlM2NkNGI3ODcyNzllYWJmYzM=',
+            studentID: token !== null ? token.id : '',
         };
     }
 
-    finish = () => { this.props.history.push('/student'); }
     render() {
+        if (this.state.studentID === null) {
+            return <h4 className="page-error">You must be logged in to view previous quizzes</h4>;
+        }
+        console.log(this.state.studentID);
         return (
             <QueryRenderer
                 environment={environment}
@@ -31,6 +31,7 @@ class ReviewQuizPage extends Component {
                                     quizName
                                     score
                                     submittedAnswers{
+                                        questionID
                                         answerChosen
                                     }
                                 }
@@ -38,59 +39,28 @@ class ReviewQuizPage extends Component {
                         }
                     } 
                     `}
-                variables={{ student_id: this.state.studentID }}
+                variables={{ student_id: this.state.studentID !== null ? this.state.studentID : '' }}
                 render={({ props }) => {
                     if (!props) {
                         return (
                             <div>Loading...</div>
                         );
                     }
+                    console.log(props);
                     if (props.node == null) {
-                        return <p>You have no Previous Quizzes for this lesson.</p>;
+                        return <h4 className="page-error">You have no Previous Quizzes for this lesson.</h4>;
                     }
                     const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined;
                     if (lessonID === undefined) {
-                        return <p>Review Lesson not available for this lesson</p>;
+                        return <h4 className="page-error">Review Lesson not available for this lesson, please press the back button one more time to go back to lesson page</h4>;
                     }
                     if (props.node.pastQuizzes === undefined) {
-                        return <p>You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal.</p>;
+                        return <h4 className="page-error">You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal.</h4>;
                     }
                     if (lessonID) {
                         return (
                             <div className="container">
-                                <h1>Quiz Submissions</h1>
-                                {
-                                    props.node.pastQuizzes ?
-                                        props.node.pastQuizzes.map((pq, idx) => (
-                                            pq.lessonID === lessonID ?
-                                                <div key={idx}>
-
-                                                    <h4>Try #{idx + 1}: {pq.quizName}</h4>
-                                                    <p><b>Score: {pq.score}</b></p>
-                                                Your Answers:
-                                                    {
-                                                        pq.submittedAnswers.map((q, i) =>
-                                                            (
-                                                                <div key={i}>
-                                                                    {
-                                                                        q.answerChosen &&
-                                                                        <p key={i}>
-                                                                            {idx + 1}. {q.answerChosen}<br />
-                                                                        </p>
-                                                                    }
-                                                                </div>
-                                                            ))
-                                                    }
-
-                                                </div>
-                                                :
-                                                null
-                                        ))
-                                        :
-                                        null
-                                }
-                                <ReviewQuiz lessonID={lessonID} />
-                                <SlightlyPaddedButton className="btn btn-primary" onClick={this.finish} bsStyle="primary"> Done </SlightlyPaddedButton>
+                                <ReviewQuiz lessonID={lessonID} pastQuizzes={props.node.pastQuizzes} />
                             </div>
                         );
                     }

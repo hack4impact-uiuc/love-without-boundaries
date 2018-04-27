@@ -1,12 +1,11 @@
 
-.navbar:hover {
+/* .navbar:hover {
 	background-color:#c13030;
 	color: white;
 	padding: 1.5%;
 	margin:auto;
-	border-radius: 10px;
 	border-bottom: 0px;
-}
+} */
 
 /* .lessonProps{
 	color: #a6acb5;
@@ -35,10 +34,10 @@
 }
 .admin-lesson-box {
 	border: 1px solid #d1d1d7;
-	height: 400px;
+	height: 325px;
 	border-radius: 8px;
-	max-width: 380px;
-	margin: 10px 0;
+	max-width: 420px;
+	margin: 10px auto;
 	text-align: center;
 }
 .lesson-title {
@@ -49,11 +48,21 @@
 	border-radius: 6px;
 	background-color: #ffffff;
 }
+.lesson-btn2 {
+	border: 1px solid #ff5050;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+.lesson-text {
+	font-size: 14px;
+	display: inline-block;
+	color: #ff5050;
+}
 .lesson-quiz-text {
 	margin-top: 10px;
 	font-size: 17px;
 	display: inline-block;
-	color: rgb(0, 0, 0);
+	color: #5e6b77;
 }
 .lesson-btn-box {
 	padding-left: 9px;
@@ -166,6 +175,7 @@
 	font-weight: 200;
 	font-size: 15px;
 	padding-top: 3%;
+	word-spacing: .2em;
 }
 
 .lowerBox{
@@ -290,14 +300,127 @@
 	display: inline;
 }
 
-.hello {
-	padding-left: 10px;
+.hidden{
+	visibility: hidden;
 }
 
+.padded{
+	margin-bottom: 7%;
+}
+
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: -20px; /* the bottom margin is the negative value of the footer's height */
+    background-color: #ccc;
+}
+.spacer.edge { 
+    background-color: white; /* same as body background */
+}
+
+.spacer {
+    height: 20px;
+ }
+
+ .infront{
+	 z-index: 100;
+	 position: relative;
+ }
+
+ .navbar{
+	 background-color:#B33C42;
+	 margin-bottom: 0px;
+
+	 min-height: 75px;
+ }
+
+ .hr{
+	margin-top: 0px;
+	margin-bottom: 0px;
+ }
+
+ .navbar-collapse{
+	 border-top: 0px;
+ }
+
+ .navbar-toggle{
+	 margin-top: 10px;
+ }
+
+ .capit{
+	 text-transform: capitalize;
+	 position: relative;
+ }
 .ppp {
 	margin-left: 10px;
 }
 .ppp2 {
 	width: 35%;
 	margin-left: 10px;
+	display: inline-block;
+}
+
+.past-quiz-box {
+	max-width: 400px;
+	max-height: 400px;
+	border: 1px solid #3778ba;
+	border-radius: 10px;
+	margin-top: 15px;
+	padding: 10px;
+}
+
+.correct-answer-box {
+	max-width: 400px;
+	max-height: 400px;
+	border: 1px solid #22a531;
+	border-radius: 10px;
+	margin: 15px 5px;;
+	padding: 10px;
+}
+
+.sign-in-btn {
+	background-color: #C04448;
+	color: #ffffff;
+	height: 50px;
+	width: 100px;
+	padding: 12px 20px;
+	margin: 10px 10px;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 16px;
+	vertical-align: middle;
+}
+.sign-in-btn-box {
+	padding-top: 5%;
+}
+
+.dark-box {
+	background: url("https://file-utocriqbzb.now.sh/");
+    background-size: cover;  
+    width: 100%;
+	height: 430px;
+    display: block;
+
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+	word-spacing: .25em;
+    font-weight: 600;
+    font-size: 26px;
+    text-align: center;
+    
+    padding-top: 60px;
+    margin-top: 0%;
+    right:0%;
+    margin-left: 0%;
+    left:0%;
+}
+
+.page-error {
+	margin: 8%;
+	text-align: center; 
 }

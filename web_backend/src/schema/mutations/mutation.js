@@ -18,6 +18,9 @@ const createStudent = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         student: {
@@ -25,7 +28,7 @@ const createStudent = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
+    mutateAndGetPayload: async ({ name, email, token }) => {
         const s = new Student({ name, email });
         return s.save();
     },
@@ -40,6 +43,9 @@ const createTeacher = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         teacher: {
@@ -47,7 +53,7 @@ const createTeacher = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
+    mutateAndGetPayload: async ({ name, email, token }) => {
         const t = new Teacher({ name, email });
         return t.save();
     },
@@ -62,6 +68,9 @@ const createAdmin = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         admin: {
@@ -69,7 +78,7 @@ const createAdmin = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
+    mutateAndGetPayload: async ({ name, email, token }) => {
         const a = new Admin({ name, email });
         return a.save();
     },
@@ -96,7 +105,7 @@ const createLesson = mutationWithClientMutationId({
     }) => {
         const l = new Lesson({
             name, quiz, worksheetName, worksheetURL, notesName, notesURL,
-        });
+        }, { new: true });
         return l.save();
     },
 });
@@ -136,7 +145,7 @@ const addGrade = mutationWithClientMutationId({
     mutateAndGetPayload: ({ id, lesson, score }) => {
         const obj = fromGlobalId(id);
         const grade = { lesson, score };
-        return Student.findOneAndUpdate({ _id: obj.id }, { $push: { grades: grade } });
+        return Student.findOneAndUpdate({ _id: obj.id }, { $push: { grades: grade } }, { new: true });
     },
 });
 
@@ -156,7 +165,7 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null;
         const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null;
         if (realStudentId && realTeacherId) {
-            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } });
+            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } }, { new: true });
             await Teacher.findByIdAndUpdate(fromGlobalId(teacherID).id, { $push: { listOfStudentIDs: fromGlobalId(studentID).id } });
         }
         return Student.findById(fromGlobalId(studentID).id) && Teacher.findById(fromGlobalId(teacherID).id);
@@ -211,6 +220,9 @@ const submitQuiz = mutationWithClientMutationId({
         const lObj = fromGlobalId(lessonID);
         const q1 = await Lesson.findById(lObj.id).exec();
         const questionIDs = q1.quiz.questions.map(q => q.id);
+        if (questionIDs.length < 0) {
+            return;
+        }
         // const answerNames = q1.quiz.questions.map(q => q.answers.map(a => [a.answerName, a.isCorrect]));
         let numCorrect = 0;
         questions.forEach((q, i) => {
@@ -228,11 +240,46 @@ const submitQuiz = mutationWithClientMutationId({
                 submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             }
         });
-        let newTopScore = (numCorrect / questionIDs.length);
-        const s1 = await Student.findById(sObj.id).exec();
-        if (s1.topScore > newTopScore) {
-            newTopScore = s1.topScore;
+        const newTopScore = (numCorrect / questionIDs.length);
+        console.log(newTopScore);
+        const s1 = await Student.findById(sObj.id);
+        console.log(s1.grades);
+        const lessonGrade = s1.grades.find(elem => elem.lessonID === lessonID);
+        if (lessonGrade === undefined) {
+            console.log('doesnt exits');
+            const newEntry = { score: newTopScore, lessonID };
+            await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
+        } else {
+            // console.log('else');
+
+            // console.log(lessonGrade.score);
+            if (newTopScore > lessonGrade.score) {
+                // console.log('higher');
+                // console.log('UDPATING');
+                // console.log(lessonGrade);
+                await Student.findByIdAndUpdate(sObj.id, { $pull: { grades: lessonGrade } });
+                // const lessonGrade2 = s1.grades.find(elem => elem.lessonID === lessonID);
+                // console.log(lessonGrade2);
+                console.log('ypdated');
+                const newEntry = { score: newTopScore, lessonID };
+                console.log(newEntry);
+                await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
+                const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
+                // console.log(lessonGrade3);
+            }
+
+
+            // await Student.findByIdAndUpdate(sObj.idm, { $push: { grades: newTopScore, lessonId: lessonID } });
         }
+        const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
+        console.log(lessonGrade3);
+        // console.log(lessonGrade);
+        // if (lessonGrade.score < newTopScore) {
+        //     console.log('BEAT IT');
+        //     // Student.findByIdAndUpdate(sObj.idm, { $set: { grades:  } });
+        //     // newTopScore = s1.topScore;
+        //     // s1.
+        // }
         const pastQuiz = {
             lessonID,
             quizName: q1.name,
@@ -451,7 +498,7 @@ const addURL = mutationWithClientMutationId({
     },
     mutateAndGetPayload: ({ id, url }) => {
         const obj = fromGlobalId(id);
-        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } });
+        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } }, { new: true });
     },
 });
 

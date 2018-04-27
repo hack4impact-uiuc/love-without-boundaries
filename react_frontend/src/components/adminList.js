@@ -67,7 +67,7 @@ export const PopUpList = styled.div`
     position: fixed;
     background-color: white;
     left: 80%;
-    top:60%;
+    top:40%;
 `;
 
 export const TeacherElem = styled.div`
@@ -88,6 +88,7 @@ class AdminListComponent extends React.Component<Props> {
             studentOrTutor: 'STUDENT',
             showAssignList: false,
             selectedTeacherId: '',
+            filterText: '',
         };
     }
 
@@ -134,6 +135,11 @@ class AdminListComponent extends React.Component<Props> {
         deleteTeacher(environment, deleteTeacherId);
         window.location.reload();
     }
+    handleFilter = (e) => {
+        this.setState({
+            filterText: e.target.value,
+        });
+    }
 
     getList(props) {
         return (
@@ -149,35 +155,42 @@ class AdminListComponent extends React.Component<Props> {
                             </thead>
                             <tbody>
                                 { this.state.studentOrTutor === 'TEACHER' ?
-                                    props.teachers.map((teacher, idx) => (
-                                        <tr key={idx}>
-                                            <th scrope="row">{idx + 1}</th>
-                                            <th>
-                                                <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/teacher', state: { teacher } }}>
-                                                    <button className="btn btn-default">{teacher.name}</button>
-                                                </Link>
-                                            </th>
-                                            <th>
-                                                <DeleteButton className="btn btn-danger" name={teacher.id} onClick={this.onClickDeleteTeacher} > Delete </DeleteButton>
-                                            </th>
-                                        </tr>
-                                    ))
-                                    : props.students.map((student, idx) => (
-                                        <tr key={idx}>
-                                            <th scrope="row">{idx + 1}</th>
-                                            <th>
-                                                <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/student', state: { student } }}>
-                                                    <button className="btn btn-default">{student.name}</button>
-                                                </Link>
-                                            </th>
-                                            <th>
-                                                <DeleteButton className="btn btn-danger" name={student.id} onClick={this.onClickDeleteStudent} > Delete </DeleteButton>
-                                            </th>
-                                            <th>
-                                                <AssignButton className="btn btn-info" name={student.id} onClick={this.onClickShowAssignList} > Assign </AssignButton>
-                                            </th>
-                                        </tr>
-                                    ))
+                                    props.teachers !== null ?
+                                        props.teachers.filter(elem => elem.name.toLowerCase().includes(this.state.filterText.toLowerCase())).map((teacher, idx) => (
+                                            <tr key={idx}>
+                                                <th scrope="row">{idx + 1}</th>
+                                                <th>
+                                                    <Link key={idx} style={{ display: 'block' }}to={{ pathname: '/teacher', state: { teacher } }}>
+                                                        <button className="btn btn-default">{teacher.name}</button>
+                                                    </Link>
+                                                </th>
+                                                <th>
+                                                    <DeleteButton className="btn btn-danger" name={teacher.id} onClick={this.onClickDeleteTeacher} > Delete </DeleteButton>
+                                                </th>
+                                            </tr>
+                                        ))
+                                        :
+                                        <p>No Teachers</p>
+                                    :
+                                    props.students !== null ?
+                                        props.students.filter(elem => elem.name.toLowerCase().includes(this.state.filterText.toLowerCase())).map((s, idx) => (
+                                            <tr key={idx}>
+                                                <th scrope="row">{idx + 1}</th>
+                                                <th>
+                                                    <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/student', state: { student: s } }}>
+                                                        <button className="btn btn-default">{s.name}</button>
+                                                    </Link>
+                                                </th>
+                                                <th>
+                                                    <DeleteButton className="btn btn-danger" name={s.id} onClick={this.onClickDeleteStudent} > Delete </DeleteButton>
+                                                </th>
+                                                <th>
+                                                    <AssignButton className="btn btn-info" name={s.id} onClick={this.onClickShowAssignList} > Assign </AssignButton>
+                                                </th>
+                                            </tr>
+                                        ))
+                                        :
+                                        <p>No Students</p>
                                 }
                             </tbody>
                         </table>
@@ -201,7 +214,18 @@ class AdminListComponent extends React.Component<Props> {
     getPopList(props, showList) {
         if (showList === true) {
             return (
-                <PopUpList>{props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input name="teacher" type="radio" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name} </ul></TeacherElem>)}
+                <PopUpList>
+
+                    {
+                        props.teachers.map((teacher, i) => (
+                            <div key={i}>
+                                <hr style={{ margin: '5px' }} />
+                                <ul id={teacher.id} >
+                                    <input name="teacher" type="radio" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name}
+                                </ul>
+                            </div>))
+
+                    }
                     <AssignTeacherButton className="btn btn-info" onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton>
                 </PopUpList>
             );
@@ -234,14 +258,16 @@ class AdminListComponent extends React.Component<Props> {
                             <div>Loading...</div>
                         );
                     }
-                    const teacherList = props.teachers.map((teacher) => <TeacherElem><ul id={teacher.id} > <input type="checkbox" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name} </ul></TeacherElem>);
 
                     return (
                         <div className="rightMargin" >
                             <div>
                                 <h2> Viewing { this.state.studentOrTutor == student ? 'list of students' : 'list of teachers'}</h2>
-                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-primary' : 'btn btn-default'} name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
-                                <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-default' : 'btn btn-primary'} name="TEACHER" onClick={this.onClickMake}> Teachers </PaddedButton>
+                                <div className="form-inline">
+                                    <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-primary' : 'btn btn-default'} name="STUDENT" onClick={this.onClickMake}> Students </PaddedButton>
+                                    <PaddedButton className={this.state.studentOrTutor == student ? 'btn btn-default' : 'btn btn-primary'} name="TEACHER" onClick={this.onClickMake}> Teachers </PaddedButton>
+                                    <input className="form-control" type="text" name="filter-users" value={this.state.filterText} onChange={this.handleFilter} placeholder="Filter" />
+                                </div>
                                 <div> {this.getList(props)} </div>
                                 <div> {this.getPopList(props, this.state.showAssignList)}</div>
                             </div>

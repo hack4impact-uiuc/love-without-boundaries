@@ -4,26 +4,31 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
 import Checkbox from './../components/checkbox';
+import jwtDecode from 'jwt-decode';
 import PaddedButton from './../components/button';
 
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWUxNWNlM2NkNGI3ODcyNzllYWJmYzM=' };
+        this.state = { lessonID: '', studentID: jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : null };
     }
 
     componentWillMount = () => {
         this.selectedCheckboxes = {};
     }
 
-    toggleCheckbox = (label, i) => {
-        this.selectedCheckboxes[i] = label;
-    }
+      toggleCheckbox = (label, i) => {
+          if (this.selectedCheckboxes[i] != label) {
+              this.selectedCheckboxes[i] = label;
+          }
+      }
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
         submitQuiz(environment, this.state.studentID, this.state.lessonID, Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
+        this.props.history.goBack();
     }
+
 
     createCheckbox = (label, id, i) => (
         <Checkbox
@@ -34,10 +39,13 @@ class TakeQuizPage extends Component {
     )
 
     createCheckboxes = (answerNames, questionId) => (
-        answerNames.map((e) => this.createCheckbox(e, questionId))
+        answerNames.map((e, i) => this.createCheckbox(e, questionId, i))
     )
 
     render() {
+        if (this.state.studentID === null) {
+            return <h4 className="page-error">You must be logged in as a Student to take quiz. Try logging in again.</h4>;
+        }
         return (
             <QueryRenderer
                 environment={environment}
@@ -71,7 +79,7 @@ class TakeQuizPage extends Component {
                 render={({ props }) => {
                     if (!props) {
                         return (
-                            <div>Loading...</div>
+                            <p>Loading...</p>
                         );
                     }
                     this.state.lessonID = props.node.id;
@@ -85,15 +93,28 @@ class TakeQuizPage extends Component {
                                         {
                                             props.node.quiz.questions.map((q, i) =>
                                                 (
-                                                    <form onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
+                                                    <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
                                                         {props.node.quiz.questions[i].questionName }
-                                                        {this.createCheckboxes(props.node.quiz.questions[i].answers.map((q, i) => q.answerName), props.node.quiz.questions[i].id) }
-                                                        {i === props.node.quiz.questions.length - 1 && <PaddedButton className="btn btn-danger" type="submit">Save</PaddedButton>}
+                                                        {
+                                                            this.createCheckboxes(
+                                                                props.node.quiz.questions[i].answers.map((q, idx) => q.answerName),
+                                                                props.node.quiz.questions[i].id,
+                                                            )
+                                                        }
+                                                        {
+                                                            i === props.node.quiz.questions.length - 1 &&
+                                                            <PaddedButton
+                                                                className="btn btn-primary"
+                                                                onClick={() => alert('Good Job!')}
+                                                                type="submit"
+                                                            >Submit Quiz
+                                                            </PaddedButton>
+                                                        }
                                                     </form>
                                                 ))
                                         }
                                     </div>
-                                    <Link to="/student"><PaddedButton className="btn btn-danger">Go Back</PaddedButton></Link>
+                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                                 </div>
                             </div>
                         </div>

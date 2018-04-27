@@ -24,5 +24,6 @@ const StudentSchema = new Schema({
         url: { type: String },
     }],
     URL: { type: String },
+    googleID: { type: String },
 });
 export default mongoose.model('Student', StudentSchema);

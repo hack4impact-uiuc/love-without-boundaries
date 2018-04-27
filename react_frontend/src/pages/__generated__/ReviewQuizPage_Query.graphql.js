@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash bc3bce31b979da6b6f4ae99523647537
+ * @relayHash eb7406874cf98b47490a332c39838da6
  */
 
 /* eslint-disable */
@@ -19,6 +19,7 @@ export type ReviewQuizPage_QueryResponse = {|
       +quizName: ?string,
       +score: ?number,
       +submittedAnswers: ?$ReadOnlyArray<?{|
+        +questionID: ?string,
         +answerChosen: ?string,
       |}>,
     |}>,
@@ -39,6 +40,7 @@ query ReviewQuizPage_Query(
         quizName
         score
         submittedAnswers {
+          questionID
           answerChosen
         }
       }
@@ -111,6 +113,13 @@ v2 = {
             {
               "kind": "ScalarField",
               "alias": null,
+              "name": "questionID",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
               "name": "answerChosen",
               "args": null,
               "storageKey": null
@@ -126,7 +135,7 @@ return {
   "operationKind": "query",
   "name": "ReviewQuizPage_Query",
   "id": null,
-  "text": "query ReviewQuizPage_Query(\n  $student_id: ID!\n) {\n  node(id: $student_id) {\n    __typename\n    ... on Student {\n      pastQuizzes {\n        lessonID\n        quizName\n        score\n        submittedAnswers {\n          answerChosen\n        }\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query ReviewQuizPage_Query(\n  $student_id: ID!\n) {\n  node(id: $student_id) {\n    __typename\n    ... on Student {\n      pastQuizzes {\n        lessonID\n        quizName\n        score\n        submittedAnswers {\n          questionID\n          answerChosen\n        }\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -184,5 +193,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '96843679741598ce80efa0c2cc7a141a';
+(node/*: any*/).hash = '526e3b77d281e93405c54415c6f7dee1';
 module.exports = node;
