@@ -16,7 +16,7 @@ class StudentPage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            isStudent: false,
+            isStudent: true,
         };
         console.log('hi');
         console.log(this.props);
