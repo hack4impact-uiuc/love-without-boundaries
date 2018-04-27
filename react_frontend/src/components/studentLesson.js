@@ -5,7 +5,7 @@ import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
 import { copyFile, setPermissionToAllEdit } from '../Gapi';
 import environment from '../relay/environment';
 import PaddedButton from './button';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 class StudentLesson extends React.Component {
     constructor(props) {
@@ -23,14 +23,19 @@ class StudentLesson extends React.Component {
     }
     componentDidMount() {
         let refresh = 0;
-        if (this.props.student === null) {
+        const token = jwtDecode(sessionStorage.getItem('token'));
+        if (token === null || !token) {
             return;
         }
+        if (this.props.student === null || this.props.isStudent === false || token.userType !== 'student') {
+            return;
+        }
+
         const studentWorksheetLessonIDs = this.props.student.worksheets.map(element => element.lessonID);
         let i;
         const indices = [];
         const promises = [];
-        for (i = 0; i < this.props.lessons.length; i++) {
+        for (i = 0; i < this.props.lessons.length; i += 1) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
                 refresh = 1;
                 const url = this.props.lessons[i].worksheetURL;
@@ -77,17 +82,20 @@ class StudentLesson extends React.Component {
         }
         return (
             <div className="container-fluid">
-                <h2>
-                    {
-                        this.props.student !== undefined ? `${this.props.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
-                    }
-                </h2>
+                <div className="row" style={{ padding: '10px 20px' }}>
+                    <h2>
+                        {
+                            this.props.student !== undefined ? `${this.props.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
+                        }
+                    </h2>
+                    <p style={{ color: 'grey' }} >Email: {this.props.student.email}</p>
+                </div>
                 <div className="row">
                     <div className="col-sm-3">
                         <GoogleDocButton url={this.props.student.URL} location={this.props.location} />
                         <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
                     </div>
-                    <div className="col-sm-9">
+                    <div className="col-sm-8 col-md-9">
                         {
                             this.props.lessons !== undefined ?
                                 this.props.lessons.map((lesson, idx) => (

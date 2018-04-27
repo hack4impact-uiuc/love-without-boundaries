@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7190e27bff261ca9833d2a4757fd398f
+ * @relayHash fc5cfcd1bc5e18171f7f2cd17aa63b5d
  */
 
 /* eslint-disable */
@@ -21,6 +21,7 @@ export type StudentPage_QueryResponse = {|
   |}>,
   +node: ?{|
     +name?: ?string,
+    +email?: ?string,
     +worksheets?: ?$ReadOnlyArray<?{|
       +lessonID: ?string,
       +url: ?string,
@@ -46,6 +47,7 @@ query StudentPage_Query(
     __typename
     ... on Student {
       name
+      email
       worksheets {
         lessonID
         url
@@ -117,6 +119,13 @@ v4 = [
   }
 ],
 v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "email",
+  "args": null,
+  "storageKey": null
+},
+v6 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "worksheets",
@@ -141,7 +150,7 @@ v5 = {
     }
   ]
 },
-v6 = {
+v7 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "URL",
@@ -153,7 +162,7 @@ return {
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      name\n      worksheets {\n        lessonID\n        url\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
+  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      name\n      email\n      worksheets {\n        lessonID\n        url\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -178,8 +187,9 @@ return {
             "selections": [
               v2,
               v5,
+              v6,
               v1,
-              v6
+              v7
             ]
           }
         ]
@@ -215,7 +225,8 @@ return {
             "selections": [
               v2,
               v5,
-              v6
+              v6,
+              v7
             ]
           }
         ]
@@ -224,5 +235,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '470b7d77a372f4337f0acfe4c1170cb5';
+(node/*: any*/).hash = '450da85510e43e087082c033bc2096a4';
 module.exports = node;

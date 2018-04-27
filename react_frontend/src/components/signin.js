@@ -19,7 +19,7 @@ class SignIn extends React.Component {
     }
 
     responseGoogle = (auth) => {
-        fetch('http://localhost:8080/auth/google', {
+        fetch('https://lwb-backend.now.sh/auth/google', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
