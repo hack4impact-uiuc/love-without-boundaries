@@ -21,32 +21,38 @@ class SignIn extends React.Component {
 
 
     getId = (props) => {
-        console.log('IN GET ID');
-        console.log(this.props.role);
-        console.log(this.state.email);
-        if (this.props.role === 'student') {
-            for (let i = 0; i < props.students.length; i++) {
-                console.log(props.students[i].email);
-                console.log(this.state.email);
-                console.log(props.students[i].email === this.state.email);
-                if (props.students[i].email === this.state.email) {
-                    console.log(props.students[i].id);
-                    this.props.history.push('/student', { student: { id: props.students[i].id, name: props.students[i].name } });
+        console.log(this.props.requestType);
+        if (this.props.requestType === 'register') {
+            console.log('hi');
+            window.location.reload();
+        } else {
+            console.log('IN GET ID');
+            console.log(this.props.role);
+            console.log(this.state.email);
+            if (this.props.role === 'student') {
+                for (let i = 0; i < props.students.length; i++) {
+                    console.log(props.students[i].email);
+                    console.log(this.state.email);
+                    console.log(props.students[i].email === this.state.email);
+                    if (props.students[i].email === this.state.email) {
+                        console.log(props.students[i].id);
+                        this.props.history.push('/student', { student: { id: props.students[i].id, name: props.students[i].name } });
+                    }
                 }
-            }
-        } else if (this.props.role === 'teacher') {
-            for (let i = 0; i < props.teachers.length; i++) {
-                console.log(props.teachers[i].email);
-                if (props.teachers[i].email === this.state.email) {
-                    console.log(props.teachers[i].id);
-                    this.props.history.push('/teacher', { teacher: { id: props.teachers[i].id, name: props.teachers[i].name } });
+            } else if (this.props.role === 'teacher') {
+                for (let i = 0; i < props.teachers.length; i++) {
+                    console.log(props.teachers[i].email);
+                    if (props.teachers[i].email === this.state.email) {
+                        console.log(props.teachers[i].id);
+                        this.props.history.push('/teacher', { teacher: { id: props.teachers[i].id, name: props.teachers[i].name } });
+                    }
                 }
-            }
-        } else if (this.props.role === 'admin') {
-            for (let i = 0; i < props.admins.length; i++) {
-                if (props.admins[i].email === this.state.email) {
-                    console.log(props.admins[i].id);
-                    this.props.history.push('/admin', { admin: { id: props.admins[i].id, name: props.admins[i].name } });
+            } else if (this.props.role === 'admin') {
+                for (let i = 0; i < props.admins.length; i++) {
+                    if (props.admins[i].email === this.state.email) {
+                        console.log(props.admins[i].id);
+                        this.props.history.push('/admin', { admin: { id: props.admins[i].id, name: props.admins[i].name } });
+                    }
                 }
             }
         }
@@ -127,6 +133,7 @@ class SignIn extends React.Component {
                                 <div>
 
                                     {this.getId(props)}
+                                    {/* {this.props.role == 'register' && <p> lol </p>} */}
 
                                 </div>
                             );

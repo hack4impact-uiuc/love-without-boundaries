@@ -202,7 +202,7 @@ class HomePage extends React.Component<Props> {
                                     <div className="lower"> Our goal is to prepare students for their future </div>
                                 </DarkBox>
                                 {
-                                    (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login') ?
+                                    ((this.props.location.state == undefined || this.props.location.state.signedIn) && (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login')) ?
                                         <div>
                                             <p>Are you a...</p>
 
@@ -216,7 +216,8 @@ class HomePage extends React.Component<Props> {
                                         :
                                         <div>
 
-                                            <SignInButton className="lower btn" onClick={this.onLogin}>Sign in</SignInButton>
+                                            <SignInButton className="lower btn" onClick={this.onLogin}>Login</SignInButton>
+                                            <SignInButton className="lower btn" onClick={this.onSignUp}>Sign up</SignInButton>
                                         </div>
                                 }
                             </SignInSection>
