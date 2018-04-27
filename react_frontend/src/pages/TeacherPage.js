@@ -50,7 +50,7 @@ class TeacherPage extends React.Component<Props> {
                     if (props) {
                         // check if empty
                         if (props.node == null || Object.keys(props.node).length === 0) {
-                            return <ErrorMessage code="404" message="Error Fetching. You must be a logged in as a Teacher or Admin to see this page." />;
+                            return <ErrorMessage code="404" message="You must be a logged in as a Teacher to see this page." />;
                         }
                         return (
                             <div className="container-fluid">

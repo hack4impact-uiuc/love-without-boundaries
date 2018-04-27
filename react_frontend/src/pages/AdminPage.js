@@ -43,10 +43,10 @@ class AdminPage extends React.Component {
                             <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
                             <div className="admin-tool-bar">
                                 <div className="adminTool">
-                                    <Link to="/admin/lesson"><PaddedButton className="btn btn-default">Edit Lessons</PaddedButton></Link>
+                                    <Link to="/admin/lesson"><PaddedButton className="btn btn-admin">Edit Lessons</PaddedButton></Link>
                                 </div>
                                 <div className="adminTool">
-                                    <Link to="/admin/list"><PaddedButton className="btn btn-default">View Teachers and Students</PaddedButton></Link>
+                                    <Link to="/admin/list"><PaddedButton className="btn btn-admin">View Teachers and Students</PaddedButton></Link>
                                 </div>
                             </div>
                         </div>
