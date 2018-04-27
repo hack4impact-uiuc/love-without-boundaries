@@ -220,6 +220,9 @@ const submitQuiz = mutationWithClientMutationId({
         const lObj = fromGlobalId(lessonID);
         const q1 = await Lesson.findById(lObj.id).exec();
         const questionIDs = q1.quiz.questions.map(q => q.id);
+        if (questionIDs.length < 0) {
+            return;
+        }
         // const answerNames = q1.quiz.questions.map(q => q.answers.map(a => [a.answerName, a.isCorrect]));
         let numCorrect = 0;
         questions.forEach((q, i) => {
@@ -237,11 +240,21 @@ const submitQuiz = mutationWithClientMutationId({
                 submittedAnswers.push({ questionID: q._id, answerChosen: answers[i] });
             }
         });
-        let newTopScore = (numCorrect / questionIDs.length);
-        const s1 = await Student.findById(sObj.id).exec();
-        if (s1.topScore > newTopScore) {
-            newTopScore = s1.topScore;
+        const newTopScore = (numCorrect / questionIDs.length);
+        const s1 = await Student.findById(sObj.id);
+        const lessonGrade = s1.grades.find(elem => elem.lessonID === lessonID);
+
+        if (lessonGrade === undefined) {
+            const newEntry = { score: newTopScore, lessonID };
+            await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
+        } else if (newTopScore > lessonGrade.score) {
+            await Student.findByIdAndUpdate(sObj.id, { $pull: { grades: lessonGrade } });
+            const newEntry = { score: newTopScore, lessonID };
+            await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
+            const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
         }
+
+        const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
         const pastQuiz = {
             lessonID,
             quizName: q1.name,

@@ -236,7 +236,7 @@ type EditLessonPayload {
 # Grade received on a quiz
 type Grade {
   # The name of the lesson that the grade is for
-  lesson: String
+  lessonID: String
 
   # The grade in which the student received for this leeson
   score: Int
@@ -286,14 +286,8 @@ type Lesson implements Node {
   # Lesson's quiz for the material to be tested on
   quiz: Quiz
 
-  # The name of the lesson's worksheet
-  worksheetName: String
-
   # The URL of the lesson's worksheet
   worksheetURL: String
-
-  # The name of the lesson's notes
-  notesName: String
 
   # The URL of the lesson's notes
   notesURL: String
@@ -407,9 +401,6 @@ type Student implements Node {
 
   # Student's empty google doc playground
   URL: String
-
-  # The student's highest grade
-  topScore: Float
 }
 
 input SubmitQuizInput {

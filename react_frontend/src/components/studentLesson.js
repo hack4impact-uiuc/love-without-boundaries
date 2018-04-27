@@ -16,9 +16,23 @@ class StudentLesson extends React.Component {
                 newWkshtObj[this.props.student.worksheets[i].lessonID] = this.props.student.worksheets[i].url;
             }
         }
+        const newGrades = {};
+        if (this.props.student !== null && this.props.student.grades !== undefined) {
+            for (let i = 0; i < this.props.student.grades.length; i += 1) {
+                newWkshtObj[this.props.student.grades[i].lesson] = this.props.student.grades[i].score;
+                let s = this.props.student.grades[i].score;
+                if (this.props.student.grades[i].lesson in newGrades) {
+                    if (s < newGrades[this.props.student.grades[i].lesson]) {
+                        s = newGrades[this.props.student.grades[i].lesson];
+                    }
+                }
+                newGrades[this.props.student.grades[i].lesson] = s;
+            }
+        }
         this.state = {
             error: '',
             worksheetObj: newWkshtObj,
+            grades: newGrades,
         };
     }
     componentDidMount() {
@@ -87,6 +101,7 @@ class StudentLesson extends React.Component {
                         <GoogleDocButton url={this.props.student.URL} location={this.props.location} />
                         <a href="http://dictionary.com/"><PaddedButton className="btn btn-info">Cambodian-English Dictionary</PaddedButton></a>
                     </div>
+
                     <div className="col-sm-9">
                         {
                             this.props.lessons !== undefined ?
@@ -97,10 +112,11 @@ class StudentLesson extends React.Component {
                                         lessonName={lesson.name}
                                         lessonNotesLink={lesson.notesURL}
                                         lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
-                                        quizPercentage="50%"
+                                        quizPercentage={(this.props.student.grades.find(l => l.lessonID === lesson.id) === undefined) ? undefined : (this.props.student.grades.find(l => l.lessonID === lesson.id)).score}
                                         quizIsChecked={false}
                                         isStudent={this.props.isStudent}
                                     />
+
                                 ))
                                 :
                                 <p>There arent any lessons</p>
