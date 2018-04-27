@@ -18,7 +18,7 @@ class StudentPage extends React.Component<Props> {
         if (location.state !== undefined && location.state.student !== undefined) {
             return location.state.student.id;
         }
-        return jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : '';
+        return p ? jwtDecode(sessionStorage.getItem('token')).id : '';
     }
     render() {
         return (

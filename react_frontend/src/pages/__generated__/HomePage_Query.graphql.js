@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 67ff578d0836c1ad0e2efbdc6876c446
+ * @relayHash c24a725342780947752a3c43736b575d
  */
 
 /* eslint-disable */
@@ -10,12 +10,12 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type studentListItem_student$ref = any;
-export type HomePage_QueryVariables = {| |};
+export type HomePage_QueryVariables = {||};
 export type HomePage_QueryResponse = {|
   +students: ?$ReadOnlyArray<?{|
     +id: string,
     +$fragmentRefs: studentListItem_student$ref,
-  |}>,
+  |}>
 |};
 */
 
@@ -102,5 +102,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '7b38ae507eec63b9375b3f7cf966e609';
 module.exports = node;

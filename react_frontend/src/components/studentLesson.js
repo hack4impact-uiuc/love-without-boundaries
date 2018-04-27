@@ -85,7 +85,7 @@ class StudentLesson extends React.Component {
                 <div className="row">
                     <div className="col-sm-3">
                         <GoogleDocButton url={this.props.student.URL} location={this.props.location} />
-                        <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
+                        <a href="http://dictionary.com/"><PaddedButton className="btn btn-info">Cambodian-English Dictionary</PaddedButton></a>
                     </div>
                     <div className="col-sm-9">
                         {

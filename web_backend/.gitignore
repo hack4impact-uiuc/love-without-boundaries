@@ -6,3 +6,4 @@ flow-typed
 yarn.lock
 yarn-error.lock
 package-lock.json
+.env

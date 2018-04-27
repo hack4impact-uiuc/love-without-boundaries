@@ -17,17 +17,19 @@ class SignIn extends React.Component {
     }
 
     responseGoogle = (auth) => {
-        fetch('http://localhost:8080/auth/google', {
+        console.log(auth);
+        fetch('https://lwb-backend.now.sh/auth/google', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ tokenId: auth.tokenId, role: this.props.role, accessToken: auth.accessToken }),
         }).then(resp => resp.json()).then(r => {
+            console.log('token', r);
             sessionStorage.setItem('token', r.token);
             const { data } = r;
 
-            this.props.history.push(`/${r.role}`, { [r.role]: { id: data.id, name: data.name } });
+            this.props.history.push(r.role === 'admin' ? `/${r.role}/list` : `/${r.role}`, { [r.role]: { id: data.id, name: data.name } });
         }).catch(console.error);
 
         this.setState({

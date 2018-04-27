@@ -43,8 +43,6 @@ export const addAdmin = async (name, email, tokenId) => {
     if (!name || !email) { // no credentials = fail
         return false;
     }
-    console.log(name);
-    console.log(email);
     const admin = await Admin.findOne({ name, email });
     if (admin !== null) {
         return Admin.findOne({ name, email });

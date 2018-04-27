@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7190e27bff261ca9833d2a4757fd398f
+ * @relayHash 9d1224158918c7329072ffe54bb149e4
  */
 
 /* eslint-disable */
@@ -10,7 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type StudentPage_QueryVariables = {|
-  studentId: string,
+  studentId: string
 |};
 export type StudentPage_QueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
@@ -224,5 +224,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '470b7d77a372f4337f0acfe4c1170cb5';
 module.exports = node;
