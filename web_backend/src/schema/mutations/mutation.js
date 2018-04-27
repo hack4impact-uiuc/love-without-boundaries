@@ -18,6 +18,9 @@ const createStudent = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         student: {
@@ -25,7 +28,7 @@ const createStudent = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
+    mutateAndGetPayload: async ({ name, email, token }) => {
         const s = new Student({ name, email });
         return s.save();
     },
@@ -40,6 +43,9 @@ const createTeacher = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         teacher: {
@@ -47,7 +53,7 @@ const createTeacher = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
+    mutateAndGetPayload: async ({ name, email, token }) => {
         const t = new Teacher({ name, email });
         return t.save();
     },
@@ -62,6 +68,9 @@ const createAdmin = mutationWithClientMutationId({
         email: {
             type: new GraphQLNonNull(GraphQLString),
         },
+        token: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
     outputFields: {
         admin: {
@@ -69,7 +78,7 @@ const createAdmin = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({ name, email }) => {
+    mutateAndGetPayload: async ({ name, email, token }) => {
         const a = new Admin({ name, email });
         return a.save();
     },
@@ -96,7 +105,7 @@ const createLesson = mutationWithClientMutationId({
     }) => {
         const l = new Lesson({
             name, quiz, worksheetName, worksheetURL, notesName, notesURL,
-        });
+        }, { new: true });
         return l.save();
     },
 });
@@ -136,7 +145,7 @@ const addGrade = mutationWithClientMutationId({
     mutateAndGetPayload: ({ id, lesson, score }) => {
         const obj = fromGlobalId(id);
         const grade = { lesson, score };
-        return Student.findOneAndUpdate({ _id: obj.id }, { $push: { grades: grade } });
+        return Student.findOneAndUpdate({ _id: obj.id }, { $push: { grades: grade } }, { new: true });
     },
 });
 
@@ -156,7 +165,7 @@ const assignStudentToTeacher = mutationWithClientMutationId({
         const realStudentId = await Student.findById(fromGlobalId(studentID).id) !== null;
         const realTeacherId = await Teacher.findById(fromGlobalId(teacherID).id) !== null;
         if (realStudentId && realTeacherId) {
-            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } });
+            await Student.findByIdAndUpdate(fromGlobalId(studentID).id, { $set: { teacherID: fromGlobalId(teacherID).id } }, { new: true });
             await Teacher.findByIdAndUpdate(fromGlobalId(teacherID).id, { $push: { listOfStudentIDs: fromGlobalId(studentID).id } });
         }
         return Student.findById(fromGlobalId(studentID).id) && Teacher.findById(fromGlobalId(teacherID).id);
@@ -451,7 +460,7 @@ const addURL = mutationWithClientMutationId({
     },
     mutateAndGetPayload: ({ id, url }) => {
         const obj = fromGlobalId(id);
-        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } });
+        return Student.findByIdAndUpdate(obj.id, { $set: { URL: url } }, { new: true });
     },
 });
 

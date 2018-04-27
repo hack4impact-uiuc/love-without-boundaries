@@ -5,6 +5,7 @@ import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
 import { copyFile, setPermissionToAllEdit } from '../Gapi';
 import environment from '../relay/environment';
 import PaddedButton from './button';
+import jwt_decode from 'jwt-decode';
 
 class StudentLesson extends React.Component {
     constructor(props) {

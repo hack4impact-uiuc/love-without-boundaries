@@ -1,13 +1,20 @@
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
+import AdminEditLesson from '../components/adminEditLesson';
+
 import AdminLessonComponent from '../components/adminLesson';
+
+type Props = {
+    /**/
+  }
 
 class AdminLessonList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
+
     render() {
         return (
             <QueryRenderer
