@@ -20,6 +20,9 @@ class SignIn extends React.Component {
 
 
     getId = (props) => {
+        console.log('IN GET ID');
+        console.log(this.props.role);
+        console.log(this.state.email);
         if (this.props.role === 'student') {
             for (let i = 0; i < props.students.length; i++) {
                 if (props.students[i].email === this.state.email) {
@@ -31,7 +34,7 @@ class SignIn extends React.Component {
             for (let i = 0; i < props.teachers.length; i++) {
                 if (props.teachers[i].email === this.state.email) {
                     console.log(props.teachers[i].id);
-                    this.props.history.push('/teacher', { teachers: { id: props.teachers[i].id } });
+                    this.props.history.push('/teacher', { teacher: { id: props.teachers[i].id } });
                 }
             }
         } else if (this.props.role === 'admin') {
@@ -62,7 +65,6 @@ class SignIn extends React.Component {
         return (
 
             <div>
-                {this.state.id && <p> ENTERRR</p> }
                 {this.state.email === '' &&
                 <GoogleLogin
                     className="btn"

@@ -86,19 +86,20 @@ app.post('/auth/google', async (req, res) => {
     try {
         const { tokenId, role } = req.body;
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
+        console.log(existing);
         // console.log('yo');
         // console.log(existing);
         // console.log({ role });
         // const combined = await Object.assign(existing, { role });
         // console.log({ existing, role });
         // console.log('yo');
-        if (existing) {
-            return res.json({ existing, role });
-            // response.role = { role };
-            // // console.log(role);
-            // console.log(response);
-            // return response;
-        }
+        // if (existing) {
+        //     return res.json({ existing, role });
+        //     // response.role = { role };
+        //     // // console.log(role);
+        //     // console.log(response);
+        //     // return response;
+        // }
         return res.json(({
             student: addStudent,
             teacher: addTeacher,
