@@ -21,6 +21,7 @@ class StudentLesson extends React.Component {
         };
     }
     componentDidMount() {
+        let refresh = 0;
         if (this.props.studentWorksheets === null) {
             return;
         }
@@ -30,6 +31,7 @@ class StudentLesson extends React.Component {
         const promises = [];
         for (i = 0; i < this.props.lessons.length; i++) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
+                refresh = 1;
                 const url = this.props.lessons[i].worksheetURL;
                 const fileMatch = url.match(/[-\w]{25,}/);
                 if (fileMatch === null || fileMatch === undefined) {
@@ -45,8 +47,12 @@ class StudentLesson extends React.Component {
                 if (res[i] == undefined || res.error) {
                     throw Error('Insufficient Privilges, please contact Admin');
                 }
+                refresh = 1;
                 setPermissionToAllEdit(res[i].id);
                 addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
+            }
+            if (refresh == 1) {
+                window.location.reload();
             }
         }).catch(err => console.error(err.message));
     }
