@@ -36,7 +36,7 @@ class LessonComponent extends React.Component<Props> {
                         </div>
                     </div>
                     {this.props.isStudent && (
-                        <p className="lesson-quiz-text"> Quiz -- Grade: { this.props.quizPercentage !== undefined ? `${this.props.quizPercentage * 100}%` : 'Haven\'t taken' }</p>
+                        <p className="lesson-quiz-text"> Quiz -- Grade: { this.props.quizPercentage !== undefined ? `${this.props.quizPercentage}%` : 'Haven\'t taken' }</p>
                     )}
                     <p style={{ color: 'red' }}> { this.props.lessonWorksheetLink === undefined || this.props.lessonWorksheetLink === null ? 'Worksheet Copy doesnt have link' : ''} </p>
                 </div>

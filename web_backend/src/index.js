@@ -77,9 +77,6 @@ const withAuth = next => async (req, res) => {
     const header = req.headers.authorization;
     if (header) {
         const [type, token] = header.split(' ');
-        // console.log('yo');
-        // console.log(jwt_decode(token).tokenId);
-        // console.log('yo');
         switch (type) {
         case 'Bearer':
             req.user = await getaccountFromGoogleToken(jwt_decode(token).tokenId) || req.user;
@@ -91,7 +88,6 @@ const withAuth = next => async (req, res) => {
             break;
         }
     }
-    console.log('sent');
     return next(req, res);
 };
 
