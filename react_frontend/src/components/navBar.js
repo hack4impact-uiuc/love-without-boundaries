@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import './../../assets/Hover.css';
-import lovewithout_white from './../../assets/lovewithout_white.png';
 
 type Props = {
     /**/
@@ -106,30 +105,30 @@ class NavBar extends React.Component<Props> {
     render() {
         return (
             <div>
-            <nav className="navbar navbar-default">
-            <div className="container-fluid">
-                <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                </button>
-                <ImageBox />
-                </div>
-                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul className="nav navbar-nav navbar-right">
-                    <li><HomeText href="#"> Logout </HomeText></li>
-                </ul>
-                <ul className="nav navbar-nav navbar-right">
-                    <li><HomeText href="#"> Profile </HomeText></li>
-                </ul>
-                <ul className="nav navbar-nav navbar-right">
-                    <li><HomeText href="#"> Home </HomeText></li>
-                </ul>
-                </div>
-            </div>
-            </nav>
+                <nav className="navbar" style={{ borderRadius: '0' }}>
+                    <div className="container-fluid">
+                        <div className="navbar-header">
+                            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                                <span className="sr-only">Toggle navigation</span>
+                                <span className="icon-bar" />
+                                <span className="icon-bar" />
+                                <span className="icon-bar" />
+                            </button>
+                            <ImageBox />
+                        </div>
+                        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul className="nav navbar-nav navbar-right">
+                                <li><HomeText href="#"> Logout </HomeText></li>
+                            </ul>
+                            <ul className="nav navbar-nav navbar-right">
+                                <li><HomeText href="#"> Profile </HomeText></li>
+                            </ul>
+                            <ul className="nav navbar-nav navbar-right">
+                                <li><HomeText href="#"> Home </HomeText></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
         );
     }

@@ -16,40 +16,12 @@ type Props = {
 }
 const HomeSection = styled.div`
     background-size: cover;  
-    width: 100%;
     display: block;
     height: 1000px;
 `;
 
-const DarkBox = styled.div`
-    background: url("https://file-utocriqbzb.now.sh/");
-    background-size: cover;  
-    width: 100%;
-    height: 370px;
-    display: block;
-
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-family: 'Lato', sans-serif;
-	word-spacing: .25em;
-    font-weight: 600;
-    font-size: 26px;
-    text-align: center;
-    
-    padding-top: 8%;
-    margin-top: 0%;
-    right:0%;
-    margin-left: 0%;
-    left:0%;
-
-`;
-
 const SignInSection = styled.div`
     text-align: center;
-`;
-const SignInButton = styled.div`
-
-
 `;
 const LogoRow = styled.div`
     padding-top: 20px;
@@ -95,10 +67,8 @@ const TopBox = styled.div`
     background-size: cover;  
     width: 100%;
     height: 300px;
-
-    border-right: .5px solid #c4c4c4;
-
-`;
+    `;
+    // border-right: /z.5px solid #c4c4c4;
 const BottomBox = styled.div`
     background: url("https://file-rfipjzwojd.now.sh/");
     background-size: cover;  
@@ -106,30 +76,24 @@ const BottomBox = styled.div`
     height: 300px;
     position: relative;
     margin-right: 0%;
-
-    border-left: .5px solid #c4c4c4;
-
-`;
+    `;
+    // border-left: .5px solid #c4c4c4;
 
 const RightBox = styled.div`
     background-color: #9e0c24;
     width: 100%;
     height: 300px;
     position: relative;
-
-    border-bottom: .5px solid #c4c4c4;
-
-`;
+    `;
+    // border-bottom: .5px solid #c4c4c4;
 
 const LeftBox = styled.div`
     background-color: #9e0c24;
     width: 100%;
     height: 300px;
     position: relative;
-
-    border-top: .5px solid #c4c4c4;
-
-`;
+    `;
+    // border-top: .5px solid #c4c4c4;
 
 const BoxText = styled.div`
     font-weight: 200;
@@ -215,127 +179,115 @@ class HomePage extends React.Component<Props> {
                 variables={{}}
                 render={({ props }) => (
                     <div >
-                        <head>
-                            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-                        </head>
-                        <HomeSection className="container" className="homePic">
-                            <div className="container-fluid">
+                        <HomeSection className="container-fluid" >
+                            <div className="row">
+                                <SignInSection>
+                                    {
+                                        <div className="dark-box">The Learning Tool Mission
+                                            <br />______
+                                            <div className="lower"> Our goal is to prepare students for their future </div>
+                                            { ((this.props.location.state == undefined || this.props.location.state.signedIn) && (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login')) ?
+                                                <div className="sign-in-btn-box">
+                                                    <p>Are you a...</p>
+                                                    <SignIn role="student" requestType={this.state.loginOrSignup} />
+
+                                                    <SignIn role="teacher" requestType={this.state.loginOrSignup} />
+
+                                                    <SignIn role="admin" requestType={this.state.loginOrSignup} />
+                                                </div>
+                                                :
+                                                <div className="sign-in-btn-box">
+                                                    <button className="sign-in-btn btn" onClick={this.onLogin}>Login</button>
+                                                    <button className="sign-in-btn btn" onClick={this.onSignUp}>Sign up</button>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </SignInSection>
+                            </div>
+                            <div className="padded">
                                 <div className="row">
-                                    <SignInSection>
-                                        {
-                                            <DarkBox>The Learning Tool Mission
-                                                <br />______
-                                                <div className="lower"> Our goal is to prepare students for their future </div>
-                                                { ((this.props.location.state == undefined || this.props.location.state.signedIn) && (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login')) ?
-                                                    <div>
-                                                        <p>Are you a...</p>
-
-                                                        <SignIn role="student" requestType={this.state.loginOrSignup} />
-
-                                                        <SignIn role="teacher" requestType={this.state.loginOrSignup} />
-
-                                                        <SignIn role="admin" requestType={this.state.loginOrSignup} />
-
-                                                    </div>
-                                                    :
-                                                    <div>
-
-                                                        <SignInButton className="lower btn" onClick={this.onLogin}>Login</SignInButton>
-                                                        <SignInButton className="lower btn" onClick={this.onSignUp}>Sign up</SignInButton>
-                                                    </div>
-                                                }
-                                            </DarkBox>
-                                        }
-                                    </SignInSection>
-                                </div>
-
-
-                                <div className="padded">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-4">
-                                            <SignUpIcon />
-                                            <div className="caption">
+                                    <div className="col-12 col-sm-4">
+                                        <SignUpIcon />
+                                        <div className="caption">
                                             Sign up for an account
-                                            </div>
-                                            <br />
-                                            <div className="subCaption">
+                                        </div>
+                                        <br />
+                                        <div className="subCaption">
                                             Students can sign up for an account and will be paired with a tutor
-                                            </div>
                                         </div>
-                                        <div className="col-12 col-sm-4">
-                                            <LearningIcon />
-                                            <div className="caption">
+                                    </div>
+                                    <div className="col-12 col-sm-4">
+                                        <LearningIcon />
+                                        <div className="caption">
                                             Start learning
-                                            </div>
-                                            <br />
-                                            <div className="subCaption">
+                                        </div>
+                                        <br />
+                                        <div className="subCaption">
                                             Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
-                                            </div>
                                         </div>
-                                        <div className="col-12 col-sm-4">
-                                            <AcheiveIcon />
-                                            <div className="caption">
+                                    </div>
+                                    <div className="col-12 col-sm-4">
+                                        <AcheiveIcon />
+                                        <div className="caption">
                                         Get the results
-                                            </div>
-                                            <br />
-                                            <div className="subCaption">
+                                        </div>
+                                        <br />
+                                        <div className="subCaption">
                                             These lessons are to prepare students for high acheivement in national exams
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div className="row">
-                                    <div
-                                        className="col-12 col-sm-6"
-                                        style={noGutter}
-                                    >
-                                        <div className="no-gutter">
-                                            <TopBox />
-                                        </div>
+                            <div className="row">
+                                <div
+                                    className="col-12 col-sm-6"
+                                    style={noGutter}
+                                >
+                                    <div className="no-gutter">
+                                        <TopBox />
                                     </div>
-                                    <div className="col-12 col-sm-6" style={noGutter}>
-                                        <div className="no-gutter">
-                                            <RightBox>
-                                                <br />
-                                                <br />
-                                                <BoxText>
+                                </div>
+                                <div className="col-12 col-sm-6" style={noGutter}>
+                                    <div className="no-gutter">
+                                        <RightBox>
+                                            <br />
+                                            <br />
+                                            <BoxText>
                                                     Learn From Anywhere
-                                                </BoxText>
-                                                <br />
-                                                <BoxText> ________</BoxText>
-                                                <br />
-                                                <br />
-                                                <BoxSubText>
+                                            </BoxText>
+                                            <br />
+                                            <BoxText> ________</BoxText>
+                                            <br />
+                                            <br />
+                                            <BoxSubText>
                                                     Lessons are accessible from many different devices
-                                                </BoxSubText>
-                                            </RightBox>
-                                        </div>
+                                            </BoxSubText>
+                                        </RightBox>
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <div className="col-12 col-sm-6" style={noGutter}>
-                                        <LeftBox>
-                                            <br />
-                                            <br />
-                                            <BoxRightText>
+                            </div>
+                            <div className="row">
+                                <div className="col-12 col-sm-6" style={noGutter}>
+                                    <LeftBox>
+                                        <br />
+                                        <br />
+                                        <BoxRightText>
                                                     Our Product is Dope as Hell
-                                            </BoxRightText>
-                                            <br />
-                                            <BoxRightText> ________</BoxRightText>
-                                            <br />
-                                            <br />
-                                            <BoxRightSubText>
+                                        </BoxRightText>
+                                        <br />
+                                        <BoxRightText> ________</BoxRightText>
+                                        <br />
+                                        <br />
+                                        <BoxRightSubText>
                                                     Use our product because we are dope as hell and this product will improve ur life by like 300%
-                                            </BoxRightSubText>
-                                        </LeftBox>
-                                    </div>
-                                    <div className="col-12 col-sm-6" style={noGutter}>
-                                        <BottomBox />
-                                    </div>
+                                        </BoxRightSubText>
+                                    </LeftBox>
                                 </div>
-
-
+                                <div className="col-12 col-sm-6" style={noGutter}>
+                                    <BottomBox />
+                                </div>
                             </div>
                         </HomeSection>
                         <div className="hidden" >Icons made by <a href="https://www.flaticon.com/authors/itim2101" title="itim2101">itim2101</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
