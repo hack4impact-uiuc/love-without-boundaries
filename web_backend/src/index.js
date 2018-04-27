@@ -100,7 +100,9 @@ app.post('/auth/google', async (req, res) => {
         //     // console.log(response);
         //     // return response;
         // }
-        return res.json(({
+
+
+        return await res.json(({
             student: addStudent,
             teacher: addTeacher,
             admin: async () => ({ error: 'Cannot create Admin acccount' }),
