@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 425c1f95fce320677a1f1a3cefcfd557
+ * @relayHash 6956449cba8153b044026361e1674a4e
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type lessonListQueryVariables = {| |};
-export type lessonListQueryResponse = {|
+export type adminLessonListQueryVariables = {| |};
+export type adminLessonListQueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +id: string,
     +name: ?string,
@@ -22,7 +22,7 @@ export type lessonListQueryResponse = {|
 
 
 /*
-query lessonListQuery {
+query adminLessonListQuery {
   lessons {
     id
     name
@@ -77,13 +77,13 @@ var v0 = [
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "lessonListQuery",
+  "name": "adminLessonListQuery",
   "id": null,
-  "text": "query lessonListQuery {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n}\n",
+  "text": "query adminLessonListQuery {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "lessonListQuery",
+    "name": "adminLessonListQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -91,11 +91,11 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "lessonListQuery",
+    "name": "adminLessonListQuery",
     "argumentDefinitions": [],
     "selections": v0
   }
 };
 })();
-(node/*: any*/).hash = '3259e3bf618c212b07c1cbff156e75b4';
+(node/*: any*/).hash = '69d58ad1f77e8c0c6e4a74543ba9f3e8';
 module.exports = node;

@@ -103,6 +103,7 @@ type AssignStudentToTeacherPayload {
 input CreateAdminInput {
   name: String!
   email: String!
+  token: String!
   clientMutationId: String
 }
 
@@ -129,6 +130,7 @@ type CreateLessonPayload {
 input CreateStudentInput {
   name: String!
   email: String!
+  token: String!
   clientMutationId: String
 }
 
@@ -140,6 +142,7 @@ type CreateStudentPayload {
 input CreateTeacherInput {
   name: String!
   email: String!
+  token: String!
   clientMutationId: String
 }
 
@@ -283,8 +286,14 @@ type Lesson implements Node {
   # Lesson's quiz for the material to be tested on
   quiz: Quiz
 
+  # The name of the lesson's worksheet
+  worksheetName: String
+
   # The URL of the lesson's worksheet
   worksheetURL: String
+
+  # The name of the lesson's notes
+  notesName: String
 
   # The URL of the lesson's notes
   notesURL: String

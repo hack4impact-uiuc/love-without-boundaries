@@ -1,25 +1,29 @@
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
+
 import AdminLessonComponent from '../components/adminLesson';
+
+type Props = {
+    /**/
+  }
 
 class AdminLessonList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
+
     render() {
         return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query lessonListQuery{
+                    query adminLessonListQuery{
                         lessons{
                             id
                             name
-                            worksheetName
                             worksheetURL
-                            notesName
                             notesURL
                         }
                     }  
