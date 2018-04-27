@@ -18,9 +18,7 @@ class LessonList extends React.Component {
                         lessons{
                             id
                             name
-                            worksheetName
                             worksheetURL
-                            notesName
                             notesURL
                         }
                     }  

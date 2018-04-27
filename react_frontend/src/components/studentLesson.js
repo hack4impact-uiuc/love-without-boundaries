@@ -15,9 +15,23 @@ class StudentLesson extends React.Component {
                 newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
             }
         }
+        const newGrades = {};
+        if (this.props.studentWorksheets !== null && this.props.studentWorksheets.grades !== undefined) {
+            for (let i = 0; i < this.props.studentWorksheets.grades.length; i += 1) {
+                newWkshtObj[this.props.studentWorksheets.grades[i].lesson] = this.props.studentWorksheets.grades[i].score;
+                let s = this.props.studentWorksheets.grades[i].score;
+                if (this.props.studentWorksheets.grades[i].lesson in newGrades) {
+                    if (s < newGrades[this.props.studentWorksheets.grades[i].lesson]) {
+                        s = newGrades[this.props.studentWorksheets.grades[i].lesson];
+                    }
+                }
+                newGrades[this.props.studentWorksheets.grades[i].lesson] = s;
+            }
+        }
         this.state = {
             error: '',
             worksheetObj: newWkshtObj,
+            grades: newGrades,
         };
     }
     componentDidMount() {
@@ -85,7 +99,7 @@ class StudentLesson extends React.Component {
                                         lessonName={lesson.name}
                                         lessonNotesLink={lesson.notesURL}
                                         lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
-                                        quizPercentage="50%"
+                                        quizPercentage={`${this.state.grades[lesson.id]}%`}
                                         quizIsChecked={false}
                                         isStudent={this.props.isStudent}
                                     />
