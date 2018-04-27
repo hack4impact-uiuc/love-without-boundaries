@@ -1,12 +1,11 @@
 
-.navbar:hover {
+/* .navbar:hover {
 	background-color:#c13030;
 	color: white;
 	padding: 1.5%;
 	margin:auto;
-	border-radius: 10px;
 	border-bottom: 0px;
-}
+} */
 
 /* .lessonProps{
 	color: #a6acb5;
@@ -176,6 +175,7 @@
 	font-weight: 200;
 	font-size: 15px;
 	padding-top: 3%;
+	word-spacing: .2em;
 }
 
 .lowerBox{
@@ -300,6 +300,61 @@
 	display: inline;
 }
 
+.hidden{
+	visibility: hidden;
+}
+
+.padded{
+	margin-bottom: 7%;
+}
+
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: -20px; /* the bottom margin is the negative value of the footer's height */
+    background-color: #ccc;
+}
+.spacer.edge { 
+    background-color: white; /* same as body background */
+}
+
+.spacer {
+    height: 20px;
+ }
+
+ .infront{
+	 z-index: 100;
+	 position: relative;
+ }
+
+ .navbar{
+	 background-color:#B33C42;
+	 margin-bottom: 0px;
+
+	 min-height: 75px;
+ }
+
+ .hr{
+	margin-top: 0px;
+	margin-bottom: 0px;
+ }
+
+ .navbar-collapse{
+	 border-top: 0px;
+ }
+
+ .navbar-toggle{
+	 margin-top: 10px;
+ }
+
+ .capit{
+	 text-transform: capitalize;
+	 position: relative;
+ }
 .ppp {
 	margin-left: 10px;
 }
@@ -325,4 +380,42 @@
 	border-radius: 10px;
 	margin: 15px 5px;;
 	padding: 10px;
+}
+
+.sign-in-btn {
+	background-color: #C04448;
+	color: #ffffff;
+	height: 50px;
+	width: 100px;
+	padding: 12px 20px;
+	margin: 10px 10px;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 16px;
+	vertical-align: middle;
+}
+.sign-in-btn-box {
+	padding-top: 7%;
+}
+
+.dark-box {
+	background: url("https://file-utocriqbzb.now.sh/");
+    background-size: cover;  
+    width: 100%;
+	height: 400px;
+    display: block;
+
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+	word-spacing: .25em;
+    font-weight: 600;
+    font-size: 26px;
+    text-align: center;
+    
+    padding-top: 60px;
+    margin-top: 0%;
+    right:0%;
+    margin-left: 0%;
+    left:0%;
 }
