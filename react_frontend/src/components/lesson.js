@@ -101,4 +101,4 @@ class LessonComponent extends React.Component<Props> {
     }
 }
 
-export default withRouter(LessonComponent);
+export default LessonComponent;
