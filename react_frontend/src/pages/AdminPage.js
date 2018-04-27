@@ -59,12 +59,10 @@ class AdminPage extends React.Component {
     }
 
     render() {
-        console.log('hi');
-        console.log(this.isAdmin());
         return (
             <div>
                 {
-                    this.isAdmin &&
+                    this.isAdmin() &&
                     <div className="container-fluid">
                         <div className="row">
                             <h2 className="TopTextHeader"> Administrator Tool Page </h2>
@@ -93,7 +91,7 @@ class AdminPage extends React.Component {
                         </div>
                     </div>
                 }
-                {!this.isAdmin && <p> You are not logged in as admin </p> }
+                {!this.isAdmin() && <h4 className="page-error"> You are not logged in as admin </h4> }
             </div>
         );
     }
