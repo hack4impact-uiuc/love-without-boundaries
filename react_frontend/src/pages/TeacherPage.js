@@ -49,7 +49,7 @@ class TeacherPage extends React.Component<Props> {
                     if (props) {
                         // check if empty
                         if (props.node == null || Object.keys(props.node).length === 0) {
-                            return <h4 className="page-error">Error Fetching. You must be a logged in as a Teacher or Admin to see this page.</h4>;
+                            return <h4 className="page-error">You must be a logged in as a Teacher to see this page.</h4>;
                         }
                         return (
                             <div className="container-fluid">

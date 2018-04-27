@@ -262,7 +262,7 @@ class HomePage extends React.Component<Props> {
                                             <br />
                                             <br />
                                             <BoxSubText>
-                                                    Lessons are accessible from many different devices
+                                                    Students can look at previous notes, work on worsheets, and take quizzes from anywhere on any device.
                                             </BoxSubText>
                                         </RightBox>
                                     </div>
@@ -274,14 +274,14 @@ class HomePage extends React.Component<Props> {
                                         <br />
                                         <br />
                                         <BoxRightText>
-                                                    Our Product is Dope as Hell
+                                                    Connect with Teachers
                                         </BoxRightText>
                                         <br />
                                         <BoxRightText> ________</BoxRightText>
                                         <br />
                                         <br />
                                         <BoxRightSubText>
-                                                    Use our product because we are dope as hell and this product will improve ur life by like 300%
+                                                    Use product allows students and teachers to work together on shared worksheets so that students can get immediate feedback as they learn English.
                                         </BoxRightSubText>
                                     </LeftBox>
                                 </div>
