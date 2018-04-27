@@ -33,12 +33,6 @@ export const createToken = async (name, email, token, role) => {
     if (!name || !email || !token || !role) {
         return '';
     }
-    const user = await User.find({
-        name, email, token, role,
-    });
-    if (user.length === 0) {
-        return '';
-    }
     const payload = {
         token,
         role,
