@@ -101,6 +101,7 @@ class StudentLesson extends React.Component {
                         <GoogleDocButton url={this.props.student.URL} location={this.props.location} />
                         <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
                     </div>
+
                     <div className="col-sm-9">
                         {
                             this.props.lessons !== undefined ?
@@ -111,10 +112,11 @@ class StudentLesson extends React.Component {
                                         lessonName={lesson.name}
                                         lessonNotesLink={lesson.notesURL}
                                         lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
-                                        quizPercentage={this.state.grades[lesson.id]}
+                                        quizPercentage={(this.props.student.grades.find(l => l.lessonID === lesson.id) === undefined) ? undefined : (this.props.student.grades.find(l => l.lessonID === lesson.id)).score}
                                         quizIsChecked={false}
                                         isStudent={this.props.isStudent}
                                     />
+
                                 ))
                                 :
                                 <p>There arent any lessons</p>

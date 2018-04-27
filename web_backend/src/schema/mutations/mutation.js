@@ -241,45 +241,20 @@ const submitQuiz = mutationWithClientMutationId({
             }
         });
         const newTopScore = (numCorrect / questionIDs.length);
-        console.log(newTopScore);
         const s1 = await Student.findById(sObj.id);
-        console.log(s1.grades);
         const lessonGrade = s1.grades.find(elem => elem.lessonID === lessonID);
+
         if (lessonGrade === undefined) {
-            console.log('doesnt exits');
             const newEntry = { score: newTopScore, lessonID };
             await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
-        } else {
-            // console.log('else');
-
-            // console.log(lessonGrade.score);
-            if (newTopScore > lessonGrade.score) {
-                // console.log('higher');
-                // console.log('UDPATING');
-                // console.log(lessonGrade);
-                await Student.findByIdAndUpdate(sObj.id, { $pull: { grades: lessonGrade } });
-                // const lessonGrade2 = s1.grades.find(elem => elem.lessonID === lessonID);
-                // console.log(lessonGrade2);
-                console.log('ypdated');
-                const newEntry = { score: newTopScore, lessonID };
-                console.log(newEntry);
-                await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
-                const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
-                // console.log(lessonGrade3);
-            }
-
-
-            // await Student.findByIdAndUpdate(sObj.idm, { $push: { grades: newTopScore, lessonId: lessonID } });
+        } else if (newTopScore > lessonGrade.score) {
+            await Student.findByIdAndUpdate(sObj.id, { $pull: { grades: lessonGrade } });
+            const newEntry = { score: newTopScore, lessonID };
+            await Student.findByIdAndUpdate(sObj.id, { $push: { grades: newEntry } });
+            const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
         }
+
         const lessonGrade3 = s1.grades.find(elem => elem.lessonID === lessonID);
-        console.log(lessonGrade3);
-        // console.log(lessonGrade);
-        // if (lessonGrade.score < newTopScore) {
-        //     console.log('BEAT IT');
-        //     // Student.findByIdAndUpdate(sObj.idm, { $set: { grades:  } });
-        //     // newTopScore = s1.topScore;
-        //     // s1.
-        // }
         const pastQuiz = {
             lessonID,
             quizName: q1.name,

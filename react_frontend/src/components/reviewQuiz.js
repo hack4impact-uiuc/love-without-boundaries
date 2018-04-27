@@ -89,7 +89,7 @@ class ReviewQuiz extends React.Component {
                                                 pq.lessonID === this.props.lessonID ?
                                                     <div key={idx} className="past-quiz-box">
                                                         <h4 style={{ fontWeight: '600' }}>Try #{idx + 1}</h4>
-                                                        <p style={{ color: '#3778ba' }}><b>Score: {pq.score.toFixed(2)}</b></p>
+                                                        <p style={{ color: '#3778ba' }}><b>Score: {pq.score.toFixed(2) * 100}%</b></p>
                                                         <b style={{ paddingBottom: '5px' }}>Your Answers:</b>
                                                         {
                                                             pq.submittedAnswers.map((q, i) =>
