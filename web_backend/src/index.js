@@ -100,7 +100,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors());
-app.use('/graphql', (graphqlHTTP({
+app.use('/graphql', withAuth(graphqlHTTP({
     schema: Schema,
     graphiql: true,
 })));
