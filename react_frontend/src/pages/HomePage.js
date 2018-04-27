@@ -29,11 +29,10 @@ const DarkBox = styled.div`
     text-transform: uppercase;
     font-family: 'Lato', sans-serif;
 	word-spacing: .25em;
-
     font-weight: 600;
     font-size: 26px;
-	text-align: center;
-    position: relative;
+    text-align: center;
+    
     padding-top: 8%;
     margin-top: 0%;
     right:0%;
@@ -140,10 +139,12 @@ const LeftBox = styled.div`
 const BoxText = styled.div`
     font-weight: 200;
     font-size: 26px;
-	text-align: center;
+	text-align: right;
     position: relative;
     font-family: 'Lato', sans-serif;
     color: white;
+
+    margin-right: 10%;
 `;
 const BoxRightText = styled.div`
     font-weight: 200;
@@ -168,10 +169,11 @@ const BoxRightSubText = styled.div`
 const BoxSubText = styled.div`
     font-weight: 100;
     font-size: 16px;
-	text-align: center;
+	text-align: right;
     position: relative;
     font-family: 'Lato', sans-serif;
     color: white;
+    margin-right: 10%;
 `;
 
 const noGutter = {
