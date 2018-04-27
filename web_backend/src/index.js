@@ -18,7 +18,8 @@ export const addStudent = async (name, email) => {
     if (!name || !email) { // no credentials = fail
         return false;
     }
-    if (Student.findOne({ name, email })) {
+    const student = await Student.findOne({ name, email });
+    if (student !== null) {
         return Student.findOne({ name, email });
     }
     const s = new Student({ name, email });
@@ -30,7 +31,8 @@ export const addTeacher = async (name, email) => {
     if (!name || !email) { // no credentials = fail
         return false;
     }
-    if (Teacher.findOne({ name, email })) {
+    const teacher = await Teacher.findOne({ name, email });
+    if (teacher !== null) {
         return Student.findOne({ name, email });
     }
     const t = new Teacher({ name, email });
