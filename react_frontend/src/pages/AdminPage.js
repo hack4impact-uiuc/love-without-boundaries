@@ -87,7 +87,7 @@ const AdminPage = ({ match }) => (
             </div>
         </div>
         }
-        {!isAdmin() && <p> You are not logged in as admin </p> }
+        {!isAdmin() && <h4 className="page-error"> You are not logged in as admin </h4> }
     </div>
 );
 

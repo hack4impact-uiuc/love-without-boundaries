@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7190e27bff261ca9833d2a4757fd398f
+ * @relayHash 66ccf5aa16cba68d7465ffa0ed1e200f
  */
 
 /* eslint-disable */
@@ -24,6 +24,10 @@ export type StudentPage_QueryResponse = {|
     +worksheets?: ?$ReadOnlyArray<?{|
       +lessonID: ?string,
       +url: ?string,
+    |}>,
+    +grades?: ?$ReadOnlyArray<?{|
+      +lessonID: ?string,
+      +score: ?number,
     |}>,
     +id?: string,
     +URL?: ?string,
@@ -49,6 +53,10 @@ query StudentPage_Query(
       worksheets {
         lessonID
         url
+      }
+      grades {
+        lessonID
+        score
       }
       id
       URL
@@ -117,6 +125,13 @@ v4 = [
   }
 ],
 v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "lessonID",
+  "args": null,
+  "storageKey": null
+},
+v6 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "worksheets",
@@ -125,13 +140,7 @@ v5 = {
   "concreteType": "Worksheet",
   "plural": true,
   "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "lessonID",
-      "args": null,
-      "storageKey": null
-    },
+    v5,
     {
       "kind": "ScalarField",
       "alias": null,
@@ -141,7 +150,26 @@ v5 = {
     }
   ]
 },
-v6 = {
+v7 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "grades",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Grade",
+  "plural": true,
+  "selections": [
+    v5,
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "score",
+      "args": null,
+      "storageKey": null
+    }
+  ]
+},
+v8 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "URL",
@@ -153,7 +181,7 @@ return {
   "operationKind": "query",
   "name": "StudentPage_Query",
   "id": null,
-  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      name\n      worksheets {\n        lessonID\n        url\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
+  "text": "query StudentPage_Query(\n  $studentId: ID!\n) {\n  lessons {\n    id\n    name\n    worksheetURL\n    notesURL\n  }\n  node(id: $studentId) {\n    __typename\n    ... on Student {\n      name\n      worksheets {\n        lessonID\n        url\n      }\n      grades {\n        lessonID\n        score\n      }\n      id\n      URL\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -177,9 +205,10 @@ return {
             "type": "Student",
             "selections": [
               v2,
-              v5,
+              v6,
+              v7,
               v1,
-              v6
+              v8
             ]
           }
         ]
@@ -214,8 +243,9 @@ return {
             "type": "Student",
             "selections": [
               v2,
-              v5,
-              v6
+              v6,
+              v7,
+              v8
             ]
           }
         ]
@@ -224,5 +254,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '470b7d77a372f4337f0acfe4c1170cb5';
+(node/*: any*/).hash = '39feb481cdad48380c8f08f31f26d4c1';
 module.exports = node;
