@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
-import AdminEditLesson from '../components/adminEditLesson';
 
 import AdminLessonComponent from '../components/adminLesson';
 
