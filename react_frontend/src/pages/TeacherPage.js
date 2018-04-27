@@ -2,61 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
+import jwtDecode from 'jwt-decode';
 import environment from '../relay/environment';
-import jwt_decode from 'jwt-decode';
 
 type Props = {
     /**/
 }
 
-const TeacherAddLessonBox = styled.div`
-    color: white;
-    font-size: 25px;
-    text-align: center;
-    float:right;
-    margin: 20px;
-    background-color: #a6acb5;
-    height: 400px;
-    width: 800px;
-    z-index: -1;
-    font-family: "Arial";
-`;
-
-const TeacherTitle = styled.div`
-    border-bottom-style: solid;
-    border-color: white;
-    color: white;
-    padding: 10px;
-    font-size: 25px;
-    text-align: center;
-    margin: 20px;
-    font-family: "Arial";
-`;
-
-const TeacherButton = styled.div`
-    display: inline-block;
-    border-style: solid;
-    border-color: white;
-    color: #a6acb5;
-    padding: 15px 15px;
-    margin: 5px 5px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 15px;
-    background-color: white;
-    height: 40px;
-    z-index: -1;
-    font-family: "Arial";
-`;
 class TeacherPage extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            teacherID: 'VGVhY2hlcjo1YWNhOTVkMjVkNTM3ODc4ZDQ1YjVlNjA=',
-            // teacherID: this.props.location.state != undefined ? this.props.location.state : jwt_decode(localStorage.getItem('token')).userID
+            teacherID: this.getTeacherId,
         };
     }
+    getTeacherId = () => {
+        const { location } = this.props;
+        if (location.state !== undefined && location.state.teacher !== undefined) {
+            return location.state.teacher.id;
+        }
+        return jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : '';
+    }
     render() {
+        console.log(this.props.location.state);
         return (
             <QueryRenderer
                 environment={environment}
@@ -75,12 +43,13 @@ class TeacherPage extends React.Component<Props> {
                     }
                 `}
                 variables={{
-                    teacher_id: this.props.location.state != undefined ? this.props.location.state.teacher.id : jwt_decode(localStorage.getItem('token')).userID,
+                    teacher_id: this.getTeacherId(),
                 }}
                 render={({ props }) => {
                     if (props) {
-                        if (props.node == null) {
-                            return <h5>Error Fetching, You must be a teacher/admin to see this.</h5>;
+                        // check if empty
+                        if (props.node == null || Object.keys(props.node).length === 0) {
+                            return <h4 className="page-error">Error Fetching. You must be a logged in as a Teacher or Admin to see this page.</h4>;
                         }
                         return (
                             <div className="container-fluid">

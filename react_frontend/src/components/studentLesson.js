@@ -11,9 +11,9 @@ class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
         const newWkshtObj = {};
-        if (this.props.studentWorksheets !== null) {
-            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
-                newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        if (this.props.student !== null) {
+            for (let i = 0; i < this.props.student.worksheets.length; i += 1) {
+                newWkshtObj[this.props.student.worksheets[i].lessonID] = this.props.student.worksheets[i].url;
             }
         }
         this.state = {
@@ -23,10 +23,10 @@ class StudentLesson extends React.Component {
     }
     componentDidMount() {
         let refresh = 0;
-        if (this.props.studentWorksheets === null) {
+        if (this.props.student === null) {
             return;
         }
-        const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
+        const studentWorksheetLessonIDs = this.props.student.worksheets.map(element => element.lessonID);
         let i;
         const indices = [];
         const promises = [];
@@ -50,7 +50,7 @@ class StudentLesson extends React.Component {
                 }
                 refresh = 1;
                 setPermissionToAllEdit(res[i].id);
-                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
+                addStudentWorksheetCopy(environment, this.props.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
             }
             if (refresh == 1) {
                 window.location.reload();
@@ -59,9 +59,9 @@ class StudentLesson extends React.Component {
     }
     componentWillReceiveProps(newProps) {
         const newObj = {};
-        if (newProps.studentWorksheets !== null) {
-            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
-                newObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        if (newProps.student !== null) {
+            for (let i = 0; i < this.props.student.worksheets.length; i += 1) {
+                newObj[this.props.student.worksheets[i].lessonID] = this.props.student.worksheets[i].url;
             }
         }
         this.setState({
@@ -72,19 +72,19 @@ class StudentLesson extends React.Component {
         if (this.state.error !== '') {
             return <p>{this.state.error}</p>;
         }
-        if (this.props.studentWorksheets === null) {
+        if (this.props.student === null) {
             return <p>Student Worksheets prop is null</p>;
         }
         return (
             <div className="container-fluid">
                 <h2>
                     {
-                        this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
+                        this.props.student !== undefined ? `${this.props.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
                     }
                 </h2>
                 <div className="row">
                     <div className="col-sm-3">
-                        <GoogleDocButton url={this.props.studentWorksheets.URL} location={this.props.location} />
+                        <GoogleDocButton url={this.props.student.URL} location={this.props.location} />
                         <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
                     </div>
                     <div className="col-sm-9">

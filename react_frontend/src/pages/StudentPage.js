@@ -4,7 +4,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import environment from '../relay/environment';
 import GoogleDocButton from '../components/googleDocButton';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import StudentLesson from '../components/studentLesson';
 import { copyFile } from '../Gapi';
 
@@ -13,18 +13,12 @@ type Props = {
   }
 
 class StudentPage extends React.Component<Props> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isStudent: true,
-        };
-        console.log('hi');
-        console.log(this.props);
-        // console.log(this.props.location.state);
-        // this.props.location.state= 'aria';
-        // console.log('up');
-        // console.log(jwt_decode(sessionStorage.getItem('token')).name);
-        // console.log('up');
+    getStudentId = () => {
+        const { location } = this.props;
+        if (location.state !== undefined && location.state.student !== undefined) {
+            return location.state.student.id;
+        }
+        return jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : '';
     }
     render() {
         return (
@@ -41,6 +35,7 @@ class StudentPage extends React.Component<Props> {
                             }
                             node(id: $studentId) {
                                 ... on Student {
+                                    name
                                     worksheets {
                                         lessonID
                                         url
@@ -51,20 +46,25 @@ class StudentPage extends React.Component<Props> {
                             }
                         }
                     `}
-                    variables={{ studentId: this.props.location.state != undefined ? this.props.location.state.student.id : '' }}
+                    variables={{ studentId: this.getStudentId() }}
                     render={({ props }) => {
                         if (!props) {
                             return (
                                 <div>Loading...</div>
                             );
                         }
+                        if (props.node === null || Object.keys(props.node).length === 0) {
+                            return <h4 className="page-error">You must be logged in to see this. Please try again.</h4>;
+                        }
+                        const token = jwtDecode(sessionStorage.getItem('token'));
+                        const userType = token !== null ? token.userType : 'none';
+                        console.log(token);
                         return (
                             <div>
                                 <StudentLesson
-                                    isStudent={this.state.isStudent}
-                                    studentWorksheets={props.node}
+                                    isStudent={userType === 'student'}
+                                    student={props.node}
                                     lessons={props.lessons}
-                                    location={this.props.location}
                                 />
                             </div>
                         );

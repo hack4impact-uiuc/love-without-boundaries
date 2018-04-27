@@ -395,14 +395,14 @@
 	vertical-align: middle;
 }
 .sign-in-btn-box {
-	padding-top: 7%;
+	padding-top: 5%;
 }
 
 .dark-box {
 	background: url("https://file-utocriqbzb.now.sh/");
     background-size: cover;  
     width: 100%;
-	height: 400px;
+	height: 430px;
     display: block;
 
     color: #FFFFFF;
@@ -418,4 +418,9 @@
     right:0%;
     margin-left: 0%;
     left:0%;
+}
+
+.page-error {
+	margin: 8%;
+	text-align: center; 
 }

@@ -4,12 +4,13 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
 import Checkbox from './../components/checkbox';
+import jwtDecode from 'jwt-decode';
 import PaddedButton from './../components/button';
 
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWUyYzIxZGY0YmYyM2EwZWRkMzIzMzU=' };
+        this.state = { lessonID: '', studentID: jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : null };
     }
 
     componentWillMount = () => {
@@ -25,6 +26,7 @@ class TakeQuizPage extends Component {
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
         submitQuiz(environment, this.state.studentID, this.state.lessonID, Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
+        this.props.history.goBack();
     }
 
 
@@ -37,10 +39,13 @@ class TakeQuizPage extends Component {
     )
 
     createCheckboxes = (answerNames, questionId) => (
-        answerNames.map((e) => this.createCheckbox(e, questionId))
+        answerNames.map((e, i) => this.createCheckbox(e, questionId, i))
     )
 
     render() {
+        if (this.state.studentID === null) {
+            return <h4 className="page-error">You must be logged in as a Student to take quiz. Try logging in again.</h4>;
+        }
         return (
             <QueryRenderer
                 environment={environment}
@@ -74,7 +79,7 @@ class TakeQuizPage extends Component {
                 render={({ props }) => {
                     if (!props) {
                         return (
-                            <div>Loading...</div>
+                            <p>Loading...</p>
                         );
                     }
                     this.state.lessonID = props.node.id;
@@ -92,7 +97,7 @@ class TakeQuizPage extends Component {
                                                         {props.node.quiz.questions[i].questionName }
                                                         {
                                                             this.createCheckboxes(
-                                                                props.node.quiz.questions[i].answers.map((q, i) => q.answerName),
+                                                                props.node.quiz.questions[i].answers.map((q, idx) => q.answerName),
                                                                 props.node.quiz.questions[i].id,
                                                             )
                                                         }

@@ -27,7 +27,7 @@ class SignIn extends React.Component {
             body: JSON.stringify({ tokenId: auth.tokenId, role: this.props.role, accessToken: auth.accessToken }),
         }).then(resp => resp.json()).then(r => {
             console.log('r', r);
-            sessionStorage.setItem('type', r.role);
+            sessionStorage.setItem('token', r.token);
             const { data } = r;
             this.props.history.push(`/${r.role}`, { [r.role]: { id: data.id, name: data.name } });
         }).catch(console.error);
