@@ -4,6 +4,7 @@ import addURL from '../relay/mutations/addURL';
 import { addFile, copyFile } from '../Gapi';
 import environment from '../relay/environment';
 import PaddedButton from './button';
+import jwtDecode from 'jwt-decode';
 
 class googleDocButton extends React.Component {
     constructor(props) {
@@ -14,6 +15,10 @@ class googleDocButton extends React.Component {
     }
     componentDidMount() {
         if (this.state.url) {
+            return;
+        }
+        const token = jwtDecode(sessionStorage.getItem('token'));
+        if (token === null || !token || token.userType !== 'student') {
             return;
         }
         // Need to get userId
@@ -30,11 +35,9 @@ class googleDocButton extends React.Component {
     }
     render() {
         return (
-            <div>
-                <a href={this.state.url}>
-                    <PaddedButton type="button" className="btn btn-info">Google Docs Playground</PaddedButton>
-                </a>
-            </div>
+            <a href={this.state.url}>
+                <PaddedButton type="button" className="btn btn-lwb">Playground</PaddedButton>
+            </a>
         );
     }
 }

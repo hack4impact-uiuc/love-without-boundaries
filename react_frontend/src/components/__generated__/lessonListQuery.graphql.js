@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash be425558908d0691725428f621a553cb
+ * @relayHash 425c1f95fce320677a1f1a3cefcfd557
  */
 
 /* eslint-disable */
@@ -9,14 +9,14 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type lessonListQueryVariables = {||};
+export type lessonListQueryVariables = {| |};
 export type lessonListQueryResponse = {|
   +lessons: ?$ReadOnlyArray<?{|
     +id: string,
     +name: ?string,
     +worksheetURL: ?string,
     +notesURL: ?string,
-  |}>
+  |}>,
 |};
 */
 
@@ -97,6 +97,5 @@ return {
   }
 };
 })();
-// prettier-ignore
 (node/*: any*/).hash = '3259e3bf618c212b07c1cbff156e75b4';
 module.exports = node;

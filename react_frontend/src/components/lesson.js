@@ -13,8 +13,8 @@ const SlightlyPaddedButton = styled.button`
 class LessonComponent extends React.Component<Props> {
     render() {
         return (
-            <div className="row">
-                <div className="col-md-3 col-sm-2" />
+            <div className="row" style={{ margin: '0 auto' }}>
+                {/* <div className="col-md-3 col-sm-2" /> */}
                 <div className="col-sm-6 lesson-box">
                     <h3 className="lesson-title" >{this.props.lessonName}</h3>
                     <div className="lesson-btn-box">
@@ -40,7 +40,7 @@ class LessonComponent extends React.Component<Props> {
                     )}
                     <p style={{ color: 'red' }}> { this.props.lessonWorksheetLink === undefined || this.props.lessonWorksheetLink === null ? 'Worksheet Copy doesnt have link' : ''} </p>
                 </div>
-                <div className="col-md-3 col-sm-2" />
+                {/* <div className="col-md-3 col-sm-2" /> */}
             </div>
         );
     }

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c53cb2a04f4ee031e0159f10bc9babdf
+ * @relayHash 7cf920cd5b4724a6924be342f0ceb2ab
  */
 
 /* eslint-disable */
@@ -9,21 +9,20 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type AddURLInput = {
-  id?: ?string,
-  url?: ?string,
-  clientMutationId?: ?string,
-};
 export type addURLMutationVariables = {|
-  input: AddURLInput
+  input: {
+    id?: ?string,
+    url?: ?string,
+    clientMutationId?: ?string,
+  },
 |};
 export type addURLMutationResponse = {|
   +addURL: ?{|
     +student: ?{|
-      +id: string
+      +id: string,
     |},
     +clientMutationId: ?string,
-  |}
+  |},
 |};
 */
 
@@ -118,6 +117,5 @@ return {
   }
 };
 })();
-// prettier-ignore
 (node/*: any*/).hash = 'ac92367c6cf399b94b47a5e2d77dafcc';
 module.exports = node;
