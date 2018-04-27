@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1003a5d4141a2a433e6b6f4d0ba85a55
+ * @relayHash 8e5dd724ad0cfb886ef13f8e2ffff231
  */
 
 /* eslint-disable */
@@ -12,14 +12,17 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type signinQueryVariables = {| |};
 export type signinQueryResponse = {|
   +students: ?$ReadOnlyArray<?{|
+    +name: ?string,
     +email: ?string,
     +id: string,
   |}>,
   +teachers: ?$ReadOnlyArray<?{|
+    +name: ?string,
     +email: ?string,
     +id: string,
   |}>,
   +admins: ?$ReadOnlyArray<?{|
+    +name: ?string,
     +email: ?string,
     +id: string,
   |}>,
@@ -30,14 +33,17 @@ export type signinQueryResponse = {|
 /*
 query signinQuery {
   students {
+    name
     email
     id
   }
   teachers {
+    name
     email
     id
   }
   admins {
+    name
     email
     id
   }
@@ -46,6 +52,13 @@ query signinQuery {
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
+  {
+    "kind": "ScalarField",
+    "alias": null,
+    "name": "name",
+    "args": null,
+    "storageKey": null
+  },
   {
     "kind": "ScalarField",
     "alias": null,
@@ -98,7 +111,7 @@ return {
   "operationKind": "query",
   "name": "signinQuery",
   "id": null,
-  "text": "query signinQuery {\n  students {\n    email\n    id\n  }\n  teachers {\n    email\n    id\n  }\n  admins {\n    email\n    id\n  }\n}\n",
+  "text": "query signinQuery {\n  students {\n    name\n    email\n    id\n  }\n  teachers {\n    name\n    email\n    id\n  }\n  admins {\n    name\n    email\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -116,5 +129,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '31bbc5be1de0e05c1abed834c5dfedd0';
+(node/*: any*/).hash = '284202f232ed71abb24c2ba657139291';
 module.exports = node;

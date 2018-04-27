@@ -100,13 +100,38 @@ app.post('/auth/google', async (req, res) => {
         //     // console.log(response);
         //     // return response;
         // }
+        // if (role === 'student') {
+        //     if (Student.find({ name: payload.name, email: payload.email })) {
+        //         console.log((Student.find({ name: payload.name, email: payload.email })));
+        //         console.log('FOUND STUDENT');
+        //         return (Student.find({ name: payload.name, email: payload.email }));
+        //     }
+        // }
+        // if (role === 'teacher') {
+        //     if (Teacher.find({ name: payload.name, email: payload.email })) {
+        //         console.log('FOUND TEACHER');
+        //         return (Teacher.find({ name: payload.name, email: payload.email }));
+        //     }
+        // }
+        // if (role === 'admin') {
+        //     if (Admin.find({ name: payload.name, email: payload.email })) {
+        //         console.log('FOUND ADMIN');
+        //         return (Admin.find({ name: payload.name, email: payload.email }));
+        //     }
+        // }
 
+        // Teacher.find({ name: payload.name, email: payload.email });
 
-        return await res.json(({
+        //  await res.json(
+
+        const x = await res.json(({
             student: addStudent,
             teacher: addTeacher,
             admin: async () => ({ error: 'Cannot create Admin acccount' }),
         })[role](payload.name, payload.email));
+        // console.log(x);
+        console.log('ADDED USER');
+        return x;
         // response.role = role;
         // // console.log(role);
         // return response;
@@ -114,5 +139,6 @@ app.post('/auth/google', async (req, res) => {
         console.trace(e);
     }
 });
+
 
 app.listen(8080);
