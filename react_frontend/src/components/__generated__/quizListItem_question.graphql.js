@@ -8,11 +8,11 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-import type { FragmentReference } from "relay-runtime";
+import type { FragmentReference } from 'relay-runtime';
 declare export opaque type quizListItem_question$ref: FragmentReference;
 export type quizListItem_question = {|
   +questions: ?$ReadOnlyArray<?{|
-    +questionName: ?string
+    +questionName: ?string,
   |}>,
   +$refType: quizListItem_question$ref,
 |};
@@ -46,6 +46,5 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
-// prettier-ignore
 (node/*: any*/).hash = '427f4a3094e4079ae0e83c599a8278b8';
 module.exports = node;

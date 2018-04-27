@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b60bb919ed8f456588556d7b01f2c364
+ * @relayHash ad7e59a07355a117ca8a2dba5753fb23
  */
 
 /* eslint-disable */
@@ -9,38 +9,34 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type CreateLessonInput = {
-  name: string,
-  quiz?: ?InputQuiz,
-  worksheetName?: ?string,
-  worksheetURL?: ?string,
-  notesName?: ?string,
-  notesURL?: ?string,
-  clientMutationId?: ?string,
-};
-export type InputQuiz = {
-  name?: ?string,
-  questions?: ?$ReadOnlyArray<?InputQuestion>,
-  lessonID?: ?string,
-};
-export type InputQuestion = {
-  questionName?: ?string,
-  answers?: ?$ReadOnlyArray<?InputAnswer>,
-};
-export type InputAnswer = {
-  answerName?: ?string,
-  isCorrect?: ?boolean,
-};
 export type addLessonMutationVariables = {|
-  input: CreateLessonInput
+  input: {
+    name: string,
+    quiz?: ?{
+      name?: ?string,
+      questions?: ?$ReadOnlyArray<?{
+        questionName?: ?string,
+        answers?: ?$ReadOnlyArray<?{
+          answerName?: ?string,
+          isCorrect?: ?boolean,
+        }>,
+      }>,
+      lessonID?: ?string,
+    },
+    worksheetName?: ?string,
+    worksheetURL?: ?string,
+    notesName?: ?string,
+    notesURL?: ?string,
+    clientMutationId?: ?string,
+  },
 |};
 export type addLessonMutationResponse = {|
   +createLesson: ?{|
     +lesson: ?{|
-      +id: string
+      +id: string,
     |},
     +clientMutationId: ?string,
-  |}
+  |},
 |};
 */
 
@@ -135,6 +131,5 @@ return {
   }
 };
 })();
-// prettier-ignore
 (node/*: any*/).hash = '71ccb63a40e84eda3102756358045596';
 module.exports = node;

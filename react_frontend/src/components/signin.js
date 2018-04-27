@@ -17,7 +17,6 @@ class SignIn extends React.Component {
     }
 
     responseGoogle = (auth) => {
-        console.log(auth);
         fetch('https://lwb-backend.now.sh/auth/google', {
             method: 'POST',
             headers: {
@@ -25,7 +24,6 @@ class SignIn extends React.Component {
             },
             body: JSON.stringify({ tokenId: auth.tokenId, role: this.props.role, accessToken: auth.accessToken }),
         }).then(resp => resp.json()).then(r => {
-            console.log('token', r);
             sessionStorage.setItem('token', r.token);
             const { data } = r;
 

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4cfdec3f6e4a084873ca08ecadf89548
+ * @relayHash d5d94434c90b232d813f7f78d73ba479
  */
 
 /* eslint-disable */
@@ -10,7 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type reviewQuiz_QueryVariables = {|
-  lesson_id: string
+  lesson_id: string,
 |};
 export type reviewQuiz_QueryResponse = {|
   +node: ?{|
@@ -23,9 +23,9 @@ export type reviewQuiz_QueryResponse = {|
           +answerName: ?string,
           +isCorrect: ?boolean,
         |}>,
-      |}>
+      |}>,
     |},
-  |}
+  |},
 |};
 */
 
@@ -203,6 +203,5 @@ return {
   }
 };
 })();
-// prettier-ignore
 (node/*: any*/).hash = 'ce72ef46b88b51f4a6394c1cddf895c9';
 module.exports = node;

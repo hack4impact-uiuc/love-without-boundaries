@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 74f90fdba016a55ce11f893356cb92bc
+ * @relayHash bba9c2e6be15bc766ed95a9927337d6c
  */
 
 /* eslint-disable */
@@ -15,6 +15,7 @@ export type TeacherPage_QueryVariables = {|
 export type TeacherPage_QueryResponse = {|
   +node: ?{|
     +name?: ?string,
+    +email?: ?string,
     +students?: ?$ReadOnlyArray<?{|
       +name: ?string,
       +id: string,
@@ -33,6 +34,7 @@ query TeacherPage_Query(
     __typename
     ... on Teacher {
       name
+      email
       students {
         name
         id
@@ -81,6 +83,13 @@ v4 = {
   "selections": [
     v2,
     {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "email",
+      "args": null,
+      "storageKey": null
+    },
+    {
       "kind": "LinkedField",
       "alias": null,
       "name": "students",
@@ -107,7 +116,7 @@ return {
   "operationKind": "query",
   "name": "TeacherPage_Query",
   "id": null,
-  "text": "query TeacherPage_Query(\n  $teacher_id: ID!\n) {\n  node(id: $teacher_id) {\n    __typename\n    ... on Teacher {\n      name\n      students {\n        name\n        id\n        URL\n      }\n    }\n    id\n  }\n}\n",
+  "text": "query TeacherPage_Query(\n  $teacher_id: ID!\n) {\n  node(id: $teacher_id) {\n    __typename\n    ... on Teacher {\n      name\n      email\n      students {\n        name\n        id\n        URL\n      }\n    }\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -159,6 +168,5 @@ return {
   }
 };
 })();
-// prettier-ignore
-(node/*: any*/).hash = 'a6676ab5e5657928b7482546c8104606';
+(node/*: any*/).hash = '1b1d9da35113c1aad2a1f38b116102bf';
 module.exports = node;

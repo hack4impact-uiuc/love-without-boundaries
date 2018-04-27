@@ -33,6 +33,7 @@ class StudentPage extends React.Component<Props> {
                             node(id: $studentId) {
                                 ... on Student {
                                     name
+                                    email
                                     worksheets {
                                         lessonID
                                         url
@@ -57,8 +58,10 @@ class StudentPage extends React.Component<Props> {
                         if (props.node === null || Object.keys(props.node).length === 0) {
                             return <h4 className="page-error">You must be logged in to see this. Please try again.</h4>;
                         }
-                        console.log(props);
                         const token = jwtDecode(sessionStorage.getItem('token'));
+                        if (token === null || !token) {
+                            return <h4 className="page-error">You must be logged in to see this. Please try again.</h4>;
+                        }
                         const userType = token !== null ? token.userType : 'none';
                         return (
                             <div>

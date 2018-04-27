@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7cd9a9316cc8488d8eedbaa11966ac82
+ * @relayHash 0b356716812772ea3830bb5d7a674af5
  */
 
 /* eslint-disable */
@@ -9,20 +9,19 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type AssignStudentToTeacherInput = {
-  studentID?: ?string,
-  teacherID?: ?string,
-  clientMutationId?: ?string,
-};
 export type assignStudentToTeacherMutationVariables = {|
-  input: AssignStudentToTeacherInput
+  input: {
+    studentID?: ?string,
+    teacherID?: ?string,
+    clientMutationId?: ?string,
+  },
 |};
 export type assignStudentToTeacherMutationResponse = {|
   +assignStudentToTeacher: ?{|
     +student: ?{|
-      +name: ?string
-    |}
-  |}
+      +name: ?string,
+    |},
+  |},
 |};
 */
 
@@ -142,6 +141,5 @@ return {
   }
 };
 })();
-// prettier-ignore
 (node/*: any*/).hash = '1aa2c51af12c9a653573e6ad787e8996';
 module.exports = node;

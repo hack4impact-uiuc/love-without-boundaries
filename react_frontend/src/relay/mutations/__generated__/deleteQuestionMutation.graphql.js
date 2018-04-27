@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 786b5ae42d85e959a8d92e16d945dba7
+ * @relayHash 1fbee13b174dc08526ad48f8817b2e99
  */
 
 /* eslint-disable */
@@ -9,20 +9,19 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type deleteQuestionInput = {
-  questionId: string,
-  lessonId: string,
-  clientMutationId?: ?string,
-};
 export type deleteQuestionMutationVariables = {|
-  input: deleteQuestionInput
+  input: {
+    questionId: string,
+    lessonId: string,
+    clientMutationId?: ?string,
+  },
 |};
 export type deleteQuestionMutationResponse = {|
   +deleteQuestion: ?{|
     +lesson: ?{|
-      +name: ?string
-    |}
-  |}
+      +name: ?string,
+    |},
+  |},
 |};
 */
 
@@ -142,6 +141,5 @@ return {
   }
 };
 })();
-// prettier-ignore
 (node/*: any*/).hash = '51f7dabc565b3958334f6723882d469a';
 module.exports = node;

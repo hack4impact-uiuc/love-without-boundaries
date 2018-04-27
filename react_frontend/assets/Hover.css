@@ -11,25 +11,17 @@
 	color: #a6acb5;
 } */
 
-.lessonBox:hover {
-	background-color:#8f949b;
+.lesson-box:hover {
+	background-color:#ededed;
+	border: 0px;
 }
-.lessonBox-old {
-	color: white;
-    background-color: #a6acb5;
-    height: 30%;
-	margin: auto;
-	margin-top: 15px;
-	margin-bottom: 15px;
-    border-radius: 0px 40px;
-    text-align: center;
-}
+
 .lesson-box {
 	border: 1px solid #d1d1d7;
 	max-height: 300px;
 	border-radius: 8px;
-	max-width: 380px;
-	margin: 10px 0;
+	max-width: 420px;
+	margin: 10px auto;
 	text-align: left;
 }
 .admin-lesson-box {

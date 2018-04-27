@@ -84,38 +84,36 @@ class TakeQuizPage extends Component {
                     }
                     this.state.lessonID = props.node.id;
                     return (
-                        <div>
+                        <div className="container">
                             <h1>{props.node.name} Quiz</h1>
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-sm-12">
+                            <div className="row">
+                                <div className="col-sm-12">
 
-                                        {
-                                            props.node.quiz.questions.map((q, i) =>
-                                                (
-                                                    <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
-                                                        {props.node.quiz.questions[i].questionName }
-                                                        {
-                                                            this.createCheckboxes(
-                                                                props.node.quiz.questions[i].answers.map((q, idx) => q.answerName),
-                                                                props.node.quiz.questions[i].id,
-                                                            )
-                                                        }
-                                                        {
-                                                            i === props.node.quiz.questions.length - 1 &&
+                                    {
+                                        props.node.quiz.questions.map((q, i) =>
+                                            (
+                                                <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
+                                                    {props.node.quiz.questions[i].questionName }
+                                                    {
+                                                        this.createCheckboxes(
+                                                            props.node.quiz.questions[i].answers.map((q, idx) => q.answerName),
+                                                            props.node.quiz.questions[i].id,
+                                                        )
+                                                    }
+                                                    {
+                                                        i === props.node.quiz.questions.length - 1 &&
                                                             <PaddedButton
                                                                 className="btn btn-primary"
                                                                 onClick={() => alert('Good Job!')}
                                                                 type="submit"
                                                             >Submit Quiz
                                                             </PaddedButton>
-                                                        }
-                                                    </form>
-                                                ))
-                                        }
-                                    </div>
-                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
+                                                    }
+                                                </form>
+                                            ))
+                                    }
                                 </div>
+                                <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                             </div>
                         </div>
                     );

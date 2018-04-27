@@ -737,7 +737,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -1888,7 +1888,7 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
-fbjs@^0.8.16:
+fbjs@^0.8.14, fbjs@^0.8.16:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -3591,7 +3591,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.0:
+prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -3697,6 +3697,15 @@ rc@^1.1.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-relay@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.6.0.tgz#7a0eca435c81b9b01d8917d4bca6507eefbcdfe4"
+  dependencies:
+    babel-runtime "^6.23.0"
+    fbjs "^0.8.14"
+    prop-types "^15.5.8"
+    relay-runtime "1.6.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -3807,6 +3816,13 @@ regjsparser@^0.1.4:
   resolved "https://registry.yarnpkg.com/regjsparser/-/regjsparser-0.1.5.tgz#7ee8f84dc6fa792d3fd0ae228d24bd949ead205c"
   dependencies:
     jsesc "~0.5.0"
+
+relay-runtime@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.6.0.tgz#2b70058fb77a4c93a171752ce147f8ee8d8a88b9"
+  dependencies:
+    babel-runtime "^6.23.0"
+    fbjs "^0.8.14"
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

@@ -24,7 +24,6 @@ class TeacherPage extends React.Component<Props> {
         return jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : '';
     }
     render() {
-        console.log(this.props.location.state);
         return (
             <QueryRenderer
                 environment={environment}
@@ -33,6 +32,7 @@ class TeacherPage extends React.Component<Props> {
                         node(id: $teacher_id) {
                             ... on Teacher {
                                 name
+                                email
                                 students {
                                     name
                                     id
@@ -66,7 +66,7 @@ class TeacherPage extends React.Component<Props> {
                                             { props.node == null || props.node.students == null ?
                                                 <p>You have no assigned students.</p>
                                                 : props.node.students.map((student, idx) => (
-                                                    <tr>
+                                                    <tr key={idx}>
                                                         <th scrope="row">{idx}</th>
                                                         <th>
                                                             <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/student', state: { student } }}>
@@ -86,6 +86,7 @@ class TeacherPage extends React.Component<Props> {
                                         see their lessons. Each lesson has a link to lesson notes (same for everyone) and a link to a
                                         specific worksheet document for that student.
                                     </p>
+                                    <p style={{ color: 'grey' }}>Email: {props.node.email}</p>
                                 </div>
                             </div>
                         );
