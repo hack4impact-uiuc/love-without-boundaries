@@ -87,8 +87,16 @@ class TakeQuizPage extends Component {
                                                 (
                                                     <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
                                                         {props.node.quiz.questions[i].questionName }
-                                                        {this.createCheckboxes(props.node.quiz.questions[i].answers.map((q, i) => q.answerName), props.node.quiz.questions[i].id) }
-                                                        {i === props.node.quiz.questions.length - 1 && <PaddedButton className="btn btn-danger" type="submit">Save</PaddedButton>}
+                                                        {
+                                                            this.createCheckboxes(
+                                                                props.node.quiz.questions[i].answers.map((q, i) => q.answerName),
+                                                                props.node.quiz.questions[i].id,
+                                                            )
+                                                        }
+                                                        {
+                                                            i === props.node.quiz.questions.length - 1 &&
+                                                            <PaddedButton className="btn btn-primary" type="submit">Submit Quiz</PaddedButton>
+                                                        }
                                                     </form>
                                                 ))
                                         }
