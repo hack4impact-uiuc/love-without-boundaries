@@ -95,7 +95,7 @@ class TakeQuizPage extends Component {
                                                         }
                                                         {
                                                             i === props.node.quiz.questions.length - 1 &&
-                                                            <PaddedButton className="btn btn-primary" type="submit">Submit Quiz</PaddedButton>
+                                                            <PaddedButton className="btn btn-primary" onClick={() => alert('Good Job!')} type="submit">Submit Quiz</PaddedButton>
                                                         }
                                                     </form>
                                                 ))
