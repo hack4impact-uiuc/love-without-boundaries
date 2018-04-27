@@ -1,8 +1,11 @@
 import React from 'react';
-import { setPermissionToAllRead, getIdFromUrl } from '../Gapi';
+import environment from '../relay/environment';
+import { setPermissionToAllRead, setPermissionToAllEdit, getIdFromUrl } from '../Gapi';
+import addLesson, { mutation as addLessonMutation } from '../relay/mutations/addLesson';
+import './../../assets/Hover.css';
 
 
-class LessonForm extends React.Component {
+class AdminLessonForm extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -26,8 +29,8 @@ class LessonForm extends React.Component {
             alert('Please Insert Notes Link and Worksheet Link');
         }
         setPermissionToAllRead(NotesFileID);
-        setPermissionToAllRead(WkshtFileID);
-
+        setPermissionToAllEdit(WkshtFileID);
+        addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link);
         this.setState({
             name: '',
             notes_link: '',
@@ -65,4 +68,4 @@ class LessonForm extends React.Component {
     }
 }
 
-export default LessonForm;
+export default AdminLessonForm;

@@ -36,9 +36,7 @@ class StudentPage extends React.Component<Props> {
                             lessons{
                                 id
                                 name
-                                worksheetName
                                 worksheetURL
-                                notesName
                                 notesURL
                             }
                             node(id: $studentId) {
@@ -47,7 +45,8 @@ class StudentPage extends React.Component<Props> {
                                         lessonID
                                         url
                                     }
-                                    topScore
+                                    id
+                                    URL
                                 }
                             }
                         }

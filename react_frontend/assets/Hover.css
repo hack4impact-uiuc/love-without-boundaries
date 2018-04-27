@@ -27,10 +27,18 @@
 }
 .lesson-box {
 	border: 1px solid #d1d1d7;
-	height: 200px;
+	max-height: 300px;
 	border-radius: 8px;
 	max-width: 380px;
 	margin: 10px 0;
+	text-align: left;
+}
+.admin-lesson-box {
+	border: 1px solid #d1d1d7;
+	height: 325px;
+	border-radius: 8px;
+	max-width: 420px;
+	margin: 10px auto;
 	text-align: center;
 }
 .lesson-title {
@@ -39,16 +47,29 @@
 .lesson-btn {
 	border: 1px solid #1EAEDB;
 	border-radius: 6px;
+	background-color: #ffffff;
+}
+.lesson-btn2 {
+	border: 1px solid #ff5050;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+.lesson-text {
+	font-size: 14px;
+	display: inline-block;
+	color: #ff5050;
 }
 .lesson-quiz-text {
-	margin-left: 8px;
 	margin-top: 10px;
 	font-size: 17px;
 	display: inline-block;
 	color: #726E78;
 }
+.lesson-btn-box {
+	padding-left: 9px;
+}
 .quiz-btn-box {
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .quizButton {
@@ -277,4 +298,31 @@
 
 .inlineDis{
 	display: inline;
+}
+
+.ppp {
+	margin-left: 10px;
+}
+.ppp2 {
+	width: 35%;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+.past-quiz-box {
+	max-width: 400px;
+	max-height: 400px;
+	border: 1px solid #3778ba;
+	border-radius: 10px;
+	margin-top: 15px;
+	padding: 10px;
+}
+
+.correct-answer-box {
+	max-width: 400px;
+	max-height: 400px;
+	border: 1px solid #22a531;
+	border-radius: 10px;
+	margin: 15px 5px;;
+	padding: 10px;
 }

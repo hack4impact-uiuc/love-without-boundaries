@@ -9,7 +9,7 @@ import PaddedButton from './../components/button';
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWRmZjMyNzU0YmMxMDAzNzhkODAyMjM=' };
+        this.state = { lessonID: '', studentID: 'U3R1ZGVudDo1YWUxNWNlM2NkNGI3ODcyNzllYWJmYzM=' };
     }
 
     componentWillMount = () => {
@@ -88,15 +88,23 @@ class TakeQuizPage extends Component {
                                         {
                                             props.node.quiz.questions.map((q, i) =>
                                                 (
-                                                    <form onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
+                                                    <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
                                                         {props.node.quiz.questions[i].questionName }
-                                                        {this.createCheckboxes(props.node.quiz.questions[i].answers.map((q, i) => q.answerName), props.node.quiz.questions[i].id) }
-                                                        {i === props.node.quiz.questions.length - 1 && <PaddedButton className="btn btn-danger" type="submit">Save</PaddedButton>}
+                                                        {
+                                                            this.createCheckboxes(
+                                                                props.node.quiz.questions[i].answers.map((q, i) => q.answerName),
+                                                                props.node.quiz.questions[i].id,
+                                                            )
+                                                        }
+                                                        {
+                                                            i === props.node.quiz.questions.length - 1 &&
+                                                            <PaddedButton className="btn btn-primary" onClick={() => alert('Good Job!')} type="submit">Submit Quiz</PaddedButton>
+                                                        }
                                                     </form>
                                                 ))
                                         }
                                     </div>
-                                    <Link to="/student"><PaddedButton className="btn btn-danger">Go Back</PaddedButton></Link>
+                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                                 </div>
                             </div>
                         </div>
