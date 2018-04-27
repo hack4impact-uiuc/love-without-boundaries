@@ -14,6 +14,7 @@ const MONGO_URI = 'mongodb://ariamalkani:malkani@ds147228.mlab.com:47228/lwb';
 const CLIENT_ID = '162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com';
 
 export const addStudent = async (name, email) => {
+    console.log('hi');
     if (!name || !email) { // no credentials = fail
         return false;
     }
@@ -21,6 +22,7 @@ export const addStudent = async (name, email) => {
         return Student.findOne({ name, email });
     }
     const s = new Student({ name, email });
+    console.log('new');
     return s.save();
 };
 
@@ -94,13 +96,13 @@ app.post('/auth/google', async (req, res) => {
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
         console.log(existing);
 
-        if (existing) {
-            return res.json({ existing, role });
-        //     // response.role = { role };
-        //     // // console.log(role);
-        //     // console.log(response);
-        //     // return response;
-        }
+        // if (existing) {
+        //     return res.json({ existing, role });
+        // //     // response.role = { role };
+        // //     // // console.log(role);
+        // //     // console.log(response);
+        // //     // return response;
+        // }
         // if (role === 'student') {
         //     if (Student.find({ name: payload.name, email: payload.email })) {
         //         console.log((Student.find({ name: payload.name, email: payload.email })));
