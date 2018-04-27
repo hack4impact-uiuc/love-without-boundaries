@@ -8,7 +8,7 @@ import AdminLessonForm from './../components/adminLessonForm';
 import AdminLessonList from './../components/adminLessonList';
 import AdminListComponent from './../components/adminList';
 import environment from '../relay/environment';
-
+import jwt_decode from 'jwt-decode';
 
 const ToolBar = styled.div`
 
@@ -46,36 +46,48 @@ const PaddedButton = styled.button`
     margin-left: 10px;
 `;
 
-type Props = {
-    /**/
-  }
+
+function isAdmin() {
+    if (sessionStorage.getItem('token') !== null) {
+        if ((jwt_decode(sessionStorage.getItem('token'))).userType === 'admin') {
+            return true;
+        }
+    }
+    return false;
+}
 
 const AdminPage = ({ match }) => (
-    <div className="container-fluid">
-        <div className="row">
-            <h2 className="TopTextHeader"> Administrator Tool Page </h2>
-            <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
-            <ToolBar>
-                <div className="adminTool">
-                    <Link to="/admin/lesson"><PaddedButton className="btn btn-default">Edit Lessons</PaddedButton></Link>
-                </div>
-                <div className="adminTool">
-                    <Link to="/admin/list"><PaddedButton className="btn btn-default">View Teachers and Students</PaddedButton></Link>
-                </div>
-            </ToolBar>
-        </div>
-        <br />
-        <div className="row rightMargin">
-            {
-                match.params.showLesson === 'lesson' ?
-                    <div className="centered">
-                        <AdminLessonForm />
-                        <AdminLessonList />
+    <div>
+        {isAdmin() &&
+        <div className="container-fluid">
+            <div className="row">
+                <h2 className="TopTextHeader"> Administrator Tool Page </h2>
+
+                <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
+                <ToolBar>
+                    <div className="adminTool">
+                        <Link to="/admin/lesson"><PaddedButton className="btn btn-default">Edit Lessons</PaddedButton></Link>
                     </div>
-                    :
-                    <AdminListComponent />
-            }
+                    <div className="adminTool">
+                        <Link to="/admin/list"><PaddedButton className="btn btn-default">View Teachers and Students</PaddedButton></Link>
+                    </div>
+                </ToolBar>
+            </div>
+            <br />
+            <div className="row rightMargin">
+                {
+                    match.params.showLesson === 'lesson' ?
+                        <div className="centered">
+                            <AdminLessonForm />
+                            <AdminLessonList />
+                        </div>
+                        :
+                        <AdminListComponent />
+                }
+            </div>
         </div>
+        }
+        {!isAdmin() && <p> You are not logged in as admin </p> }
     </div>
 );
 
