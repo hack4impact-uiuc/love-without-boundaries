@@ -16,14 +16,17 @@ class TakeQuizPage extends Component {
         this.selectedCheckboxes = {};
     }
 
-    toggleCheckbox = (label, i) => {
-        this.selectedCheckboxes[i] = label;
-    }
+      toggleCheckbox = (label, i) => {
+          if (this.selectedCheckboxes[i] != label) {
+              this.selectedCheckboxes[i] = label;
+          }
+      }
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
         submitQuiz(environment, this.state.studentID, this.state.lessonID, Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
     }
+
 
     createCheckbox = (label, id, i) => (
         <Checkbox
