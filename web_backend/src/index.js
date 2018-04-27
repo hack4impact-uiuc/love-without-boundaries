@@ -17,6 +17,9 @@ export const addStudent = async (name, email) => {
     if (!name || !email) { // no credentials = fail
         return false;
     }
+    if (Student.findOne({ name, email })) {
+        return Student.findOne({ name, email });
+    }
     const s = new Student({ name, email });
     return s.save();
 };
@@ -24,6 +27,9 @@ export const addStudent = async (name, email) => {
 export const addTeacher = async (name, email) => {
     if (!name || !email) { // no credentials = fail
         return false;
+    }
+    if (Teacher.findOne({ name, email })) {
+        return Student.findOne({ name, email });
     }
     const t = new Teacher({ name, email });
     return t.save();
@@ -87,19 +93,14 @@ app.post('/auth/google', async (req, res) => {
         const { tokenId, role } = req.body;
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
         console.log(existing);
-        // console.log('yo');
-        // console.log(existing);
-        // console.log({ role });
-        // const combined = await Object.assign(existing, { role });
-        // console.log({ existing, role });
-        // console.log('yo');
-        // if (existing) {
-        //     return res.json({ existing, role });
+
+        if (existing) {
+            return res.json({ existing, role });
         //     // response.role = { role };
         //     // // console.log(role);
         //     // console.log(response);
         //     // return response;
-        // }
+        }
         // if (role === 'student') {
         //     if (Student.find({ name: payload.name, email: payload.email })) {
         //         console.log((Student.find({ name: payload.name, email: payload.email })));
@@ -124,17 +125,11 @@ app.post('/auth/google', async (req, res) => {
 
         //  await res.json(
 
-        const x = await res.json(({
+        return await res.json(({
             student: addStudent,
             teacher: addTeacher,
             admin: async () => ({ error: 'Cannot create Admin acccount' }),
         })[role](payload.name, payload.email));
-        // console.log(x);
-        console.log('ADDED USER');
-        return x;
-        // response.role = role;
-        // // console.log(role);
-        // return response;
     } catch (e) {
         console.trace(e);
     }

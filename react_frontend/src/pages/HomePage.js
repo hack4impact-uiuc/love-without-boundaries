@@ -216,8 +216,7 @@ class HomePage extends React.Component<Props> {
                                         :
                                         <div>
 
-                                            <SignInButton className="lower btn" onClick={this.onLogin}>Log In</SignInButton>
-                                            <SignInButton className="lower btn" onClick={this.onSignUp}>Sign Up</SignInButton>
+                                            <SignInButton className="lower btn" onClick={this.onLogin}>Sign in</SignInButton>
                                         </div>
                                 }
                             </SignInSection>
