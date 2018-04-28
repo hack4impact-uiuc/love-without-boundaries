@@ -12,6 +12,8 @@ import ReviewQuizPage from './ReviewQuizPage';
 import './../../assets/style.css';
 import './../../assets/Hover.css';
 import NavBar from '../components/navBar';
+import Footer from '../components/footer';
+
 
 type Props = {
     /**/
@@ -55,7 +57,13 @@ const App = () => (
                 <Route path="/reviewquiz" component={ReviewQuizPage} />
             </div>
         </Router>
+        <div />
+
+        <Footer />
+
     </div>
+
+
 );
 
 export default App;

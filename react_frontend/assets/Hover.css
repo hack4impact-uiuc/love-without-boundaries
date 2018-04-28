@@ -385,6 +385,14 @@
 	padding: 10px;
 }
 
+.mystyle{
+	background-color: rgb(177,61,68);
+	color: rgb(255,255,255);
+	position: fixed;
+	text-align: center;
+	bottom: 0px;
+    width: 100%;
+}
 .sign-in-btn {
 	background-color: #C04448;
 	color: #ffffff;
