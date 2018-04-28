@@ -111,15 +111,17 @@ class StudentLesson extends React.Component {
                 <div className="row">
                     {
                         <div>
-                            <div style={{ margin: '0 auto' }}>
-                                <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
-                                <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
-                                    <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
-                                </a>
-                            </div>
-
                             <div className="tableOfContents">
+                                <div style={{ margin: '0 auto' }}>
+                                    <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
+                                    <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
+                                        <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
+                                    </a>
+                                </div>
+
+
                                 <h3> Table of Contents </h3>
+                                <p />
                                 { this.props.lessons !== undefined ? this.props.lessons.map(lesson => <p> {lesson.name} </p>) : <p> You are not logged in</p>}
                             </div>
 
