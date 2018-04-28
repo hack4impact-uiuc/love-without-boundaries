@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import './../../assets/Hover.css';
-import lovewithout_white from './../../assets/lovewithout_white.png';
 
 type Props = {
     /**/

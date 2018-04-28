@@ -1,37 +1,24 @@
 
-.navbar:hover {
+/* .navbar:hover {
 	background-color:#c13030;
 	color: white;
 	padding: 1.5%;
 	margin:auto;
-	border-radius: 10px;
 	border-bottom: 0px;
-}
+} */
 
 /* .lessonProps{
 	color: #a6acb5;
 } */
 
-.lessonBox:hover {
-	background-color:#8f949b;
+
+.btn-admin {
+	background-color:#ededed;
+	color: #000;
 }
-.lessonBox-old {
-	color: white;
-    background-color: #a6acb5;
-    height: 30%;
-	margin: auto;
-	margin-top: 15px;
-	margin-bottom: 15px;
-    border-radius: 0px 40px;
-    text-align: center;
-}
-.lesson-box {
-	border: 1px solid #d1d1d7;
-	max-height: 300px;
-	border-radius: 8px;
-	max-width: 380px;
-	margin: 10px 0;
-	text-align: left;
+.admin-lesson-box:hover {
+	background-color:#ededed;
+	border: 0px;
 }
 .admin-lesson-box {
 	border: 1px solid #d1d1d7;
@@ -41,13 +28,28 @@
 	margin: 10px auto;
 	text-align: center;
 }
+.lesson-box:hover {
+	background-color:#ededed;
+	border: 0px;
+}
+.lesson-box {
+	border: 1px solid #d1d1d7;
+	max-height: 300px;
+	border-radius: 8px;
+	max-width: 420px;
+	margin: 10px auto;
+	text-align: left;
+}
 .lesson-title {
 	font-size: 25px;
 }
 .lesson-btn {
-	border: 1px solid #1EAEDB;
+	border: 1px solid #337ab7;
 	border-radius: 6px;
 	background-color: #ffffff;
+}
+.lesson-box a {
+	color:#337ab7;
 }
 .lesson-btn2 {
 	border: 1px solid #ff5050;
@@ -63,7 +65,7 @@
 	margin-top: 10px;
 	font-size: 17px;
 	display: inline-block;
-	color: #726E78;
+	color: #5e6b77;
 }
 .lesson-btn-box {
 	padding-left: 9px;
@@ -176,6 +178,7 @@
 	font-weight: 200;
 	font-size: 15px;
 	padding-top: 3%;
+	word-spacing: .2em;
 }
 
 .lowerBox{
@@ -300,6 +303,61 @@
 	display: inline;
 }
 
+.hidden{
+	visibility: hidden;
+}
+
+.padded{
+	margin-bottom: 7%;
+}
+
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: -20px; /* the bottom margin is the negative value of the footer's height */
+    background-color: #ccc;
+}
+.spacer.edge { 
+    background-color: white; /* same as body background */
+}
+
+.spacer {
+    height: 20px;
+ }
+
+ .infront{
+	 z-index: 100;
+	 position: relative;
+ }
+
+ .navbar{
+	 background-color:#B33C42;
+	 margin-bottom: 0px;
+
+	 min-height: 75px;
+ }
+
+ .hr{
+	margin-top: 0px;
+	margin-bottom: 0px;
+ }
+
+ .navbar-collapse{
+	 border-top: 0px;
+ }
+
+ .navbar-toggle{
+	 margin-top: 10px;
+ }
+
+ .capit{
+	 text-transform: capitalize;
+	 position: relative;
+ }
 .ppp {
 	margin-left: 10px;
 }
@@ -334,4 +392,74 @@
 	text-align: center;
 	bottom: 0px;
     width: 100%;
+}
+.sign-in-btn {
+	background-color: #C04448;
+	color: #ffffff;
+	height: 50px;
+	width: 100px;
+	padding: 12px 20px;
+	margin: 10px 10px;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 16px;
+	vertical-align: middle;
+}
+.sign-in-btn-box {
+	padding-top: 5%;
+}
+
+.dark-box {
+	background: url("https://file-utocriqbzb.now.sh/");
+    background-size: cover;  
+    width: 100%;
+	height: 430px;
+    display: block;
+
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+	word-spacing: .25em;
+    font-weight: 600;
+    font-size: 26px;
+    text-align: center;
+    
+    padding-top: 60px;
+    margin-top: 0%;
+    right:0%;
+    margin-left: 0%;
+    left:0%;
+}
+
+.page-error {
+	margin: 20%;
+	text-align: center;
+	height: 40px;
+    flex-direction: row 
+}
+
+.admin-tool-bar {
+	background: rgba(30,209,179,1);
+    background: -moz-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(193, 56, 56,1)), color-stop(100%, rgba(65, 186, 234,1)));
+    background: -webkit-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: -o-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: -ms-linear-gradient(left, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    background: linear-gradient(to right, rgba(193, 56, 56,1) 0%, rgba(65, 186, 234,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ed1b3', endColorstr='#037291', GradientType=1 );
+
+
+    width: 70%;
+    height: auto;
+    position: relative;
+    background-size: cover;  
+    margin: auto;
+
+    display: block;
+    overflow: auto;
+
+    padding-bottom: 10px;
+
+    margin-bottom: 5%;
+    text-align: center;
 }

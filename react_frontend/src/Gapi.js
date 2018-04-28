@@ -3,9 +3,7 @@ import jwtDecode from 'jwt-decode';
 import addStudentWorksheetCopy from './relay/mutations/addStudentWorksheetCopy';
 
 function getGapiAccessToken() {
-    // return jwtDecode(localStorage.getItem('token')).gapi_access_token;
-    // hard code token for now
-    return 'ya29.GlyqBcF74pl9XAEJPTq1UZCLJqh6OQsz9CG6IiyI8qasrxSJ3b-nBmmhMJtL_trF2_zu_MwPRQXabquO5gdE97GhPd9YQF-b8l-B1wG363rqgigntJDur8Fv6tvfXg';
+    return jwtDecode(sessionStorage.getItem('token')) ? jwtDecode(sessionStorage.getItem('token')).gapi_access_token : '';
 }
 
 function setPermissionToAllRead(fileId) {

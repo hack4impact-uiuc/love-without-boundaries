@@ -11,8 +11,6 @@ class QuizPage extends Component {
         this.state = {};
     }
 
-    finish = () => { this.props.history.push('/admin'); }
-
     render() {
         if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID) {
             return <h2>Lesson doesnt exist. Try again.</h2>;

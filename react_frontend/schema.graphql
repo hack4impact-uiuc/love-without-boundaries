@@ -103,6 +103,7 @@ type AssignStudentToTeacherPayload {
 input CreateAdminInput {
   name: String!
   email: String!
+  token: String!
   clientMutationId: String
 }
 
@@ -129,6 +130,7 @@ type CreateLessonPayload {
 input CreateStudentInput {
   name: String!
   email: String!
+  token: String!
   clientMutationId: String
 }
 
@@ -140,6 +142,7 @@ type CreateStudentPayload {
 input CreateTeacherInput {
   name: String!
   email: String!
+  token: String!
   clientMutationId: String
 }
 
@@ -233,7 +236,7 @@ type EditLessonPayload {
 # Grade received on a quiz
 type Grade {
   # The name of the lesson that the grade is for
-  lesson: String
+  lessonID: String
 
   # The grade in which the student received for this leeson
   score: Int
@@ -398,9 +401,6 @@ type Student implements Node {
 
   # Student's empty google doc playground
   URL: String
-
-  # The student's highest grade
-  topScore: Float
 }
 
 input SubmitQuizInput {

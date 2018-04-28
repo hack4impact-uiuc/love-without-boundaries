@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1df06f8e64767e20800fe00f51cd24cd
+ * @relayHash e64ff48c7772a3aecdb33d6626baf4be
  */
 
 /* eslint-disable */
@@ -13,6 +13,7 @@ export type addStudentMutationVariables = {|
   input: {
     name: string,
     email: string,
+    token: string,
     clientMutationId?: ?string,
   },
 |};

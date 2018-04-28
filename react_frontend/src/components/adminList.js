@@ -215,18 +215,17 @@ class AdminListComponent extends React.Component<Props> {
         if (showList === true) {
             return (
                 <PopUpList>
-                    <table>
-                        {
-                            props.teachers.map((teacher) => (
-                                <tr>
-                                    <hr style={{ margin: '5px' }} />
-                                    <ul id={teacher.id} >
-                                        <input name="teacher" type="radio" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name}
-                                    </ul>
-                                </tr>))
 
-                        }
-                    </table>
+                    {
+                        props.teachers.map((teacher, i) => (
+                            <div key={i}>
+                                <hr style={{ margin: '5px' }} />
+                                <ul id={teacher.id} >
+                                    <input name="teacher" type="radio" value={teacher.id} onChange={this.handleInputChange} />  {teacher.name}
+                                </ul>
+                            </div>))
+
+                    }
                     <AssignTeacherButton className="btn btn-info" onClick={this.assignStudentToTeachers}> Assign to Teacher </AssignTeacherButton>
                 </PopUpList>
             );

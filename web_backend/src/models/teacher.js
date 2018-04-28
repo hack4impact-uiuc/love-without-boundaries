@@ -6,6 +6,7 @@ const TeacherSchema = new Schema({
     name: { type: String },
     email: { type: String },
     listOfStudentIDs: [{ type: String }],
+    googleID: { type: String },
 });
 
 export default mongoose.model('Teacher', TeacherSchema);

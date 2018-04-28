@@ -7,7 +7,7 @@ const StudentSchema = new Schema({
     email: { type: String },
     teacherID: { type: String },
     grades: [{
-        lesson: { type: String },
+        lessonID: { type: String },
         score: { type: Number },
     }],
     pastQuizzes: [{
@@ -24,6 +24,6 @@ const StudentSchema = new Schema({
         url: { type: String },
     }],
     URL: { type: String },
-    topScore: { type: Number },
+    googleID: { type: String },
 });
 export default mongoose.model('Student', StudentSchema);

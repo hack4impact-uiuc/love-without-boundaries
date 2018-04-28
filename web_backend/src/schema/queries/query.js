@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLNonNull } from 'graphql';
 import Student from '../../models/student';
 import Admin from '../../models/admin';
 import Teacher from '../../models/teacher';

@@ -46,8 +46,8 @@ const App = () => (
                     </li>
                 </ul>
 
-                <hr />
-                <NavBar />
+                <hr style={{ margin: '0px' }} />
+                <NavBar className="infront" />
                 <Route exact path="/" component={HomePage} />
                 <Route path="/student" component={StudentPage} />
                 <Route path="/teacher" component={TeacherPage} />

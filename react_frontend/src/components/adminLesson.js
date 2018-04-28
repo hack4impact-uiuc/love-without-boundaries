@@ -33,8 +33,7 @@ class AdminLessonComponent extends React.Component {
         return (
 
             <div className="row">
-                <div className="col-md-3 col-sm-2" />
-                <div className="col-sm-6 admin-lesson-box">
+                <div className="admin-lesson-box">
                     <h3 className="lesson-title">
                         {this.state.showEditLesson ?
                             <p>

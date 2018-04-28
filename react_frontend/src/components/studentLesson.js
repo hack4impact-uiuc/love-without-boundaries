@@ -5,31 +5,54 @@ import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy'
 import { copyFile, setPermissionToAllEdit } from '../Gapi';
 import environment from '../relay/environment';
 import PaddedButton from './button';
+import jwtDecode from 'jwt-decode';
 
 class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
         const newWkshtObj = {};
-        if (this.props.studentWorksheets !== null) {
-            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
-                newWkshtObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        // this is for easy access in render
+        // creates wksht Obj(hash map), where the key is the lessonID and value: worksheetURL
+        if (this.props.student !== null) {
+            for (let i = 0; i < this.props.student.worksheets.length; i += 1) {
+                newWkshtObj[this.props.student.worksheets[i].lessonID] = this.props.student.worksheets[i].url;
+            }
+        }
+        // same as above but for grades
+        const newGrades = {};
+        if (this.props.student !== null && this.props.student.grades !== undefined) {
+            for (let i = 0; i < this.props.student.grades.length; i += 1) {
+                newWkshtObj[this.props.student.grades[i].lesson] = this.props.student.grades[i].score;
+                let s = this.props.student.grades[i].score;
+                if (this.props.student.grades[i].lesson in newGrades) {
+                    if (s < newGrades[this.props.student.grades[i].lesson]) {
+                        s = newGrades[this.props.student.grades[i].lesson];
+                    }
+                }
+                newGrades[this.props.student.grades[i].lesson] = s;
             }
         }
         this.state = {
             error: '',
             worksheetObj: newWkshtObj,
+            grades: newGrades,
         };
     }
     componentDidMount() {
         let refresh = 0;
-        if (this.props.studentWorksheets === null) {
+        const token = jwtDecode(sessionStorage.getItem('token'));
+        if (token === null || !token) {
             return;
         }
-        const studentWorksheetLessonIDs = this.props.studentWorksheets.worksheets.map(element => element.lessonID);
+        if (this.props.student === null || this.props.isStudent === false || token.userType !== 'student') {
+            return;
+        }
+        // google Docs stuff - creating copies of worksheets
+        const studentWorksheetLessonIDs = this.props.student.worksheets.map(element => element.lessonID);
         let i;
         const indices = [];
         const promises = [];
-        for (i = 0; i < this.props.lessons.length; i++) {
+        for (i = 0; i < this.props.lessons.length; i += 1) {
             if (!(studentWorksheetLessonIDs.includes(this.props.lessons[i].id))) {
                 refresh = 1;
                 const url = this.props.lessons[i].worksheetURL;
@@ -43,13 +66,14 @@ class StudentLesson extends React.Component {
             }
         }
         Promise.all(promises).then((res) => {
-            for (i = 0; i < res.length; i++) {
-                if (res[i] == undefined || res.error) {
+            for (i = 0; i < res.length; i += 1) {
+                if (res[i] == undefined || res.error || res[i].id === undefined || res[i].id.length === 0) {
                     throw Error('Insufficient Privilges, please contact Admin');
                 }
                 refresh = 1;
                 setPermissionToAllEdit(res[i].id);
-                addStudentWorksheetCopy(environment, this.props.location.state.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
+                // add to database
+                addStudentWorksheetCopy(environment, this.props.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
             }
             if (refresh == 1) {
                 window.location.reload();
@@ -58,9 +82,9 @@ class StudentLesson extends React.Component {
     }
     componentWillReceiveProps(newProps) {
         const newObj = {};
-        if (newProps.studentWorksheets !== null) {
-            for (let i = 0; i < this.props.studentWorksheets.worksheets.length; i += 1) {
-                newObj[this.props.studentWorksheets.worksheets[i].lessonID] = this.props.studentWorksheets.worksheets[i].url;
+        if (newProps.student !== null) {
+            for (let i = 0; i < this.props.student.worksheets.length; i += 1) {
+                newObj[this.props.student.worksheets[i].lessonID] = this.props.student.worksheets[i].url;
             }
         }
         this.setState({
@@ -71,24 +95,29 @@ class StudentLesson extends React.Component {
         if (this.state.error !== '') {
             return <p>{this.state.error}</p>;
         }
-        if (this.props.studentWorksheets === null) {
+        if (this.props.student === null) {
             return <p>Student Worksheets prop is null</p>;
         }
         return (
-            <div className="container-fluid">
-                <h2>
-                    {
-                        this.props.location.state != undefined ? `${this.props.location.state.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
-                    }
-                </h2>
-                <div className="row">
-                    <div className="col-sm-3">
-                        <GoogleDocButton url={this.props.studentWorksheets.URL} location={this.props.location} />
-                        <a href="http://dictionary.com/"><PaddedButton className="btn btn-default">Cambodian-English Dictionary</PaddedButton></a>
-                    </div>
-                    <div className="col-sm-9">
+            <div className="container">
+                <div className="row" style={{ padding: '10px 20px' }}>
+                    <h2>
                         {
-                            this.props.lessons !== undefined ?
+                            this.props.student !== undefined ? `${this.props.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
+                        }
+                    </h2>
+                    <p style={{ color: 'grey' }} >Email: {this.props.student.email}</p>
+                </div>
+                <div className="row">
+                    {
+                        <div>
+                            <div style={{ margin: '0 auto' }}>
+                                <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
+                                <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
+                                    <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
+                                </a>
+                            </div>
+                            { this.props.lessons !== undefined ?
                                 this.props.lessons.map((lesson, idx) => (
                                     <LessonComponent
                                         key={idx}
@@ -96,15 +125,17 @@ class StudentLesson extends React.Component {
                                         lessonName={lesson.name}
                                         lessonNotesLink={lesson.notesURL}
                                         lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
-                                        quizPercentage="50%"
+                                        quizPercentage={(this.props.student.grades.find(l => l.lessonID === lesson.id) === undefined) ? undefined : (this.props.student.grades.find(l => l.lessonID === lesson.id)).score}
                                         quizIsChecked={false}
                                         isStudent={this.props.isStudent}
                                     />
+
                                 ))
                                 :
                                 <p>There arent any lessons</p>
-                        }
-                    </div>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         );

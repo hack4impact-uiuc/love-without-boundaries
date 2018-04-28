@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
+import ErrorMessage from './errorMessage';
 
 const SlightlyPaddedButton = styled.button`
     margin: 0px 5px;
@@ -70,7 +71,7 @@ class ReviewQuiz extends React.Component {
                         );
                     }
                     if (this.props.pastQuizzes === null) {
-                        return <p>No Past Quizzes.</p>;
+                        return <ErrorMessage message="No Past Quizzes." />;
                     }
                     return (
                         <div>
@@ -89,7 +90,8 @@ class ReviewQuiz extends React.Component {
                                                 pq.lessonID === this.props.lessonID ?
                                                     <div key={idx} className="past-quiz-box">
                                                         <h4 style={{ fontWeight: '600' }}>Try #{idx + 1}</h4>
-                                                        <p style={{ color: '#3778ba' }}><b>Score: {pq.score.toFixed(2)}</b></p>
+                                                        {console.log(pq.score)}
+                                                        <p style={{ color: '#3778ba' }}><b>Score: {pq.score.toFixed(2) * 100}%</b></p>
                                                         <b style={{ paddingBottom: '5px' }}>Your Answers:</b>
                                                         {
                                                             pq.submittedAnswers.map((q, i) =>
