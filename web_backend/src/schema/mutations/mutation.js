@@ -89,9 +89,7 @@ const createLesson = mutationWithClientMutationId({
     inputFields: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         quiz: { type: InputQuizType },
-        worksheetName: { type: GraphQLString },
         worksheetURL: { type: GraphQLString },
-        notesName: { type: GraphQLString },
         notesURL: { type: GraphQLString },
     },
     outputFields: {
@@ -100,12 +98,12 @@ const createLesson = mutationWithClientMutationId({
             resolve: payload => payload,
         },
     },
-    mutateAndGetPayload: ({
-        name, quiz, worksheetName, worksheetURL, notesName, notesURL,
+    mutateAndGetPayload: async ({
+        name, quiz, worksheetURL, notesURL,
     }) => {
         const l = new Lesson({
-            name, quiz, worksheetName, worksheetURL, notesName, notesURL,
-        }, { new: true });
+            name, quiz, worksheetURL, notesURL,
+        });
         return l.save();
     },
 });

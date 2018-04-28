@@ -7,6 +7,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../relay/environment';
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BACKEND_URL } from '../utils';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class SignIn extends React.Component {
     }
 
     responseGoogle = (auth) => {
-        fetch('https://lwb-backend.now.sh/auth/google', {
+        fetch(`${BACKEND_URL}/auth/google`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,9 +27,12 @@ class SignIn extends React.Component {
         }).then(resp => resp.json()).then(r => {
             sessionStorage.setItem('token', r.token);
             const { data } = r;
-
+            if (data === undefined) {
+                alert('Error Logging in. Try again.');
+                throw Error('Error Logging in.');
+            }
             this.props.history.push(r.role === 'admin' ? `/${r.role}/list` : `/${r.role}`, { [r.role]: { id: data.id, name: data.name } });
-        }).catch(console.error);
+        }).catch(err => console.error(err));
 
         this.setState({
             email: jwt_decode(auth.tokenId).email,

@@ -11,22 +11,14 @@
 	color: #a6acb5;
 } */
 
-.lesson-box:hover {
-	background-color:#ededed;
-	border: 0px;
-}
 
 .btn-admin {
 	background-color:#ededed;
 	color: #000;
 }
-.lesson-box {
-	border: 1px solid #d1d1d7;
-	max-height: 300px;
-	border-radius: 8px;
-	max-width: 420px;
-	margin: 10px auto;
-	text-align: left;
+.admin-lesson-box:hover {
+	background-color:#ededed;
+	border: 0px;
 }
 .admin-lesson-box {
 	border: 1px solid #d1d1d7;
@@ -35,6 +27,18 @@
 	max-width: 420px;
 	margin: 10px auto;
 	text-align: center;
+}
+.lesson-box:hover {
+	background-color:#ededed;
+	border: 0px;
+}
+.lesson-box {
+	border: 1px solid #d1d1d7;
+	max-height: 300px;
+	border-radius: 8px;
+	max-width: 420px;
+	margin: 10px auto;
+	text-align: left;
 }
 .lesson-title {
 	font-size: 25px;

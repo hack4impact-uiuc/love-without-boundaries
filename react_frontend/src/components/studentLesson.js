@@ -11,11 +11,14 @@ class StudentLesson extends React.Component {
     constructor(props) {
         super(props);
         const newWkshtObj = {};
+        // this is for easy access in render
+        // creates wksht Obj(hash map), where the key is the lessonID and value: worksheetURL
         if (this.props.student !== null) {
             for (let i = 0; i < this.props.student.worksheets.length; i += 1) {
                 newWkshtObj[this.props.student.worksheets[i].lessonID] = this.props.student.worksheets[i].url;
             }
         }
+        // same as above but for grades
         const newGrades = {};
         if (this.props.student !== null && this.props.student.grades !== undefined) {
             for (let i = 0; i < this.props.student.grades.length; i += 1) {
@@ -44,7 +47,7 @@ class StudentLesson extends React.Component {
         if (this.props.student === null || this.props.isStudent === false || token.userType !== 'student') {
             return;
         }
-
+        // google Docs stuff - creating copies of worksheets
         const studentWorksheetLessonIDs = this.props.student.worksheets.map(element => element.lessonID);
         let i;
         const indices = [];
@@ -69,6 +72,7 @@ class StudentLesson extends React.Component {
                 }
                 refresh = 1;
                 setPermissionToAllEdit(res[i].id);
+                // add to database
                 addStudentWorksheetCopy(environment, this.props.student.id, this.props.lessons[indices[i]].id, `https://docs.google.com/document/d/${res[i].id}/edit`);
             }
             if (refresh == 1) {

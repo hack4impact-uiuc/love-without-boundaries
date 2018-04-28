@@ -6,12 +6,13 @@ import {
     RecordSource,
     Store,
 } from 'relay-runtime';
+import { BACKEND_URL } from '../utils';
 
 function fetchQuery(
     operation,
     variables,
 ) {
-    return fetch('http://localhost:8080/graphql', {
+    return fetch(`${BACKEND_URL}/graphql`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

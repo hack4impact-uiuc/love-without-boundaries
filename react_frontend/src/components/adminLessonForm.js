@@ -28,8 +28,9 @@ class AdminLessonForm extends React.Component {
         if (!NotesFileID || !WkshtFileID) {
             alert('Please Insert Notes Link and Worksheet Link');
         }
-        setPermissionToAllRead(NotesFileID);
-        setPermissionToAllEdit(WkshtFileID);
+        console.log(NotesFileID[0]);
+        setPermissionToAllRead(NotesFileID[0]);
+        setPermissionToAllEdit(WkshtFileID[0]);
         addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link);
         this.setState({
             name: '',
@@ -58,7 +59,7 @@ class AdminLessonForm extends React.Component {
                         <label htmlFor="lesson_wksht_link_input">Lesson Worksheet Link: </label>
                         <input className="form-control" id="lesson_wksht_link_input" name="wksht_link" value={this.state.wksht_link} onChange={this.handleChange} placeholder="Enter Worksheet File Link" />
                     </div>
-                    <p style={{ color: '#d41137' }}> Please make sure that Notes & Worksheet File is viewable to everyone with the link and is in the Shared LWB Google Drive Folder</p>
+                    <p style={{ color: '#d41137' }}> Please make sure that Notes & Worksheet File is viewable to everyone with the link ("View" for "Anyone with the link") and is in the Shared Google Drive Folder</p>
 
                     <button className="btn btn-primary" onClick={this.submitLesson}>Add Lesson</button>
                 </form>

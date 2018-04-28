@@ -24,20 +24,18 @@ function addLesson(environment: Environment, name: string, worksheetURL: string,
             notesURL,
         },
     };
-    let finalResponse = {};
     commitMutation(
         environment,
         {
             mutation,
             variables,
             onCompleted: (response) => {
-                console.log('Hello');
-                finalResponse = response;
+                console.log('Response Recieved from Server.');
+                console.log(response);
             },
             onError: err => console.error(err),
         },
     );
-    return finalResponse;
 }
 
 export default addLesson;

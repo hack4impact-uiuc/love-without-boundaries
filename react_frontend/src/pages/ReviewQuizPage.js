@@ -19,7 +19,6 @@ class ReviewQuizPage extends Component {
         if (this.state.studentID === null) {
             return <h4 className="page-error">You must be logged in to view previous quizzes</h4>;
         }
-        console.log(this.state.studentID);
         return (
             <QueryRenderer
                 environment={environment}
@@ -55,7 +54,7 @@ class ReviewQuizPage extends Component {
                         return <ErrorMessage message="No Lesson, please click on Lesson." />;
                     }
                     if (props.node.pastQuizzes === undefined) {
-                        return <ErrorMessage message="You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal."/>
+                        return <ErrorMessage message="You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal." />;
                     }
                     if (lessonID) {
                         return (
