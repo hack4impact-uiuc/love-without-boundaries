@@ -455,3 +455,11 @@
     margin-bottom: 5%;
     text-align: center;
 }
+
+.tableOfContents {
+	float: right;
+}
+
+.lesson {
+	float: left;
+}

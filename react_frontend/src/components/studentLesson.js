@@ -117,23 +117,31 @@ class StudentLesson extends React.Component {
                                     <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
                                 </a>
                             </div>
-                            { this.props.lessons !== undefined ?
-                                this.props.lessons.map((lesson, idx) => (
-                                    <LessonComponent
-                                        key={idx}
-                                        id={lesson.id}
-                                        lessonName={lesson.name}
-                                        lessonNotesLink={lesson.notesURL}
-                                        lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
-                                        quizPercentage={(this.props.student.grades.find(l => l.lessonID === lesson.id) === undefined) ? undefined : (this.props.student.grades.find(l => l.lessonID === lesson.id)).score}
-                                        quizIsChecked={false}
-                                        isStudent={this.props.isStudent}
-                                    />
 
-                                ))
-                                :
-                                <p>There arent any lessons</p>
-                            }
+                            <div className="tableOfContents">
+                                <h3> Table of Contents </h3>
+                                { this.props.lessons !== undefined ? this.props.lessons.map(lesson => <p> {lesson.name} </p>) : <p> You are not logged in</p>}
+                            </div>
+
+                            <div className="lessons">
+                                { this.props.lessons !== undefined ?
+                                    this.props.lessons.map((lesson, idx) => (
+                                        <LessonComponent
+                                            key={idx}
+                                            id={lesson.id}
+                                            lessonName={lesson.name}
+                                            lessonNotesLink={lesson.notesURL}
+                                            lessonWorksheetLink={this.state.worksheetObj[lesson.id]}
+                                            quizPercentage={(this.props.student.grades.find(l => l.lessonID === lesson.id) === undefined) ? undefined : (this.props.student.grades.find(l => l.lessonID === lesson.id)).score}
+                                            quizIsChecked={false}
+                                            isStudent={this.props.isStudent}
+                                        />
+
+                                    ))
+                                    :
+                                    <p>There arent any lessons</p>
+                                }
+                            </div>
                         </div>
                     }
                 </div>
