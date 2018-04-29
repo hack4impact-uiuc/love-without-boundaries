@@ -193,7 +193,8 @@ class HomePage extends React.Component<Props> {
 
                                                     <SignIn role="teacher" requestType={this.state.loginOrSignup} />
 
-                                                    <SignIn role="admin" requestType={this.state.loginOrSignup} />
+                                                    {this.state.loginOrSignup === 'login' && <SignIn role="admin" requestType={this.state.loginOrSignup} />}
+
                                                 </div>
                                                 :
                                                 <div className="sign-in-btn-box">
