@@ -455,3 +455,20 @@
     margin-bottom: 5%;
     text-align: center;
 }
+
+.hometext{
+	color: #FFFFFF;
+	font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 20px;
+    margin: 20px;
+	max-width: 100px;
+	background-color:#B33C42;
+
+}
+.hometext:hover{
+
+	background-color:#B33C42 !important;
+	color: #ddbaba;
+}

@@ -49,48 +49,10 @@ const HomeText = styled.div`
     text-transform: uppercase;
     font-weight: 100;
     font-size: 20px;
-
     margin: 20px;
-
     max-width: 100px;
-
-
 `;
 
-const LessonText = styled.div`
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-family: 'Montserrat';
-    font-weight: 800;
-    font-size: 18px;
-    border-bottom: 3px solid white;
-    
-    margin-right: 5px;
-    margin-left: 5px;
-    display: inline-block;
-    position: relative;
-
-    margin: 20px;
-    margin-left: 3%;
-    bottom: 40px;
-
-`;
-const LogText = styled.div`
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-family: 'Montserrat';
-    font-weight: 800;
-    font-size: 18px;
-    border-bottom: 3px solid white;
-    
-    display: inline-block;
-    position: relative;
-
-    margin: 20px;
-    margin-left: 3%;
-    bottom: 40px;
-
-`;
 
 const ImageBox = styled.div`
     background: url("https://file-gupzgikpce.now.sh/");
@@ -134,13 +96,13 @@ class NavBar extends React.Component<Props> {
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
-                                <li> <HomeText> <a href="#"> Logout </a> </HomeText> </li>
+                                <li><a className="hometext" href="#"> Logout </a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText > <a href={this.getPath()} > Profile </a> </HomeText></li>
+                                <li><a className="hometext" href={this.getPath()} > Profile </a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText> <a href="./"> Home </a> </HomeText></li>
+                                <li><a className="hometext" href="./"> Home </a></li>
                             </ul>
                         </div>
                     </div>
