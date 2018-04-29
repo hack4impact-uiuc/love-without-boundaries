@@ -48,7 +48,7 @@ const App = () => (
                 <Route path="/reviewquiz" component={ReviewQuizPage} />
             </div>
         </Router>
-        <footer style={{ position: 'center', 'margin-left': '45% ' }} >Made by Hack4Impact@uiuc</footer>
+        <footer style={{ 'text-align': 'center', bottom: '0', position: 'relative' }}>Made by Hack4Impact@uiuc</footer>
     </div>
 );
 
