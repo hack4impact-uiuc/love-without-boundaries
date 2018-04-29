@@ -472,3 +472,19 @@
 	background-color:#B33C42 !important;
 	color: #ddbaba;
 }
+.tableOfContents {
+
+	float: right;
+	margin-right: 20%;
+	margin-top: 0%;
+	padding-top: 0%;
+	
+}
+.footer-section {
+	display: block;
+	height: 350px;
+	padding-top:70px !important;
+	text-align: center;
+	bottom: 0;
+}
+

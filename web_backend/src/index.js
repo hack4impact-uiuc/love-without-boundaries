@@ -112,7 +112,6 @@ app.post('/auth/google', async (req, res) => {
         const { existing, payload } = await getaccountFromGoogleToken(tokenId);
 
         if (role === 'student') {
-            console.log(accessToken);
             const student = await addStudent(payload.name, payload.email, tokenId);
             const id = toGlobalId('Student', student._id);
             const ret = {
