@@ -45,10 +45,10 @@ class TakeQuizPage extends Component {
 
     render() {
         if (this.state.studentID === null) {
-            return <ErrorMessage code="404" message="You must be logged in as a Student to take quiz. Try logging in again."/>
+            return <ErrorMessage code="404" message="You must be logged in as a Student to take quiz. Try logging in again." />;
         }
-        if (this.props.location.state === undefined ){
-            return <ErrorMessage code="404" message="No Lesson"/>
+        if (this.props.location.state === undefined) {
+            return <ErrorMessage code="404" message="No Lesson" />;
         }
         return (
             <QueryRenderer
@@ -116,8 +116,8 @@ class TakeQuizPage extends Component {
                                                 </form>
                                             ))
                                     }
+                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                                 </div>
-                                <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
                             </div>
                         </div>
                     );

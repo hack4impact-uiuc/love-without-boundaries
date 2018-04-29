@@ -100,30 +100,22 @@ class StudentLesson extends React.Component {
         }
         return (
             <div className="container">
-                <div className="row" style={{ padding: '10px 20px' }}>
+                <div className="row" style={{ padding: '10px 0' }}>
                     <h2>
                         {
                             this.props.student !== undefined ? `${this.props.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
                         }
                     </h2>
-                    <p style={{ color: 'grey' }} >Email: {this.props.student.email}</p>
+                    <p style={{ color: 'grey', paddingLeft: '5px' }} >Email: {this.props.student.email}</p>
                 </div>
                 <div className="row">
                     {
                         <div>
-                            <div className="tableOfContents">
-                                <div style={{ margin: '0 auto' }}>
-                                    <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
-                                    <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
-                                        <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
-                                    </a>
-                                </div>
 
-
-                                <h3> Table of Contents </h3>
-                                <p />
-                                { this.props.lessons !== undefined ? this.props.lessons.map(lesson => <p> {lesson.name} </p>) : <p> You are not logged in</p>}
-                            </div>
+                            <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
+                            <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
+                                <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
+                            </a>
 
                             <div className="lessons">
                                 { this.props.lessons !== undefined ?

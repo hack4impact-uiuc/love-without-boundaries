@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import './../../assets/Hover.css';
 
 type Props = {
@@ -114,7 +115,7 @@ class NavBar extends React.Component<Props> {
                                 <span className="icon-bar" />
                                 <span className="icon-bar" />
                             </button>
-                            <ImageBox />
+                            <Link to="/"><ImageBox /></Link>
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">

@@ -22,22 +22,6 @@ const App = () => (
     <div>
         <Router>
             <div>
-                <ul>
-                    <li>
-                        <Link to="/" >Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/student" >Student</Link>
-                    </li>
-                    <li>
-                        <Link to="/teacher" >Teacher</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/list" >Admin</Link>
-                    </li>
-                </ul>
-
-                <hr style={{ margin: '0px' }} />
                 <NavBar className="infront" />
                 <Route exact path="/" component={HomePage} />
                 <Route path="/student" component={StudentPage} />
@@ -48,7 +32,6 @@ const App = () => (
                 <Route path="/reviewquiz" component={ReviewQuizPage} />
             </div>
         </Router>
-        <footer style={{ 'text-align': 'center', bottom: '0', position: 'relative' }}>Made by Hack4Impact@uiuc</footer>
     </div>
 );
 
