@@ -17,14 +17,7 @@ type Props = {
     /**/
 }
 
-// student name - tim, private key - 'tim'
-const studentJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6InN0dWRlbnQiLCJ1c2VySUQiOiJVM1IxWkdWdWREbzFZV0UxTjJOaU9EWXlZMlUwT1RrNVpXSTBZbUZrTkdNPSIsImlhdCI6MTUyMTQ5ODcwM30.8F_hov-c-8NxTYBtQPtUvQV-RJ9yFUCw6VNEzjYxNs8';
-// teacher name - aria, private key - 'tim
-const teacherJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6InRlYWNoZXIiLCJ1c2VySUQiOiJWR1ZoWTJobGNqbzFZV0V5TVdSa05qRTBPVGc0TlRkak0yUTVZemMyWm1RPSIsImlhdCI6MTUyMTQ5ODYyNn0.81F-tqrRmNWjVaaWAtUcJDZWxnHsgZxhnPFBlNEAwWM';
 
-// CHANGE TO STUDENTJWT OR TEACHERJWT DEPENDING ON WHAT YOU ARE WORKING ON
-localStorage.setItem('token', studentJWT);
-// to decode it, import jwt-decode https://www.npmjs.com/package/jwt-decode
 const App = () => (
     <div>
         <Router>
@@ -55,6 +48,7 @@ const App = () => (
                 <Route path="/reviewquiz" component={ReviewQuizPage} />
             </div>
         </Router>
+        <footer style={{ position: 'center', 'margin-left': '45% ' }} >Made by Hack4Impact@uiuc</footer>
     </div>
 );
 
