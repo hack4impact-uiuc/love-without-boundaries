@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 33dc09202e3979a23c4170aa719688c0
+ * @relayHash a9611fca25acfbba20b897b7cbc3a7e6
  */
 
 /* eslint-disable */
@@ -9,18 +9,19 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+export type AddStudentWorksheetCopyInput = {
+  studentID?: ?string,
+  lessonID?: ?string,
+  url?: ?string,
+  clientMutationId?: ?string,
+};
 export type addStudentWorksheetCopyMutationVariables = {|
-  input: {
-    studentID?: ?string,
-    lessonID?: ?string,
-    url?: ?string,
-    clientMutationId?: ?string,
-  },
+  input: AddStudentWorksheetCopyInput
 |};
 export type addStudentWorksheetCopyMutationResponse = {|
   +addStudentWorksheetCopy: ?{|
-    +clientMutationId: ?string,
-  |},
+    +clientMutationId: ?string
+  |}
 |};
 */
 
@@ -94,5 +95,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '0b9fa1d2b2f9817378703de099ab86be';
 module.exports = node;

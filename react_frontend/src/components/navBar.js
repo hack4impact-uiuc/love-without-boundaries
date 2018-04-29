@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import './../../assets/Hover.css';
 
+import jwtDecode from 'jwt-decode';
+
+
 type Props = {
     /**/
 }
@@ -47,48 +50,10 @@ const HomeText = styled.div`
     text-transform: uppercase;
     font-weight: 100;
     font-size: 20px;
-
     margin: 20px;
-
     max-width: 100px;
-
-
 `;
 
-const LessonText = styled.div`
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-family: 'Montserrat';
-    font-weight: 800;
-    font-size: 18px;
-    border-bottom: 3px solid white;
-    
-    margin-right: 5px;
-    margin-left: 5px;
-    display: inline-block;
-    position: relative;
-
-    margin: 20px;
-    margin-left: 3%;
-    bottom: 40px;
-
-`;
-const LogText = styled.div`
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-family: 'Montserrat';
-    font-weight: 800;
-    font-size: 18px;
-    border-bottom: 3px solid white;
-    
-    display: inline-block;
-    position: relative;
-
-    margin: 20px;
-    margin-left: 3%;
-    bottom: 40px;
-
-`;
 
 const ImageBox = styled.div`
     background: url("https://file-gupzgikpce.now.sh/");
@@ -97,12 +62,29 @@ const ImageBox = styled.div`
     width: 200px;
     position: relative;
     margin-left: 0%;
-
+    margin-top: 10px;
     display: inline-block;
 `;
 
 
 class NavBar extends React.Component<Props> {
+    getPath = () => {
+        if (sessionStorage.getItem('token') !== null) {
+            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'student') {
+                return '/student';
+            } else if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'teacher') {
+                return '/teacher';
+            } else if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'admin') {
+                return '/admin/list';
+            }
+        }
+        return '';
+    }
+
+    logoutFunc = () => {
+        sessionStorage.clear();
+    }
+
     render() {
         return (
             <div>
@@ -119,13 +101,13 @@ class NavBar extends React.Component<Props> {
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText href="#"> Logout </HomeText></li>
+                                <li><a className="hometext" onClick={this.logoutFunc()} href="/"> Logout </a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText href="#"> Profile </HomeText></li>
+                                <li><a className="hometext" href={this.getPath()} > Profile </a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText href="#"> Home </HomeText></li>
+                                <li><a className="hometext" href="/"> Home </a></li>
                             </ul>
                         </div>
                     </div>

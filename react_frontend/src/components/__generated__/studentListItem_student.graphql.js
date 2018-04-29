@@ -8,7 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-import type { FragmentReference } from 'relay-runtime';
+import type { FragmentReference } from "relay-runtime";
 declare export opaque type studentListItem_student$ref: FragmentReference;
 export type studentListItem_student = {|
   +name: ?string,
@@ -33,5 +33,6 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
+// prettier-ignore
 (node/*: any*/).hash = '650f99dca902f4ebfeea903cf75dbd5b';
 module.exports = node;

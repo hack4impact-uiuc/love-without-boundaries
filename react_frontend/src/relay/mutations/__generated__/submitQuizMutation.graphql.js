@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2f9a39a8dbe0c2959475424fb346ddcf
+ * @relayHash 3630e854df774939566f0f9900977c2c
  */
 
 /* eslint-disable */
@@ -9,18 +9,21 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+export type SubmitQuizInput = {
+  id?: ?string,
+  lessonID?: ?string,
+  answeredQuestions?: ?InputSubmittedAnswers,
+  clientMutationId?: ?string,
+};
+export type InputSubmittedAnswers = {
+  submissions?: ?$ReadOnlyArray<?InputSubmittedAnswer>
+};
+export type InputSubmittedAnswer = {
+  questionID?: ?string,
+  answerChosen?: ?string,
+};
 export type submitQuizMutationVariables = {|
-  input: {
-    id?: ?string,
-    lessonID?: ?string,
-    answeredQuestions?: ?{
-      submissions?: ?$ReadOnlyArray<?{
-        questionID?: ?string,
-        answerChosen?: ?string,
-      }>,
-    },
-    clientMutationId?: ?string,
-  },
+  input: SubmitQuizInput
 |};
 export type submitQuizMutationResponse = {|
   +submitQuiz: ?{|
@@ -33,8 +36,8 @@ export type submitQuizMutationResponse = {|
           +answerChosen: ?string,
         |}>,
       |}>,
-    |},
-  |},
+    |}
+  |}
 |};
 */
 
@@ -206,5 +209,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '0eabb8adf1d0d6b12bdc1deded919982';
 module.exports = node;

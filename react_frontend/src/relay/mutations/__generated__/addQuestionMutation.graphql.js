@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 29d0858d64ba0345b9a52ca527e02f2c
+ * @relayHash 3a3b60ce079e80cf3512528a1b6a9fb0
  */
 
 /* eslint-disable */
@@ -9,18 +9,21 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+export type AddQuestionInput = {
+  question?: ?InputQuestion,
+  lessonId?: ?string,
+  clientMutationId?: ?string,
+};
+export type InputQuestion = {
+  questionName?: ?string,
+  answers?: ?$ReadOnlyArray<?InputAnswer>,
+};
+export type InputAnswer = {
+  answerName?: ?string,
+  isCorrect?: ?boolean,
+};
 export type addQuestionMutationVariables = {|
-  input: {
-    question?: ?{
-      questionName?: ?string,
-      answers?: ?$ReadOnlyArray<?{
-        answerName?: ?string,
-        isCorrect?: ?boolean,
-      }>,
-    },
-    lessonId?: ?string,
-    clientMutationId?: ?string,
-  },
+  input: AddQuestionInput
 |};
 export type addQuestionMutationResponse = {|
   +addQuestion: ?{|
@@ -32,10 +35,10 @@ export type addQuestionMutationResponse = {|
             +answerName: ?string,
             +isCorrect: ?boolean,
           |}>,
-        |}>,
-      |},
-    |},
-  |},
+        |}>
+      |}
+    |}
+  |}
 |};
 */
 
@@ -237,5 +240,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '144c569ff356bda9802a5dcf1e2c9932';
 module.exports = node;
