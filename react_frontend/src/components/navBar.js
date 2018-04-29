@@ -105,31 +105,17 @@ const ImageBox = styled.div`
 
 
 class NavBar extends React.Component<Props> {
-    isAdmin = () => {
-        if (sessionStorage.getItem('token') !== null) {
-            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'admin') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    isTeacher = () => {
-        if (sessionStorage.getItem('token') !== null) {
-            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'teacher') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    isStudent = () => {
+    getPath = () => {
         if (sessionStorage.getItem('token') !== null) {
             if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'student') {
-                return true;
+                return '/student';
+            } else if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'teacher') {
+                return '/teacher';
+            } else if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'admin') {
+                return '/admin/list';
             }
         }
-        return false;
+        return '';
     }
 
     render() {
@@ -148,13 +134,13 @@ class NavBar extends React.Component<Props> {
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText href="#"> Logout </HomeText></li>
+                                <li> <HomeText> <a href="#"> Logout </a> </HomeText> </li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText href="#"> Profile </HomeText></li>
+                                <li><HomeText > <a href={this.getPath()} > Profile </a> </HomeText></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><HomeText href="#"> Home </HomeText></li>
+                                <li><HomeText> <a href="./"> Home </a> </HomeText></li>
                             </ul>
                         </div>
                     </div>
