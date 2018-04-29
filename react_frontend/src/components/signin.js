@@ -50,7 +50,7 @@ class SignIn extends React.Component {
                         clientId="162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com"
                         responseType="id_token"
                         buttonText={this.props.role}
-                        scope="https://www.googleapis.com/auth/drive.file"
+                        scope="https://www.googleapis.com/auth/drive"
                         onSuccess={this.responseGoogle}
                     />
                 }
