@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import './../../assets/Hover.css';
 
+import jwtDecode from 'jwt-decode';
+
+
 type Props = {
     /**/
 }
@@ -102,6 +105,33 @@ const ImageBox = styled.div`
 
 
 class NavBar extends React.Component<Props> {
+    isAdmin = () => {
+        if (sessionStorage.getItem('token') !== null) {
+            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'admin') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isTeacher = () => {
+        if (sessionStorage.getItem('token') !== null) {
+            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'teacher') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isStudent = () => {
+        if (sessionStorage.getItem('token') !== null) {
+            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'student') {
+                return true;
+            }
+        }
+        return false;
+    }
+
     render() {
         return (
             <div>
