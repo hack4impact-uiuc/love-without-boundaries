@@ -96,13 +96,13 @@ class NavBar extends React.Component<Props> {
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
-                                <li><a className="hometext" href="#"> Logout </a></li>
+                                <li><a className="hometext" href="/"> Logout </a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
                                 <li><a className="hometext" href={this.getPath()} > Profile </a></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><a className="hometext" href="./"> Home </a></li>
+                                <li><a className="hometext" href="/"> Home </a></li>
                             </ul>
                         </div>
                     </div>
