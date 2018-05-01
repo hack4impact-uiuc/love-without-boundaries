@@ -12,6 +12,7 @@ import ReviewQuizPage from './ReviewQuizPage';
 import './../../assets/style.css';
 import './../../assets/Hover.css';
 import NavBar from '../components/navBar';
+import Footer from '../components/footer';
 
 type Props = {
     /**/
@@ -21,7 +22,7 @@ type Props = {
 const App = () => (
     <div>
         <Router>
-            <div>
+            <React.Fragment>
                 <NavBar className="infront" />
                 <Route exact path="/" component={HomePage} />
                 <Route path="/student" component={StudentPage} />
@@ -30,7 +31,7 @@ const App = () => (
                 <Route path="/quiz" component={QuizPage} />
                 <Route path="/takequiz" component={TakeQuizPage} />
                 <Route path="/reviewquiz" component={ReviewQuizPage} />
-            </div>
+            </React.Fragment>
         </Router>
     </div>
 );

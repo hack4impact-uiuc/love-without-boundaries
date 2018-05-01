@@ -9,7 +9,6 @@ import AdminLessonForm from '../components/adminLessonForm';
 import AdminLessonList from '../components/adminLessonList';
 import AdminListComponent from '../components/adminList';
 
-
 const PaddedButton = styled.button`
     padding: 10px;
     margin-top: 10px;
