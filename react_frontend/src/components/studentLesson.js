@@ -116,12 +116,16 @@ class StudentLesson extends React.Component {
                             <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
                                 <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
                             </a>
+                            <a style={{ display: 'inline-block' }} href="https://docs.google.com/document/d/1fKQIrPVuGRNT1rly3aVaYwyuowL2OlULeZFalrplcxQ/edit">
+                                <PaddedButton className="btn btn-lwb">Glossary</PaddedButton>
+                            </a>
 
                             <div className="lessons">
                                 { this.props.lessons !== undefined ?
                                     this.props.lessons.map((lesson, idx) => (
                                         <LessonComponent
                                             key={idx}
+                                            studentID={this.props.student.id}
                                             id={lesson.id}
                                             lessonName={lesson.name}
                                             lessonNotesLink={lesson.notesURL}

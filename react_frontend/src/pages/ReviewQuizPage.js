@@ -39,7 +39,7 @@ class ReviewQuizPage extends Component {
                         }
                     } 
                     `}
-                variables={{ student_id: this.state.studentID !== null ? this.state.studentID : '' }}
+                variables={{ student_id: this.props.location.state !== undefined ? this.props.location.state.studentID : '' }}
                 render={({ props }) => {
                     if (!props) {
                         return (

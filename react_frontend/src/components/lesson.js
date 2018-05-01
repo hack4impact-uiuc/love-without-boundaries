@@ -14,7 +14,6 @@ class LessonComponent extends React.Component<Props> {
     render() {
         return (
             <div className="row" style={{ margin: '0 auto' }}>
-                {/* <div className="col-md-3 col-sm-2" /> */}
                 <div className="col-sm-6 lesson-box">
                     <h3 className="lesson-title" >{this.props.lessonName}</h3>
                     <div className="lesson-btn-box">
@@ -30,17 +29,14 @@ class LessonComponent extends React.Component<Props> {
                                     </Link>
                                 )}
 
-                            <Link to={{ pathname: '/reviewquiz', state: { lessonID: this.props.id } }}>
+                            <Link to={{ pathname: '/reviewquiz', state: { lessonID: this.props.id, studentID: this.props.studentID } }}>
                                 <SlightlyPaddedButton className="btn lesson-btn" > Review Quiz </SlightlyPaddedButton>
                             </Link>
                         </div>
                     </div>
-                    {this.props.isStudent && (
-                        <p className="lesson-quiz-text"> Quiz -- Grade: { this.props.quizPercentage !== undefined ? `${this.props.quizPercentage}%` : 'Haven\'t taken' }</p>
-                    )}
+                    <p className="lesson-quiz-text"> Quiz -- Grade: { this.props.quizPercentage !== undefined ? `${this.props.quizPercentage}%` : 'Haven\'t taken' }</p>
                     <p style={{ color: 'red' }}> { this.props.lessonWorksheetLink === undefined || this.props.lessonWorksheetLink === null ? 'Worksheet Copy doesnt have link' : ''} </p>
                 </div>
-                {/* <div className="col-md-3 col-sm-2" /> */}
             </div>
         );
     }
