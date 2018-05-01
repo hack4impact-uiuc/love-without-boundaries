@@ -45,6 +45,7 @@
 	border: 1px solid #d1d1d7;
 	max-height: 300px;
 	border-radius: 8px;
+	min-width: 350px;
 	max-width: 420px;
 	margin: 10px auto;
 	text-align: left;
@@ -491,7 +492,7 @@
 	
 }
 .footer-section {
-	position: absolute;
+	
 	bottom: 0;
 	width: 100%;
 	padding: 5px;

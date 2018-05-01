@@ -100,7 +100,7 @@ class StudentLesson extends React.Component {
         }
         return (
             <div className="container">
-                <div className="row" style={{ padding: '10px 0' }}>
+                <div className="row" style={{ padding: '10px 20px' }}>
                     <h2>
                         {
                             this.props.student !== undefined ? `${this.props.student.name}'s Lessons` : 'My Lessons - Student isnt logged in aka nonexisting user- showing this for development purposes'
@@ -110,7 +110,7 @@ class StudentLesson extends React.Component {
                 </div>
                 <div className="row">
                     {
-                        <div>
+                        <div className="col-sm-8">
 
                             <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
                             <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
@@ -138,6 +138,15 @@ class StudentLesson extends React.Component {
                             </div>
                         </div>
                     }
+                    <div className="col-sm-4">
+                        <h3>Table of Contents</h3>
+                        {
+                            this.props.lessons !== undefined &&
+                                this.props.lessons.map((lesson, idx) => (
+                                    <p key={idx}>{idx + 1}. {lesson.name}</p>
+                                ))
+                        }
+                    </div>
                 </div>
             </div>
         );
