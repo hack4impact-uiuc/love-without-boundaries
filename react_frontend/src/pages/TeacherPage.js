@@ -68,7 +68,7 @@ class TeacherPage extends React.Component<Props> {
                                                 <p>You have no assigned students.</p>
                                                 : props.node.students.map((student, idx) => (
                                                     <tr key={idx}>
-                                                        <th scrope="row">{idx}</th>
+                                                        <th scrope="row">{idx + 1}</th>
                                                         <th>
                                                             <Link key={idx} style={{ display: 'block' }} to={{ pathname: '/student', state: { student } }}>
                                                                 <button className="btn btn-default">{student.name}</button>

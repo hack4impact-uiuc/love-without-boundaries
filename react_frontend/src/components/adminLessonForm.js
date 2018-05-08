@@ -28,7 +28,6 @@ class AdminLessonForm extends React.Component {
         if (!NotesFileID || !WkshtFileID) {
             alert('Please Insert Notes Link and Worksheet Link');
         }
-        console.log(NotesFileID[0]);
         setPermissionToAllRead(NotesFileID[0]);
         setPermissionToAllEdit(WkshtFileID[0]);
         addLesson(environment, this.state.name, this.state.wksht_link, this.state.notes_link);

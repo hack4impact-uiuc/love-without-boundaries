@@ -14,24 +14,24 @@ const mutation = graphql`
 `;
 
 function addStudent(environment: Environment, name: string, email: string) {
-	const variables = {
-		input: {
+    const variables = {
+        input: {
             name,
-            email
-        }
-	};
+            email,
+        },
+    };
 
-  commitMutation(
-    environment,
-    {
-		mutation,
-		variables,
-		onCompleted: (response) => {
-			console.log('Response received from server.');
-		},
-		onError: err => console.error(err),
-    },
-  );
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('addStudent Mutation: Response received from server.');
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default addStudent;

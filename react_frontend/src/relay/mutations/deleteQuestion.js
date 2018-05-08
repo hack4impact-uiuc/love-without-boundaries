@@ -28,7 +28,6 @@ function deleteQuestion(environment: Environment, quizID : string, qID: ID) {
             variables,
             onCompleted: (response) => {
                 console.log('Response received from server. Question removed.');
-                console.log(response);
             },
             onError: err => console.error(err),
         },

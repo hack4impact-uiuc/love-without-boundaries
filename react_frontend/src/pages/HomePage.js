@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import SignIn from '../components/signin';
+import SignIn from '../components/signIn';
 import Footer from '../components/footer';
 
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
@@ -182,9 +182,9 @@ class HomePage extends React.Component<Props> {
                             <div className="row">
                                 <SignInSection>
                                     {
-                                        <div className="dark-box">The Learning Tool Mission
+                                        <div className="dark-box">Our Mission
                                             <br />______
-                                            <div className="lower"> Our goal is to prepare students for their future </div>
+                                            <div className="lower">Empowering students to become fluent in English and to excel in their studies</div>
                                             { ((this.props.location.state == undefined || this.props.location.state.signedIn) && (this.state.loginOrSignup === 'register' || this.state.loginOrSignup === 'login')) ?
                                                 <div className="sign-in-btn-box">
                                                     <p>Are you a...</p>
@@ -210,31 +210,31 @@ class HomePage extends React.Component<Props> {
                                     <div className="col-12 col-sm-4">
                                         <SignUpIcon />
                                         <div className="caption">
-                                            Sign up for an account
+                                        Hands-On Learning
                                         </div>
                                         <br />
                                         <div className="subCaption">
-                                            Students can sign up for an account and will be paired with a tutor
+                                        Create an account to begin studying and practicing your language skills
                                         </div>
                                     </div>
                                     <div className="col-12 col-sm-4">
                                         <LearningIcon />
                                         <div className="caption">
-                                            Start learning
+                                        Tailored Curriculum
                                         </div>
                                         <br />
                                         <div className="subCaption">
-                                            Tutors will go over lessons with you and supplement your lessons with worksheets and quizzes
+                                        Lessons are designed specifically for Cambodian exam preparation
                                         </div>
                                     </div>
                                     <div className="col-12 col-sm-4">
                                         <AcheiveIcon />
                                         <div className="caption">
-                                        Get the results
+                                        Dedicated Tutors
                                         </div>
                                         <br />
                                         <div className="subCaption">
-                                            These lessons are to prepare students for high acheivement in national exams
+                                        Connect with your personal tutor to amplify your learning
                                         </div>
                                     </div>
                                 </div>
@@ -255,14 +255,14 @@ class HomePage extends React.Component<Props> {
                                             <br />
                                             <br />
                                             <BoxText>
-                                                    Learn From Anywhere
+                                            Flexible Learning
                                             </BoxText>
                                             <br />
                                             <BoxText> ________</BoxText>
                                             <br />
                                             <br />
                                             <BoxSubText>
-                                                    Students can look at previous notes, work on worsheets, and take quizzes from anywhere on any device.
+                                            Access your lessons, worksheets, and quizzes anywhere and anytime you're connected to the Internet
                                             </BoxSubText>
                                         </RightBox>
                                     </div>
@@ -274,14 +274,14 @@ class HomePage extends React.Component<Props> {
                                         <br />
                                         <br />
                                         <BoxRightText>
-                                                    Connect with Teachers
+                                        Real-Time Support
                                         </BoxRightText>
                                         <br />
                                         <BoxRightText> ________</BoxRightText>
                                         <br />
                                         <br />
                                         <BoxRightSubText>
-                                                    Use product allows students and teachers to work together on shared worksheets so that students can get immediate feedback as they learn English.
+                                        Tutors provide rapid, individual feedback on your work and can answer questions or help with editing
                                         </BoxRightSubText>
                                     </LeftBox>
                                 </div>

@@ -27,7 +27,6 @@ function assignStudentToTeacher(environment: Environment, studentID: string, tea
             variables,
             onCompleted: (response) => {
                 console.log('Response received from server.');
-                console.log(response);
             },
             onError: err => console.error(err),
         },

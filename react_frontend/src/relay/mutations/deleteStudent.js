@@ -12,24 +12,22 @@ const mutation = graphql`
 `;
 
 function deleteStudent(environment: Environment, id: string) {
-const variables = {
-  input: {
-    id
-  },
-};
-console.log(variables)
-commitMutation(
-  environment,
-  {
-    mutation,
-    variables,
-    onCompleted: (response) => {
-      console.log('Response received from server.')
-      console.log(response)
-    },
-    onError: err => console.error(err),
-  },
-);
+    const variables = {
+        input: {
+            id,
+        },
+    };
+    commitMutation(
+        environment,
+        {
+            mutation,
+            variables,
+            onCompleted: (response) => {
+                console.log('Response received from server.');
+            },
+            onError: err => console.error(err),
+        },
+    );
 }
 
 export default deleteStudent;

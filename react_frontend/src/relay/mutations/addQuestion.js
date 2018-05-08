@@ -36,8 +36,7 @@ function addQuestion(environment: Environment, quizID: string, questionName: str
             mutation,
             variables,
             onCompleted: (response) => {
-                console.log('Response received from server. Question added.');
-                console.log(response);
+                console.log('addQuestion Mutation: Response received from server. Question added.');
             },
             onError: err => console.error(err),
         },

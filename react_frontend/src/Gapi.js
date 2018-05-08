@@ -79,11 +79,11 @@ function InitialStudentSetup(environment, id) {
         // loop through each lesson and copy each worksheet
         lessons.forEach((lesson) => {
             if (lesson.worksheetURL === undefined || !lesson.worksheetURL) {
-                console.log(`Error: lesson ${id} doesnt have worksheetURL...`);
+                console.error(`Error: lesson ${id} doesnt have worksheetURL...`);
             } else {
                 copyFile(lesson.worksheetURL).then((res2) => {
                     if (res2 === undefined || res2.error) {
-                        console.err('Copy File failed. Contact Admin');
+                        console.error('Copy File failed. Contact Admin');
                     } else {
                         const newFileID = res2.id;
                         addStudentWorksheetCopy(environment, id, lesson.id, `https://docs.google.com/document/d/${newFileID}`);

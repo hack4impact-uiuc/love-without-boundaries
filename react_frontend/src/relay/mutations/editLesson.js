@@ -26,7 +26,6 @@ function editLesson(environment: Environment, lessonID: string, name: string) {
             variables,
             onCompleted: (response) => {
                 console.log('Response received from server. Lesson name changed.');
-                console.log(response);
             },
             onError: err => console.error(err),
         },

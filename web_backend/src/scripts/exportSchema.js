@@ -9,4 +9,4 @@ const schemaPath = path.resolve(__dirname, '../../../react_frontend/schema.graph
 
 fs.writeFileSync(schemaPath, printSchema(schema));
 
-console.log('Wrote ' + schemaPath);
+console.log(`Wrote ${schemaPath}`);

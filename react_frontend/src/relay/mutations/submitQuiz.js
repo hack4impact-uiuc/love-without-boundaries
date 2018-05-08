@@ -26,7 +26,6 @@ function submitQuiz(environment: Environment, studentID: string, quizID: string,
     for (let i = 0; i < questionIds.length; i += 1) {
         mysubmissions.push({ questionID: questionIds[i], answerChosen: chosenAnswers[i] });
     }
-    console.log(mysubmissions);
     const variables = {
         input: {
             id: studentID,
@@ -42,7 +41,6 @@ function submitQuiz(environment: Environment, studentID: string, quizID: string,
             variables,
             onCompleted: (response) => {
                 console.log('Response received from server. Quiz submitted.');
-                console.log(response);
             },
             onError: err => console.error(err),
         },

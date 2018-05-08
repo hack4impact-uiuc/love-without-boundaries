@@ -30,8 +30,7 @@ function addLesson(environment: Environment, name: string, worksheetURL: string,
             mutation,
             variables,
             onCompleted: (response) => {
-                console.log('Response Recieved from Server.');
-                console.log(response);
+                console.log('AddLesson mutation: response Recieved from Server.');
             },
             onError: err => console.error(err),
         },

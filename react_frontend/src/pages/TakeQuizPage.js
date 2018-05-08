@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
+import jwtDecode from 'jwt-decode';
 import environment from '../relay/environment';
 import submitQuiz from '../relay/mutations/submitQuiz';
 import Checkbox from './../components/checkbox';
-import jwtDecode from 'jwt-decode';
 import PaddedButton from './../components/button';
 import ErrorMessage from '../components/errorMessage';
+
+const positiveFeedback = ['Great Job!', 'Good Work!', 'Fantastic!', 'Excellent',
+    'Awesome!', 'Keep up the great work!', 'Terrific! You\'re learning with every quiz you complete!',
+    'You\'re going to be fluent before you know it if you keep this up!',
+    'Brilliant!', 'Wonderful Effort!', 'You\'re making amazing progress!',
+    'You should be proud of yourself for all your efforts!'];
 
 class TakeQuizPage extends Component {
     constructor(props) {
@@ -108,7 +114,7 @@ class TakeQuizPage extends Component {
                                                         i === props.node.quiz.questions.length - 1 &&
                                                             <PaddedButton
                                                                 className="btn btn-primary"
-                                                                onClick={() => alert('Good Job!')}
+                                                                onClick={() => alert(positiveFeedback[Math.floor(Math.random() * positiveFeedback.length)])}
                                                                 type="submit"
                                                             >Submit Quiz
                                                             </PaddedButton>

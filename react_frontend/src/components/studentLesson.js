@@ -1,11 +1,11 @@
 import React from 'react';
+import jwtDecode from 'jwt-decode';
 import GoogleDocButton from './googleDocButton';
 import LessonComponent from './lesson';
 import addStudentWorksheetCopy from '../relay/mutations/addStudentWorksheetCopy';
 import { copyFile, setPermissionToAllEdit } from '../Gapi';
 import environment from '../relay/environment';
 import PaddedButton from './button';
-import jwtDecode from 'jwt-decode';
 
 class StudentLesson extends React.Component {
     constructor(props) {
@@ -35,7 +35,6 @@ class StudentLesson extends React.Component {
         this.state = {
             error: '',
             worksheetObj: newWkshtObj,
-            grades: newGrades,
         };
     }
     componentDidMount() {
@@ -113,7 +112,7 @@ class StudentLesson extends React.Component {
                         <div className="col-sm-8">
 
                             <GoogleDocButton style={{ display: 'inline-block' }} url={this.props.student.URL} location={this.props.location} />
-                            <a style={{ display: 'inline-block' }} href="http://dictionary.com/">
+                            <a style={{ display: 'inline-block' }} href="http://www.english-khmer.com/">
                                 <PaddedButton className="btn btn-lwb">Dictionary</PaddedButton>
                             </a>
                             <a style={{ display: 'inline-block' }} href="https://docs.google.com/document/d/1fKQIrPVuGRNT1rly3aVaYwyuowL2OlULeZFalrplcxQ/edit">
