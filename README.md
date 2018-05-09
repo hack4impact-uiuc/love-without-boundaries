@@ -61,3 +61,13 @@ yarn run relay  # will recompile graphql queries and regenrate files
 yarn run dev 
 ```
 Note: if you prefer using npm, use `npm` instead of `yarn` in commands provided above
+
+## Team
+- Product Manager - Timothy Ko ([@tko22](https://github.com/tko22))
+- Technical Lead - Aria Malkani ([@CodeBrew28](https://github.com/CodeBrew28))
+
+**Software Devs**
+- Shreyas Mohan ([@shreyshrey1](https://github.com/shreyshrey1))
+- Hana Rimawi ([@HRimaw2](https://github.com/HRimaw2))
+- Michael Chen ([@Feeshay](https://github.com/Feeshay))
+- Alan Ren ([@alanren2](https://github.com/alanren2))
