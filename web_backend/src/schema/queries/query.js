@@ -15,25 +15,26 @@ const Query = new GraphQLObjectType({
             students: {
                 type: new GraphQLList(StudentType),
                 resolve() {
-                    return Student.find();
+                    return Student.find().sort('-date');;
                 },
             },
             teachers: {
                 type: new GraphQLList(TeacherType),
                 resolve() {
-                    return Teacher.find();
+                    return Teacher.find().sort('-date');;
                 },
             },
             admins: {
                 type: new GraphQLList(AdminType),
                 resolve() {
-                    return Admin.find();
+                    return Admin.find().sort('-date');;
                 },
             },
             lessons: {
                 type: new GraphQLList(LessonType),
                 resolve() {
-                    return Lesson.find();
+                    console.log(Lesson.find())
+                    return Lesson.find().sort('-date');;
                 },
             },
         };
