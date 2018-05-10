@@ -33,7 +33,6 @@ const Query = new GraphQLObjectType({
             lessons: {
                 type: new GraphQLList(LessonType),
                 resolve() {
-                    console.log(Lesson.find())
                     return Lesson.find().sort('-date');;
                 },
             },
