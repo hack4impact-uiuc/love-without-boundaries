@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import StyledButton from '../components/button';
 import environment from '../relay/environment';
-import SignIn from '../components/signIn';
+import SignIn from '../components/signin';
 import Footer from '../components/footer';
 
 import { getFileInfo, setPermissionToAllRead, copyFile, setPermissionToAllEdit, InitialStudentSetup } from '../Gapi';
