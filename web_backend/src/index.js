@@ -106,6 +106,10 @@ app.use('/graphql', withAuth(graphqlHTTP({
     graphiql: true,
 })));
 
+app.get('/aria-y-tho', function (req, res) {
+	res.send('aria pls learn how to devops :)');
+});
+
 app.post('/auth/google', async (req, res) => {
     try {
         const { tokenId, role, accessToken } = req.body;

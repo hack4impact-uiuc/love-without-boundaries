@@ -4,7 +4,7 @@
   "description": "micro-graphql",
   "main": "dist/bundle.js",
   "scripts": {
-    "start": "node dist/ -p 8080",
+    "start": "bash -c 'exec -a h4i_web_backend node dist/ -p 8080'",
     "build": "babel src/ -d dist/",
     "exportSchema": "node ./dist/scripts/exportSchema.js"
   },
