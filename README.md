@@ -1,6 +1,8 @@
 # Love Without Boundaries 
 **Goal:** To facilitate and improve the learning process of Cambodian Students as they prepare for their College Entrance English Exam by tracking the progress of students and their interactions with tutors.
 
+Our [Product Requirements Doc](https://docs.google.com/document/d/1y8MK2azpexMoWtBsTlrhu2AmfXoDUcbLPuhANLMKcxM/edit)
+
 ## Tech Stack
 We split this application into Frontend and Backend services. The backend is [GraphQL](http://graphql.org/) server using Express and Node.js 8.x.x with [MongoDB](https://docs.mongodb.com/), a NoSQL database, as our choice of data store. The Frontend is built with React 16.2.x and [Relay](https://facebook.github.io/relay/), which is a GraphQL client used to interact with the backend. 
 
