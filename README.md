@@ -71,3 +71,12 @@ Note: if you prefer using npm, use `npm` instead of `yarn` in commands provided 
 - Hana Rimawi ([@HRimaw2](https://github.com/HRimaw2))
 - Michael Chen ([@Feeshay](https://github.com/Feeshay))
 - Alan Ren ([@alanren2](https://github.com/alanren2))
+
+### Student View
+<img width="1072" alt="screen shot 2018-05-28 at 4 15 09 pm" src="https://user-images.githubusercontent.com/27740557/40631820-f8ca676c-6294-11e8-9142-553eaa1e11dc.png">
+
+### Admin View
+<img width="1072" alt="screen shot 2018-05-28 at 4 15 00 pm" src="https://user-images.githubusercontent.com/27740557/40631836-265b3d78-6295-11e8-891b-f43a43ca71f2.png">
+
+#### Adding/Editing Lessons
+<img width="1072" alt="screen shot 2018-05-28 at 4 37 36 pm" src="https://user-images.githubusercontent.com/27740557/40631859-82e6d444-6295-11e8-9986-3705aa9339a0.png">
