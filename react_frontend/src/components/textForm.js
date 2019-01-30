@@ -3,5 +3,5 @@
 import styled from 'styled-components';
 
 export default styled.textForm`
-    background-color: #B3B6B7;
+    background-color: #b3b6b7;
 `;

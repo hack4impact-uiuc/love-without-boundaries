@@ -16,22 +16,21 @@ export type teacherListItem_teacher = {|
 |};
 */
 
-
-const node/*: ConcreteFragment*/ = {
-  "kind": "Fragment",
-  "name": "teacherListItem_teacher",
-  "type": "Teacher",
-  "metadata": null,
-  "argumentDefinitions": [],
-  "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "name",
-      "args": null,
-      "storageKey": null
-    }
-  ]
+const node /*: ConcreteFragment*/ = {
+    kind: 'Fragment',
+    name: 'teacherListItem_teacher',
+    type: 'Teacher',
+    metadata: null,
+    argumentDefinitions: [],
+    selections: [
+        {
+            kind: 'ScalarField',
+            alias: null,
+            name: 'name',
+            args: null,
+            storageKey: null,
+        },
+    ],
 };
 // prettier-ignore
 (node/*: any*/).hash = 'e8d504b5f3ad2f2fc99bc9c1b88645db';

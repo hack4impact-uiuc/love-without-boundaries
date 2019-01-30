@@ -26,7 +26,6 @@ export type deleteQuestionMutationResponse = {|
 |};
 */
 
-
 /*
 mutation deleteQuestionMutation(
   $input: deleteQuestionInput!
@@ -40,107 +39,106 @@ mutation deleteQuestionMutation(
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "input",
-    "type": "deleteQuestionInput!",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "input",
-    "variableName": "input",
-    "type": "deleteQuestionInput!"
-  }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-};
-return {
-  "kind": "Request",
-  "operationKind": "mutation",
-  "name": "deleteQuestionMutation",
-  "id": null,
-  "text": "mutation deleteQuestionMutation(\n  $input: deleteQuestionInput!\n) {\n  deleteQuestion(input: $input) {\n    lesson {\n      name\n      id\n    }\n  }\n}\n",
-  "metadata": {},
-  "fragment": {
-    "kind": "Fragment",
-    "name": "deleteQuestionMutation",
-    "type": "Mutation",
-    "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "deleteQuestion",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "deleteQuestionPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "lesson",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Lesson",
-            "plural": false,
-            "selections": [
-              v2
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "operation": {
-    "kind": "Operation",
-    "name": "deleteQuestionMutation",
-    "argumentDefinitions": v0,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "deleteQuestion",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "deleteQuestionPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "lesson",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Lesson",
-            "plural": false,
-            "selections": [
-              v2,
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "id",
-                "args": null,
-                "storageKey": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-};
+const node /*: ConcreteRequest*/ = (function() {
+    var v0 = [
+            {
+                kind: 'LocalArgument',
+                name: 'input',
+                type: 'deleteQuestionInput!',
+                defaultValue: null,
+            },
+        ],
+        v1 = [
+            {
+                kind: 'Variable',
+                name: 'input',
+                variableName: 'input',
+                type: 'deleteQuestionInput!',
+            },
+        ],
+        v2 = {
+            kind: 'ScalarField',
+            alias: null,
+            name: 'name',
+            args: null,
+            storageKey: null,
+        };
+    return {
+        kind: 'Request',
+        operationKind: 'mutation',
+        name: 'deleteQuestionMutation',
+        id: null,
+        text:
+            'mutation deleteQuestionMutation(\n  $input: deleteQuestionInput!\n) {\n  deleteQuestion(input: $input) {\n    lesson {\n      name\n      id\n    }\n  }\n}\n',
+        metadata: {},
+        fragment: {
+            kind: 'Fragment',
+            name: 'deleteQuestionMutation',
+            type: 'Mutation',
+            metadata: null,
+            argumentDefinitions: v0,
+            selections: [
+                {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'deleteQuestion',
+                    storageKey: null,
+                    args: v1,
+                    concreteType: 'deleteQuestionPayload',
+                    plural: false,
+                    selections: [
+                        {
+                            kind: 'LinkedField',
+                            alias: null,
+                            name: 'lesson',
+                            storageKey: null,
+                            args: null,
+                            concreteType: 'Lesson',
+                            plural: false,
+                            selections: [v2],
+                        },
+                    ],
+                },
+            ],
+        },
+        operation: {
+            kind: 'Operation',
+            name: 'deleteQuestionMutation',
+            argumentDefinitions: v0,
+            selections: [
+                {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'deleteQuestion',
+                    storageKey: null,
+                    args: v1,
+                    concreteType: 'deleteQuestionPayload',
+                    plural: false,
+                    selections: [
+                        {
+                            kind: 'LinkedField',
+                            alias: null,
+                            name: 'lesson',
+                            storageKey: null,
+                            args: null,
+                            concreteType: 'Lesson',
+                            plural: false,
+                            selections: [
+                                v2,
+                                {
+                                    kind: 'ScalarField',
+                                    alias: null,
+                                    name: 'id',
+                                    args: null,
+                                    storageKey: null,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    };
 })();
 // prettier-ignore
 (node/*: any*/).hash = '51f7dabc565b3958334f6723882d469a';

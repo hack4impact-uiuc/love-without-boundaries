@@ -8,50 +8,74 @@ import Checkbox from './../components/checkbox';
 import PaddedButton from './../components/button';
 import ErrorMessage from '../components/errorMessage';
 
-const positiveFeedback = ['Great Job!', 'Good Work!', 'Fantastic!', 'Excellent',
-    'Awesome!', 'Keep up the great work!', 'Terrific! You\'re learning with every quiz you complete!',
-    'You\'re going to be fluent before you know it if you keep this up!',
-    'Brilliant!', 'Wonderful Effort!', 'You\'re making amazing progress!',
-    'You should be proud of yourself for all your efforts!'];
+const positiveFeedback = [
+    'Great Job!',
+    'Good Work!',
+    'Fantastic!',
+    'Excellent',
+    'Awesome!',
+    'Keep up the great work!',
+    "Terrific! You're learning with every quiz you complete!",
+    "You're going to be fluent before you know it if you keep this up!",
+    'Brilliant!',
+    'Wonderful Effort!',
+    "You're making amazing progress!",
+    'You should be proud of yourself for all your efforts!',
+];
 
 class TakeQuizPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { lessonID: '', studentID: jwtDecode(sessionStorage.getItem('token')) !== null ? jwtDecode(sessionStorage.getItem('token')).id : null };
+        this.state = {
+            lessonID: '',
+            studentID:
+                jwtDecode(sessionStorage.getItem('token')) !== null
+                    ? jwtDecode(sessionStorage.getItem('token')).id
+                    : null,
+        };
     }
 
     componentWillMount = () => {
         this.selectedCheckboxes = {};
-    }
+    };
 
-      toggleCheckbox = (label, i) => {
-          if (this.selectedCheckboxes[i] != label) {
-              this.selectedCheckboxes[i] = label;
-          }
-      }
+    toggleCheckbox = (label, i) => {
+        if (this.selectedCheckboxes[i] != label) {
+            this.selectedCheckboxes[i] = label;
+        }
+    };
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
-        submitQuiz(environment, this.state.studentID, this.state.lessonID, Object.keys(this.selectedCheckboxes), Object.values(this.selectedCheckboxes));
+        submitQuiz(
+            environment,
+            this.state.studentID,
+            this.state.lessonID,
+            Object.keys(this.selectedCheckboxes),
+            Object.values(this.selectedCheckboxes),
+        );
         this.props.history.goBack();
-    }
-
+    };
 
     createCheckbox = (label, id, i) => (
         <Checkbox
             key={i}
             label={label}
-            handleCheckboxChange={(e) => this.toggleCheckbox(e, id)}
+            handleCheckboxChange={e => this.toggleCheckbox(e, id)}
         />
-    )
+    );
 
-    createCheckboxes = (answerNames, questionId) => (
-        answerNames.map((e, i) => this.createCheckbox(e, questionId, i))
-    )
+    createCheckboxes = (answerNames, questionId) =>
+        answerNames.map((e, i) => this.createCheckbox(e, questionId, i));
 
     render() {
         if (this.state.studentID === null) {
-            return <ErrorMessage code="404" message="You must be logged in as a Student to take quiz. Try logging in again." />;
+            return (
+                <ErrorMessage
+                    code="404"
+                    message="You must be logged in as a Student to take quiz. Try logging in again."
+                />
+            );
         }
         if (this.props.location.state === undefined) {
             return <ErrorMessage code="404" message="No Lesson" />;
@@ -60,11 +84,11 @@ class TakeQuizPage extends Component {
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query TakeQuizPage_Query($quiz_id: ID!){
-                        node(id:$quiz_id){
+                    query TakeQuizPage_Query($quiz_id: ID!) {
+                        node(id: $quiz_id) {
                             id
                             __typename
-                            
+
                             ... on Lesson {
                                 name
                                 quiz {
@@ -72,25 +96,25 @@ class TakeQuizPage extends Component {
                                     questions {
                                         id
                                         questionName
-                                        answers{
+                                        answers {
                                             answerName
                                             isCorrect
                                         }
                                     }
                                 }
                             }
-
                         }
                     }
                 `}
                 variables={{
-                    quiz_id: this.props.location.state !== undefined ? this.props.location.state.lessonID : '',
+                    quiz_id:
+                        this.props.location.state !== undefined
+                            ? this.props.location.state.lessonID
+                            : '',
                 }}
                 render={({ props }) => {
                     if (!props) {
-                        return (
-                            <p>Loading...</p>
-                        );
+                        return <p>Loading...</p>;
                     }
                     this.state.lessonID = props.node.id;
                     return (
@@ -98,31 +122,58 @@ class TakeQuizPage extends Component {
                             <h1>{props.node.name} Quiz</h1>
                             <div className="row">
                                 <div className="col-sm-12">
-
-                                    {
-                                        props.node.quiz.questions.map((q, i) =>
-                                            (
-                                                <form key={i} onSubmit={(e) => this.handleFormSubmit(e, props.node.quiz.questions[i].id)}>
-                                                    {props.node.quiz.questions[i].questionName }
-                                                    {
-                                                        this.createCheckboxes(
-                                                            props.node.quiz.questions[i].answers.map((q, idx) => q.answerName),
-                                                            props.node.quiz.questions[i].id,
+                                    {props.node.quiz.questions.map((q, i) => (
+                                        <form
+                                            key={i}
+                                            onSubmit={e =>
+                                                this.handleFormSubmit(
+                                                    e,
+                                                    props.node.quiz.questions[i]
+                                                        .id,
+                                                )
+                                            }
+                                        >
+                                            {
+                                                props.node.quiz.questions[i]
+                                                    .questionName
+                                            }
+                                            {this.createCheckboxes(
+                                                props.node.quiz.questions[
+                                                    i
+                                                ].answers.map(
+                                                    (q, idx) => q.answerName,
+                                                ),
+                                                props.node.quiz.questions[i].id,
+                                            )}
+                                            {i ===
+                                                props.node.quiz.questions
+                                                    .length -
+                                                    1 && (
+                                                <PaddedButton
+                                                    className="btn btn-primary"
+                                                    onClick={() =>
+                                                        alert(
+                                                            positiveFeedback[
+                                                                Math.floor(
+                                                                    Math.random() *
+                                                                        positiveFeedback.length,
+                                                                )
+                                                            ],
                                                         )
                                                     }
-                                                    {
-                                                        i === props.node.quiz.questions.length - 1 &&
-                                                            <PaddedButton
-                                                                className="btn btn-primary"
-                                                                onClick={() => alert(positiveFeedback[Math.floor(Math.random() * positiveFeedback.length)])}
-                                                                type="submit"
-                                                            >Submit Quiz
-                                                            </PaddedButton>
-                                                    }
-                                                </form>
-                                            ))
-                                    }
-                                    <PaddedButton className="btn btn-danger" onClick={this.props.history.goBack}>Go Back</PaddedButton>
+                                                    type="submit"
+                                                >
+                                                    Submit Quiz
+                                                </PaddedButton>
+                                            )}
+                                        </form>
+                                    ))}
+                                    <PaddedButton
+                                        className="btn btn-danger"
+                                        onClick={this.props.history.goBack}
+                                    >
+                                        Go Back
+                                    </PaddedButton>
                                 </div>
                             </div>
                         </div>
@@ -132,6 +183,5 @@ class TakeQuizPage extends Component {
         );
     }
 }
-
 
 export default withRouter(TakeQuizPage);

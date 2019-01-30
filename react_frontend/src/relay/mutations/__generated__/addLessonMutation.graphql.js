@@ -44,7 +44,6 @@ export type addLessonMutationResponse = {|
 |};
 */
 
-
 /*
 mutation addLessonMutation(
   $input: CreateLessonInput!
@@ -58,82 +57,83 @@ mutation addLessonMutation(
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "input",
-    "type": "CreateLessonInput!",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "createLesson",
-    "storageKey": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input",
-        "type": "CreateLessonInput!"
-      }
-    ],
-    "concreteType": "CreateLessonPayload",
-    "plural": false,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "lesson",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Lesson",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "clientMutationId",
-        "args": null,
-        "storageKey": null
-      }
-    ]
-  }
-];
-return {
-  "kind": "Request",
-  "operationKind": "mutation",
-  "name": "addLessonMutation",
-  "id": null,
-  "text": "mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      id\n    }\n    clientMutationId\n  }\n}\n",
-  "metadata": {},
-  "fragment": {
-    "kind": "Fragment",
-    "name": "addLessonMutation",
-    "type": "Mutation",
-    "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": v1
-  },
-  "operation": {
-    "kind": "Operation",
-    "name": "addLessonMutation",
-    "argumentDefinitions": v0,
-    "selections": v1
-  }
-};
+const node /*: ConcreteRequest*/ = (function() {
+    var v0 = [
+            {
+                kind: 'LocalArgument',
+                name: 'input',
+                type: 'CreateLessonInput!',
+                defaultValue: null,
+            },
+        ],
+        v1 = [
+            {
+                kind: 'LinkedField',
+                alias: null,
+                name: 'createLesson',
+                storageKey: null,
+                args: [
+                    {
+                        kind: 'Variable',
+                        name: 'input',
+                        variableName: 'input',
+                        type: 'CreateLessonInput!',
+                    },
+                ],
+                concreteType: 'CreateLessonPayload',
+                plural: false,
+                selections: [
+                    {
+                        kind: 'LinkedField',
+                        alias: null,
+                        name: 'lesson',
+                        storageKey: null,
+                        args: null,
+                        concreteType: 'Lesson',
+                        plural: false,
+                        selections: [
+                            {
+                                kind: 'ScalarField',
+                                alias: null,
+                                name: 'id',
+                                args: null,
+                                storageKey: null,
+                            },
+                        ],
+                    },
+                    {
+                        kind: 'ScalarField',
+                        alias: null,
+                        name: 'clientMutationId',
+                        args: null,
+                        storageKey: null,
+                    },
+                ],
+            },
+        ];
+    return {
+        kind: 'Request',
+        operationKind: 'mutation',
+        name: 'addLessonMutation',
+        id: null,
+        text:
+            'mutation addLessonMutation(\n  $input: CreateLessonInput!\n) {\n  createLesson(input: $input) {\n    lesson {\n      id\n    }\n    clientMutationId\n  }\n}\n',
+        metadata: {},
+        fragment: {
+            kind: 'Fragment',
+            name: 'addLessonMutation',
+            type: 'Mutation',
+            metadata: null,
+            argumentDefinitions: v0,
+            selections: v1,
+        },
+        operation: {
+            kind: 'Operation',
+            name: 'addLessonMutation',
+            argumentDefinitions: v0,
+            selections: v1,
+        },
+    };
 })();
 // prettier-ignore
 (node/*: any*/).hash = '71ccb63a40e84eda3102756358045596';

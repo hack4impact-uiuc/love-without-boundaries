@@ -17,34 +17,42 @@ class SignIn extends React.Component {
         };
     }
 
-    responseGoogle = (auth) => {
+    responseGoogle = auth => {
         fetch(`${BACKEND_URL}/auth/google`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ tokenId: auth.tokenId, role: this.props.role, accessToken: auth.accessToken }),
-        }).then(resp => resp.json()).then(r => {
-            sessionStorage.setItem('token', r.token);
-            const { data } = r;
-            if (data === undefined) {
-                alert('Error Logging in. Try again.');
-                throw Error('Error Logging in.');
-            }
-            this.props.history.push(r.role === 'admin' ? `/${r.role}/list` : `/${r.role}`, { [r.role]: { id: data.id, name: data.name } });
-        }).catch(err => console.error(err));
+            body: JSON.stringify({
+                tokenId: auth.tokenId,
+                role: this.props.role,
+                accessToken: auth.accessToken,
+            }),
+        })
+            .then(resp => resp.json())
+            .then(r => {
+                sessionStorage.setItem('token', r.token);
+                const { data } = r;
+                if (data === undefined) {
+                    alert('Error Logging in. Try again.');
+                    throw Error('Error Logging in.');
+                }
+                this.props.history.push(
+                    r.role === 'admin' ? `/${r.role}/list` : `/${r.role}`,
+                    { [r.role]: { id: data.id, name: data.name } },
+                );
+            })
+            .catch(err => console.error(err));
 
         this.setState({
             email: jwt_decode(auth.tokenId).email,
         });
-    }
+    };
 
     render() {
         return (
-
             <div style={{ display: 'inline-block' }}>
-                {
-                    this.state.email === '' &&
+                {this.state.email === '' && (
                     <GoogleLogin
                         className="btn sign-in-btn"
                         clientId="162938498619-oloa040ksgc64aubtv7hi7pmnbanmmul.apps.googleusercontent.com"
@@ -53,7 +61,7 @@ class SignIn extends React.Component {
                         scope="https://www.googleapis.com/auth/drive"
                         onSuccess={this.responseGoogle}
                     />
-                }
+                )}
             </div>
         );
     }

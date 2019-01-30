@@ -7,13 +7,18 @@ const mutation = graphql`
     mutation addStudentWorksheetCopyMutation(
         $input: AddStudentWorksheetCopyInput!
     ) {
-        addStudentWorksheetCopy(input: $input){
+        addStudentWorksheetCopy(input: $input) {
             clientMutationId
         }
     }
 `;
 
-function addStudentWorksheetCopy(environment: Environment, studentID: string, lessonID: string, url: string) {
+function addStudentWorksheetCopy(
+    environment: Environment,
+    studentID: string,
+    lessonID: string,
+    url: string,
+) {
     const variables = {
         input: {
             studentID,
@@ -22,17 +27,16 @@ function addStudentWorksheetCopy(environment: Environment, studentID: string, le
         },
     };
 
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('addStudentWorksheetCopy Mutation: Response received from server.');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log(
+                'addStudentWorksheetCopy Mutation: Response received from server.',
+            );
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default addStudentWorksheetCopy;

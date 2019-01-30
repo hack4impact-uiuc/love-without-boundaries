@@ -17,53 +17,72 @@ class ReviewQuizPage extends Component {
 
     render() {
         if (this.state.studentID === null) {
-            return <h4 className="page-error">You must be logged in to view previous quizzes</h4>;
+            return (
+                <h4 className="page-error">
+                    You must be logged in to view previous quizzes
+                </h4>
+            );
         }
         return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query ReviewQuizPage_Query($student_id: ID!){
-                        node(id: $student_id){
-                            ... on Student{
-                                pastQuizzes{
+                    query ReviewQuizPage_Query($student_id: ID!) {
+                        node(id: $student_id) {
+                            ... on Student {
+                                pastQuizzes {
                                     lessonID
                                     quizName
                                     score
-                                    submittedAnswers{
+                                    submittedAnswers {
                                         questionID
                                         answerChosen
                                     }
                                 }
                             }
                         }
-                    } 
-                    `}
-                variables={{ student_id: this.props.location.state !== undefined ? this.props.location.state.studentID : '' }}
+                    }
+                `}
+                variables={{
+                    student_id:
+                        this.props.location.state !== undefined
+                            ? this.props.location.state.studentID
+                            : '',
+                }}
                 render={({ props }) => {
                     if (!props) {
-                        return (
-                            <div>Loading...</div>
-                        );
+                        return <div>Loading...</div>;
                     }
                     if (props.node == null) {
-                        return <ErrorMessage message="You have no Previous Quizzes for this lesson." />;
+                        return (
+                            <ErrorMessage message="You have no Previous Quizzes for this lesson." />
+                        );
                     }
-                    const lessonID = this.props.location.state !== undefined ? this.props.location.state.lessonID : undefined;
+                    const lessonID =
+                        this.props.location.state !== undefined
+                            ? this.props.location.state.lessonID
+                            : undefined;
                     if (lessonID === undefined) {
-                        return <ErrorMessage message="No Lesson, please click on Lesson." />;
+                        return (
+                            <ErrorMessage message="No Lesson, please click on Lesson." />
+                        );
                     }
                     if (props.node.pastQuizzes === undefined) {
-                        return <ErrorMessage message="You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal." />;
+                        return (
+                            <ErrorMessage message="You have no Previous Quizzes. You cannot access Review Quiz in the admin edit lessons portal." />
+                        );
                     }
                     if (lessonID) {
                         return (
                             <div className="container">
-                                <ReviewQuiz lessonID={lessonID} pastQuizzes={props.node.pastQuizzes} />
+                                <ReviewQuiz
+                                    lessonID={lessonID}
+                                    pastQuizzes={props.node.pastQuizzes}
+                                />
                             </div>
                         );
                     }
-                    return (<div>Something went wrong :(</div>);
+                    return <div>Something went wrong :(</div>;
                 }}
             />
         );

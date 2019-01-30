@@ -3,28 +3,35 @@ import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-mutation submitQuizMutation(
-    $input: SubmitQuizInput!
-) {
-    submitQuiz(input: $input){
-        student {
-            name
-            pastQuizzes {
-                quizName
-                submittedAnswers {
-                    questionID
-                    answerChosen
+    mutation submitQuizMutation($input: SubmitQuizInput!) {
+        submitQuiz(input: $input) {
+            student {
+                name
+                pastQuizzes {
+                    quizName
+                    submittedAnswers {
+                        questionID
+                        answerChosen
+                    }
                 }
             }
         }
     }
-}
 `;
 
-function submitQuiz(environment: Environment, studentID: string, quizID: string, questionIds: [string], chosenAnswers: [string]) {
+function submitQuiz(
+    environment: Environment,
+    studentID: string,
+    quizID: string,
+    questionIds: [string],
+    chosenAnswers: [string],
+) {
     const mysubmissions = [];
     for (let i = 0; i < questionIds.length; i += 1) {
-        mysubmissions.push({ questionID: questionIds[i], answerChosen: chosenAnswers[i] });
+        mysubmissions.push({
+            questionID: questionIds[i],
+            answerChosen: chosenAnswers[i],
+        });
     }
     const variables = {
         input: {
@@ -34,17 +41,14 @@ function submitQuiz(environment: Environment, studentID: string, quizID: string,
         },
     };
 
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('Response received from server. Quiz submitted.');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log('Response received from server. Quiz submitted.');
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default submitQuiz;

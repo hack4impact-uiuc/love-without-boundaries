@@ -1,17 +1,9 @@
 // @flow
 
-import {
-    Environment,
-    Network,
-    RecordSource,
-    Store,
-} from 'relay-runtime';
+import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import { BACKEND_URL } from '../utils';
 
-function fetchQuery(
-    operation,
-    variables,
-) {
+function fetchQuery(operation, variables) {
     return fetch(`${BACKEND_URL}/graphql`, {
         method: 'POST',
         headers: {

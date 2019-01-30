@@ -8,24 +8,29 @@ import ErrorMessage from '../components/errorMessage';
 
 type Props = {
     /**/
-  }
+};
 
 class StudentPage extends React.Component<Props> {
     getStudentId = () => {
         const { location } = this.props;
-        if (location.state !== undefined && location.state.student !== undefined) {
+        if (
+            location.state !== undefined &&
+            location.state.student !== undefined
+        ) {
             return location.state.student.id;
         }
-        return jwtDecode(sessionStorage.getItem('token')) ? jwtDecode(sessionStorage.getItem('token')).id : '';
-    }
+        return jwtDecode(sessionStorage.getItem('token'))
+            ? jwtDecode(sessionStorage.getItem('token')).id
+            : '';
+    };
     render() {
         return (
             <div>
                 <QueryRenderer
                     environment={environment}
                     query={graphql`
-                        query StudentPage_Query($studentId: ID!){
-                            lessons{
+                        query StudentPage_Query($studentId: ID!) {
+                            lessons {
                                 id
                                 name
                                 worksheetURL
@@ -52,18 +57,32 @@ class StudentPage extends React.Component<Props> {
                     variables={{ studentId: this.getStudentId() }}
                     render={({ props }) => {
                         if (!props) {
+                            return <div>Loading...</div>;
+                        }
+                        if (
+                            props.node === null ||
+                            Object.keys(props.node).length === 0
+                        ) {
                             return (
-                                <div>Loading...</div>
+                                <ErrorMessage
+                                    code="404"
+                                    message="You must be logged in to see this. Please try again."
+                                />
                             );
                         }
-                        if (props.node === null || Object.keys(props.node).length === 0) {
-                            return <ErrorMessage code="404" message="You must be logged in to see this. Please try again." />;
-                        }
-                        const token = jwtDecode(sessionStorage.getItem('token'));
+                        const token = jwtDecode(
+                            sessionStorage.getItem('token'),
+                        );
                         if (token === null || !token) {
-                            return <ErrorMessage code="404" message="You must be logged in to see this. Please try again." />;
+                            return (
+                                <ErrorMessage
+                                    code="404"
+                                    message="You must be logged in to see this. Please try again."
+                                />
+                            );
                         }
-                        const userType = token !== null ? token.userType : 'none';
+                        const userType =
+                            token !== null ? token.userType : 'none';
                         return (
                             <div>
                                 <StudentLesson
@@ -79,6 +98,5 @@ class StudentPage extends React.Component<Props> {
         );
     }
 }
-
 
 export default withRouter(StudentPage);

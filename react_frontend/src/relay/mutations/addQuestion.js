@@ -3,12 +3,12 @@ import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
     mutation addQuestionMutation($input: AddQuestionInput!) {
-        addQuestion(input: $input){
+        addQuestion(input: $input) {
             lesson {
                 quiz {
-                    questions{
+                    questions {
                         questionName
-                        answers{
+                        answers {
                             answerName
                             isCorrect
                         }
@@ -19,7 +19,12 @@ const mutation = graphql`
     }
 `;
 
-function addQuestion(environment: Environment, quizID: string, questionName: string, answers: [{string: string}]) {
+function addQuestion(
+    environment: Environment,
+    quizID: string,
+    questionName: string,
+    answers: [{ string: string }],
+) {
     const variables = {
         input: {
             lessonId: quizID,
@@ -30,17 +35,16 @@ function addQuestion(environment: Environment, quizID: string, questionName: str
         },
     };
 
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('addQuestion Mutation: Response received from server. Question added.');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log(
+                'addQuestion Mutation: Response received from server. Question added.',
+            );
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default addQuestion;

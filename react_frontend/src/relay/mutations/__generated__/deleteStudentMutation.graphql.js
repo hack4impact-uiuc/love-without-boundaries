@@ -25,7 +25,6 @@ export type deleteStudentMutationResponse = {|
 |};
 */
 
-
 /*
 mutation deleteStudentMutation(
   $input: DeleteStudentInput!
@@ -39,107 +38,106 @@ mutation deleteStudentMutation(
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "input",
-    "type": "DeleteStudentInput!",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "input",
-    "variableName": "input",
-    "type": "DeleteStudentInput!"
-  }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-};
-return {
-  "kind": "Request",
-  "operationKind": "mutation",
-  "name": "deleteStudentMutation",
-  "id": null,
-  "text": "mutation deleteStudentMutation(\n  $input: DeleteStudentInput!\n) {\n  deleteStudent(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n",
-  "metadata": {},
-  "fragment": {
-    "kind": "Fragment",
-    "name": "deleteStudentMutation",
-    "type": "Mutation",
-    "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "deleteStudent",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "DeleteStudentPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "student",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Student",
-            "plural": false,
-            "selections": [
-              v2
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "operation": {
-    "kind": "Operation",
-    "name": "deleteStudentMutation",
-    "argumentDefinitions": v0,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "deleteStudent",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "DeleteStudentPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "student",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Student",
-            "plural": false,
-            "selections": [
-              v2,
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "id",
-                "args": null,
-                "storageKey": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-};
+const node /*: ConcreteRequest*/ = (function() {
+    var v0 = [
+            {
+                kind: 'LocalArgument',
+                name: 'input',
+                type: 'DeleteStudentInput!',
+                defaultValue: null,
+            },
+        ],
+        v1 = [
+            {
+                kind: 'Variable',
+                name: 'input',
+                variableName: 'input',
+                type: 'DeleteStudentInput!',
+            },
+        ],
+        v2 = {
+            kind: 'ScalarField',
+            alias: null,
+            name: 'name',
+            args: null,
+            storageKey: null,
+        };
+    return {
+        kind: 'Request',
+        operationKind: 'mutation',
+        name: 'deleteStudentMutation',
+        id: null,
+        text:
+            'mutation deleteStudentMutation(\n  $input: DeleteStudentInput!\n) {\n  deleteStudent(input: $input) {\n    student {\n      name\n      id\n    }\n  }\n}\n',
+        metadata: {},
+        fragment: {
+            kind: 'Fragment',
+            name: 'deleteStudentMutation',
+            type: 'Mutation',
+            metadata: null,
+            argumentDefinitions: v0,
+            selections: [
+                {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'deleteStudent',
+                    storageKey: null,
+                    args: v1,
+                    concreteType: 'DeleteStudentPayload',
+                    plural: false,
+                    selections: [
+                        {
+                            kind: 'LinkedField',
+                            alias: null,
+                            name: 'student',
+                            storageKey: null,
+                            args: null,
+                            concreteType: 'Student',
+                            plural: false,
+                            selections: [v2],
+                        },
+                    ],
+                },
+            ],
+        },
+        operation: {
+            kind: 'Operation',
+            name: 'deleteStudentMutation',
+            argumentDefinitions: v0,
+            selections: [
+                {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'deleteStudent',
+                    storageKey: null,
+                    args: v1,
+                    concreteType: 'DeleteStudentPayload',
+                    plural: false,
+                    selections: [
+                        {
+                            kind: 'LinkedField',
+                            alias: null,
+                            name: 'student',
+                            storageKey: null,
+                            args: null,
+                            concreteType: 'Student',
+                            plural: false,
+                            selections: [
+                                v2,
+                                {
+                                    kind: 'ScalarField',
+                                    alias: null,
+                                    name: 'id',
+                                    args: null,
+                                    storageKey: null,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    };
 })();
 // prettier-ignore
 (node/*: any*/).hash = '0408c10dcbf8315820c4476a93ef0330';

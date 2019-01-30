@@ -10,12 +10,15 @@ const StudentListItem = props => (
         <div>
             <ul>
                 <li>
-                    <Link to="/student" >{props.student.name}</Link>
+                    <Link to="/student">{props.student.name}</Link>
                 </li>
             </ul>
 
             <hr />
-            <Route path="/student" render={() => <StudentPage studentName={props.student.name} />} />
+            <Route
+                path="/student"
+                render={() => <StudentPage studentName={props.student.name} />}
+            />
         </div>
     </Router>
 );

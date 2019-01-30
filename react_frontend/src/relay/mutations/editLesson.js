@@ -3,7 +3,7 @@ import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
     mutation editLessonMutation($input: EditLessonInput!) {
-        editLesson(input: $input){
+        editLesson(input: $input) {
             lesson {
                 name
             }
@@ -19,17 +19,14 @@ function editLesson(environment: Environment, lessonID: string, name: string) {
         },
     };
 
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('Response received from server. Lesson name changed.');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log('Response received from server. Lesson name changed.');
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default editLesson;

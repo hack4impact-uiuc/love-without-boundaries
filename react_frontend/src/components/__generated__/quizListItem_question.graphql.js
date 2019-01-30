@@ -18,33 +18,32 @@ export type quizListItem_question = {|
 |};
 */
 
-
-const node/*: ConcreteFragment*/ = {
-  "kind": "Fragment",
-  "name": "quizListItem_question",
-  "type": "Quiz",
-  "metadata": null,
-  "argumentDefinitions": [],
-  "selections": [
-    {
-      "kind": "LinkedField",
-      "alias": null,
-      "name": "questions",
-      "storageKey": null,
-      "args": null,
-      "concreteType": "Question",
-      "plural": true,
-      "selections": [
+const node /*: ConcreteFragment*/ = {
+    kind: 'Fragment',
+    name: 'quizListItem_question',
+    type: 'Quiz',
+    metadata: null,
+    argumentDefinitions: [],
+    selections: [
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "questionName",
-          "args": null,
-          "storageKey": null
-        }
-      ]
-    }
-  ]
+            kind: 'LinkedField',
+            alias: null,
+            name: 'questions',
+            storageKey: null,
+            args: null,
+            concreteType: 'Question',
+            plural: true,
+            selections: [
+                {
+                    kind: 'ScalarField',
+                    alias: null,
+                    name: 'questionName',
+                    args: null,
+                    storageKey: null,
+                },
+            ],
+        },
+    ],
 };
 // prettier-ignore
 (node/*: any*/).hash = '427f4a3094e4079ae0e83c599a8278b8';

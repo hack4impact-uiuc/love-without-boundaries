@@ -4,10 +4,8 @@ import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-    mutation addURLMutation(
-        $input: AddURLInput!
-    ) {
-        addURL(input: $input){
+    mutation addURLMutation($input: AddURLInput!) {
+        addURL(input: $input) {
             student {
                 id
             }
@@ -23,17 +21,14 @@ function addURL(environment: Environment, id: string, url: string) {
             url,
         },
     };
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('Response Received from Server');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log('Response Received from Server');
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default addURL;

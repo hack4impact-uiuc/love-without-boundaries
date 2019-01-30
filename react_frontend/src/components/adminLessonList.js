@@ -6,7 +6,7 @@ import AdminLessonComponent from '../components/adminLesson';
 
 type Props = {
     /**/
-  }
+};
 
 class AdminLessonList extends React.Component {
     constructor(props) {
@@ -19,36 +19,32 @@ class AdminLessonList extends React.Component {
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query adminLessonListQuery{
-                        lessons{
+                    query adminLessonListQuery {
+                        lessons {
                             id
                             name
                             worksheetURL
                             notesURL
                         }
-                    }  
+                    }
                 `}
                 variables={{}}
                 render={({ props }) => {
                     if (!props) {
-                        return (
-                            <div>Loading...</div>
-                        );
+                        return <div>Loading...</div>;
                     }
                     return (
                         <div>
-                            {
-                                props.lessons.map((lesson, idx) => (
-                                    <AdminLessonComponent
-                                        key={idx}
-                                        id={lesson.id}
-                                        lessonName={lesson.name}
-                                        lessonNotesLink={lesson.notesURL}
-                                        lessonWorksheetLink={lesson.worksheetURL}
-                                        worksheetName={lesson.worksheetName}
-                                    />
-                                ))
-                            }
+                            {props.lessons.map((lesson, idx) => (
+                                <AdminLessonComponent
+                                    key={idx}
+                                    id={lesson.id}
+                                    lessonName={lesson.name}
+                                    lessonNotesLink={lesson.notesURL}
+                                    lessonWorksheetLink={lesson.worksheetURL}
+                                    worksheetName={lesson.worksheetName}
+                                />
+                            ))}
                         </div>
                     );
                 }}
@@ -56,6 +52,5 @@ class AdminLessonList extends React.Component {
         );
     }
 }
-
 
 export default AdminLessonList;

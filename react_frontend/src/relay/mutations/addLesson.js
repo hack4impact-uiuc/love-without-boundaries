@@ -4,10 +4,8 @@ import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-    mutation addLessonMutation(
-        $input: CreateLessonInput!
-    ) {
-        createLesson(input: $input){
+    mutation addLessonMutation($input: CreateLessonInput!) {
+        createLesson(input: $input) {
             lesson {
                 id
             }
@@ -16,7 +14,12 @@ const mutation = graphql`
     }
 `;
 
-function addLesson(environment: Environment, name: string, worksheetURL: string, notesURL: string) {
+function addLesson(
+    environment: Environment,
+    name: string,
+    worksheetURL: string,
+    notesURL: string,
+) {
     const variables = {
         input: {
             name,
@@ -24,17 +27,14 @@ function addLesson(environment: Environment, name: string, worksheetURL: string,
             notesURL,
         },
     };
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('AddLesson mutation: response Recieved from Server.');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log('AddLesson mutation: response Recieved from Server.');
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default addLesson;

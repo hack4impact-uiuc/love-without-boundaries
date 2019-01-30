@@ -16,8 +16,7 @@ import Footer from '../components/footer';
 
 type Props = {
     /**/
-}
-
+};
 
 const App = () => (
     <div>

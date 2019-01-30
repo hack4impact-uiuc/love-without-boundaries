@@ -12,49 +12,54 @@ class QuizPage extends Component {
     }
 
     render() {
-        if (!this.props.location || !this.props.location.state || !this.props.location.state.lessonID) {
+        if (
+            !this.props.location ||
+            !this.props.location.state ||
+            !this.props.location.state.lessonID
+        ) {
             return <h2>Lesson doesnt exist. Try again.</h2>;
         }
         return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                        query QuizPage_Query($lesson_id: ID!){
-                            node(id: $lesson_id) {
-                                id
-                                ... on Lesson {
-                                    name
-                                    quiz {
-                                        lessonID
-                                        questions {
-                                            id
-                                            questionName
-                                            answers{
-                                                answerName
-                                                isCorrect
-                                            }
+                    query QuizPage_Query($lesson_id: ID!) {
+                        node(id: $lesson_id) {
+                            id
+                            ... on Lesson {
+                                name
+                                quiz {
+                                    lessonID
+                                    questions {
+                                        id
+                                        questionName
+                                        answers {
+                                            answerName
+                                            isCorrect
                                         }
                                     }
                                 }
                             }
                         }
-                    `}
+                    }
+                `}
                 variables={{
                     lesson_id: this.props.location.state.lessonID,
                 }}
                 render={({ props }) => {
                     if (!props || !props.node) {
-                        return (
-                            <div>Loading...</div>
-                        );
+                        return <div>Loading...</div>;
                     }
                     return (
                         <div className="container">
                             <h1>{props.node.name}</h1>
-                            <AdminQuiz questions={props.node.quiz.questions} quizID={props.node.id} />
+                            <AdminQuiz
+                                questions={props.node.quiz.questions}
+                                quizID={props.node.id}
+                            />
                             <Link to="/admin/lesson">
                                 <PaddedButton className="btn btn-success">
-                                Finish Quiz
+                                    Finish Quiz
                                 </PaddedButton>
                             </Link>
                         </div>

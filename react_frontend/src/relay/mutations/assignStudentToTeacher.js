@@ -2,17 +2,22 @@ import { commitMutation, graphql } from 'react-relay';
 import type { Environment } from 'relay-runtime';
 
 const mutation = graphql`
-    mutation assignStudentToTeacherMutation($input: AssignStudentToTeacherInput!) {
-      assignStudentToTeacher(input: $input){
-        student {
-          name
+    mutation assignStudentToTeacherMutation(
+        $input: AssignStudentToTeacherInput!
+    ) {
+        assignStudentToTeacher(input: $input) {
+            student {
+                name
+            }
         }
-      }
     }
-            
 `;
 
-function assignStudentToTeacher(environment: Environment, studentID: string, teacherID: string) {
+function assignStudentToTeacher(
+    environment: Environment,
+    studentID: string,
+    teacherID: string,
+) {
     const variables = {
         input: {
             studentID,
@@ -20,17 +25,14 @@ function assignStudentToTeacher(environment: Environment, studentID: string, tea
         },
     };
     console.log(variables);
-    commitMutation(
-        environment,
-        {
-            mutation,
-            variables,
-            onCompleted: (response) => {
-                console.log('Response received from server.');
-            },
-            onError: err => console.error(err),
+    commitMutation(environment, {
+        mutation,
+        variables,
+        onCompleted: response => {
+            console.log('Response received from server.');
         },
-    );
+        onError: err => console.error(err),
+    });
 }
 
 export default assignStudentToTeacher;

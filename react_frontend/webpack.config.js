@@ -1,4 +1,4 @@
-let webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
 
 const parentDir = path.join(__dirname, '');

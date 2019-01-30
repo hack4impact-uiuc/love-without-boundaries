@@ -19,7 +19,6 @@ export type HomePage_QueryResponse = {|
 |};
 */
 
-
 /*
 query HomePage_Query {
   students {
@@ -33,74 +32,75 @@ fragment studentListItem_student on Student {
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
-return {
-  "kind": "Request",
-  "operationKind": "query",
-  "name": "HomePage_Query",
-  "id": null,
-  "text": "query HomePage_Query {\n  students {\n    id\n    ...studentListItem_student\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n",
-  "metadata": {},
-  "fragment": {
-    "kind": "Fragment",
-    "name": "HomePage_Query",
-    "type": "Query",
-    "metadata": null,
-    "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "students",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Student",
-        "plural": true,
-        "selections": [
-          v0,
-          {
-            "kind": "FragmentSpread",
-            "name": "studentListItem_student",
-            "args": null
-          }
-        ]
-      }
-    ]
-  },
-  "operation": {
-    "kind": "Operation",
-    "name": "HomePage_Query",
-    "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "students",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Student",
-        "plural": true,
-        "selections": [
-          v0,
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "name",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
-  }
-};
+const node /*: ConcreteRequest*/ = (function() {
+    var v0 = {
+        kind: 'ScalarField',
+        alias: null,
+        name: 'id',
+        args: null,
+        storageKey: null,
+    };
+    return {
+        kind: 'Request',
+        operationKind: 'query',
+        name: 'HomePage_Query',
+        id: null,
+        text:
+            'query HomePage_Query {\n  students {\n    id\n    ...studentListItem_student\n  }\n}\n\nfragment studentListItem_student on Student {\n  name\n}\n',
+        metadata: {},
+        fragment: {
+            kind: 'Fragment',
+            name: 'HomePage_Query',
+            type: 'Query',
+            metadata: null,
+            argumentDefinitions: [],
+            selections: [
+                {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'students',
+                    storageKey: null,
+                    args: null,
+                    concreteType: 'Student',
+                    plural: true,
+                    selections: [
+                        v0,
+                        {
+                            kind: 'FragmentSpread',
+                            name: 'studentListItem_student',
+                            args: null,
+                        },
+                    ],
+                },
+            ],
+        },
+        operation: {
+            kind: 'Operation',
+            name: 'HomePage_Query',
+            argumentDefinitions: [],
+            selections: [
+                {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'students',
+                    storageKey: null,
+                    args: null,
+                    concreteType: 'Student',
+                    plural: true,
+                    selections: [
+                        v0,
+                        {
+                            kind: 'ScalarField',
+                            alias: null,
+                            name: 'name',
+                            args: null,
+                            storageKey: null,
+                        },
+                    ],
+                },
+            ],
+        },
+    };
 })();
 // prettier-ignore
 (node/*: any*/).hash = '7b38ae507eec63b9375b3f7cf966e609';

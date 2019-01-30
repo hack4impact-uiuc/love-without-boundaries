@@ -9,12 +9,14 @@
         },
         "sourceType": "module"
     },
-    "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "prettier" // disables all conflicting rules
+  ],
     "parser": "babel-eslint",
     "rules": {
         "react/jsx-filename-extension": "off",
         "react/prop-types": "off",
-        "indent": ["error", 4],
         "react/jsx-indent": 4,
         "react/jsx-indent-props":4,
         "eqeqeq": "off",
@@ -28,3 +30,4 @@
         "react/prefer-stateless-function": "off"
     }
 }
+

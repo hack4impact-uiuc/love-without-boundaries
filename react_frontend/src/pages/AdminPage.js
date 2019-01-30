@@ -19,55 +19,74 @@ const PaddedButton = styled.button`
     margin-left: 10px;
 `;
 
-
 class AdminPage extends React.Component {
     isAdmin = () => {
         if (sessionStorage.getItem('token') !== null) {
-            if ((jwtDecode(sessionStorage.getItem('token'))).userType === 'admin') {
+            if (
+                jwtDecode(sessionStorage.getItem('token')).userType === 'admin'
+            ) {
                 return true;
             }
         }
         return false;
-    }
+    };
 
     render() {
         return (
             <div>
-                {
-                    this.isAdmin() &&
+                {this.isAdmin() && (
                     <div className="container-fluid">
                         <div className="row">
-                            <h2 className="TopTextHeader"> Administrator Tool Page </h2>
+                            <h2 className="TopTextHeader">
+                                {' '}
+                                Administrator Tool Page{' '}
+                            </h2>
 
-                            <h5 className="TopText"> Administrators have the ability to keep track of all of the students and teachers, and create Quizzes and lessons.  </h5>
+                            <h5 className="TopText">
+                                {' '}
+                                Administrators have the ability to keep track of
+                                all of the students and teachers, and create
+                                Quizzes and lessons.{' '}
+                            </h5>
                             <div className="admin-tool-bar">
                                 <div className="adminTool">
-                                    <Link to="/admin/lesson"><PaddedButton className="btn btn-admin">Edit Lessons</PaddedButton></Link>
+                                    <Link to="/admin/lesson">
+                                        <PaddedButton className="btn btn-admin">
+                                            Edit Lessons
+                                        </PaddedButton>
+                                    </Link>
                                 </div>
                                 <div className="adminTool">
-                                    <Link to="/admin/list"><PaddedButton className="btn btn-admin">View Teachers and Students</PaddedButton></Link>
+                                    <Link to="/admin/list">
+                                        <PaddedButton className="btn btn-admin">
+                                            View Teachers and Students
+                                        </PaddedButton>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                         <br />
                         <div className="row rightMargin">
-                            {
-                                this.props.match.params.showLesson === 'lesson' ?
-                                    <div className="centered">
-                                        <AdminLessonForm />
-                                        <AdminLessonList />
-                                    </div>
-                                    :
-                                    <AdminListComponent />
-                            }
+                            {this.props.match.params.showLesson === 'lesson' ? (
+                                <div className="centered">
+                                    <AdminLessonForm />
+                                    <AdminLessonList />
+                                </div>
+                            ) : (
+                                <AdminListComponent />
+                            )}
                         </div>
                     </div>
-                }
-                {!this.isAdmin() && <ErrorMessage code="404" message="You are not logged in as admin" /> }
+                )}
+                {!this.isAdmin() && (
+                    <ErrorMessage
+                        code="404"
+                        message="You are not logged in as admin"
+                    />
+                )}
             </div>
         );
     }
 }
-
 
 export default withRouter(AdminPage);
